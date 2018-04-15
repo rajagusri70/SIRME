@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
+	<title>Selamat Datang di Rancangan SIRME</title>
 
 	<style type="text/css">
 
@@ -68,13 +68,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 
 <div id="container">
-	<h1>Welcome to CodeIgniter!</h1>
+	<h1>Selamat Datang di Rancangan SIRME!</h1>
 
 	<div id="body">
 		<p>Gambaran Fitur Sistem Informasi Rekam Medis</p>
 
+		<p>Login</p>
+		<a href="" ><code></code></a>
+
 		<p>Daftar Pasien Baru</p>
 		<a href="http://localhost/SIRME/pasien/daftar" ><code>http://localhost/SIRME/pasien/daftar</code></a>
+
+		<p>Lihat Daftar Pasien</p>
+		<a href="http://localhost/SIRME/pasien" ><code>http://localhost/SIRME/pasien/daftar</code></a>
 
 	</div>
 

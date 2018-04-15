@@ -4,13 +4,15 @@ class Pasien extends CI_Controller {
 	
 	public function __construct(){
 		parent::__construct();
+		if($this->session->userdata('status') != "login"){
+			redirect(base_url("admin"));
+		}
 		$this->load->model('PasienModel'); 
 	}
 	
-	// public function index(){
-	// 	$data['siswa'] = $this->PasienModel->view();
-	// 	$this->load->view('pasien/index', $data);
-	// }
+	public function index(){
+		$this->load->view('pasien/daftar_pasien');
+	}
 	
 	public function daftar(){
 		$data = array();

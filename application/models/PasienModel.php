@@ -2,13 +2,19 @@
 
 class PasienModel extends CI_Model{
 
+
+	function __construct() {
+        parent::__construct();    
+        
+    }
+
 	public function view(){
 
 	}
 
 	public function upload(){
 		$newname = $this->input->post('input_no_ktp');
-	    $config['upload_path'] = './images/';
+	    $config['upload_path'] = './images/pasien/';
 	    $config['allowed_types'] = 'jpg|png|jpeg';
 	    $config['max_size']	= '2048';
 	    $config['remove_space'] = TRUE;
@@ -46,5 +52,35 @@ class PasienModel extends CI_Model{
 			"foto" => $upload['file']['file_name']
 		);
 		$this->db->insert('pasien', $data);
+	}
+
+	public function cariPasienLama($parameter_cari){
+		$cari_input = $this->input->post('cari_input');
+		if($parameter_cari == 'id_pasien'){
+			$where = array(
+			'no_pasien' => $cari_input);
+			return $this->db->get_where("pasien",$where)->result();
+		}elseif ($parameter_cari == 'nama_pasien') {
+			$where = $cari_input; 
+			$this->db->like("nama",$where);
+			return $this->db->get("pasien")->result();
+		}elseif($parameter_cari == 'no_ktp'){
+			$where = array(
+			'no_ktp' => $cari_input);
+			return $this->db->get_where("pasien",$where)->result();
+		}elseif ($parameter_cari == 'no_kk') {
+			$where = array(
+			'no_kk' => $cari_input);
+			return $this->db->get_where("pasien",$where)->result();
+		}
+		//return $this->db->get()->result();
+	}
+
+	public function cari(){
+		$cari_input = $this->input->post('cari_input');
+
+		$this->db->like('no_pasien', $cari_input);
+    	$this->db->or_like('nama', $cari_input);
+		return $this->db->get('pasien')->result();
 	}
 }

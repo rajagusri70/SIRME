@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Sistem Informasi Rumah Sakit</title>
+  <title>SIRME | Daftar Baru</title>
 
   <!-- Bootstrap core CSS -->
 
@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/switchery/switchery.min.css" />
 
   <script src="<?php echo base_url(); ?>/assets/js/jquery.min.js"></script>
+  
 
   <!--[if lt IE 9]>
         <script src="../assets/js/ie8-responsive-file-warning.js"></script>
@@ -63,11 +64,15 @@
           <!-- menu prile quick info -->
           <div class="profile">
             <div class="profile_pic">
-              <img src="<?php echo base_url('assets/') ?>images/img.jpg" alt="..." class="img-circle profile_img">
+              <?php foreach ($users as $user) { ?>
+              <img src="<?php echo base_url('images/') ?>admin/<?php echo $user->foto ?>" alt="..." class="img-circle profile_img">
+              <?php } ?>
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
-              <h2>Dr. John Doe</h2>
+              <?php foreach ($users as $user) { ?>
+                <h2>Dr. <?php echo $user->nama ?></h2>
+              <?php } ?>
             </div>
           </div>
           <!-- /menu prile quick info -->
@@ -89,9 +94,11 @@
                 </li>
                 <li><a><i class="fa fa-edit"></i> Pasien <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo site_url('pasien/daftar') ?>" >Daftar Pasien Baru</a>
+                    <li><a href="<?php echo site_url('pasien/') ?>">Cari Pasien</a>
                     </li>
-                    <li><a href="form.php">Lihat Daftar Pasien</a>
+                    <li><a href="<?php echo site_url('pasien/daftar') ?>" >Pendaftaran Pasien Baru</a>
+                    </li>
+                    <li><a href="<?php echo site_url('pasien/pasien_lama') ?>">Pendaftaran Pasien Lama</a>
                     </li>
                   </ul>
                 </li>
@@ -175,8 +182,12 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="images/img.jpg" alt="">John Doe
+                  <img src="images/img.jpg" alt="">Dr. 
+                  <?php foreach ($users as $user) {
+                    echo $user->nama;
+                  } ?>
                   <span class=" fa fa-angle-down"></span>
+                  
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
                   <li><a href="javascript:;">  Profile</a>
@@ -190,7 +201,7 @@
                   <li>
                     <a href="javascript:;">Help</a>
                   </li>
-                  <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                  <li><a href="<?php echo base_url('admin/logout') ?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                   </li>
                 </ul>
               </li>
@@ -286,10 +297,10 @@
             <div class="title_right">
               <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                 <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search for...">
+                  <!-- <input type="text" class="form-control" placeholder="Search for...">
                   <span class="input-group-btn">
                             <button class="btn btn-default" type="button">Go!</button>
-                        </span>
+                        </span> -->
                 </div>
               </div>
             </div>
@@ -306,7 +317,7 @@
                   <br />
                   <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('pasien/daftar'); ?>" method="post" enctype="multipart/form-data" >
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Foto<span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="foto">Foto<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="file" id="" class="btn btn-primary" name="input_foto" required="" class="">

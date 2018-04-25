@@ -73,14 +73,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div id="body">
 		<p>Gambaran Fitur Sistem Informasi Rekam Medis</p>
 
-		<p>Login</p>
-		<a href="" ><code></code></a>
+		<p>Login (Jika tidak ter-Load, klik Logout terlebih dahulu)</p>
+		<a href="<?php echo base_url('login'); ?>" ><code>http://localhost/SIRME/login</code></a>
 
 		<p>Daftar Pasien Baru</p>
 		<a href="http://localhost/SIRME/pasien/daftar" ><code>http://localhost/SIRME/pasien/daftar</code></a>
 
 		<p>Lihat Daftar Pasien</p>
 		<a href="http://localhost/SIRME/pasien" ><code>http://localhost/SIRME/pasien/daftar</code></a>
+
+		<p>Logout</p>
+		<a href="<?php echo base_url('admin/logout'); ?>" ><code>Klik Disini untuk Logout</code></a>
+
 
 	</div>
 

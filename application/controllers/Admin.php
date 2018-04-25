@@ -6,11 +6,14 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('admin/login');
+		// $this->load->view('admin/login');
 	}
 
 	function __construct(){
-		parent::__construct();		
+		parent::__construct();
+		// if($this->session->userdata('status') == "login"){
+		// 	$this->load->view('welcome_message');
+		// }		
 		$this->load->model('LoginModel');
  
 	}
@@ -29,17 +32,15 @@ class Admin extends CI_Controller {
 				'status' => "login"
 				);
 			$this->session->set_userdata($data_session);
- 
-			redirect(base_url('welcome'));
- 
+			redirect(base_url('home'));
 		}else{
 			echo "Username dan password salah !";
 		}
 	}
 
-	function logout(){
+	public function logout(){
 		$this->session->sess_destroy();
-		redirect(base_url('admin'));
+		redirect(base_url('login'));
 	}
 
 }

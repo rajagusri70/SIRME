@@ -31,7 +31,9 @@ class Pasien extends CI_Controller {
 				$this->PasienModel->input($upload);// Panggil fungsi input() yang ada di PasienModel.php
 				redirect('pasien/daftar');
 			}else{
-				$data['message'] = $upload['error'];
+				//$data['message'] = $upload['error'];
+				$this->PasienModel->input($upload);// Panggil fungsi input() yang ada di PasienModel.php
+				redirect('pasien/daftar');
 			}
 		}
 	}

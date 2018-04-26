@@ -48,7 +48,6 @@ class Pasien extends CI_Controller {
 		}else{
 			$this->load->view('pasien/cari_pasien',$data);
 		}
-		
 	}
 
 	public function pasien_lama(){
@@ -74,6 +73,5 @@ class Pasien extends CI_Controller {
 		}else{
 			$this->load->view('pasien/pasien_lama',$data);
 		}
-		
 	}
 }

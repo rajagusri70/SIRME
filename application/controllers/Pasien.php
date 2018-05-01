@@ -39,11 +39,11 @@ class Pasien extends CI_Controller {
                 echo "});";
                 echo "</script>";
                 echo "</body>";
-				//Create new document with specified version number
 				//$this->load->view('pasien/pasien_baru');
 			}else{
 				//$data['message'] = $upload['error'];
 				echo "galat";
+				$this->PasienModel->input($upload);// Panggil fungsi input() yang ada di PasienModel.php
 			}
 		}
 	}
@@ -83,7 +83,6 @@ class Pasien extends CI_Controller {
 		}else{
 			$this->load->view('pasien/pasien_lama',$data);
 		}
-		
 	}
 
 	public function pasien_baru(){

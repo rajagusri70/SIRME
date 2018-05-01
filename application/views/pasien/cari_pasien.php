@@ -96,50 +96,6 @@
                     </li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu" style="display: none">
-                    <li><a href="general_elements.html">General Elements</a>
-                    </li>
-                    <li><a href="media_gallery.html">Media Gallery</a>
-                    </li>
-                    <li><a href="typography.html">Typography</a>
-                    </li>
-                    <li><a href="icons.html">Icons</a>
-                    </li>
-                    <li><a href="glyphicons.html">Glyphicons</a>
-                    </li>
-                    <li><a href="widgets.html">Widgets</a>
-                    </li>
-                    <li><a href="invoice.html">Invoice</a>
-                    </li>
-                    <li><a href="inbox.html">Inbox</a>
-                    </li>
-                    <li><a href="calender.html">Calender</a>
-                    </li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu" style="display: none">
-                    <li><a href="tables.html">Tables</a>
-                    </li>
-                    <li><a href="tables_dynamic.html">Table Dynamic</a>
-                    </li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu" style="display: none">
-                    <li><a href="chartjs.html">Chart JS</a>
-                    </li>
-                    <li><a href="chartjs2.html">Chart JS2</a>
-                    </li>
-                    <li><a href="morisjs.html">Moris JS</a>
-                    </li>
-                    <li><a href="echarts.html">ECharts </a>
-                    </li>
-                    <li><a href="other_charts.html">Other Charts </a>
-                    </li>
-                  </ul>
-                </li>
               </ul>
             </div>
             </div>
@@ -291,14 +247,7 @@
             </div>
 
             <div class="title_right">
-              <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search for...">
-                  <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Go!</button>
-                        </span>
-                </div>
-              </div>
+              
             </div>
           </div>
           <div class="clearfix"></div>
@@ -327,14 +276,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input id="name" class="form-control" name="cari_input" placeholder="dapat berupa No. Pasien/Nama" required="required" type="text" name="cari_input" >
-                        
                       </div>
-                      <!-- <select class="" name="parameter_input" >
-                        <option value="id_pasien">ID Pasien</option>
-                        <option value="nama_pasien">Nama Pasien</option>
-                        <option value="no_ktp">Nomor KTP</option>
-                        <option value="no_kk">Nomor KK</option>
-                      </select> -->
                     </div>
                     <div class="form-group">
                       
@@ -414,7 +356,7 @@
                               <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                                 </button>
-                                <h4 class="modal-title" id="myModalLabel"><?php echo $p->no_pasien; ?> | <?php echo $p->nama; ?></h4>
+                                <h4 class="modal-title" id="myModalLabel"><b><?php echo $p->no_pasien; ?> | <?php echo $p->nama; ?></b></h4>
                               </div>
                               <div class="modal-body">
                                 <h4></h4>
@@ -425,19 +367,6 @@
                 <div class="x_title">
                   <h2>Rekam Medis Pasien</h2>
                   <ul class="nav navbar-right panel_toolbox">
-                    <!-- <li><a href="#"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Settings 1</a>
-                        </li>
-                        <li><a href="#">Settings 2</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li><a href="#"><i class="fa fa-close"></i></a>
-                    </li> -->
                   </ul>
                   <div class="clearfix"></div>
                 </div>
@@ -507,9 +436,6 @@
                                     </div>
                                   </div>
                                 </div>
-                                <!-- <div class="modal-footer">
-                                                  <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
-                                                </div> -->
                               </form>
                             </div>
                           </div>
@@ -537,7 +463,7 @@
                     <br />
 
                     <!-- start skills -->
-                    <h4>Skills</h4>
+                    <!-- <h4>Skills</h4>
                     <ul class="list-unstyled user_data">
                       <li>
                         <p>Web Applications</p>
@@ -563,7 +489,7 @@
                           <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
                         </div>
                       </li>
-                    </ul>
+                    </ul> -->
                     <!-- end of skills -->
 
                   </div>
@@ -676,8 +602,84 @@
 
                         </div>
                         <div role="tabpanel" class="tab-pane fade" id="tab_content3<?php echo $p->no_pasien; ?>" aria-labelledby="profile-tab">
-                          <p>xxFood truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui
-                            photo booth letterpress, commodo enim craft beer mlkshk </p>
+                          <table style="font-size: 14px;" class="table table-striped table-bordered" >
+                            <tr>
+                              <td><b>No Pasien</b></td>
+                              <td>&nbsp;:<b> <?php echo $p->no_pasien; ?></b></td>
+                            </tr>
+                            <tr>
+                              <td><b>Nomor KTP</b></td>
+                              <td>&nbsp;: <?php echo $p->no_ktp; ?></td>
+                            </tr>
+                            <tr>
+                              <td><b>Nomor KK</b></td>
+                              <td>&nbsp;: <?php echo $p->no_kk; ?></td>
+                            </tr>
+                            <tr>
+                              <td><b>Nama Pasien</b></td>
+                              <td>&nbsp;: <?php echo $p->nama; ?></td>
+                            </tr>
+                            <tr>
+                              <td><b>Jenis Kelamin</b></td>
+                              <td>&nbsp;: <?php echo $p->jenis_kelamin; ?></td>
+                            </tr>
+                            <tr>
+                              <td><b>Tanggal Lahir</b></td>
+                              <td>&nbsp;: <?php echo $p->tanggal_lahir; ?></td>
+                            </tr>
+                            <tr>
+                              <td><b>Tempat Lahir</b></td>
+                              <td>&nbsp;: <?php echo $p->tempat_lahir; ?></td>
+                            </tr>
+                            <tr>
+                              <td><b>Umur</b></td>
+                              <td>&nbsp;: <?php echo $p->umur; ?></td>
+                            </tr>
+                            <tr>
+                              <td><b>Alamat</b></td>
+                              <td>&nbsp;: <?php echo $p->alamat; ?></td>
+                            </tr>
+                            <tr>
+                              <td><b>Pekerjaan</b></td>
+                              <td>&nbsp;: <?php echo $p->pekerjaan; ?></td>
+                            </tr>
+                            <tr>
+                              <td><b>Pendidikan Terakhir</b></td>
+                              <td>&nbsp;: <?php echo $p->pendidikan; ?></td>
+                            </tr>
+                            <tr>
+                              <td><b>Golongan Darah</b></td>
+                              <td>&nbsp;: <?php echo $p->golongan_darah; ?></td>
+                            </tr>
+                            <tr>
+                              <td><b>Status Pernikahan</b></td>
+                              <td>&nbsp;: <?php echo $p->status_pernikahan; ?></td>
+                            </tr>
+                            <tr>
+                              <td><b>Nama Orangtua</b></td>
+                              <td>&nbsp;: <?php echo $p->nama_orangtua; ?></td>
+                            </tr>
+                            <tr>
+                              <td><b>Pekerjaan Orangtua</b></td>
+                              <td>&nbsp;: <?php echo $p->pekerjaan_orangtua; ?></td>
+                            </tr>
+                            <tr>
+                              <td><b>Nama Suami/Istri</b></td>
+                              <td>&nbsp;: <?php echo $p->nama_suamistri; ?></td>
+                            </tr>
+                            <tr>
+                              <td><b>Agama</b></td>
+                              <td>&nbsp;: <?php echo $p->agama; ?></td>
+                            </tr>
+                            <tr>
+                              <td><b>Nomor Kontak</b></td>
+                              <td>&nbsp;: <?php echo $p->no_telpon; ?></td>
+                            </tr>
+                            <style type="text/css">
+                              th, td {
+                                padding: 5px;
+                            </style>
+                          </table>
                         </div>
                       </div>
                     </div>
@@ -689,7 +691,7 @@
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
+                                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                               </div>
                             </div>
                           </div>
@@ -709,7 +711,7 @@
         <!-- footer content -->
         <footer>
           <div class="copyright-info">
-            <p class="pull-right">Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>  
+            <p class="pull-right">Sistem Informasi Rekam Medis Elektronik - <a href="<?php echo(base_url()) ?>">SIRME</a>  
             </p>
           </div>
           <div class="clearfix"></div>
@@ -741,48 +743,6 @@
   <script src="<?php echo base_url(); ?>/assets/js/custom.js"></script>
   <!-- form validation -->
   <script src="<?php echo base_url(); ?>/assets/js/validator/validator.js"></script>
-  <script>
-    // initialize the validator function
-    validator.message['date'] = 'not a real date';
-
-    // validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
-    $('form')
-      .on('blur', 'input[required], input.optional, select.required', validator.checkField)
-      .on('change', 'select.required', validator.checkField)
-      .on('keypress', 'input[required][pattern]', validator.keypress);
-
-    $('.multi.required')
-      .on('keyup blur', 'input', function() {
-        validator.checkField.apply($(this).siblings().last()[0]);
-      });
-
-    // bind the validation to the form submit event
-    //$('#send').click('submit');//.prop('disabled', true);
-
-    $('form').submit(function(e) {
-      e.preventDefault();
-      var submit = true;
-      // evaluate the form using generic validaing
-      if (!validator.checkAll($(this))) {
-        submit = false;
-      }
-
-      if (submit)
-        this.submit();
-      return false;
-    });
-
-    /* FOR DEMO ONLY */
-    $('#vfields').change(function() {
-      $('form').toggleClass('mode2');
-    }).prop('checked', false);
-
-    $('#alerts').change(function() {
-      validator.defaults.alerts = (this.checked) ? false : true;
-      if (this.checked)
-        $('form .alert').remove();
-    }).prop('checked', false);
-  </script>
 
 </body>
 

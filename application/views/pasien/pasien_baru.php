@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>SIRME | Daftar Baru</title>
+  <title>SIRME | Pasien</title>
 
   <!-- Bootstrap core CSS -->
 
@@ -20,17 +20,9 @@
   <!-- Custom styling plus plugins -->
   <link href="<?php echo base_url(); ?>/assets/css/custom.css" rel="stylesheet">
   <link href="<?php echo base_url(); ?>/assets/css/icheck/flat/green.css" rel="stylesheet">
-  <!-- editor -->
-  <link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
-  <link href="<?php echo base_url(); ?>/assets/css/editor/external/google-code-prettify/prettify.css" rel="stylesheet">
-  <link href="<?php echo base_url(); ?>/assets/css/editor/index.css" rel="stylesheet">
-  <!-- select2 -->
-  <link href="<?php echo base_url(); ?>/assets/css/select/select2.min.css" rel="stylesheet">
-  <!-- switchery -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/switchery/switchery.min.css" />
+
 
   <script src="<?php echo base_url(); ?>/assets/js/jquery.min.js"></script>
-  
 
   <!--[if lt IE 9]>
         <script src="../assets/js/ie8-responsive-file-warning.js"></script>
@@ -96,53 +88,19 @@
                   <ul class="nav child_menu" style="display: none">
                     <li><a href="<?php echo site_url('pasien/') ?>">Cari Pasien</a>
                     </li>
-                    <li><a href="<?php echo site_url('pasien/pasien_baru') ?>" >Pendaftaran Pasien Baru</a>
+                    <li><a href="<?php echo $_SERVER['REQUEST_URI']; ?>" >Pendaftaran Pasien Baru</a>
                     </li>
                     <li><a href="<?php echo site_url('pasien/pasien_lama') ?>">Pendaftaran Pasien Lama</a>
                     </li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-user-md"></i> Rawat Jalan <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li><a href="general_elements.html">General Elements</a>
+                    <li><a href="index.html">Status Rawat Pasien</a>
                     </li>
-                    <li><a href="media_gallery.html">Media Gallery</a>
+                    <li><a href="index2.html">Status Selesai</a>
                     </li>
-                    <li><a href="typography.html">Typography</a>
-                    </li>
-                    <li><a href="icons.html">Icons</a>
-                    </li>
-                    <li><a href="glyphicons.html">Glyphicons</a>
-                    </li>
-                    <li><a href="widgets.html">Widgets</a>
-                    </li>
-                    <li><a href="invoice.html">Invoice</a>
-                    </li>
-                    <li><a href="inbox.html">Inbox</a>
-                    </li>
-                    <li><a href="calender.html">Calender</a>
-                    </li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu" style="display: none">
-                    <li><a href="tables.html">Tables</a>
-                    </li>
-                    <li><a href="tables_dynamic.html">Table Dynamic</a>
-                    </li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu" style="display: none">
-                    <li><a href="chartjs.html">Chart JS</a>
-                    </li>
-                    <li><a href="chartjs2.html">Chart JS2</a>
-                    </li>
-                    <li><a href="morisjs.html">Moris JS</a>
-                    </li>
-                    <li><a href="echarts.html">ECharts </a>
-                    </li>
-                    <li><a href="other_charts.html">Other Charts </a>
+                    <li><a href="index3.html">Dashboard3</a>
                     </li>
                   </ul>
                 </li>
@@ -182,7 +140,7 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="images/img.jpg" alt="">Dr. 
+                  Dr. 
                   <?php foreach ($users as $user) {
                     echo $user->nama;
                   } ?>
@@ -289,68 +247,63 @@
       <!-- page content -->
       <div class="right_col" role="main">
         <div class="">
-
           <div class="page-title">
             <div class="title_left">
-              <h3>Pendaftaran Pasien Baru</h3>
+              <h3>
+                Pendaftaran Pasien Baru
+              </h3>
             </div>
+
             <div class="title_right">
-              <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                <div class="input-group">
-                  <!-- <input type="text" class="form-control" placeholder="Search for...">
-                  <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Go!</button>
-                        </span> -->
-                </div>
-              </div>
+              
             </div>
           </div>
           <div class="clearfix"></div>
+
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Data Diri <small></small></h2>
+                  <h2>Data Pribadi</h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                  </ul>
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                  <br />
+                  
                   <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('pasien/daftar'); ?>" method="post" enctype="multipart/form-data" >
+                    
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="foto">Foto<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="file" id="" class="btn btn-primary" name="input_foto" required="" class="">
+                        <input type="file" id="foto" class="btn btn-primary" name="input_foto" required="" class="">
                       </div>
                     </div>
-                    <div class="form-group">
+                    <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nomor KTP<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" name="input_no_ktp" required="required" class="form-control col-md-7 col-xs-12">
+                        <input type="number" id="nomor_ktp" name="input_no_ktp" required="required" class="normal-form-long">
                       </div>
                     </div>
-                    <div class="form-group">
+                    <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Nomor KK<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" name="input_no_kk" id="last-name" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
+                        <input type="number" name="input_no_kk" id="input_no_kk" required="required" class="normal-form-long">
                       </div>
                     </div>
-                    <div class="form-group">
+                    <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Nama<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" name="input_nama" id="last-name" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
+                        <input type="text" name="input_nama" id="nama" required="required" class="normal-form-long">
                       </div>
                     </div>
-                    <!-- <div class="form-group">
-                      <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Middle Name / Initial</label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
-                      </div>
-                    </div> -->
-                    <div class="form-group">
+                    <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Jenis Kelamin</label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <div id="gender" class="btn-group" data-toggle="buttons">
@@ -363,102 +316,150 @@
                         </div>
                       </div>
                     </div>
-                    <div class="form-group">
+                    <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal Lahir<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="birthday" name="input_tanggal_lahir" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                        <select class="normal-form" name="input_tanggal_lahir" id="tanggal-lahir" required="required">
+                          <option>-pilih tanggal-</option>
+                          <?php for ($x=1; $x<=31; $x++){
+                            if($x<10){
+                              echo "<option value=".'0'."$x>".'0'."$x</option>";
+                            }else{
+                              echo "<option value=$x>$x</option>";
+                            }
+                          }
+                          ?>
+                        </select>
+                        <select class="normal-form" id="bulan_lahir" name="input_bulan_lahir">
+                          <option id="none" value="none">-pilih bulan-</option>
+                          <option value="Januari">Januari</option>
+                          <option value="Februari">Februari</option>
+                          <option value="Maret">Maret</option>
+                          <option value="April">April</option>
+                          <option value="Mei">Mei</option>
+                          <option value="Juni">Juni</option>
+                          <option value="Juli">Juli</option>
+                          <option value="Agustus">Agustus</option>
+                          <option value="September">September</option>
+                          <option value="Oktober">Oktober</option>
+                          <option value="November">November</option>
+                          <option value="Desember">Desember</option>
+                        </select>
+                        <select class="normal-form" id="tahun_lahir" name="input_tahun_lahir">
+                          <option>-pilih tahun-</option>
+                          <?php for ($year=1900; $year<=date("Y"); $year++){
+                            echo "<option value=$year>$year</option>";
+                          }
+                          ?>
+                        </select>
                       </div>
+
                     </div>
-                    <div class="form-group">
+                    <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Tempat Lahir<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="birthday" name="input_tempat_lahir" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                        <input id="tempat_lahir" name="input_tempat_lahir" class="normal-form-long" required="required" type="text">
                       </div>
                     </div>
-                    <div class="form-group">
+                    <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Umur<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="birthday" name="input_umur" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                        <input id="birthday" name="input_umur" class="normal-form-long" required="required" type="text">
                       </div>
                     </div>
-                    <div class="form-group">
+                    <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Golongan Darah<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="birthday" name="input_golongan_darah" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                        <select class="normal-form" name="input_golongan_darah">
+                          <option value="A">A</option>
+                          <option value="B">B</option>
+                          <option value="AB">AB</option>
+                          <option value="O">O</option>
+                        </select>
                       </div>
                     </div>
-                    <div class="form-group">
+                    <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Alamat<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="birthday" name="input_alamat" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                        <input id="birthday" name="input_alamat" class="normal-form-long" required="required" type="text">
                       </div>
                     </div>
-                    <div class="form-group">
+                    <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Pekerjaan<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="birthday" name="input_pekerjaan" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                        <input id="birthday" name="input_pekerjaan" class="normal-form-long" required="required" type="text">
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Pendidikan<span class="required">*</span>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Pendidikan Terakhir<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="birthday" name="input_pendidikan" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                        <input id="birthday" name="input_pendidikan" class="normal-form-long" required="required" type="text">
                       </div>
                     </div>
-                    <div class="form-group">
+                    <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Status Pernikahan<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="birthday" name="input_status_pernikahan" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                        <select class="normal-form-long" name="input_status_pernikahan">
+                          <option value="Belum Nikah">Belum Nikah</option>
+                          <option value="Sudah Nikah">Sudah Nikah</option>
+                        </select>
                       </div>
                     </div>
-                    <div class="form-group">
+                    <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Orangtua<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="birthday" name="input_nama_orangtua" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                        <input id="birthday" name="input_nama_orangtua" class="normal-form-long" required="required" type="text">
                       </div>
                     </div>
-                    <div class="form-group">
+                    <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Pekerjaan Orangtua<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="birthday" name="input_pekerjaan_orangtua" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                        <input id="birthday" name="input_pekerjaan_orangtua" class="normal-form-long" required="required" type="text">
                       </div>
                     </div>
-                    <div class="form-group">
+                    <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Suami/Istri<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="birthday" name="input_nama_suamistri" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                        <input id="birthday" name="input_nama_suamistri" class="normal-form-long" required="required" type="text">
                       </div>
                     </div>
-                    <div class="form-group">
+                    <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Agama<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="birthday" name="input_agama" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                        <input id="birthday" name="input_agama" class="normal-form-long" required="required" type="text">
                       </div>
                     </div>
-                    <div class="form-group">
+                    <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">No. Telepon<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="birthday" name="input_no_telpon" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                        <input id="birthday" name="input_no_telpon" class="normal-form-long" required="required" type="number">
+                      </div>
+                    </div>
+                    <!-- ============== -->
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12">
                       </div>
                     </div>
                     <div class="ln_solid"></div>
                     <div class="form-group">
-                      <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                        <button type="clear" class="btn btn-primary">Cancel</button>
-                        <button type="submit" class="btn btn-success" name="submit" value="Simpan">Daftar</button>
+                      <div class="col-md-6 col-md-offset-3">
+                        <input type="submit" name="submit" class="btn btn-success" value="Daftarkan Pasien">
                       </div>
                     </div>
                   </form>
@@ -466,33 +467,21 @@
               </div>
             </div>
           </div>
-
-          <script type="text/javascript">
-            $(document).ready(function() {
-              $('#birthday').daterangepicker({
-                singleDatePicker: true,
-                calender_style: "picker_4"
-              }, function(start, end, label) {
-                console.log(start.toISOString(), end.toISOString(), label);
-              });
-            });
-          </script>
         </div>
-        <!-- /page content -->
 
         <!-- footer content -->
         <footer>
           <div class="copyright-info">
-            <p class="pull-right">Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            <p class="pull-right">Sistem Informasi Rekam Medis Elektronik - <a href="<?php echo(base_url()) ?>">SIRME</a>  
             </p>
           </div>
           <div class="clearfix"></div>
         </footer>
         <!-- /footer content -->
-
       </div>
-
+      <!-- /page content -->
     </div>
+
   </div>
 
   <div id="custom_notifications" class="custom-notifications dsp_none">
@@ -509,197 +498,13 @@
   <script src="<?php echo base_url(); ?>/assets/js/nicescroll/jquery.nicescroll.min.js"></script>
   <!-- icheck -->
   <script src="<?php echo base_url(); ?>/assets/js/icheck/icheck.min.js"></script>
-  <!-- tags -->
-  <script src="<?php echo base_url(); ?>/assets/js/tags/jquery.tagsinput.min.js"></script>
-  <!-- switchery -->
-  <script src="<?php echo base_url(); ?>/assets/js/switchery/switchery.min.js"></script>
-  <!-- daterangepicker -->
-  <script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/moment/moment.min.js"></script>
-  <script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/datepicker/daterangepicker.js"></script>
-  <!-- richtext editor -->
-  <script src="<?php echo base_url(); ?>/assets/js/editor/bootstrap-wysiwyg.js"></script>
-  <script src="<?php echo base_url(); ?>/assets/js/editor/external/jquery.hotkeys.js"></script>
-  <script src="<?php echo base_url(); ?>/assets/js/editor/external/google-code-prettify/prettify.js"></script>
-  <!-- select2 -->
-  <script src="<?php echo base_url(); ?>/assets/js/select/select2.full.js"></script>
-  <!-- form validation -->
-  <script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/parsley/parsley.min.js"></script>
-  <!-- textarea resize -->
-  <script src="<?php echo base_url(); ?>/assets/js/textarea/autosize.min.js"></script>
-  <script>
-    autosize($('.resizable_textarea'));
-  </script>
-  <!-- Autocomplete -->
-  <script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/autocomplete/countries.js"></script>
-  <script src="<?php echo base_url(); ?>/assets/js/autocomplete/jquery.autocomplete.js"></script>
   <!-- pace -->
   <script src="<?php echo base_url(); ?>/assets/js/pace/pace.min.js"></script>
-  <script type="text/javascript">
-    $(function() {
-      'use strict';
-      var countriesArray = $.map(countries, function(value, key) {
-        return {
-          value: value,
-          data: key
-        };
-      });
-      // Initialize autocomplete with custom appendTo:
-      $('#autocomplete-custom-append').autocomplete({
-        lookup: countriesArray,
-        appendTo: '#autocomplete-container'
-      });
-    });
-  </script>
   <script src="<?php echo base_url(); ?>/assets/js/custom.js"></script>
-
-
-  <!-- select2 -->
-  <script>
-    $(document).ready(function() {
-      $(".select2_single").select2({
-        placeholder: "Select a state",
-        allowClear: true
-      });
-      $(".select2_group").select2({});
-      $(".select2_multiple").select2({
-        maximumSelectionLength: 4,
-        placeholder: "With Max Selection limit 4",
-        allowClear: true
-      });
-    });
-  </script>
-  <!-- /select2 -->
-  <!-- input tags -->
-  <script>
-    function onAddTag(tag) {
-      alert("Added a tag: " + tag);
-    }
-
-    function onRemoveTag(tag) {
-      alert("Removed a tag: " + tag);
-    }
-
-    function onChangeTag(input, tag) {
-      alert("Changed a tag: " + tag);
-    }
-
-    $(function() {
-      $('#tags_1').tagsInput({
-        width: 'auto'
-      });
-    });
-  </script>
-  <!-- /input tags -->
   <!-- form validation -->
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $.listen('parsley:field:validate', function() {
-        validateFront();
-      });
-      $('#demo-form .btn').on('click', function() {
-        $('#demo-form').parsley().validate();
-        validateFront();
-      });
-      var validateFront = function() {
-        if (true === $('#demo-form').parsley().isValid()) {
-          $('.bs-callout-info').removeClass('hidden');
-          $('.bs-callout-warning').addClass('hidden');
-        } else {
-          $('.bs-callout-info').addClass('hidden');
-          $('.bs-callout-warning').removeClass('hidden');
-        }
-      };
-    });
-
-    $(document).ready(function() {
-      $.listen('parsley:field:validate', function() {
-        validateFront();
-      });
-      $('#demo-form2 .btn').on('click', function() {
-        $('#demo-form2').parsley().validate();
-        validateFront();
-      });
-      var validateFront = function() {
-        if (true === $('#demo-form2').parsley().isValid()) {
-          $('.bs-callout-info').removeClass('hidden');
-          $('.bs-callout-warning').addClass('hidden');
-        } else {
-          $('.bs-callout-info').addClass('hidden');
-          $('.bs-callout-warning').removeClass('hidden');
-        }
-      };
-    });
-    try {
-      hljs.initHighlightingOnLoad();
-    } catch (err) {}
-  </script>
-  <!-- /form validation -->
-  <!-- editor -->
-  <script>
-    $(document).ready(function() {
-      $('.xcxc').click(function() {
-        $('#descr').val($('#editor').html());
-      });
-    });
-
-    $(function() {
-      function initToolbarBootstrapBindings() {
-        var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',
-            'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',
-            'Times New Roman', 'Verdana'
-          ],
-          fontTarget = $('[title=Font]').siblings('.dropdown-menu');
-        $.each(fonts, function(idx, fontName) {
-          fontTarget.append($('<li><a data-edit="fontName ' + fontName + '" style="font-family:\'' + fontName + '\'">' + fontName + '</a></li>'));
-        });
-        $('a[title]').tooltip({
-          container: 'body'
-        });
-        $('.dropdown-menu input').click(function() {
-            return false;
-          })
-          .change(function() {
-            $(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle');
-          })
-          .keydown('esc', function() {
-            this.value = '';
-            $(this).change();
-          });
-
-        $('[data-role=magic-overlay]').each(function() {
-          var overlay = $(this),
-            target = $(overlay.data('target'));
-          overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
-        });
-        if ("onwebkitspeechchange" in document.createElement("input")) {
-          var editorOffset = $('#editor').offset();
-          $('#voiceBtn').css('position', 'absolute').offset({
-            top: editorOffset.top,
-            left: editorOffset.left + $('#editor').innerWidth() - 35
-          });
-        } else {
-          $('#voiceBtn').hide();
-        }
-      };
-
-      function showErrorAlert(reason, detail) {
-        var msg = '';
-        if (reason === 'unsupported-file-type') {
-          msg = "Unsupported format " + detail;
-        } else {
-          console.log("error uploading file", reason, detail);
-        }
-        $('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>' +
-          '<strong>File upload error</strong> ' + msg + ' </div>').prependTo('#alerts');
-      };
-      initToolbarBootstrapBindings();
-      $('#editor').wysiwyg({
-        fileUploadError: showErrorAlert
-      });
-      window.prettyPrint && prettyPrint();
-    });
-  </script>
-  <!-- /editor -->
+  <script src="<?php echo base_url(); ?>/assets/js/validator/validator.js"></script>
+  
+  
 </body>
 
 </html>

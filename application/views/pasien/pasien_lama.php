@@ -96,50 +96,6 @@
                     </li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu" style="display: none">
-                    <li><a href="general_elements.html">General Elements</a>
-                    </li>
-                    <li><a href="media_gallery.html">Media Gallery</a>
-                    </li>
-                    <li><a href="typography.html">Typography</a>
-                    </li>
-                    <li><a href="icons.html">Icons</a>
-                    </li>
-                    <li><a href="glyphicons.html">Glyphicons</a>
-                    </li>
-                    <li><a href="widgets.html">Widgets</a>
-                    </li>
-                    <li><a href="invoice.html">Invoice</a>
-                    </li>
-                    <li><a href="inbox.html">Inbox</a>
-                    </li>
-                    <li><a href="calender.html">Calender</a>
-                    </li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu" style="display: none">
-                    <li><a href="tables.html">Tables</a>
-                    </li>
-                    <li><a href="tables_dynamic.html">Table Dynamic</a>
-                    </li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu" style="display: none">
-                    <li><a href="chartjs.html">Chart JS</a>
-                    </li>
-                    <li><a href="chartjs2.html">Chart JS2</a>
-                    </li>
-                    <li><a href="morisjs.html">Moris JS</a>
-                    </li>
-                    <li><a href="echarts.html">ECharts </a>
-                    </li>
-                    <li><a href="other_charts.html">Other Charts </a>
-                    </li>
-                  </ul>
-                </li>
               </ul>
             </div>
             </div>
@@ -291,14 +247,7 @@
             </div>
 
             <div class="title_right">
-              <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search for...">
-                  <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Go!</button>
-                        </span>
-                </div>
-              </div>
+              
             </div>
           </div>
           <div class="clearfix"></div>
@@ -425,7 +374,7 @@
         <!-- footer content -->
         <footer>
           <div class="copyright-info">
-            <p class="pull-right">Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>  
+            <p class="pull-right">Sistem Informasi Rekam Medis Elektronik - <a href="<?php echo(base_url()) ?>">SIRME</a>  
             </p>
           </div>
           <div class="clearfix"></div>
@@ -457,48 +406,6 @@
   <script src="<?php echo base_url(); ?>/assets/js/custom.js"></script>
   <!-- form validation -->
   <script src="<?php echo base_url(); ?>/assets/js/validator/validator.js"></script>
-  <script>
-    // initialize the validator function
-    validator.message['date'] = 'not a real date';
-
-    // validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
-    $('form')
-      .on('blur', 'input[required], input.optional, select.required', validator.checkField)
-      .on('change', 'select.required', validator.checkField)
-      .on('keypress', 'input[required][pattern]', validator.keypress);
-
-    $('.multi.required')
-      .on('keyup blur', 'input', function() {
-        validator.checkField.apply($(this).siblings().last()[0]);
-      });
-
-    // bind the validation to the form submit event
-    //$('#send').click('submit');//.prop('disabled', true);
-
-    $('form').submit(function(e) {
-      e.preventDefault();
-      var submit = true;
-      // evaluate the form using generic validaing
-      if (!validator.checkAll($(this))) {
-        submit = false;
-      }
-
-      if (submit)
-        this.submit();
-      return false;
-    });
-
-    /* FOR DEMO ONLY */
-    $('#vfields').change(function() {
-      $('form').toggleClass('mode2');
-    }).prop('checked', false);
-
-    $('#alerts').change(function() {
-      validator.defaults.alerts = (this.checked) ? false : true;
-      if (this.checked)
-        $('form .alert').remove();
-    }).prop('checked', false);
-  </script>
 
 </body>
 

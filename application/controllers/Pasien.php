@@ -18,20 +18,32 @@ class Pasien extends CI_Controller {
 	}
 	
 	public function daftar(){
-		// $session_id = $this->session->userdata('nama');
-		// $where = array(
-		// 	'username' => $session_id);
-		// $x['users'] = $this->AdminModel->tampilkan($where);
 		$users['users'] = $this->AdminModel->tampilkan();
 		$data = array();
-		$this->load->view('pasien/form_daftar',$users);
+		$this->load->view('pasien/pasien_baru',$users);
 		if($this->input->post('submit')){ // Jika user mengklik tombol submit yang ada di form
 			$upload = $this->PasienModel->upload();
 			if($upload['result'] == "success"){
 				$this->PasienModel->input($upload);// Panggil fungsi input() yang ada di PasienModel.php
-				redirect('pasien/daftar');
+				// $this->load->view('pasien/pasien_baru');
+				echo '<body>';
+				echo '<script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/notify/pnotify.core.js"></script>';
+				echo '<script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/notify/pnotify.buttons.js"></script>';
+				echo '<script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/notify/pnotify.nonblock.js"></script>';
+				echo "<script>";
+				echo "new PNotify({";
+				echo "title: 'Sukses',";
+                echo "text: 'Sticky success... I\'m not even gonna make a joke.',";
+                echo "type: 'success',";
+                echo "hide: false";
+                echo "});";
+                echo "</script>";
+                echo "</body>";
+				//Create new document with specified version number
+				//$this->load->view('pasien/pasien_baru');
 			}else{
-				$data['message'] = $upload['error'];
+				//$data['message'] = $upload['error'];
+				echo "galat";
 			}
 		}
 	}
@@ -46,7 +58,6 @@ class Pasien extends CI_Controller {
 		}else{
 			$this->load->view('pasien/cari_pasien',$data);
 		}
-		
 	}
 
 	public function pasien_lama(){
@@ -73,5 +84,10 @@ class Pasien extends CI_Controller {
 			$this->load->view('pasien/pasien_lama',$data);
 		}
 		
+	}
+
+	public function pasien_baru(){
+		$users['users'] = $this->AdminModel->tampilkan();
+		$this->load->view('pasien/pasien_baru',$users);
 	}
 }

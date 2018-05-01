@@ -13,7 +13,8 @@ class Admin extends CI_Controller {
 		parent::__construct();
 		// if($this->session->userdata('status') == "login"){
 		// 	$this->load->view('welcome_message');
-		// }		
+		// }
+				
 		$this->load->model('LoginModel');
  
 	}
@@ -26,13 +27,20 @@ class Admin extends CI_Controller {
 			'password' => md5($password)
 			);
 		$cek = $this->LoginModel->cek_login("admin",$where)->num_rows();
+		$cek_tipe = $this->LoginModel->cek_login("admin",$where);
+		$tipe_admin = $cek_tipe->result_array();
 		if($cek > 0){
 			$data_session = array(
 				'nama' => $username,
 				'status' => "login"
 				);
-			$this->session->set_userdata($data_session);
-			redirect(base_url('home'));
+			if($tipe_admin[0]['tipe_admin'] == 'resepsionis'){
+				$this->session->set_userdata($data_session);
+				redirect(base_url('home'));
+			}else{
+				echo "<b>Fitur untuk Dokter/Perawat Sedang dalam tahap pengembangan</b>";
+				$this->session->sess_destroy();
+			}
 		}else{
 			echo "Username dan password salah !";
 		}

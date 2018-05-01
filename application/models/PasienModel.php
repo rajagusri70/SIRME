@@ -31,12 +31,16 @@ class PasienModel extends CI_Model{
     }
 
 	public function input($upload){
+		$tanggal = $this->input->post('input_tanggal_lahir');
+		$bulan = $this->input->post('input_bulan_lahir');
+		$tahun = $this->input->post('input_tahun_lahir');
+		$tanggal_lahir_lengkap = $tanggal.'-'.$bulan.'-'.$tahun;
 		$data = array(
 			"no_ktp" => $this->input->post('input_no_ktp'),
 			"no_kk" => $this->input->post('input_no_kk'),
 			"nama" => $this->input->post('input_nama'),
 			"jenis_kelamin" => $this->input->post('input_jenis_kelamin'),
-			"tanggal_lahir" => $this->input->post('input_tanggal_lahir'),
+			"tanggal_lahir" => $tanggal_lahir_lengkap,
 			"tempat_lahir" => $this->input->post('input_tempat_lahir'),
 			"umur" => $this->input->post('input_umur'),
 			"alamat" => $this->input->post('input_alamat'),

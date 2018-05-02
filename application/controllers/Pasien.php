@@ -90,4 +90,8 @@ class Pasien extends CI_Controller {
 		$users['users'] = $this->AdminModel->tampilkan();
 		$this->load->view('pasien/pasien_baru',$users);
 	}
+
+	public function poli(){
+		
+	}
 }

@@ -357,13 +357,104 @@
                         <td><?php echo $p->umur; ?></td>
                         <td><?php echo $p->pekerjaan; ?></td>
                         <td><?php echo $p->golongan_darah; ?></td>
-                        <td><a href="#" class="btn btn-primary btn-xs"><i class="fa fa-hospital-o"></i> Daftar ke Poli </a>
-                          
+                        <td>
+                          <button type="button" class=" btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg-id-<?php echo $p->no_pasien; ?>">Daftarkan ke Poli</button>
+                          <!-- <a href="#" class=""><i class="fa fa-hospital-o"></i> Daftar ke Poli </a> -->
                         </td>
                       </tr>
                       <?php } ?>
                     </tbody>
                   </table>
+                  <div class="modal fade bs-example-modal-lg-id-<?php echo $p->no_pasien; ?>" tabindex="-1" role="dialog" aria-hidden="true">
+                          <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel"><b><?php echo $p->no_pasien; ?> | <?php echo $p->nama; ?></b></h4>
+                              </div>
+                              <div class="modal-body">
+                                <h4></h4>
+          <!-- Isi dari Modal -->
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Data Pribadi</h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  
+                  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="" method="post" enctype="multipart/form-data" >
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Pilih Poliklinik<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select id="poliklinik" onchange="biaya();" class="normal-form-long" >
+                          <option value="none">-Pilih Poliklinik-</option>
+                          <option value="Poli Umum">Poli Umum</option>
+                          <option value="Poli Mata">Poli Mata</option>
+                          <option value="Poli T.H.T">Poli T.H.T</option>
+                          <option value="Poli Bedah">Poli Bedah</option>
+                          <option value="Bersalin">Bersalin</option>
+                          <option value="Poli Kulit dan Kelamin">Poli Kulit dan Kelamin</option>
+                          <option value="UGD">UGD</option>
+                          <option value="Poli Gigi">Poli Gigi</option>
+                          <option value="Poli Anak">Poli Anak</option>
+                          <option value="Poli Syaraf">Poli Syaraf</option>
+                          <option value="Poli Jantung">Poli Jantung</option>
+                          <option value="Paru">Paru</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Biaya Pendaftaran (Rp.)<span ></span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="biaya_daftar" type="text" class="normal-form-long" readonly required="" placeholder="Biaya yang dikeluarkan untuk pendaftaran Poli">
+                      </div>
+                    </div>
+                    <script type="text/javascript">
+                      function biaya(){
+                        var poli = document.getElementById("poliklinik").value;
+                        if(poli == "Poli Umum"){
+                          document.getElementById("biaya_daftar").value = "30000";
+                        }else if(poli == "Poli Mata"){
+                          document.getElementById("biaya_daftar").value = "40000";
+                        }else if(poli == "Poli T.H.T"){
+                           document.getElementById("biaya_daftar").value = "50000";
+                        }else if(poli == "Poli Bedah"){
+                           document.getElementById("biaya_daftar").value = "50000";
+                        }else if(poli == "Bersalin"){
+                           document.getElementById("biaya_daftar").value = "35000";
+                        }else if(poli == "Poli Kulit dan Kelamin"){
+                           document.getElementById("biaya_daftar").value = "40000";
+                        }
+                      }
+                    </script>
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                      <div class="col-md-6 col-md-offset-3">
+                        
+                        <input type="submit" name="dafar_poli" class="btn btn-success" value="Daftarkan Ke Poli">
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                              </div>
+                            </div>
+                          </div>
                 </div>
               </div>
             </div>
@@ -406,7 +497,7 @@
   <script src="<?php echo base_url(); ?>/assets/js/custom.js"></script>
   <!-- form validation -->
   <script src="<?php echo base_url(); ?>/assets/js/validator/validator.js"></script>
-
+  
 </body>
 
 </html>

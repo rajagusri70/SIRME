@@ -394,7 +394,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Pilih Poliklinik<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select id="poliklinik" onchange="biaya();" class="normal-form-long" >
+                        <select id="poliklinik" name="input_poliklinik" onchange="biaya();" class="normal-form-long" >
                           <option value="none">-Pilih Poliklinik-</option>
                           <option value="Poli Umum">Poli Umum</option>
                           <option value="Poli Mata">Poli Mata</option>
@@ -415,34 +415,43 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Biaya Pendaftaran (Rp.)<span ></span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="biaya_daftar" type="text" class="normal-form-long" readonly required="" placeholder="Biaya yang dikeluarkan untuk pendaftaran Poli">
+                        <input id="biaya_daftar" name="input-biaya" type="text" class="normal-form-long" readonly required="" placeholder="Biaya yang dikeluarkan untuk pendaftaran Poli">
+                      </div>
+                    </div>
+                    
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                      <div class="col-md-6 col-md-offset-3">
+                        <input type="submit" name="dafar_poli" id="tombol_poli" class="btn btn-success" value="Daftarkan Ke Poli" disabled="true">
                       </div>
                     </div>
                     <script type="text/javascript">
                       function biaya(){
                         var poli = document.getElementById("poliklinik").value;
-                        if(poli == "Poli Umum"){
+                        if(poli == "none"){
+                          document.getElementById("tombol_poli").disabled = true;
+                          document.getElementById("biaya_daftar").value = "";
+                        }else if(poli == "Poli Umum"){
                           document.getElementById("biaya_daftar").value = "30000";
+                          document.getElementById("tombol_poli").disabled = false;
                         }else if(poli == "Poli Mata"){
                           document.getElementById("biaya_daftar").value = "40000";
+                          document.getElementById("tombol_poli").disabled = false;
                         }else if(poli == "Poli T.H.T"){
                            document.getElementById("biaya_daftar").value = "50000";
+                           document.getElementById("tombol_poli").disabled = false;
                         }else if(poli == "Poli Bedah"){
                            document.getElementById("biaya_daftar").value = "50000";
+                           document.getElementById("tombol_poli").disabled = false;
                         }else if(poli == "Bersalin"){
                            document.getElementById("biaya_daftar").value = "35000";
+                           document.getElementById("tombol_poli").disabled = false;
                         }else if(poli == "Poli Kulit dan Kelamin"){
                            document.getElementById("biaya_daftar").value = "40000";
+                           document.getElementById("tombol_poli").disabled = false;
                         }
                       }
                     </script>
-                    <div class="ln_solid"></div>
-                    <div class="form-group">
-                      <div class="col-md-6 col-md-offset-3">
-                        
-                        <input type="submit" name="dafar_poli" class="btn btn-success" value="Daftarkan Ke Poli">
-                      </div>
-                    </div>
                   </form>
                 </div>
               </div>

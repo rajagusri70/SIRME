@@ -96,6 +96,14 @@
                     </li>
                   </ul>
                 </li>
+                <li><a><i class="fa fa-user-md"></i> Rawat Jalan <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu" style="display: none">
+                    <li><a href="<?php echo site_url('pasien/status') ?>">Status Rawat Pasien</a>
+                    </li>
+                    <li><a href="index2.html">Status Selesai</a>
+                    </li>
+                  </ul>
+                </li>
               </ul>
             </div>
             </div>
@@ -389,7 +397,7 @@
                 </div>
                 <div class="x_content">
                   
-                  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="" method="post" enctype="multipart/form-data" >
+                  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('pasien/pasien_lama'); ?>?nomor_pasien=<?php echo $p->no_pasien; ?>" method="post" enctype="multipart/form-data" >
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Pilih Poliklinik<span class="required">*</span>
                       </label>
@@ -415,14 +423,14 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Biaya Pendaftaran (Rp.)<span ></span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="biaya_daftar" name="input-biaya" type="text" class="normal-form-long" readonly required="" placeholder="Biaya yang dikeluarkan untuk pendaftaran Poli">
+                        <input id="biaya_daftar" name="input_biaya" type="text" class="normal-form-long" readonly required="" placeholder="Biaya yang dikeluarkan untuk pendaftaran Poli">
                       </div>
                     </div>
                     
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
-                        <input type="submit" name="dafar_poli" id="tombol_poli" class="btn btn-success" value="Daftarkan Ke Poli" disabled="true">
+                        <input type="submit" name="daftar_poli" id="tombol_poli" class="btn btn-success" value="Daftarkan Ke Poli" disabled="true">
                       </div>
                     </div>
                     <script type="text/javascript">
@@ -452,6 +460,9 @@
                         }
                       }
                     </script>
+                    <?php 
+                      $_SESSION['no_pasien'] = $p->no_pasien;
+                    ?>
                   </form>
                 </div>
               </div>

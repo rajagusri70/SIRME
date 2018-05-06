@@ -9,7 +9,13 @@ class PasienModel extends CI_Model{
     }
 
 	public function view(){
+		return $this->db->get("pasien")->result();
+	}
 
+
+	public function viewPasien($no_pasien){
+		$this->db->where("no_pasien",$no_pasien);
+		return $this->db->get("pasien")->result();
 	}
 
 	public function upload(){
@@ -86,5 +92,42 @@ class PasienModel extends CI_Model{
 		$this->db->like('no_pasien', $cari_input);
     	$this->db->or_like('nama', $cari_input);
 		return $this->db->get('pasien')->result();
+	}
+
+	public function poli(){
+		date_default_timezone_set("Asia/Jakarta");
+		$nomor_pasien = $_GET['nomor_pasien'];
+		$tanggal = date("d-m-Y");
+        $waktu = date("H:i:s");
+        $biaya = $this->input->post('input_biaya');
+        $poliklinik = $this->input->post('input_poliklinik');
+        $status = "Dalam Pemeriksaan";
+		$data = array(
+			"no_pasien" => $nomor_pasien,
+			"tanggal" => $tanggal,
+			"waktu" => $waktu,
+			"biaya" => $biaya,
+			"poliklinik" => $poliklinik,
+			"status" => $status
+		);
+		$this->db->insert('rawat_jalan', $data);
+	}
+
+	public function cariStatus(){
+		$poliklinik = $this->input->post('input_poliklinik');
+		$where = array(
+			'no_pasien' => $poliklinik
+		);
+
+		$this->db->select('*'); //memeilih semua field
+	    $this->db->from('rawat_jalan'); //memeilih tabel
+	    $this->db->join('pasien', 'rawat_jalan.no_pasien = pasien.no_pasien');
+	    $this->db->where('rawat_jalan.poliklinik',$poliklinik);
+	    return $this->db->get()->result();
+	}
+
+	public function update($where,$data){
+		$this->db->where("no_pasien",$where);
+		$this->db->update("pasien",$data);
 	}
 }

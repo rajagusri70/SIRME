@@ -359,6 +359,7 @@
                         <td><?php echo $p->golongan_darah; ?></td>
                         <td><button type="button" class=" btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg-id-<?php echo $p->no_pasien; ?>">View</button>
                         <!-- Tampilan Modal -->
+                        
                         <div class="modal fade bs-example-modal-lg-id-<?php echo $p->no_pasien; ?>" tabindex="-1" role="dialog" aria-hidden="true">
                           <div class="modal-dialog modal-lg">
                             <div class="modal-content">
@@ -434,18 +435,58 @@
                                             </ul>
                                             <div id="myTabContent" class="tab-content">
                                               <div role="tabpanel" class="tab-pane fade active in" id="tab_content1<?php echo $p->no_pasien; ?>" aria-labelledby="home-tab">
+                                                <?php
+                                                $servername = "localhost";
+                                                $username = "root";
+                                                $password = "";
+                                                $dbname = "sirme";
 
+                                                // Create connection
+                                                $conn = new mysqli($servername, $username, $password, $dbname);
+                                                // Check connection
+                                                if ($conn->connect_error) {
+                                                    die("Connection failed: " . $conn->connect_error);
+                                                }
+
+                                                $sql = "SELECT * FROM rawat_jalan WHERE no_pasien=".$p->no_pasien."";
+                                                $result = $conn->query($sql);
+
+                                                if(!empty($result)){
+                                                  while($row = $result->fetch_assoc()) {
+                                                ?>
                                                 <!-- start recent activity -->
                                                 <ul class="messages">
                                                   <li>
                                                     <img src="<?php echo base_url('images/pasien/').$p->foto ?>" class="avatar" alt="Avatar">
                                                     <div class="message_date">
-                                                      <h3 class="date text-info">24</h3>
-                                                      <p class="month">May</p>
+                                                      <h3 class="date text-info"><?php echo substr($row['tanggal'], 0,2) ?></h3>
+                                                      <p class="month">
+                                                      <?php
+                                                      $b = substr($row['tanggal'], 3,2);
+                                                      if($b=="01"){
+                                                        $bulan = "Januari";
+                                                      }elseif ($b=="02") {
+                                                        $bulan = "Februari";
+                                                      }elseif ($b=="03") {
+                                                        $bulan = "Maret";
+                                                      }elseif ($b=="04") {
+                                                        $bulan = "April";
+                                                      }elseif($b == "05"){
+                                                        $bulan = "Mei";
+                                                      }elseif ($b=="06") {
+                                                        $bulan = "Juni";
+                                                      }elseif ($b=="07") {
+                                                        $bulan = "Juli";
+                                                      }elseif ($b=="08") {
+                                                        $bulan = "Agustus";
+                                                      }
+                                                      echo 
+                                                      $bulan;
+                                                      ?></p>
                                                     </div>
                                                     <div class="message_wrapper">
-                                                      <h4 class="heading">Desmond Davison</h4>
-                                                      <blockquote class="message">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth.</blockquote>
+                                                      <h4 class="heading"><?php echo $p->nama; ?></h4>
+                                                      <blockquote class="message">Pasien telah mengunjungi/dirujuk ke poliklinik <b><?php echo $row['poliklinik'] ?></b>.</blockquote>
                                                       <br />
                                                       <p class="url">
                                                         <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
@@ -454,6 +495,10 @@
                                                     </div>
                                                   </li>
                                                 </ul>
+                                                <?php
+                                                  } 
+                                                }
+                                                $conn->close(); ?>
                                                 <!-- end recent activity -->
                                               </div>
                                               <div role="tabpanel" class="tab-pane fade" id="tab_content2<?php echo $p->no_pasien; ?>" aria-labelledby="profile-tab">

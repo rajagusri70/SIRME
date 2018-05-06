@@ -92,6 +92,13 @@ class PasienModel extends CI_Model{
 		$this->db->like('no_pasien', $cari_input);
     	$this->db->or_like('nama', $cari_input);
 		return $this->db->get('pasien')->result();
+		// $this->db->select('*'); //memeilih semua field
+	 //    $this->db->from($table); //memeilih tabel
+	 //    $this->db->join('rawat_jalan', 'rawat_jalan.no_pasien = pasien.no_pasien');
+	 //    $this->db->like($where,$where_parameter);
+	 //    $this->db->or_like($where2,$where_parameter2);
+	 //    return $this->db->get()->result();
+
 	}
 
 	public function poli(){
@@ -113,21 +120,31 @@ class PasienModel extends CI_Model{
 		$this->db->insert('rawat_jalan', $data);
 	}
 
-	public function cariStatus(){
-		$poliklinik = $this->input->post('input_poliklinik');
-		$where = array(
-			'no_pasien' => $poliklinik
-		);
+	public function cariStatus($table,$where,$where_parameter){
+		//$poliklinik = $this->input->post('input_poliklinik');
+		// $where = array(
+		// 	'no_pasien' => $poliklinik
+		// );
 
 		$this->db->select('*'); //memeilih semua field
-	    $this->db->from('rawat_jalan'); //memeilih tabel
+	    $this->db->from($table); //memeilih tabel
 	    $this->db->join('pasien', 'rawat_jalan.no_pasien = pasien.no_pasien');
-	    $this->db->where('rawat_jalan.poliklinik',$poliklinik);
+	    $this->db->where($where,$where_parameter);
 	    return $this->db->get()->result();
+	}
+
+	public function tampilkanRawat($table){
+		$this->db->select('*'); //memeilih semua field
+	    $this->db->from($table); //memeilih tabel
+	    $this->db->join('pasien', 'rawat_jalan.no_pasien = pasien.no_pasien');
 	}
 
 	public function update($where,$data){
 		$this->db->where("no_pasien",$where);
 		$this->db->update("pasien",$data);
+	}
+
+	public function test(){
+		return $this->db->get("pasien")->result_array();
 	}
 }

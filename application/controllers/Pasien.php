@@ -54,7 +54,7 @@ class Pasien extends CI_Controller {
 		$data['users'] = $this->AdminModel->tampilkan();
 		if(!empty($cari_input)){
 			$parameter = $this->input->post('parameter_input');
-			$data['pasien'] = $this->PasienModel->cari();
+			$data['pasien'] = $this->PasienModel->cari('pasien','pasien.no_pasien',$cari_input,'pasien.nama',$cari_input);
 			$this->load->view('pasien/cari_pasien',$data);
 		}else{
 			$this->load->view('pasien/cari_pasien',$data);
@@ -103,14 +103,16 @@ class Pasien extends CI_Controller {
 	public function status_rawat(){
 		$data['users'] = $this->AdminModel->tampilkan();
 		$poliklinik = $this->input->post('input_poliklinik');
-
+		$where = array(
+			'rawat_jalan.poliklinik' => $poliklinik, 
+		);
 		if($poliklinik == "Poli Umum"){
 			$parameter = $this->input->post('parameter_input');
-			$data['pasien'] = $this->PasienModel->cariStatus();
+			$data['pasien'] = $this->PasienModel->cariStatus('rawat_jalan','rawat_jalan.poliklinik',$poliklinik);
 	  		$this->load->view('pasien/status_rawat',$data);
 		}else if($poliklinik == "Poli Mata"){
 			$parameter = $this->input->post('parameter_input');
-			$data['pasien'] = $this->PasienModel->cariStatus();
+			$data['pasien'] = $this->PasienModel->cariStatus('rawat_jalan','rawat_jalan.poliklinik',$poliklinik);
 	  		$this->load->view('pasien/status_rawat',$data);
 		}
 
@@ -176,5 +178,10 @@ class Pasien extends CI_Controller {
 		$this->PasienModel->update($no_pasien,$data);
 		// // echo "<script>window.close();</script>";
 		// redirect('pasien/profile_pasien/'.$no_pasien);
+	}
+
+	public function test(){
+		$data = $this->PasienModel->test();
+		echo $data;
 	}
 }

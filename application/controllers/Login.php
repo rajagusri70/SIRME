@@ -40,7 +40,7 @@ class Login extends CI_Controller {
 			}else{
 				$this->session->set_userdata($data_session);
 				// echo "<b>Fitur untuk Dokter/Perawat Sedang dalam tahap pengembangan</b>";
-				redirect(base_url('resepsionis/pasien'));
+				redirect(base_url('poli_umum/check_up/pasien_terdaftar'));
 			}
 		}else{
 			echo "Username dan password salah !";

@@ -135,13 +135,6 @@ class PasienModel extends CI_Model{
 	    return $this->db->get()->result();
 	}
 
-	public function tampilkanRawat($table){
-		$this->db->select('*'); //memeilih semua field
-	    $this->db->from($table); //memeilih tabel
-	    $this->db->join('pasien', ''.$table.'.no_pasien = pasien.no_pasien');
-	    return $this->db->get()->result();
-	}
-
 	public function update($where,$data){
 		$this->db->where("no_pasien",$where);
 		$this->db->update("pasien",$data);

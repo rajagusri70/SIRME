@@ -15,13 +15,5 @@ class Rawat extends CI_Controller {
 		
 	}
 
-	public function diagnosa(){
-		// $tipe_admin = $this->session->userdata("tipe_admin");
-		// if($tipe_admin == "dokter"){
-			$users['users'] = $this->AdminModel->tampilkan();
-			$this->load->view('poli_umum/check_up',$users);
-		// }else{
-		// 	echo "no authority";
-		// }
-	}
+	
 }

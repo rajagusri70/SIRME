@@ -72,7 +72,7 @@ class Pasien extends CI_Controller {
 		$this->load->view('resepsionis/pasien_lama',$users);
 		if($this->input->post('daftar_poli')){
 			$this->PasienModel->poli();
-			redirect ("resepsionis/pasien_lama");
+			redirect ("resepsionis/pasien/pasien_lama");
 		}
 	}
 
@@ -114,7 +114,7 @@ class Pasien extends CI_Controller {
 		);
 		if($poliklinik == "Poli Umum"){
 			$parameter = $this->input->post('parameter_input');
-			$data['pasien'] = $this->PasienModel->cariStatus('rawat_jalan','rawat_jalan.poliklinik',$poliklinik);
+			$data['pasien'] = $this->RawatModel->cariStatus('rawat_jalan','rawat_jalan.poliklinik',$poliklinik);
 	  		$this->load->view('resepsionis/status_rawat',$data);
 		}else if($poliklinik == "Poli Mata"){
 			$parameter = $this->input->post('parameter_input');

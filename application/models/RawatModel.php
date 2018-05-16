@@ -39,14 +39,19 @@ class RawatModel extends CI_Model{
 	    return $this->db->get()->result();
 	}
 
-	public function tampilkanRawat($table){
-		$this->db->select('*'); //memeilih semua field
-	    $this->db->from($table); //memeilih tabel
-	    $this->db->join('pasien', ''.$table.'.no_pasien = pasien.no_pasien');
-	    return $this->db->get()->result();
+	public function tampilkanRawat(){
+		// $this->db->select('*'); //memeilih semua field
+	 //    $this->db->from($table); //memeilih tabel
+	 //    $this->db->join('pasien', ''.$table.'.no_pasien = pasien.no_pasien');
+	 //    $this->db->or_where($where);
+	 //    return $this->db->get()->result();
+		$querry = "SELECT * FROM `rawat_jalan` JOIN `pasien` ON `rawat_jalan`.`no_pasien` = `pasien`.`no_pasien` WHERE `rawat_jalan`.`status` = 'Menunggu' OR `rawat_jalan`.`status` = 'Dalam Pemeriksaan'";
+		return $this->db->query($querry)->result();
 	}
 
-	public function test(){
-		return $this->db->get("poli_umum")->result();
+	public function periksa(){
+		
 	}
+
+
 }

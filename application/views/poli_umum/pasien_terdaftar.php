@@ -23,6 +23,12 @@
 
 
   <script src="<?php echo base_url(); ?>/assets/js/jquery.min.js"></script>
+  <link href="<?php echo base_url(); ?>/assets/js/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+  <link href="<?php echo base_url(); ?>/assets/js/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="<?php echo base_url(); ?>/assets/js/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="<?php echo base_url(); ?>/assets/js/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="<?php echo base_url(); ?>/assets/js/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
+
 
   <!--[if lt IE 9]>
         <script src="../assets/js/ie8-responsive-file-warning.js"></script>
@@ -78,25 +84,13 @@
                   <ul class="nav child_menu" style="display: none">
                     <li><a href="index.html">Dashboard</a>
                     </li>
-                    <li><a href="index2.html">Dashboard2</a>
-                    </li>
-                    <li><a href="index3.html">Dashboard3</a>
-                    </li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-edit"></i> Pasien <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-user-md"></i> Check Up <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo site_url('pasien/') ?>">Cari Pasien</a>
+                    <li><a href="<?php echo $_SERVER['REQUEST_URI']; ?>">Pasien Terdaftar</a>
                     </li>
-                    <li><a href="<?php echo site_url('pasien/daftar') ?>" >Pendaftaran Pasien Baru</a>
-                    </li>
-                    <li><a href="<?php echo site_url('pasien/pasien_lama') ?>">Pendaftaran Pasien Lama</a>
-                    </li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-user-md"></i> Rawat Jalan <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo $_SERVER['REQUEST_URI']; ?>">Status Rawat Pasien</a>
+                    <li><a href="index2.html">Status Rawat Pasien</a>
                     </li>
                     <li><a href="index2.html">Status Selesai</a>
                     </li>
@@ -168,73 +162,7 @@
                   <span class="badge bg-green">6</span>
                 </a>
                 <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
-                  <li>
-                    <a>
-                      <span class="image">
-                                        <img src="images/img.jpg" alt="Profile Image" />
-                                    </span>
-                      <span>
-                                        <span>John Smith</span>
-                      <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                    </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image">
-                                        <img src="images/img.jpg" alt="Profile Image" />
-                                    </span>
-                      <span>
-                                        <span>John Smith</span>
-                      <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                    </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image">
-                                        <img src="images/img.jpg" alt="Profile Image" />
-                                    </span>
-                      <span>
-                                        <span>John Smith</span>
-                      <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                    </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image">
-                                        <img src="images/img.jpg" alt="Profile Image" />
-                                    </span>
-                      <span>
-                                        <span>John Smith</span>
-                      <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                    </span>
-                    </a>
-                  </li>
-                  <li>
-                    <div class="text-center">
-                      <a>
-                        <strong>See All Alerts</strong>
-                        <i class="fa fa-angle-right"></i>
-                      </a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-
+                  
             </ul>
           </nav>
         </div>
@@ -248,7 +176,7 @@
           <div class="page-title">
             <div class="title_left">
               <h3>
-                Status Pasien Rawat Jalan
+                Pemeriksaan Pasien
               </h3>
             </div>
 
@@ -261,57 +189,9 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Menampilkan Status Rawat Jalan Pasien <!-- <small>sub title</small> --></h2>
+                  <h2>Pasien Terdaftar Poliklinik</h2>
                   <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-
-                  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url("pasien/status_rawat") ?>" method="post" enctype="multipart/form-data" >
-                    <p>Silahkan pilih poliklinik yang akan dipilih agar dapat menampilkan status daftar pasien yang terdaftar di poliklinik tersebut. Gunakan Nomor Pasien dan Nama Pasien sebagai parameter pencarian Pasien.
-                    </p>
-                    <span class="section"></span>
-
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Pilih Poliklinik <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select id="poliklinik" name="input_poliklinik" class="normal-form" onChange="">
-                          <option value="none">- pilih poliklinik -</option>
-                          <option name="input_poli" value="Poli Umum">Poli Umum</option>
-                          <option value="Poli Mata">Poli Mata</option>
-                          <option value="Poli Kulit dan Kelamin">Poli Kulit dan Kelamin</option>
-                        </select> &nbsp;&nbsp;&nbsp;
-                        <input type="submit" name="input_poli" class="btn btn-success" value="Tampilkan">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      
-                    </div>
-                    <div class="ln_solid"></div>
-                    <div class="form-group">
-                      <div class="col-md-6 col-md-offset-3">
-                        
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-            
-            <?php 
-              //$pasien = array();
-            if (!empty($pasien)) {
-            ?>                       
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="x_panel">
-                <div class="x_title">
-                  <h2>Hasil Pencarian</h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    <li><a href="#"><i class="fa fa-chevron-up"></i></a>
                     </li>
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
@@ -322,59 +202,49 @@
                         </li>
                       </ul>
                     </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    <li><a href="#"><i class="fa fa-close"></i></a>
                     </li>
                   </ul>
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                  <table id="datatable-buttons" class="table table-striped table-bordered">
-                    
+                  <p class="text-muted font-13 m-b-30">
+                    Tabel dibawah ini berisikan pasien-pasien yang terdaftar untuk melakukan pemeriksaan, diagnosa atau berobat di Poliklinik
+                  </p>
+                  <table id="datatable" class="table table-striped table-bordered">
                     <thead>
                       <tr>
-                        <th>No Rawat Jalan</th>
-                        <th>No Pasien</th>
-                        <th>Nama Pasien</th>
-                        <th>Tanggal Masuk</th>
-                        <th>Waktu Masuk</th>
-                        <th>Poliklinik</th>
-                        <th>Status</th>
+                        <th align="center">No CM</th>
+                        <th align="center">Nama Pasien</th>
+                        <th align="center">Tanggal Masuk</th>
+                        <th align="center">Jam</th>
+                        <th align="center">Biaya</th>
+                        <th align="center">Status</th>
+                        <th align="center">Aksi</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <?php 
-
-                      foreach ($pasien as $p) { ?>
+                      <?php
+                      foreach ($rawat_jalan as $rj) {
+                      ?>
                       <tr>
-                        <td><?php echo $p->id_rawat; ?></td>
-                        <td><?php echo $p->no_pasien; ?></td>
-                        <td><?php echo $p->nama; ?></td>
-                        <td><?php echo $p->tanggal; ?></td>
-                        <td><?php echo $p->waktu; ?></td>
-                        <td><?php echo $p->poliklinik; ?></td>
-                        <td>
-                          <?php 
-                            if($p->status == "Selesai"){
-                          ?>
-                          <div type="" class="btn btn-success" ><?php echo $p->status; ?></div>
-                          <?php 
-                            }else{
-                          ?>
-                          
-                          <div type="" class="btn btn-primary" ><?php echo $p->status; ?></div>
-                          <?php 
-                          }
-                          ?>
+                        <td><?php echo $rj->no_pasien ?></td>
+                        <td><?php echo $rj->nama ?></td>
+                        <td align="center"><?php echo $rj->tanggal ?></td>
+                        <td><?php echo $rj->waktu ?></td>
+                        <td>Rp. <?php echo $rj->biaya ?></td>
+                        <td><?php echo $rj->status ?></td>
+                        <td align="center"><a href="" target="_blank" ><span class="glyphicon glyphicon-check"></span></a></td>
                       </tr>
-                      <?php } ?>
+                      
+                      <?php
+                      }
+                      ?>
                     </tbody>
                   </table>
                 </div>
               </div>
             </div>
-            <?php 
-          }
-            ?>
           </div>
         </div>
 
@@ -412,7 +282,73 @@
   <script src="<?php echo base_url(); ?>/assets/js/custom.js"></script>
   <!-- form validation -->
   <script src="<?php echo base_url(); ?>/assets/js/validator/validator.js"></script>
-  
+  <script src="<?php echo base_url(); ?>/assets/js/datatables/jquery.dataTables.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/js/datatables/dataTables.bootstrap.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/js/datatables/dataTables.buttons.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/js/datatables/buttons.bootstrap.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/js/datatables/jszip.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/js/datatables/pdfmake.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/js/datatables/vfs_fonts.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/js/datatables/buttons.html5.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/js/datatables/buttons.print.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/js/datatables/dataTables.fixedHeader.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/js/datatables/dataTables.keyTable.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/js/datatables/dataTables.responsive.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/js/datatables/responsive.bootstrap.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/js/datatables/dataTables.scroller.min.js"></script>
+  <script>
+          var handleDataTableButtons = function() {
+              "use strict";
+              0 !== $("#datatable-buttons").length && $("#datatable-buttons").DataTable({
+                dom: "Bfrtip",
+                buttons: [{
+                  extend: "copy",
+                  className: "btn-sm"
+                }, {
+                  extend: "csv",
+                  className: "btn-sm"
+                }, {
+                  extend: "excel",
+                  className: "btn-sm"
+                }, {
+                  extend: "pdf",
+                  className: "btn-sm"
+                }, {
+                  extend: "print",
+                  className: "btn-sm"
+                }],
+                responsive: !0
+              })
+            },
+            TableManageButtons = function() {
+              "use strict";
+              return {
+                init: function() {
+                  handleDataTableButtons()
+                }
+              }
+            }();
+        </script>
+        <script type="text/javascript">
+          $(document).ready(function() {
+            $('#datatable').dataTable();
+            $('#datatable-keytable').DataTable({
+              keys: true
+            });
+            $('#datatable-responsive').DataTable();
+            $('#datatable-scroller').DataTable({
+              ajax: "js/datatables/json/scroller-demo.json",
+              deferRender: true,
+              scrollY: 380,
+              scrollCollapse: true,
+              scroller: true
+            });
+            var table = $('#datatable-fixed-header').DataTable({
+              fixedHeader: true
+            });
+          });
+          TableManageButtons.init();
+        </script>
   
 </body>
 

@@ -101,6 +101,8 @@ class PasienModel extends CI_Model{
 
 	}
 
+	// ================Rawat Jalan
+
 	public function poli(){
 		date_default_timezone_set("Asia/Jakarta");
 		$nomor_pasien = $_GET['nomor_pasien'];
@@ -136,7 +138,8 @@ class PasienModel extends CI_Model{
 	public function tampilkanRawat($table){
 		$this->db->select('*'); //memeilih semua field
 	    $this->db->from($table); //memeilih tabel
-	    $this->db->join('pasien', 'rawat_jalan.no_pasien = pasien.no_pasien');
+	    $this->db->join('pasien', ''.$table.'.no_pasien = pasien.no_pasien');
+	    return $this->db->get()->result();
 	}
 
 	public function update($where,$data){
@@ -145,6 +148,6 @@ class PasienModel extends CI_Model{
 	}
 
 	public function test(){
-		return $this->db->get("pasien")->result_array();
+		return $this->db->get("poli_umum")->result();
 	}
 }

@@ -166,7 +166,7 @@
                       <div id="myTabContent" class="tab-content">
                         <div role="tabpanel" class="tab-pane fade active in" id="tab_content3" aria-labelledby="profile-tab">
                           
-                          <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('pasien/update/').$p->no_pasien  ?>" method="post" enctype="multipart/form-data" >
+                          <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('resepsionis/pasien/update/').$p->no_pasien  ?>" method="post" enctype="multipart/form-data" >
                             
                             <div class="item form-group">
                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">No KTP <span class="required">*</span>

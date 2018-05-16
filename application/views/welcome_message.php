@@ -77,10 +77,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<a href="<?php echo base_url('login'); ?>" ><code>http://localhost/SIRME/login</code></a>
 
 		<p>Daftar Pasien Baru</p>
-		<a href="http://localhost/SIRME/pasien/daftar" ><code>http://localhost/SIRME/pasien/daftar</code></a>
+		<a href="http://localhost/SIRME/resepsionis/pasien/daftar" ><code>http://localhost/SIRME/resepsionis/pasien/daftar</code></a>
 
 		<p>Lihat Daftar Pasien</p>
-		<a href="http://localhost/SIRME/pasien" ><code>http://localhost/SIRME/pasien/daftar</code></a>
+		<a href="http://localhost/SIRME/resepsionis/pasien" ><code>http://localhost/SIRME/resepsionis/pasien/daftar</code></a>
 
 		<p>Logout</p>
 		<a href="<?php echo base_url('admin/logout'); ?>" ><code>Klik Disini untuk Logout</code></a>

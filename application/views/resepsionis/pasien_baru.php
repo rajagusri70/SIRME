@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>SIRME | Pasien Lama</title>
+  <title>SIRME | Pasien</title>
 
   <!-- Bootstrap core CSS -->
 
@@ -68,9 +68,7 @@
             </div>
           </div>
           <!-- /menu prile quick info -->
-
           <br />
-
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
@@ -88,17 +86,17 @@
                 </li>
                 <li><a><i class="fa fa-edit"></i> Pasien <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo site_url('pasien/') ?>">Cari Pasien</a>
+                    <li><a href="<?php echo site_url('resepsionis/pasien/') ?>">Cari Pasien</a>
                     </li>
-                    <li><a href="<?php echo site_url('pasien/daftar') ?>" >Pendaftaran Pasien Baru</a>
+                    <li><a href="<?php echo $_SERVER['REQUEST_URI']; ?>" >Pendaftaran Pasien Baru</a>
                     </li>
-                    <li><a href="<?php echo $_SERVER['REQUEST_URI']; ?>">Pendaftaran Pasien Lama</a>
+                    <li><a href="<?php echo site_url('resepsionis/pasien/pasien_lama') ?>">Pendaftaran Pasien Lama</a>
                     </li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-user-md"></i> Rawat Jalan <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo site_url('pasien/status') ?>">Status Rawat Pasien</a>
+                    <li><a href="<?php echo site_url('resepsionis/pasien/status') ?>">Status Rawat Pasien</a>
                     </li>
                     <li><a href="index2.html">Status Selesai</a>
                     </li>
@@ -140,7 +138,7 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="images/img.jpg" alt="">Dr. 
+                  Dr. 
                   <?php foreach ($users as $user) {
                     echo $user->nama;
                   } ?>
@@ -240,17 +238,17 @@
             </ul>
           </nav>
         </div>
+
       </div>
       <!-- /top navigation -->
 
       <!-- page content -->
       <div class="right_col" role="main">
-
         <div class="">
           <div class="page-title">
             <div class="title_left">
               <h3>
-                Pendaftaran Pasien Lama
+                Pendaftaran Pasien Baru
               </h3>
             </div>
 
@@ -264,130 +262,6 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Menggunakan Metode Pencarian<!-- <small>sub title</small> --></h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-
-                  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('pasien/daftar_pasien_lama'); ?>" method="post" enctype="multipart/form-data" >
-
-                    <p>Silahkan masukan kata kunci untuk melakukan pencarian. Kata kunci yang diproses sebagai parameter pencarian adalah Nomor Pasien dan Nama. Dapat dimasukan sebagian atau secara lengkap.
-                    </p>
-                    <span class="section"></span>
-
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Kata Kunci <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="name" class="form-control" name="cari_input" placeholder="dapat berupa No. Pasien/Nama" required="required" type="text" name="cari_input" >
-                        
-                      </div>
-                      <!-- <select class="" name="parameter_input" >
-                        <option value="id_pasien">ID Pasien</option>
-                        <option value="nama_pasien">Nama Pasien</option>
-                        <option value="no_ktp">Nomor KTP</option>
-                        <option value="no_kk">Nomor KK</option>
-                      </select> -->
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <div id="parameter_input" class="btn-group" data-toggle="buttons">
-                          <input type="radio" name="parameter_input" value="id_pasien" checked=""> Nomor Pasien&nbsp; &nbsp;
-                          <input type="radio" name="parameter_input" value="no_ktp"> No. KTP&nbsp; &nbsp;
-                          <input type="radio" name="parameter_input" value="no_kk"> No. KK&nbsp; &nbsp;
-                        </div>
-                      </div>
-                    </div>
-                    <div class="ln_solid"></div>
-                    <div class="form-group">
-                      <div class="col-md-6 col-md-offset-3">
-                        <input type="submit" name="search" class="btn btn-success" value="Cari">
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-            <?php 
-              //$pasien = array();
-            if (!empty($pasien)) {
-            ?>
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="x_panel">
-                <div class="x_title">
-                  <h2>Hasil Pencarian</h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Settings 1</a>
-                        </li>
-                        <li><a href="#">Settings 2</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <table id="datatable-buttons" class="table table-striped table-bordered">
-                    
-                    <thead>
-                      <tr>
-                        <th>No Pasien</th>
-                        <th>No KTP</th>
-                        <th>Nama</th>
-                        <th>Jenis Kelamin</th>
-                        <th>Tanggal Lahir</th>
-                        <th>Umur</th>
-                        <th>Pekerjaan</th>
-                        <th>Gol. Darah</th>
-                        <th>Aksi</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php foreach ($pasien as $p) { ?>
-                      <tr>
-                        <td><?php echo $p->no_pasien; ?></td>
-                        <td><?php echo $p->no_ktp; ?></td>
-                        <td><?php echo $p->nama; ?></td>
-                        <td><?php echo $p->jenis_kelamin; ?></td>
-                        <td><?php echo $p->tanggal_lahir; ?></td>
-                        <td><?php echo $p->umur; ?></td>
-                        <td><?php echo $p->pekerjaan; ?></td>
-                        <td><?php echo $p->golongan_darah; ?></td>
-                        <td>
-                          <button type="button" class=" btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg-id-<?php echo $p->no_pasien; ?>">Daftarkan ke Poli</button>
-                          <!-- <a href="#" class=""><i class="fa fa-hospital-o"></i> Daftar ke Poli </a> -->
-                        </td>
-                      </tr>
-                      <?php } ?>
-                    </tbody>
-                  </table>
-                  <div class="modal fade bs-example-modal-lg-id-<?php echo $p->no_pasien; ?>" tabindex="-1" role="dialog" aria-hidden="true">
-                          <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                                </button>
-                                <h4 class="modal-title" id="myModalLabel"><b><?php echo $p->no_pasien; ?> | <?php echo $p->nama; ?></b></h4>
-                              </div>
-                              <div class="modal-body">
-                                <h4></h4>
-          <!-- Isi dari Modal -->
-          <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="x_panel">
-                <div class="x_title">
                   <h2>Data Pribadi</h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -396,89 +270,199 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                  
-                  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('pasien/pasien_lama'); ?>?nomor_pasien=<?php echo $p->no_pasien; ?>" method="post" enctype="multipart/form-data" >
+                  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('resepsionis/pasien/daftar'); ?>" method="post" enctype="multipart/form-data" >
+                    
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Pilih Poliklinik<span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="foto">Foto<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select id="poliklinik" name="input_poliklinik" onchange="biaya();" class="normal-form-long" >
-                          <option value="none">-Pilih Poliklinik-</option>
-                          <option value="Poli Umum">Poli Umum</option>
-                          <option value="Poli Mata">Poli Mata</option>
-                          <option value="Poli T.H.T">Poli T.H.T</option>
-                          <option value="Poli Bedah">Poli Bedah</option>
-                          <option value="Bersalin">Bersalin</option>
-                          <option value="Poli Kulit dan Kelamin">Poli Kulit dan Kelamin</option>
-                          <option value="UGD">UGD</option>
-                          <option value="Poli Gigi">Poli Gigi</option>
-                          <option value="Poli Anak">Poli Anak</option>
-                          <option value="Poli Syaraf">Poli Syaraf</option>
-                          <option value="Poli Jantung">Poli Jantung</option>
-                          <option value="Paru">Paru</option>
+                        <input type="file" id="foto" class="btn btn-primary" name="input_foto" required="" class="">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nomor KTP<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="number" id="nomor_ktp" name="input_no_ktp" required="required" class="normal-form-long">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Nomor KK<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="number" name="input_no_kk" id="input_no_kk" required="required" class="normal-form-long">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Nama<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" name="input_nama" id="nama" required="required" class="normal-form-long">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Jenis Kelamin</label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div id="gender" class="btn-group" data-toggle="buttons">
+                          <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                            <input type="radio" name="input_jenis_kelamin" value="Laki-laki" > &nbsp; Laki-laki &nbsp;
+                          </label>
+                          <label class="btn btn-primary active" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                            <input type="radio" name="input_jenis_kelamin" value="Perempuan" checked=""> Perempuan
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal Lahir<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select class="normal-form" name="input_tanggal_lahir" id="tanggal-lahir" required="required">
+                          <option>-pilih tanggal-</option>
+                          <?php for ($x=1; $x<=31; $x++){
+                            if($x<10){
+                              echo "<option value=".'0'."$x>".'0'."$x</option>";
+                            }else{
+                              echo "<option value=$x>$x</option>";
+                            }
+                          }
+                          ?>
+                        </select>
+                        <select class="normal-form" id="bulan_lahir" name="input_bulan_lahir">
+                          <option id="none" value="none">-pilih bulan-</option>
+                          <option value="Januari">Januari</option>
+                          <option value="Februari">Februari</option>
+                          <option value="Maret">Maret</option>
+                          <option value="April">April</option>
+                          <option value="Mei">Mei</option>
+                          <option value="Juni">Juni</option>
+                          <option value="Juli">Juli</option>
+                          <option value="Agustus">Agustus</option>
+                          <option value="September">September</option>
+                          <option value="Oktober">Oktober</option>
+                          <option value="November">November</option>
+                          <option value="Desember">Desember</option>
+                        </select>
+                        <select class="normal-form" id="tahun_lahir" name="input_tahun_lahir">
+                          <option>-pilih tahun-</option>
+                          <?php for ($year=1900; $year<=date("Y"); $year++){
+                            echo "<option value=$year>$year</option>";
+                          }
+                          ?>
+                        </select>
+                      </div>
+
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Tempat Lahir<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="tempat_lahir" name="input_tempat_lahir" class="normal-form-long" required="required" type="text">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Umur<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="birthday" name="input_umur" class="normal-form-long" required="required" type="text">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Golongan Darah<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select class="normal-form" name="input_golongan_darah">
+                          <option value="A">A</option>
+                          <option value="B">B</option>
+                          <option value="AB">AB</option>
+                          <option value="O">O</option>
                         </select>
                       </div>
                     </div>
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Biaya Pendaftaran (Rp.)<span ></span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Alamat<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="biaya_daftar" name="input_biaya" type="text" class="normal-form-long" readonly required="" placeholder="Biaya yang dikeluarkan untuk pendaftaran Poli">
+                        <input id="birthday" name="input_alamat" class="normal-form-long" required="required" type="text">
                       </div>
                     </div>
-                    
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Pekerjaan<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="birthday" name="input_pekerjaan" class="normal-form-long" required="required" type="text">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Pendidikan Terakhir<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="birthday" name="input_pendidikan" class="normal-form-long" required="required" type="text">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Status Pernikahan<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select class="normal-form-long" name="input_status_pernikahan">
+                          <option value="Belum Nikah">Belum Nikah</option>
+                          <option value="Sudah Nikah">Sudah Nikah</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Orangtua<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="birthday" name="input_nama_orangtua" class="normal-form-long" required="required" type="text">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Pekerjaan Orangtua<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="birthday" name="input_pekerjaan_orangtua" class="normal-form-long" required="required" type="text">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Suami/Istri<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="birthday" name="input_nama_suamistri" class="normal-form-long" required="required" type="text">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Agama<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="birthday" name="input_agama" class="normal-form-long" required="required" type="text">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">No. Telepon<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="birthday" name="input_no_telpon" class="normal-form-long" required="required" type="number">
+                      </div>
+                    </div>
+                    <!-- ============== -->
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12">
+                      </div>
+                    </div>
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
-                        <input type="submit" name="daftar_poli" id="tombol_poli" class="btn btn-success" value="Daftarkan Ke Poli" disabled="true">
+                        <input type="submit" name="submit" class="btn btn-success" value="Daftarkan Pasien">
                       </div>
                     </div>
-                    <script type="text/javascript">
-                      function biaya(){
-                        var poli = document.getElementById("poliklinik").value;
-                        if(poli == "none"){
-                          document.getElementById("tombol_poli").disabled = true;
-                          document.getElementById("biaya_daftar").value = "";
-                        }else if(poli == "Poli Umum"){
-                          document.getElementById("biaya_daftar").value = "30000";
-                          document.getElementById("tombol_poli").disabled = false;
-                        }else if(poli == "Poli Mata"){
-                          document.getElementById("biaya_daftar").value = "40000";
-                          document.getElementById("tombol_poli").disabled = false;
-                        }else if(poli == "Poli T.H.T"){
-                           document.getElementById("biaya_daftar").value = "50000";
-                           document.getElementById("tombol_poli").disabled = false;
-                        }else if(poli == "Poli Bedah"){
-                           document.getElementById("biaya_daftar").value = "50000";
-                           document.getElementById("tombol_poli").disabled = false;
-                        }else if(poli == "Bersalin"){
-                           document.getElementById("biaya_daftar").value = "35000";
-                           document.getElementById("tombol_poli").disabled = false;
-                        }else if(poli == "Poli Kulit dan Kelamin"){
-                           document.getElementById("biaya_daftar").value = "40000";
-                           document.getElementById("tombol_poli").disabled = false;
-                        }
-                      }
-                    </script>
-                    <?php 
-                      $_SESSION['no_pasien'] = $p->no_pasien;
-                    ?>
                   </form>
                 </div>
               </div>
             </div>
-          </div>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-                              </div>
-                            </div>
-                          </div>
-                </div>
-              </div>
-            </div>
-            <?php } ?>
           </div>
         </div>
 
@@ -491,7 +475,6 @@
           <div class="clearfix"></div>
         </footer>
         <!-- /footer content -->
-
       </div>
       <!-- /page content -->
     </div>
@@ -517,6 +500,7 @@
   <script src="<?php echo base_url(); ?>/assets/js/custom.js"></script>
   <!-- form validation -->
   <script src="<?php echo base_url(); ?>/assets/js/validator/validator.js"></script>
+  
   
 </body>
 

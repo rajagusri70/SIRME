@@ -90,15 +90,15 @@
                   <ul class="nav child_menu" style="display: none">
                     <li><a href="<?php echo $_SERVER['REQUEST_URI']; ?>">Cari Pasien</a>
                     </li>
-                    <li><a href="<?php echo site_url('pasien/daftar') ?>" >Pendaftaran Pasien Baru</a>
+                    <li><a href="<?php echo site_url('resepsionis/pasien/daftar') ?>" >Pendaftaran Pasien Baru</a>
                     </li>
-                    <li><a href="<?php echo site_url('pasien/pasien_lama') ?>">Pendaftaran Pasien Lama</a>
+                    <li><a href="<?php echo site_url('resepsionis/pasien/pasien_lama') ?>">Pendaftaran Pasien Lama</a>
                     </li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-user-md"></i> Rawat Jalan <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo site_url('pasien/status') ?>">Status Rawat Pasien</a>
+                    <li><a href="<?php echo site_url('resepsionis/pasien/status') ?>">Status Rawat Pasien</a>
                     </li>
                     <li><a href="index2.html">Status Selesai</a>
                     </li>
@@ -273,7 +273,7 @@
                 </div>
                 <div class="x_content">
 
-                  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('pasien/cari'); ?>" method="post" enctype="multipart/form-data" >
+                  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('resepsionis/pasien/cari'); ?>" method="post" enctype="multipart/form-data" >
 
                     <p>Silahkan masukan kata kunci untuk melakukan pencarian. Kata kunci yang diproses sebagai parameter pencarian adalah Nomor Pasien dan Nama. Dapat dimasukan sebagian atau secara lengkap.
                     </p>
@@ -404,12 +404,8 @@
                                               <i class="fa fa-briefcase user-profile-icon"></i> <?php echo $p->pekerjaan; ?>
                                             </li>
                                           </ul>
-                                          <a class="btn btn-success" href="#" onclick="window.open('<?php echo base_url("pasien/profile_pasien/$p->no_pasien") ?>','','width=1020, height=720')" ><i class="fa fa-edit m-right-xs"  ></i>Edit Profile</a>
-                                          <script language="javascript">
-                                          function buka_popup(){
-                                           window.open('<?php echo base_url("pasien/profile_pasien/$p->no_pasien") ?>', '', 'width=1020, height=720, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
-                                          }
-                                          </script>
+                                          <a class="btn btn-success" href="#" onclick="window.open('<?php echo base_url("resepsionis/pasien/profile_pasien/$p->no_pasien") ?>','','width=1020, height=720')" ><i class="fa fa-edit m-right-xs"  ></i>Edit Profile</a>
+                                          
                                           <br />
                                         </div>
                                         <div class="col-md-9 col-sm-9 col-xs-12">

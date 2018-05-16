@@ -9,6 +9,7 @@ class Pasien extends CI_Controller {
 		}
 		$this->load->model('PasienModel');
 		$this->load->model('AdminModel');
+		$this->load->model('RawatModel');
 	}
 	
 	public function index(){
@@ -71,7 +72,7 @@ class Pasien extends CI_Controller {
 		$users['users'] = $this->AdminModel->tampilkan();
 		$this->load->view('resepsionis/pasien_lama',$users);
 		if($this->input->post('daftar_poli')){
-			$this->PasienModel->poli();
+			$this->RawatModel->poli();
 			redirect ("resepsionis/pasien/pasien_lama");
 		}
 	}
@@ -191,8 +192,5 @@ class Pasien extends CI_Controller {
 		echo $data;
 	}
 
-	public function viewDiagnosa(){
-		$data = $this->PasienModel->test();
-		echo json_encode($data);
-	}
+	
 }

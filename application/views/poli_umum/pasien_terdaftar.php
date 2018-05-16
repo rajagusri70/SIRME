@@ -234,7 +234,7 @@
                         <td><?php echo $rj->waktu ?></td>
                         <td>Rp. <?php echo $rj->biaya ?></td>
                         <td><?php echo $rj->status ?></td>
-                        <td align="center"><a href="<?php echo base_url() ?>/p_umum/check_up/periksa/<?php echo $rj->id_rawat ?>" target="_blank" ><span class="glyphicon glyphicon-check"></span></a></td>
+                        <td align="center"><a href="<?php echo base_url() ?>p_umum/check_up/periksa/<?php echo $rj->id_rawat ?>" target="_blank"><span class="glyphicon glyphicon-check"></span></a></td>
                       </tr>
                       
                       <?php

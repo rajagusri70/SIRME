@@ -177,10 +177,14 @@
           <div class="clearfix"></div>
           
           <div class="row">
+            <?php
+            foreach ($pasien_terdaftar as $pt) {
+            
+            ?>
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>User Report <small>Activity report</small></h2>
+                  <h2>User Report</h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a href="#"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -199,52 +203,49 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-
                   <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
-
                     <div class="profile_img">
-
-                      <!-- end of image cropping -->
-                      
-                        <!-- Current avatar -->
                         <div class="avatar-view" title="Change the avatar">
-                          <img src="<?php echo base_url('assets/') ?>images/picture.jpg" alt="Avatar">
+                          <img src="<?php echo base_url() ?>images/pasien/<?php echo $pt->foto ?>" alt="Avatar">
                         </div>
-                        <!-- /.modal -->
-
-                        <!-- Loading state -->
                         <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
-                      
-                      <!-- end of image cropping -->
-
                     </div>
-                    <h3>Samuel Doe</h3>
+                    <h3><?php echo $pt->nama ?></h3>
 
-                    <table>
+                    <table style="font-size: 14px">
                       <tr>
-                        <td><a class="fa fa-map-marker user-profile-icon"></a></td>
-                        <td>adsdsadasd</td>
+                        <td><b>Jenis Kelamin</b></td>
                       </tr>
                       <tr>
-                        <td>B :</td>
-                        <td>sdad</td>
+                        <td><?php echo $pt->jenis_kelamin ?></td>
+                      </tr>
+                      <tr>
+                        <td><b>Tgl. Lahir</b></td>
+                      </tr>
+                      <tr>
+                        <td><?php echo $pt->tanggal_lahir ?></td>
+                      </tr>
+                      <tr>
+                        <td><b>Alamat</b></td>
+                      </tr>
+                      <tr>
+                        <td><?php echo $pt->alamat ?></td>
+                      </tr>
+                      <tr>
+                        <td><b>No. Telp</b></td>
+                      </tr>
+                      <tr>
+                        <td><?php echo $pt->no_telpon ?></td>
+                      </tr>
+                      <tr>
+                        <td><b>Umur</b></td>
+                      </tr>
+                      <tr>
+                        <td><?php echo $pt->umur ?></td>
                       </tr>
                     </table>
-                    <!-- <ul class="list-unstyled user_data">
-                      <li><i class="fa fa-map-marker user-profile-icon"></i> San Francisco, California, USA
-                      </li>
-
-                      <li>
-                        <i class="fa fa-briefcase user-profile-icon"></i> Software Engineer
-                      </li>
-                    </ul> -->
-
-                    
-                    <!-- end of skills -->
-
                   </div>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-
                     <div class="profile_title">
                       <div class="col-md-6">
                         <h2>Pemeriksaan Pasien</h2>
@@ -257,6 +258,7 @@
                           <th align="center">Tanggal</th>
                           <th align="center">Jam</th>
                           <th align="center">Check Up</th>
+                          <th align="center">Kode ICD-10</th>
                           <th align="center">Diagnosa</th>
                           <th align="center">Tindakan Lanjut</th>
                           <th align="center">Obat</th>
@@ -268,9 +270,7 @@
                         <!-- <td colspan="7" align="center">Tidak ada Data</td> -->
                       </tbody>
                     </table>
-                    
                     </br>
-                    <!-- end of user-activity-graph -->
                     <div class="" role="tabpanel" data-example-id="togglable-tabs">
                       <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
                         <li role="presentation" class="active"><a href="#periksa" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Periksa</a>
@@ -285,15 +285,12 @@
                       <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" >
                       <div id="myTabContent" class="tab-content">
 
-                        
                         <div role="tabpanel" class="tab-pane fade active in" id="periksa" aria-labelledby="home-tab">
-
-                        
                           <div class="item form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Uraian Periksa<span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <textarea id="periksa" class="form-control" rows="3" placeholder=''></textarea>
+                              <textarea id="periksa" name="periksa_input" class="form-control" rows="3" placeholder=''></textarea>
                             </div>
                           </div>
                           <script type="text/javascript">
@@ -310,14 +307,14 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Kode Penyakit (ICD-10)<span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" class="normal-form" id="icd10" placeholder="Kode atau Nama">
+                              <input type="text" name="kode_input" class="normal-form" id="icd10" placeholder="Kode atau Nama">
                             </div>
                           </div>
                           <div class="item form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Keterangan Diagnosa<span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <textarea class="form-control" rows="3" placeholder=''></textarea>
+                              <textarea class="form-control" name="keterangan_input" rows="3" placeholder=''></textarea>
                             </div>
                           </div>                      
                         </div>
@@ -326,13 +323,11 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tindakan<span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <textarea class="form-control" rows="3" placeholder=''></textarea>
+                              <textarea class="form-control" name="tindakan_input" rows="3" placeholder=''></textarea>
                             </div>
                           </div>                       
                         </div>
-                        <div role="tabpanel" class="tab-pane fade" id="rujukan" aria-labelledby="profile-tab">
-                          
-                        </div>
+                        
                         <div role="tabpanel" class="tab-pane fade" id="resep_obat" aria-labelledby="profile-tab">
                           <div class="item form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tambahkan Resep<span class="required">*</span>
@@ -351,7 +346,7 @@
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
-                          <button type="submit" name="submit" class="btn btn-success" >Kirim</button>
+                          <a id="kirim_diagnosa" class="btn btn-success" >Kirim</a>
                         </div>
                       </div>
                       </form>
@@ -360,6 +355,7 @@
                 </div>
               </div>
             </div>
+            <?php } ?>
           </div>
         </div>
 
@@ -448,7 +444,7 @@
         function tampil_diagnosa(){
             $.ajax({
                 type  : 'POST',
-                url   : '<?php echo base_url()?>/pasien/viewDiagnosa',
+                url   : '<?php echo base_url()?>/p_umum/check_up/viewdiagnosa',
                 dataType : 'json',
                 success : function(data){
                   // console.log(data);
@@ -456,11 +452,13 @@
                     var i;
                     for(i=0; i<data.length; i++){
                         html += '<tr>'+
-                                '<td>'+data[i].tanggal+'</td>'+
-                                '<td>'+data[i].jam+'</td>'+
-                                '<td>'+data[i].check_up+'</td>'+
+                                '<td>'+data[i].tanggal_cek+'</td>'+
+                                '<td>'+data[i].jam_cek+'</td>'+
+                                '<td>'+data[i].periksa+'</td>'+
+                                '<td>'+data[i].kode_penyakit+'</td>'+
                                 '<td>'+data[i].diagnosa+'</td>'+
-                                '<td>'+data[i].tindakan_lanjut+'</td>'+
+                                '<td>'+data[i].tindakan+'</td>'+
+                                '<td>'+data[i].diagnosa+'</td>'+
                                 '<td><a href="">Lihat Obat</a></td>'+
                                 '<td>40000</td>'+
                                 '</tr>';
@@ -472,6 +470,21 @@
             });
         }
       
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#kirim_diagnosa").click(function(){
+        var data = $('#demo-form2').serialize();
+        $.ajax({
+          type: 'POST',
+          url: "<?php echo base_url() ?>/p_umum/check_up/simpan",
+          data: data,
+          success: function() {
+             alert("Succed!");
+          }
+        });
+      });
+    });
   </script>
   
 </body>

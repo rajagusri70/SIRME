@@ -270,7 +270,7 @@
                 </div>
                 <div class="x_content">
 
-                  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url("resepsionis/pasien/status_rawat") ?>" method="post" enctype="multipart/form-data" >
+                  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url("resepsionis/rawat/status_rawat") ?>" method="post" enctype="multipart/form-data" >
                     <p>Silahkan pilih poliklinik yang akan dipilih agar dapat menampilkan status daftar pasien yang terdaftar di poliklinik tersebut. Gunakan Nomor Pasien dan Nama Pasien sebagai parameter pencarian Pasien.
                     </p>
                     <span class="section"></span>

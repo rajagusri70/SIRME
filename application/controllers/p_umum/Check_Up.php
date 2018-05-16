@@ -28,8 +28,22 @@ class Check_Up extends CI_Controller {
 	public function periksa($id_rawat){
 			
 			$data['users'] = $this->AdminModel->tampilkan();
-			$data[] = $this->;
+			$data['pasien_terdaftar'] = $this->RawatModel->cariStatus('rawat_jalan','id_rawat',$id_rawat);
 			$this->load->view('poli_umum/check_up',$data);
 	}
+
+	public function viewDiagnosa(){
+		$data = $this->RawatModel->viewDiagnosa();
+		echo json_encode($data);
+	}
+
+	public function simpan(){
+		$this->RawatModel->simpan();
+	}
+
+	public function test(){
+		$this->load->view('test');
+	}
+
 
 }

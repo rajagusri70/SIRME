@@ -32,13 +32,33 @@ class Check_Up extends CI_Controller {
 			$this->load->view('poli_umum/check_up',$data);
 	}
 
-	public function viewDiagnosa(){
-		$data = $this->RawatModel->viewDiagnosa();
+	public function viewDiagnosa($id_rawat){
+		$data = $this->RawatModel->viewDiagnosa($id_rawat);
 		echo json_encode($data);
 	}
 
+	public function hapusDiagnosa(){
+		$id_diagnosa = $this->input->post('id_diagnosa');
+		$where = array('id_diagnosa' => $id_diagnosa);
+		$this->RawatModel->hapusDiagnosa($where);
+		echo json_encode(array('status' => true));
+	}
+
 	public function simpan(){
-		$this->RawatModel->simpan();
+		$tanggal = date("d-m-Y");
+		$waktu = date("H:i:s");
+		$data = array(
+			'id_rawat' => $this->input->post('no_rawat'),
+			'tanggal_cek' => $tanggal,
+			'jam_cek' => $waktu,
+			'periksa' => $this->input->post('periksa'),
+			'kode_penyakit' => $this->input->post('kode'),
+			'diagnosa' => $this->input->post('keterangan'),
+			'tindakan' => $this->input->post('tindakan'),
+			'biaya' => ''
+		);
+		$this->RawatModel->simpan($data);
+		echo json_encode(array('status' => true));
 	}
 
 	public function test(){

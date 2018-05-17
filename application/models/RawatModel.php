@@ -49,24 +49,16 @@ class RawatModel extends CI_Model{
 		return $this->db->query($querry)->result();
 	}
 
-	public function simpan(){
-		$tanggal = date("d-m-Y");
-		$waktu = date("H:i:s");
-		$data = array(
-			'id_rawat' => '3',
-			'no_pasien' => '3',
-			'tanggal_cek' => '',
-			'jam_cek' => '',
-			'periksa' => $_POST['periksa_input'],
-			'kode_penyakit' => $_POST['kode_input'],
-			'diagnosa' => $_POST['keterangan_input'],
-			'tindakan' => $_POST['tindakan_input'],
-			'biaya' => ''
-		);
-		$this->db->insert('tb_diagnosa', $data);
+	public function simpan($data){
+		$this->db->insert('tb_diagnosa_umum', $data);
 	}
 
-	public function viewDiagnosa(){
-		return $this->db->get("tb_diagnosa")->result();
+	public function hapusDiagnosa($where){
+		$this->db->delete('tb_diagnosa_umum',$where);
+	}
+
+	public function viewDiagnosa($id_rawat){
+		$where = array('id_rawat' => $id_rawat, );
+		return $this->db->get_where("tb_diagnosa_umum",$where)->result();
 	}
 }

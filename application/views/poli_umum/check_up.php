@@ -28,7 +28,12 @@
   <link href="<?php echo base_url(); ?>/assets/js/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="<?php echo base_url(); ?>/assets/js/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="<?php echo base_url(); ?>/assets/js/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+  <!-- Sweetbox -->
   
+  
+
+
 
 </head>
 
@@ -92,20 +97,7 @@
           <!-- /sidebar menu -->
 
           <!-- /menu footer buttons -->
-          <div class="sidebar-footer hidden-small">
-            <a data-toggle="tooltip" data-placement="top" title="Settings">
-              <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-            </a>
-            <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-              <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-            </a>
-            <a data-toggle="tooltip" data-placement="top" title="Lock">
-              <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-            </a>
-            <a data-toggle="tooltip" data-placement="top" title="Logout">
-              <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-            </a>
-          </div>
+          
           <!-- /menu footer buttons -->
         </div>
       </div>
@@ -262,7 +254,7 @@
                           <th align="center">Diagnosa</th>
                           <th align="center">Tindakan Lanjut</th>
                           <th align="center">Obat</th>
-                          <th align="center">Biaya Total</th>
+                          <th align="center">Aksi</th>
                         </tr>
                       </thead>
                       <tbody id="show_data">
@@ -290,7 +282,7 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Uraian Periksa<span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <textarea id="periksa" name="periksa_input" class="form-control" rows="3" placeholder=''></textarea>
+                              <textarea id="periksa_input"  class="form-control" rows="3" placeholder=''></textarea>
                             </div>
                           </div>
                           <script type="text/javascript">
@@ -314,7 +306,7 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Keterangan Diagnosa<span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <textarea class="form-control" name="keterangan_input" rows="3" placeholder=''></textarea>
+                              <textarea class="form-control"  id="keterangan_input" rows="3" placeholder=''></textarea>
                             </div>
                           </div>                      
                         </div>
@@ -323,7 +315,7 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tindakan<span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <textarea class="form-control" name="tindakan_input" rows="3" placeholder=''></textarea>
+                              <textarea class="form-control"  id="tindakan_input" rows="3" placeholder=''></textarea>
                             </div>
                           </div>                       
                         </div>
@@ -346,7 +338,7 @@
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
-                          <a id="kirim_diagnosa" class="btn btn-success" >Kirim</a>
+                          <button type="button" onclick="save()" class="btn btn-success" >Kirim</button>
                         </div>
                       </div>
                       </form>
@@ -355,8 +347,7 @@
                 </div>
               </div>
             </div>
-            <?php } ?>
-          </div>
+                      </div>
         </div>
 
         <!-- footer content -->
@@ -409,27 +400,13 @@
   <script src="<?php echo base_url(); ?>/assets/js/datatables/dataTables.scroller.min.js"></script>
   <link href='https://clinicaltables.nlm.nih.gov/autocomplete-lhc-versions/15.1.1/autocomplete-lhc_jQueryUI.min.css' rel="stylesheet">
   <script src='https://clinicaltables.nlm.nih.gov/autocomplete-lhc-versions/15.1.1/autocomplete-lhc_jQuery.min.js'></script>
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/jquery.sweet-modal.min.css" />
+  <script src="<?php echo base_url(); ?>/assets/js/jquery.sweet-modal.min.js"></script>
+  <script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/notify/pnotify.core.js"></script>
+  <script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/notify/pnotify.buttons.js"></script>
+  <script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/notify/pnotify.nonblock.js"></script>
   
-        <script type="text/javascript">
-          $(document).ready(function() {
-            $('#datatable').dataTable();
-            $('#datatable-keytable').DataTable({
-              keys: true
-            });
-            $('#datatable-responsive').DataTable();
-            $('#datatable-scroller').DataTable({
-              ajax: "js/datatables/json/scroller-demo.json",
-              deferRender: true,
-              scrollY: 380,
-              scrollCollapse: true,
-              scroller: true
-            });
-            var table = $('#datatable-fixed-header').DataTable({
-              fixedHeader: true
-            });
-          });
-          TableManageButtons.init();
-        </script>
+        
         <script type="text/javascript">
           new Def.Autocompleter.Search('icd10', 'https://clinicaltables.nlm.nih.gov/api/icd10cm/v3/search?sf=code,name',
             {tableFormat: true, valueCols: [0], colHeaders: ['Code', 'Name']});
@@ -437,17 +414,21 @@
   <script type="text/javascript">
     
         tampil_diagnosa();   //pemanggilan fungsi tampil barang.
-         
-        $('#tabel_diagnosa').dataTable();
-          
         //fungsi tampil barang
         function tampil_diagnosa(){
             $.ajax({
                 type  : 'POST',
-                url   : '<?php echo base_url()?>/p_umum/check_up/viewdiagnosa',
+                url   : '<?php echo base_url()?>p_umum/check_up/viewdiagnosa/<?php echo $pt->id_rawat ?>',
                 dataType : 'json',
                 success : function(data){
                   // console.log(data);
+                  if (data.length <= 0){
+                    html += '<tr>'+
+                                '<td colspan="8" align="center">Data pemeriksaan belum ada</td>'+
+                                '</tr>';
+                    $('#show_data').html(html);
+                    setTimeout(tampil_diagnosa, 500)
+                  }else{
                     var html = '';
                     var i;
                     for(i=0; i<data.length; i++){
@@ -458,13 +439,16 @@
                                 '<td>'+data[i].kode_penyakit+'</td>'+
                                 '<td>'+data[i].diagnosa+'</td>'+
                                 '<td>'+data[i].tindakan+'</td>'+
-                                '<td>'+data[i].diagnosa+'</td>'+
-                                '<td><a href="">Lihat Obat</a></td>'+
-                                '<td>40000</td>'+
+                                '<td align="center"><a href="" class="fa fa-file-text" ></a></td>'+
+                                '<td align="center"><a class="fa fa-remove" onclick="hapus('+data[i].id_diagnosa+')" style="cursor:pointer" ></a></td>'+
                                 '</tr>';
                     }
                     $('#show_data').html(html);
                     setTimeout(tampil_diagnosa, 500)
+                  }
+                }, 
+                error: function(){
+                  
                 }
  
             });
@@ -472,21 +456,64 @@
       
   </script>
   <script type="text/javascript">
-    $(document).ready(function(){
-      $("#kirim_diagnosa").click(function(){
-        var data = $('#demo-form2').serialize();
+    function save(){
+      var no_rawat_value = '<?php echo $pt->id_rawat ?>';
+      var periksa_value = $("#periksa_input").val();
+      var kode_value = $("#icd10").val();
+      var keterangan_value = $("#keterangan_input").val();
+      var tindakan_value = $("#tindakan_input").val();
+      if(periksa_value && kode_value && keterangan_value && tindakan_value){
         $.ajax({
+          url: "<?php echo base_url().'p_umum/check_up/simpan' ?>",
           type: 'POST',
-          url: "<?php echo base_url() ?>/p_umum/check_up/simpan",
-          data: data,
-          success: function() {
-             alert("Succed!");
+          data: {periksa: periksa_value, kode: kode_value, keterangan: keterangan_value, tindakan: tindakan_value, no_rawat: no_rawat_value},
+          dataType: "JSON",
+            //data: {periksa: periksa_value, kode_penyakit: kode_value, diagnosa: keterangan_value, tindakan: tindakan_value},
+          success: function(data) {
+              // $.sweetModal({
+              //   content: 'This is a success.',
+              //   icon: $.sweetModal.ICON_SUCCESS,
+              //   timeout: 2000
+              // });
+            new PNotify({
+              title: 'Sukses',
+              text: 'Data hasil diagnosa pasien telah berhasil disimpan!',
+              type: 'success'
+            });
+            $("#periksa_input").val('');
+            $("#icd10").val('');
+            $("#keterangan_input").val('');
+            $("#tindakan_input").val('');
           }
         });
-      });
-    });
+      }else{
+        $.sweetModal({
+          content: 'Form tidak boleh kosong. Semua form harus diisi',
+          icon: $.sweetModal.ICON_WARNING
+        });
+      }
+    }
   </script>
-  
+  <script type="text/javascript">
+    function hapus(id_diagnosa){
+    var id_diagnosa_value = id_diagnosa;
+    $.sweetModal.confirm('Konfirmasi Hapus', 'Anda yakin ingin menghapus.?', function() {
+      $.ajax({
+        url: "<?php echo base_url().'p_umum/check_up/hapusDiagnosa' ?>",
+        type: 'POST',
+        data: {id_diagnosa: id_diagnosa_value},
+        dataType: "JSON",
+        success: function(data) {
+          
+          }
+      });
+    }, function() {
+        
+    });
+  }
+  </script>
+            <?php } ?>
+  }
 </body>
 
 </html>

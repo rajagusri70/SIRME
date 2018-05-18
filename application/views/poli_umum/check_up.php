@@ -247,22 +247,68 @@
                     <table id="tabel_diagnosa" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th align="center">Tanggal</th>
-                          <th align="center">Jam</th>
+                          <th align="center">Tanggal Periksa</th>
+                          <th align="center">Jam Periksa</th>
                           <th align="center">Check Up</th>
                           <th align="center">Kode ICD-10</th>
                           <th align="center">Diagnosa</th>
                           <th align="center">Tindakan Lanjut</th>
-                          <th align="center">Obat</th>
                           <th align="center">Aksi</th>
                         </tr>
                       </thead>
                       <tbody id="show_data">
-
+                        
                         <!-- <td colspan="7" align="center">Tidak ada Data</td> -->
                       </tbody>
                     </table>
-                    </br>
+                    <button type="button" class="btn btn-primary" onclick="buka_popup()"><a class="fa fa-shopping-cart" style="color: white"></a>&nbsp;&nbsp;Atur Resep</button> &nbsp;<button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" ><a class="fa fa-file-text btn-primary" ></a>&nbsp;&nbsp;Lihat Resep</button>
+                    
+                    <script type="text/javascript">
+                                function buka_popup(){
+                                  resepWindow = window.open('<?php echo base_url()?>p_umum/check_up/resep/<?php echo $id_rawat ?>', '', 'width=820, height=720, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
+                                }
+                    </script>
+                    <div class="ln_solid"></div>
+                    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+                      <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">Resep Obat Pasien</h4>
+                          </div>
+                          <div class="modal-body">
+                            <h4 align="center"><b>Resep Obat Rumah Sakit</b></h4>
+                            <div class="ln_solid"></div>
+                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                            <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                            <table class="table table-striped table-bordered">
+                              <thead align="center" style="font-weight: bold;">
+                                <tr>
+                                  <td>No. Obat</td>
+                                  <td>Nama Obat</td>
+                                  <td>Kuantitas</td>
+                                  <td>Keterangan</td>
+                                  <td>Biaya</td>
+                                  <td>Aksi</td>
+                                </tr>
+                              </thead>
+                              <tbody id="show_resep">
+                                <!-- <tr>
+                                  <td colspan="6" align="center">Tidak ada data</td>
+                                </tr> -->
+                              </tbody>
+                            </table>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- </br> -->
                     <div class="" role="tabpanel" data-example-id="togglable-tabs">
                       <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
                         <li role="presentation" class="active"><a href="#periksa" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Periksa</a>
@@ -270,8 +316,6 @@
                         <li role="presentation" class=""><a href="#diagnosa" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Diagnosa</a>
                         </li>
                         <li role="presentation" class=""><a href="#tindakan" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Tindakan</a>
-                        </li>
-                        <li role="presentation" class=""><a href="#resep_obat" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Resep Obat</a>
                         </li>
                       </ul>
                       <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" >
@@ -320,20 +364,7 @@
                           </div>                       
                         </div>
                         
-                        <div role="tabpanel" class="tab-pane fade" id="resep_obat" aria-labelledby="profile-tab">
-                          <div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tambahkan Resep<span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                              <button type="button" class="btn btn-primary" onclick="buka_popup()"><a class="fa fa-shopping-cart" style="color: white"></a>&nbsp;&nbsp;Buka Obat</button>
-                              <script type="text/javascript">
-                                function buka_popup(){
-                                window.open('', '', 'width=580, height=720, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
-                                }
-                              </script>
-                            </div>
-                          </div> 
-                        </div>
+                        
                       </div>
                       <div class="ln_solid"></div>
                       <div class="form-group">
@@ -413,7 +444,8 @@
         </script>
   <script type="text/javascript">
     
-        tampil_diagnosa();   //pemanggilan fungsi tampil barang.
+        tampil_diagnosa();
+        tampil_resep();   //pemanggilan fungsi tampil barang.
         //fungsi tampil barang
         function tampil_diagnosa(){
             $.ajax({
@@ -439,7 +471,6 @@
                                 '<td>'+data[i].kode_penyakit+'</td>'+
                                 '<td>'+data[i].diagnosa+'</td>'+
                                 '<td>'+data[i].tindakan+'</td>'+
-                                '<td align="center"><a href="" class="fa fa-file-text" ></a></td>'+
                                 '<td align="center"><a class="fa fa-remove" onclick="hapus('+data[i].id_diagnosa+')" style="cursor:pointer" ></a></td>'+
                                 '</tr>';
                     }
@@ -453,6 +484,45 @@
  
             });
         }
+
+        function tampil_resep(){
+            $.ajax({
+                type  : 'POST',
+                url   : '<?php echo base_url()?>p_umum/check_up/viewresep/<?php echo $id_rawat ?>',
+                dataType : 'json',
+                success : function(data){
+                  // console.log(data);
+                  if (data.length <= 0){
+                    html += '<tr>'+
+                                '<td colspan="6" align="center">Belum ada Obat yang dimasukan ke resep</td>'+
+                                '</tr>';
+                    $('#show_resep').html(html);
+                    setTimeout(tampil_resep, 500)
+                  }else{
+                    var html = '';
+                    var i;
+                    for(i=0; i<data.length; i++){
+                        html += '<tr>'+
+                                '<td align="center">'+data[i].no_obat+'</td>'+
+                                '<td>'+data[i].nama_obat+'</td>'+
+                                '<td>'+data[i].kuantitas+'</td>'+
+                                '<td>'+data[i].keterangan+'</td>'+
+                                '<td>'+data[i].keterangan+'</td>'+
+                                '<td align="center"><a class="fa fa-remove" onclick="" style="cursor:pointer" ></a></td>'+
+                                '</tr>';
+                    }
+                    $('#show_resep').html(html);
+                    setTimeout(tampil_resep, 500)
+                  }
+                }, 
+                error: function(){
+                  
+                }
+ 
+            });
+        }
+
+
       
   </script>
   <script type="text/javascript">
@@ -504,7 +574,15 @@
         data: {id_diagnosa: id_diagnosa_value},
         dataType: "JSON",
         success: function(data) {
-          
+          new PNotify({
+              title: 'Sukses',
+              text: 'Data hasil diagnosa pasien telah berhasil dihapus!',
+              type: 'success',
+              nonblock: {
+                                    nonblock: true,
+                                    nonblock_opacity: .2
+                                }
+            });
           }
       });
     }, function() {

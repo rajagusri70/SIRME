@@ -7,6 +7,8 @@ class Check_Up extends CI_Controller {
 		parent::__construct();
 		$this->load->model('AdminModel');
 		$this->load->model('RawatModel');
+		$this->load->model('ObatModel');
+		$this->load->model('ResepModel');
  
 	}
 
@@ -29,6 +31,8 @@ class Check_Up extends CI_Controller {
 			
 			$data['users'] = $this->AdminModel->tampilkan();
 			$data['pasien_terdaftar'] = $this->RawatModel->cariStatus('rawat_jalan','id_rawat',$id_rawat);
+			$data['id_rawat'] = $id_rawat;
+			$data['jumlah_resep'] = $this->RawatModel->count($id_rawat);
 			$this->load->view('poli_umum/check_up',$data);
 	}
 
@@ -60,6 +64,38 @@ class Check_Up extends CI_Controller {
 		$this->RawatModel->simpan($data);
 		echo json_encode(array('status' => true));
 	}
+
+	public function resep($id_rawat){
+		$data['daftar_obat'] = $this->ObatModel->viewObat();
+		$data['id_rawat'] = $id_rawat;
+		$this->load->view('poli_umum/daftar_obat',$data);
+	}
+
+	public function tambahResep(){
+		$data = array(
+			'no_obat' => $this->input->post('no_obat'),
+			'id_rawat' => $this->input->post('id_rawat')
+		);
+		$this->ResepModel->tambahResep($data);
+		echo json_encode(array('status' => true));
+	}
+
+	public function viewResep($id_rawat){
+		$data = $this->ResepModel->viewResep('tb_resep.id_rawat',$id_rawat);
+		echo json_encode($data);
+	}
+
+	public function hapusResep(){
+		$no_id = $this->input->post('no_id');
+		$where = array('no_id' => $no_id);
+		$this->ResepModel->hapusResep($where);
+		echo json_encode(array('status' => true));
+	}
+
+	// public function viewObat(){
+	// 	$data = $this->ObatModel->viewObat();
+	// 	echo json_encode($data);
+	// }
 
 	public function test(){
 		$this->load->view('test');

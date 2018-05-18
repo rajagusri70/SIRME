@@ -61,4 +61,13 @@ class RawatModel extends CI_Model{
 		$where = array('id_rawat' => $id_rawat, );
 		return $this->db->get_where("tb_diagnosa_umum",$where)->result();
 	}
+
+	public function count($id_rawat){
+		return $this->db->get('tb_diagnosa_umum')->num_rows();
+		// $this->db->select('');
+		// $this->db->from('tb_diagnosa_umum');
+		// $this->db->where('id_rawat',$id_rawat);
+		// $query = "";
+		// return $this->db->query()->result();
+	}
 }

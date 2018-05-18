@@ -282,6 +282,7 @@
   <script src="<?php echo base_url(); ?>/assets/js/custom.js"></script>
   <!-- form validation -->
   <script src="<?php echo base_url(); ?>/assets/js/validator/validator.js"></script>
+  <!-- DataTables -->
   <script src="<?php echo base_url(); ?>/assets/js/datatables/jquery.dataTables.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/js/datatables/dataTables.bootstrap.js"></script>
   <script src="<?php echo base_url(); ?>/assets/js/datatables/dataTables.buttons.min.js"></script>

@@ -262,10 +262,11 @@
                       </tbody>
                     </table>
                     <button type="button" class="btn btn-primary" onclick="buka_popup()"><a class="fa fa-shopping-cart" style="color: white"></a>&nbsp;&nbsp;Atur Resep</button> &nbsp;<button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" ><a class="fa fa-file-text btn-primary" ></a>&nbsp;&nbsp;Lihat Resep</button>
+                    &nbsp;
                     
                     <script type="text/javascript">
                                 function buka_popup(){
-                                  resepWindow = window.open('<?php echo base_url()?>p_umum/check_up/resep/<?php echo $id_rawat ?>', '', 'width=820, height=720, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
+                                  resepWindow = window.open('<?php echo base_url()?>p_umum/check_up/resep/<?php echo $pt->id_poli_umum ?>', '', 'width=820, height=720, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
                                 }
                     </script>
                     <div class="ln_solid"></div>
@@ -289,8 +290,7 @@
                                   <td>Nama Obat</td>
                                   <td>Kuantitas</td>
                                   <td>Keterangan</td>
-                                  <td>Biaya</td>
-                                  <td>Aksi</td>
+                                  <td>Atur</td>
                                 </tr>
                               </thead>
                               <tbody id="show_resep">
@@ -316,6 +316,8 @@
                         <li role="presentation" class=""><a href="#diagnosa" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Diagnosa</a>
                         </li>
                         <li role="presentation" class=""><a href="#tindakan" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Tindakan</a>
+                        </li>
+                        <li role="presentation" class=""><button class="btn btn-success" onclick="selesai()" ><b>SELESAI</b></button>
                         </li>
                       </ul>
                       <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" >
@@ -436,6 +438,7 @@
   <script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/notify/pnotify.core.js"></script>
   <script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/notify/pnotify.buttons.js"></script>
   <script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/notify/pnotify.nonblock.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/js/sweetalert.min.js"></script>
   
         
         <script type="text/javascript">
@@ -443,14 +446,13 @@
             {tableFormat: true, valueCols: [0], colHeaders: ['Code', 'Name']});
         </script>
   <script type="text/javascript">
-    
         tampil_diagnosa();
         tampil_resep();   //pemanggilan fungsi tampil barang.
         //fungsi tampil barang
         function tampil_diagnosa(){
             $.ajax({
                 type  : 'POST',
-                url   : '<?php echo base_url()?>p_umum/check_up/viewdiagnosa/<?php echo $pt->id_rawat ?>',
+                url   : '<?php echo base_url()?>p_umum/check_up/viewdiagnosa/<?php echo $pt->id_poli_umum ?>',
                 dataType : 'json',
                 success : function(data){
                   // console.log(data);
@@ -465,17 +467,17 @@
                     var i;
                     for(i=0; i<data.length; i++){
                         html += '<tr>'+
-                                '<td>'+data[i].tanggal_cek+'</td>'+
-                                '<td>'+data[i].jam_cek+'</td>'+
+                                '<td align="center" >'+data[i].tanggal_cek+'</td>'+
+                                '<td align="center" >'+data[i].jam_cek+'</td>'+
                                 '<td>'+data[i].periksa+'</td>'+
                                 '<td>'+data[i].kode_penyakit+'</td>'+
                                 '<td>'+data[i].diagnosa+'</td>'+
                                 '<td>'+data[i].tindakan+'</td>'+
-                                '<td align="center"><a class="fa fa-remove" onclick="hapus('+data[i].id_diagnosa+')" style="cursor:pointer" ></a></td>'+
+                                '<td title="Hapus Data" align="center"><a class="fa fa-remove" onclick="hapus('+data[i].id_diagnosa+')" style="cursor:pointer" ></a></td>'+
                                 '</tr>';
                     }
                     $('#show_data').html(html);
-                    setTimeout(tampil_diagnosa, 500)
+                    //setTimeout(tampil_diagnosa, 500)
                   }
                 }, 
                 error: function(){
@@ -488,7 +490,7 @@
         function tampil_resep(){
             $.ajax({
                 type  : 'POST',
-                url   : '<?php echo base_url()?>p_umum/check_up/viewresep/<?php echo $id_rawat ?>',
+                url   : '<?php echo base_url()?>p_umum/check_up/viewresep/<?php echo $pt->id_poli_umum ?>',
                 dataType : 'json',
                 success : function(data){
                   // console.log(data);
@@ -505,10 +507,9 @@
                         html += '<tr>'+
                                 '<td align="center">'+data[i].no_obat+'</td>'+
                                 '<td>'+data[i].nama_obat+'</td>'+
-                                '<td>'+data[i].kuantitas+'</td>'+
+                                '<td align="center">'+data[i].kuantitas+'</td>'+
                                 '<td>'+data[i].keterangan+'</td>'+
-                                '<td>'+data[i].keterangan+'</td>'+
-                                '<td align="center"><a class="fa fa-remove" onclick="" style="cursor:pointer" ></a></td>'+
+                                '<td align="center"><a onclick="buka_popup()" style="cursor:pointer" data-dismiss="modal" class="fa fa-shopping-cart" ></a></td>'+
                                 '</tr>';
                     }
                     $('#show_resep').html(html);
@@ -527,7 +528,7 @@
   </script>
   <script type="text/javascript">
     function save(){
-      var no_rawat_value = '<?php echo $pt->id_rawat ?>';
+      var id_poli_umum_value = '<?php echo $pt->id_poli_umum ?>';
       var periksa_value = $("#periksa_input").val();
       var kode_value = $("#icd10").val();
       var keterangan_value = $("#keterangan_input").val();
@@ -536,7 +537,7 @@
         $.ajax({
           url: "<?php echo base_url().'p_umum/check_up/simpan' ?>",
           type: 'POST',
-          data: {periksa: periksa_value, kode: kode_value, keterangan: keterangan_value, tindakan: tindakan_value, no_rawat: no_rawat_value},
+          data: {periksa: periksa_value, kode: kode_value, keterangan: keterangan_value, tindakan: tindakan_value, id_poli_umum: id_poli_umum_value},
           dataType: "JSON",
             //data: {periksa: periksa_value, kode_penyakit: kode_value, diagnosa: keterangan_value, tindakan: tindakan_value},
           success: function(data) {
@@ -550,6 +551,7 @@
               text: 'Data hasil diagnosa pasien telah berhasil disimpan!',
               type: 'success'
             });
+            tampil_diagnosa();
             $("#periksa_input").val('');
             $("#icd10").val('');
             $("#keterangan_input").val('');
@@ -583,6 +585,7 @@
                                     nonblock_opacity: .2
                                 }
             });
+          tampil_diagnosa();
           }
       });
     }, function() {
@@ -590,8 +593,38 @@
     });
   }
   </script>
+  <script type="text/javascript">
+    function selesai(){
+      swal({
+        title: "Selesaikan Pemeriksaan",
+        text: "Apakah anda yakin ingin menyelesaikan pemeriksaan Pasien? Tindakan ini tidak dapat dibatalkan dan semua data yang dimasukan akan tersimpan secara permanen di database",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((simpan) => {
+        if (simpan) {
+          $.ajax({
+          url: "<?php echo base_url().'p_umum/check_up/selesai/'.$id_rawat ?>",
+          type: 'POST',
+          data: {},
+          dataType: "JSON",
+          success: function(data) {
+            new PNotify({
+              title: 'Sukses',
+              text: 'Data rekam medis elektronik pasien telah berhasil disimpan!',
+              type: 'success'
+            });
+          }
+        });
+        } else {
+          
+        }
+      });
+    }
+  </script>
             <?php } ?>
-  }
+  
 </body>
 
 </html>

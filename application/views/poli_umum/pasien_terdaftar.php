@@ -297,6 +297,8 @@
   <script src="<?php echo base_url(); ?>/assets/js/datatables/dataTables.responsive.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/js/datatables/responsive.bootstrap.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/js/datatables/dataTables.scroller.min.js"></script>
+  
+  
   <script>
           var handleDataTableButtons = function() {
               "use strict";

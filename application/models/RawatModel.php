@@ -7,6 +7,10 @@ class RawatModel extends CI_Model{
         
     }
 
+    public function view(){
+    	return $this->db->get('rawat_jalan')->result_array();
+    }
+
 	public function poli(){
 		date_default_timezone_set("Asia/Jakarta");
 		$nomor_pasien = $_GET['nomor_pasien'];
@@ -24,6 +28,9 @@ class RawatModel extends CI_Model{
 			"status" => $status
 		);
 		$this->db->insert('rawat_jalan', $data);
+		$trx = array(
+			'' => '' 
+		);
 	}
 
 	public function cariStatus($table,$where,$where_parameter){
@@ -34,6 +41,7 @@ class RawatModel extends CI_Model{
 
 		$this->db->select('*'); //memeilih semua field
 	    $this->db->from($table); //memeilih tabel
+	    $this->db->join('rawat_jalan', 'tb_poli_umum.id_rawat = rawat_jalan.id_rawat');
 	    $this->db->join('pasien', 'rawat_jalan.no_pasien = pasien.no_pasien');
 	    $this->db->where($where,$where_parameter);
 	    return $this->db->get()->result();
@@ -57,9 +65,14 @@ class RawatModel extends CI_Model{
 		$this->db->delete('tb_diagnosa_umum',$where);
 	}
 
-	public function viewDiagnosa($id_rawat){
-		$where = array('id_rawat' => $id_rawat, );
+	public function viewDiagnosa($id_poli_umum){
+		$where = array('id_poli_umum' => $id_poli_umum );
 		return $this->db->get_where("tb_diagnosa_umum",$where)->result();
+	}
+
+	public function updateStatus($where,$data){
+		$this->db->where("id_rawat",$where);
+		$this->db->update("rawat_jalan",$data);
 	}
 
 	public function count($id_rawat){

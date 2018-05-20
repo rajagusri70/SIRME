@@ -24,4 +24,11 @@ class ResepModel extends CI_Model{
 	public function hapusResep($where){
 		$this->db->delete('tb_resep',$where);
 	}
+
+	public function updateResep($where,$data){
+		$this->db->where("no_id",$where);
+		$this->db->update("tb_resep",$data);
+	}
+
+	
 }

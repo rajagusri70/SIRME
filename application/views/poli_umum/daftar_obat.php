@@ -68,7 +68,7 @@
                         <td>Nama Obat</td>
                         <td>Kuantitas</td>
                         <td>Keterangan</td>
-                        <td>Biaya</td>
+                        <td>Update</td>
                         <td>Aksi</td>
                       </tr>
                     </thead>
@@ -184,7 +184,7 @@
         function tampil_resep(){
             $.ajax({
                 type  : 'POST',
-                url   : '<?php echo base_url()?>p_umum/check_up/viewresep/<?php echo $id_rawat ?>',
+                url   : '<?php echo base_url()?>p_umum/check_up/viewresep/<?php echo $id_poli_umum ?>',
                 dataType : 'json',
                 success : function(data){
                   // console.log(data);
@@ -201,9 +201,9 @@
                         html += '<tr>'+
                                 '<td align="center">'+data[i].no_obat+'</td>'+
                                 '<td>'+data[i].nama_obat+'</td>'+
-                                '<td><input ></td>'+
-                                '<td><input ></td>'+
-                                '<td align="center"><a href="" class="fa fa-file-text" ></a></td>'+
+                                '<td><input id="kuantitas_input'+data[i].no_id+'" value="'+data[i].kuantitas+'" type="number"  ></td>'+
+                                '<td><input id="keterangan_input'+data[i].no_id+'" value="'+data[i].keterangan+'"></td>'+
+                                '<td align="center"><button class="" onclick="update_resep('+data[i].no_id+')">Kirim</button></td>'+
                                 '<td align="center"><a class="fa fa-remove" onclick="hapus('+data[i].no_id+')" style="cursor:pointer" ></a></td>'+
                                 '</tr>';
                     }
@@ -228,18 +228,43 @@
   <script type="text/javascript">
     function tambah(no_obat){
       var no_obat_value = no_obat;
-      var id_rawat_value = <?php echo $id_rawat; ?>;
+      var id_poli_umum_value = <?php echo $id_poli_umum; ?>;
       
         $.ajax({
           url: "<?php echo base_url().'p_umum/check_up/tambahresep' ?>",
           type: 'POST',
-          data: {no_obat: no_obat_value, id_rawat: id_rawat_value},
+          data: {no_obat: no_obat_value, id_poli_umum: id_poli_umum_value},
           dataType: "JSON",
           success: function(data) {
             
             new PNotify({
               title: 'Sukses',
               text: 'Obat telah berhasil ditambahkan ke resep',
+              type: 'success'
+            });
+            tampil_resep();
+          }
+          //tampil_resep();
+        });
+
+    }
+  </script>
+  <script type="text/javascript">
+    function update_resep(no_id){
+      var no_id_value = no_id;
+      var kuantitas_value = $("#kuantitas_input"+no_id_value).val();
+      var keterangan_value = $("#keterangan_input"+no_id_value).val();;
+      
+        $.ajax({
+          url: "<?php echo base_url().'p_umum/check_up/updateresep' ?>",
+          type: 'POST',
+          data: {no_id: no_id_value, kuantitas: kuantitas_value, keterangan: keterangan_value},
+          dataType: "JSON",
+          success: function(data) {
+            
+            new PNotify({
+              title: 'Sukses',
+              text: 'Keterangan Resep telah berhasil di ganti',
               type: 'success'
             });
             tampil_resep();

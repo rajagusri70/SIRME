@@ -29,11 +29,6 @@
   <link href="<?php echo base_url(); ?>/assets/js/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="<?php echo base_url(); ?>/assets/js/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
 
-  <!-- Sweetbox -->
-  
-  
-
-
 
 </head>
 
@@ -83,11 +78,9 @@
                 </li>
                 <li><a><i class="fa fa-user-md"></i> Check Up <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo $_SERVER['REQUEST_URI']; ?>">Pasien Terdaftar</a>
+                    <li><a href="<?php echo base_url().'p_umum/check_up/pasien_terdaftar' ?>">Pasien Terdaftar</a>
                     </li>
-                    <li><a href="index2.html">Status Rawat Pasien</a>
-                    </li>
-                    <li><a href="index2.html">Status Selesai</a>
+                    <li><a href="<?php echo base_url().'p_umum/check_up/status_selesai' ?>">Status Selesai</a>
                     </li>
                   </ul>
                 </li>
@@ -317,7 +310,7 @@
                         </li>
                         <li role="presentation" class=""><a href="#tindakan" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Tindakan</a>
                         </li>
-                        <li role="presentation" class=""><button class="btn btn-success" onclick="selesai()" ><b>SELESAI</b></button>
+                        <li role="presentation" id="tombol_selesai" class=""><button class="btn btn-success" onclick="selesai()" disabled="" ><b>SELESAI</b></button>
                         </li>
                       </ul>
                       <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" >
@@ -552,6 +545,7 @@
               type: 'success'
             });
             tampil_diagnosa();
+            $(":button").prop('disabled', false);
             $("#periksa_input").val('');
             $("#icd10").val('');
             $("#keterangan_input").val('');
@@ -597,7 +591,7 @@
     function selesai(){
       swal({
         title: "Selesaikan Pemeriksaan",
-        text: "Apakah anda yakin ingin menyelesaikan pemeriksaan Pasien? Tindakan ini tidak dapat dibatalkan dan semua data yang dimasukan akan tersimpan secara permanen di database",
+        text: "Apakah anda yakin ingin menyelesaikan semua pemeriksaan Pasien? Jika semua diagnosa telah dilakukan, Anda dapat melakukan aksi ini. Tindakan ini tidak dapat dibatalkan dan semua data yang dimasukan akan tersimpan secara permanen di database",
         icon: "warning",
         buttons: true,
         dangerMode: true,

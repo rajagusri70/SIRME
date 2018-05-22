@@ -29,17 +29,6 @@
   <link href="<?php echo base_url(); ?>/assets/js/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="<?php echo base_url(); ?>/assets/js/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
 
-
-  <!--[if lt IE 9]>
-        <script src="../assets/js/ie8-responsive-file-warning.js"></script>
-        <![endif]-->
-
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
 </head>
 
 
@@ -88,9 +77,9 @@
                 </li>
                 <li><a><i class="fa fa-user-md"></i> Check Up <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo $_SERVER['REQUEST_URI']; ?>">Pasien Terdaftar</a>
+                    <li><a href="<?php echo base_url().'p_umum/check_up/pasien_terdaftar' ?>">Pasien Terdaftar</a>
                     </li>
-                    <li><a href="<?php echo base_url().'p_umum/check_up/status_selesai' ?>">Status Selesai</a>
+                    <li><a href="<?php echo $_SERVER['REQUEST_URI']; ?>">Status Selesai</a>
                     </li>
                   </ul>
                 </li>
@@ -174,7 +163,7 @@
           <div class="page-title">
             <div class="title_left">
               <h3>
-                Pemeriksaan Pasien
+                Status Selesai
               </h3>
             </div>
 
@@ -187,7 +176,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Pasien Terdaftar Poliklinik</h2>
+                  <h2>Pasien Selesai Rawat Jalan</h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a href="#"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -207,7 +196,7 @@
                 </div>
                 <div class="x_content">
                   <p class="text-muted font-13 m-b-30">
-                    Tabel dibawah ini berisikan pasien-pasien yang terdaftar untuk melakukan pemeriksaan, diagnosa atau berobat di Poliklinik
+                    Tabel dibawah ini berisikan pasien-pasien yang telah melakukan pemeriksaan rawat jalan
                   </p>
                   <table id="datatable" class="table table-striped table-bordered">
                     <thead>
@@ -231,7 +220,7 @@
                         <td><?php echo $rj->waktu ?></td><!-- 
                         <td>Rp. <?php //echo $rj->biaya ?></td> -->
                         <td><?php echo $rj->status ?></td>
-                        <td align="center"><a title="Lakukan Pemeriksaan" href="<?php echo base_url() ?>p_umum/check_up/periksa/<?php echo $rj->id_rawat ?>" target="_blank"><span class="glyphicon glyphicon-check"></span></a></td>
+                        <td align="center"><a title="Lihat Hasil Medis" href="" target="_blank" class="fa fa-file-text"></span></a></td>
                       </tr>
                       <?php
                       }
@@ -294,40 +283,6 @@
   <script src="<?php echo base_url(); ?>/assets/js/datatables/responsive.bootstrap.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/js/datatables/dataTables.scroller.min.js"></script>
   
-  
-  <script>
-          var handleDataTableButtons = function() {
-              "use strict";
-              0 !== $("#datatable-buttons").length && $("#datatable-buttons").DataTable({
-                dom: "Bfrtip",
-                buttons: [{
-                  extend: "copy",
-                  className: "btn-sm"
-                }, {
-                  extend: "csv",
-                  className: "btn-sm"
-                }, {
-                  extend: "excel",
-                  className: "btn-sm"
-                }, {
-                  extend: "pdf",
-                  className: "btn-sm"
-                }, {
-                  extend: "print",
-                  className: "btn-sm"
-                }],
-                responsive: !0
-              })
-            },
-            TableManageButtons = function() {
-              "use strict";
-              return {
-                init: function() {
-                  handleDataTableButtons()
-                }
-              }
-            }();
-        </script>
         <script type="text/javascript">
           $(document).ready(function() {
             $('#datatable').dataTable();

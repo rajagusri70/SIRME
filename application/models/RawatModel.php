@@ -57,6 +57,15 @@ class RawatModel extends CI_Model{
 		return $this->db->query($querry)->result();
 	}
 
+	public function tampilkanSelesai($where){
+		$this->db->select('*'); //memeilih semua field
+	    $this->db->from('rawat_jalan'); //memeilih tabel
+	    $this->db->join('pasien', 'rawat_jalan.no_pasien = pasien.no_pasien');
+	     $this->db->where('status','Selesai');
+	    return $this->db->get()->result();
+		//return $this->db->get_where('');
+	}
+
 	public function simpan($data){
 		$this->db->insert('tb_diagnosa_umum', $data);
 	}

@@ -8,7 +8,7 @@ class PoliklinikModel extends CI_Model{
     }
 
 	public function viewPoli(){
-		return $this->db->get('tb_poliklinik')->result_array();
+		return $this->db->get('tb_poliklinik')->result();
 	}
 
 	public function viewPoliWhere($where){

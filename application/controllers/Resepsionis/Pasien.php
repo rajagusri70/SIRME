@@ -10,6 +10,7 @@ class Pasien extends CI_Controller {
 		$this->load->model('PasienModel');
 		$this->load->model('AdminModel');
 		$this->load->model('RawatModel');
+		$this->load->model('PoliklinikModel');
 	}
 	
 	public function index(){
@@ -69,8 +70,9 @@ class Pasien extends CI_Controller {
 	}
 
 	public function pasien_lama(){
-		$users['users'] = $this->AdminModel->tampilkan();
-		$this->load->view('resepsionis/pasien_lama',$users);
+		$data['users'] = $this->AdminModel->tampilkan();
+		
+		$this->load->view('resepsionis/pasien_lama',$data);
 		if($this->input->post('daftar_poli')){
 			$this->RawatModel->poli();
 			redirect ("resepsionis/pasien/pasien_lama");
@@ -80,6 +82,7 @@ class Pasien extends CI_Controller {
 	public function daftar_pasien_lama(){
 		$parameter = $this->input->post('parameter_input');
 		$data['users'] = $this->AdminModel->tampilkan();
+		$data['poliklinik'] = $this->PoliklinikModel->viewPoli();
 		if($parameter == 'id_pasien'){
 			$data['pasien'] = $this->PasienModel->cariPasienLama('id_pasien');
 			$this->load->view('resepsionis/pasien_lama',$data);
@@ -102,37 +105,37 @@ class Pasien extends CI_Controller {
 	// 	$this->load->view('pasien/pasien_baru',$users);
 	// }
 
-	public function status(){
-		$users['users'] = $this->AdminModel->tampilkan();
-		$this->load->view('resepsionis/status_rawat',$users);
-	}
+	// public function status(){
+	// 	$users['users'] = $this->AdminModel->tampilkan();
+	// 	$this->load->view('resepsionis/status_rawat',$users);
+	// }
 
-	public function status_rawat(){
-		$data['users'] = $this->AdminModel->tampilkan();
-		$poliklinik = $this->input->post('input_poliklinik');
-		$where = array(
-			'rawat_jalan.poliklinik' => $poliklinik, 
-		);
-		if($poliklinik == "Poli Umum"){
-			$parameter = $this->input->post('parameter_input');
-			$data['pasien'] = $this->RawatModel->cariStatus('rawat_jalan','rawat_jalan.poliklinik',$poliklinik);
-	  		$this->load->view('resepsionis/status_rawat',$data);
-		}else if($poliklinik == "Poli Mata"){
-			$parameter = $this->input->post('parameter_input');
-			$data['pasien'] = $this->PasienModel->cariStatus('rawat_jalan','rawat_jalan.poliklinik',$poliklinik);
-	  		$this->load->view('resepsionis/status_rawat',$data);
-		}
+	// public function status_rawat(){
+	// 	$data['users'] = $this->AdminModel->tampilkan();
+	// 	$poliklinik = $this->input->post('input_poliklinik');
+	// 	$where = array(
+	// 		'rawat_jalan.poliklinik' => $poliklinik, 
+	// 	);
+	// 	if($poliklinik == "Poli Umum"){
+	// 		$parameter = $this->input->post('parameter_input');
+	// 		$data['pasien'] = $this->RawatModel->statusRawat('rawat_jalan','rawat_jalan.poliklinik',$poliklinik);
+	//   		$this->load->view('resepsionis/status_rawat',$data);
+	// 	}else if($poliklinik == "Poli Mata"){
+	// 		$parameter = $this->input->post('parameter_input');
+	// 		$data['pasien'] = $this->PasienModel->statusRawat('rawat_jalan','rawat_jalan.poliklinik',$poliklinik);
+	//   		$this->load->view('resepsionis/status_rawat',$data);
+	// 	}
 
-		else{
-			$this->load->view('resepsionis/status_rawat',$data);
-		}
-	 	// if($this->input->post('input_poli')){
-	 	// 	if($poliklinik == "Poli Umum"){
-	 	// 		$data['pasien'] = $this->PasienModel->cariStatus();
-	 	// 		$this->load->view('pasien/status_rawat',$data);
-	 	// 	}
-	 	// }
-	}
+	// 	else{
+	// 		$this->load->view('resepsionis/status_rawat',$data);
+	// 	}
+	//  	// if($this->input->post('input_poli')){
+	//  	// 	if($poliklinik == "Poli Umum"){
+	//  	// 		$data['pasien'] = $this->PasienModel->cariStatus();
+	//  	// 		$this->load->view('pasien/status_rawat',$data);
+	//  	// 	}
+	//  	// }
+	// }
 
 	public function profile_pasien($no_pasien){
 		$data['users'] = $this->AdminModel->tampilkan();

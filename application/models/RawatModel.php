@@ -18,7 +18,7 @@ class RawatModel extends CI_Model{
         $waktu = date("H:i:s");
         $biaya = $this->input->post('input_biaya');
         $poliklinik = $this->input->post('input_poliklinik');
-        $status = "Dalam Pemeriksaan";
+        $status = "Menunggu";
 		$data = array(
 			"no_pasien" => $nomor_pasien,
 			"tanggal" => $tanggal,
@@ -28,9 +28,17 @@ class RawatModel extends CI_Model{
 			"status" => $status
 		);
 		$this->db->insert('rawat_jalan', $data);
-		$trx = array(
-			'' => '' 
-		);
+		// $trx = array(
+		// 	'' => '' 
+		// );
+	}
+
+	public function statusRawat($table,$where,$where_parameter){
+		$this->db->select('*'); //memeilih semua field
+	    $this->db->from($table);
+	    $this->db->join('pasien', 'rawat_jalan.no_pasien = pasien.no_pasien');
+	    $this->db->where($where,$where_parameter);
+	    return $this->db->get()->result();
 	}
 
 	public function cariStatus($table,$where,$where_parameter){
@@ -53,7 +61,7 @@ class RawatModel extends CI_Model{
 	 //    $this->db->join('pasien', ''.$table.'.no_pasien = pasien.no_pasien');
 	 //    $this->db->or_where($where);
 	 //    return $this->db->get()->result();
-		$querry = "SELECT * FROM `rawat_jalan` JOIN `pasien` ON `rawat_jalan`.`no_pasien` = `pasien`.`no_pasien` WHERE `rawat_jalan`.`status` = 'Menunggu' OR `rawat_jalan`.`status` = 'Dalam Pemeriksaan'";
+		$querry = "SELECT * FROM `rawat_jalan` JOIN `pasien` ON `rawat_jalan`.`no_pasien` = `pasien`.`no_pasien` WHERE rawat_jalan.poliklinik = 'Poli Umum' AND `rawat_jalan`.`status` = 'Menunggu' OR `rawat_jalan`.`status` = 'Dalam Pemeriksaan'";
 		return $this->db->query($querry)->result();
 	}
 
@@ -84,12 +92,16 @@ class RawatModel extends CI_Model{
 		$this->db->update("rawat_jalan",$data);
 	}
 
-	public function count($id_rawat){
-		return $this->db->get('tb_diagnosa_umum')->num_rows();
-		// $this->db->select('');
-		// $this->db->from('tb_diagnosa_umum');
-		// $this->db->where('id_rawat',$id_rawat);
-		// $query = "";
-		// return $this->db->query()->result();
+	// public function count($id_rawat){
+	// 	return $this->db->get('tb_diagnosa_umum')->num_rows();
+	// 	// $this->db->select('');
+	// 	// $this->db->from('tb_diagnosa_umum');
+	// 	// $this->db->where('id_rawat',$id_rawat);
+	// 	// $query = "";
+	// 	// return $this->db->query()->result();
+	// }
+
+	public function viewStatus($where){
+		return $this->db->get_where('rawat_jalan',$where)->result();
 	}
 }

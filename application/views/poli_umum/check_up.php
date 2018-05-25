@@ -44,7 +44,7 @@
         <div class="left_col scroll-view">
 
           <div class="navbar nav_title" style="border: 0;">
-            <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>SIRME</span></a>
+            <a href="<?php echo base_url() ?>" class="site_title"><i class="fa fa-user-md"></i> <span>SIRME</span></a>
           </div>
           <div class="clearfix"></div>
 
@@ -604,10 +604,28 @@
           data: {},
           dataType: "JSON",
           success: function(data) {
-            new PNotify({
-              title: 'Sukses',
-              text: 'Data rekam medis elektronik pasien telah berhasil disimpan!',
-              type: 'success'
+            swal({
+              title: "Pasien Telah Diperiksa",
+              text: "Rawat Jalan pasien telah selesai dilakukan",
+              icon: "success",
+              buttons: {
+                catch: {
+                  text: "Oke",
+                  value: "catch",
+                },
+              },
+            })
+            .then((value) => {
+              switch (value) {         
+                case "defeat":
+                  swal("");
+                  break;         
+                case "catch":
+                  window.close();
+                  break;     
+                default:
+                  window.close();
+              }
             });
           }
         });

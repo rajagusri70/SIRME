@@ -48,7 +48,7 @@
         <div class="left_col scroll-view">
 
           <div class="navbar nav_title" style="border: 0;">
-            <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>SIRME</span></a>
+            <a href="<?php echo base_url() ?>" class="site_title"><i class="fa fa-user-md"></i> <span>SIRME</span></a>
           </div>
           <div class="clearfix"></div>
 
@@ -98,7 +98,7 @@
                 </li>
                 <li><a><i class="fa fa-user-md"></i> Rawat Jalan <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo site_url('resepsionis/pasien/status') ?>">Status Rawat Pasien</a>
+                    <li><a href="<?php echo site_url('resepsionis/rawat/status') ?>">Status Rawat Pasien</a>
                     </li>
                     <li><a href="index2.html">Status Selesai</a>
                     </li>
@@ -486,7 +486,7 @@
                                                       <br />
                                                       <p class="url">
                                                         <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
-                                                        <a href="#"><i class="fa fa-paperclip"></i> User Acceptance Test.doc </a>
+                                                        <a href="#"><i class="fa fa-paperclip"></i> Tampilkan hasil medis </a>
                                                       </p>
                                                     </div>
                                                   </li>

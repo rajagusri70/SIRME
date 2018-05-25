@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Pilih Obat</title>
+  <title>Transaksi Pasien</title>
 
   <!-- Bootstrap core CSS -->
 
@@ -24,24 +24,10 @@
 
   <script src="<?php echo base_url(); ?>/assets/js/jquery.min.js"></script>
 
-  <!--[if lt IE 9]>
-        <script src="../assets/js/ie8-responsive-file-warning.js"></script>
-        <![endif]-->
-
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
 </head>
 
-
 <body class="">
-
   <div class="container body">
-
-
     <div class="">
 
       
@@ -55,83 +41,126 @@
       <div class="right_col" role="main">
         <div class="">
           <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12 col-sm-12 col-xs-12" style="align-items:  center;">
               <div class="x_panel">
-                
-                <h2 align="center">Penyusunan Resep Obat</h2> 
+                <h3 align="center">Rumah Sakit Umum XYZ</h3>
+                <h2 align="center">Biaya Rawat Jalan No.</h2> 
                 <div class="clearfix"></div>
-                <table id="" class="table table-striped table-bordered">
-                    <thead align="center">
-                      <tr style="font-weight: bold;">
-                        
-                        <td>No. Obat</td>
-                        <td>Nama Obat</td>
-                        <td>Kuantitas</td>
-                        <td>Keterangan</td>
-                        <td>Update</td>
-                        <td>Aksi</td>
-                      </tr>
-                    </thead>
-                    <tbody id="show_resep">
-                      <tr>
-                       
-                      </tr>
-                    </tbody>
-                  </table>
                 <div class="x_content">
-                  <button class="btn btn-primary" onclick="tutup()" >Selesai</button>
                   <div class="ln_solid"></div>
-                  <p>Silahkan pilih obat yang ingin dimasukan ke Tabel Resep diatas</p>
-                  
-                  <table id="datatable" class="table table-striped table-bordered">
+                  <table style="font-size: 14px">
+                    <?php foreach ($data as $trx) {?>
+                    <tr>
+                      <td>Nama</td>
+                      <td>&nbsp;:&nbsp;</td>
+                      <td><?php echo $trx->nama ?></td>
+                    </tr>
+                    <tr>
+                      <td>No. Transaksi</td>
+                      <td>&nbsp;:&nbsp;</td>
+                      <td><?php echo $trx->id_transaksi ?></td>
+                    </tr>
+                    <tr>
+                      <td>No. Pasien</td>
+                      <td>&nbsp;:&nbsp;</td>
+                      <td><?php echo $trx->no_pasien ?></td>
+                    </tr>
+                    <tr>
+                      <td>Tanggal Transaksi</td>
+                      <td>&nbsp;:&nbsp;</td>
+                      <td><?php echo $trx->tanggal_transaksi ?></td>
+                    </tr>
+                    <tr>
+                      <td>Status Transaksi</td>
+                      <td>&nbsp;:&nbsp;</td>
+                      <td><?php echo $trx->status ?> &nbsp;<a style="cursor:pointer" onclick="selesai()" title="Lunaskan" class="fa fa-check-square-o"></a></td> 
+                    </tr>
+                  <?php } ?>
+                  </table>
+                </br></br>
+                  <table class="table table-striped table-bordered">
                     <thead align="center">
                       <tr style="font-weight: bold;">
-                        
-                        <td>No. Obat</td>
-                        <td>Nama Obat</td>
-                        <td>Jenis</td>
-                        <td>Kategori</td>
+                        <td>No</td>
+                        <td>Uraian Transaksi</td>
+                        <td>Jumlah</td>
                         <td>Harga (Rp.)</td>
-                        <td>Stok</td>
-                        <td>Aksi</td>
+                        <td>Biaya (Rp.)</td>
                       </tr>
                     </thead>
                     <tbody>
-                      <?php foreach ($daftar_obat as $do) { ?>
                       <tr>
-                        <td align="center"><?php echo $do->no_obat ?></td>
-                        <td><?php echo $do->nama_obat ?></td>
-                        <td><?php echo $do->jenis ?></td>
-                        <td align="center"><?php echo $do->kategori ?></td>
-                        <td align="right"><?php echo $do->harga ?></td>
-                        <td align="center"><?php echo $do->stok ?></td>
-                        <td align="center"><a class="fa fa-plus-circle" onclick="tambah(<?php echo "$do->no_obat"; ?>)" style="cursor:pointer" ></a></td>
+                        <td align="center" ><b>1</b></td>
+                        <td colspan="4" ><b>Pendaftaran</b></td>
+                      </tr>
+                      <?php foreach ($pendaftaran as $pdt) { ?>
+                      <tr>
+                        <td></td>
+                        <td><?php echo $pdt->nama_transaksi ?></td>
+                        <td align="center" ><?php echo $pdt->jumlah ?></td>
+                        <td align="right"><?php echo $pdt->harga ?></td>
+                        <td align="right" ><?php echo $pdt->biaya ?></td>
                       </tr>
                       <?php } ?>
+                      <tr>
+                        <td align="center" ><b>2</b></td>
+                        <td colspan="4" ><b>Pemeriksaan Rawat Jalan</b></td>
+                      </tr>
+                      <?php foreach ($pemeriksaan as $pms) { ?>
+                      <tr>
+                        <td></td>
+                        <td><?php echo $pms->nama_transaksi ?></td>
+                        <td align="center" ><?php echo $pms->jumlah ?></td>
+                        <td align="right" ><?php echo $pms->harga ?></td>
+                        <td align="right" ><?php echo $pms->biaya ?></td>
+                      </tr>
+                      <?php } ?>
+                      <tr>
+                        <td align="center" ><b>3</b></td>
+                        <td colspan="4" ><b>Biaya Obat</b></td>
+                      </tr>
+                      <?php foreach ($pengobatan as $pbt) { ?>
+                      <tr>
+                        <td></td>
+                        <td><?php echo $pbt->nama_transaksi ?></td>
+                        <td align="center" ><?php echo $pbt->jumlah ?></td>
+                        <td align="right" ><?php echo $pbt->harga ?></td>
+                        <td align="right" ><?php echo $pbt->biaya ?></td>
+                      </tr>
+                      <?php } ?>
+                      <tr>
+                        <td align="center" ><b>4</b></td>
+                        <td colspan="4" ><b>Lain-lain</b></td>
+                      </tr>
+                      <tr>
+                        <td colspan="4" align="center"><b>Jumlah Biaya Rawat Jalan</b></td>
+                        <?php foreach ($sumBiaya as $biaya) {?>
+                        <td align="right" ><b>Rp.&nbsp;&nbsp;</b><b><?php echo $biaya->biaya ?></b></td>
+                      <?php } ?>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
               </div>
+              <div style="text-align: center;">
+              <button type="button" class="btn btn-primary" onclick="window.print()"><a class="" style="color: white"></a>Cetak</button>
+              </div>
             </div>
           </div>
         </div>
-
         <!-- footer content -->
         <footer>
           <div class="copyright-info">
-            <p class="pull-right">Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>  
+            <p class="pull-right">SIRME <a href=""></a>  
             </p>
           </div>
           <div class="clearfix"></div>
         </footer>
         <!-- /footer content -->
-
       </div>
       <!-- /page content -->
     </div>
-
   </div>
-
   <div id="custom_notifications" class="custom-notifications dsp_none">
     <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group">
     </ul>
@@ -144,39 +173,16 @@
   <!-- bootstrap progress js -->
   <script src="<?php echo base_url(); ?>/assets/js/progressbar/bootstrap-progressbar.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/js/nicescroll/jquery.nicescroll.min.js"></script>
-  <!-- icheck -->
-  <script src="<?php echo base_url(); ?>/assets/js/icheck/icheck.min.js"></script>
+ 
 
   <script src="<?php echo base_url(); ?>/assets/js/custom.js"></script>
-
-  <!-- image cropping -->
-  <script src="<?php echo base_url(); ?>/assets/js/cropping/cropper.min.js"></script>
-  <script src="<?php echo base_url(); ?>/assets/js/cropping/main.js"></script>
-
-  <!-- daterangepicker -->
-  <script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/moment/moment.min.js"></script>
-  <script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/datepicker/daterangepicker.js"></script>
-
-  <!-- chart js -->
-  <script src="<?php echo base_url(); ?>/assets/js/chartjs/chart.min.js"></script>
-
-  <!-- moris js -->
-  <script src="<?php echo base_url(); ?>/assets/js/moris/raphael-min.js"></script>
-  <script src="<?php echo base_url(); ?>/assets/js/moris/morris.min.js"></script>
-
-  <!-- pace -->
-  <script src="<?php echo base_url(); ?>/assets/js/pace/pace.min.js"></script>
   <!-- Datatable -->
   <script src="<?php echo base_url(); ?>/assets/js/datatables/jquery.dataTables.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/js/datatables/dataTables.bootstrap.js"></script>
   <script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/notify/pnotify.core.js"></script>
   <script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/notify/pnotify.buttons.js"></script>
   <script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/notify/pnotify.nonblock.js"></script>
-
-  <!-- Sweet Modal -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/jquery.sweet-modal.min.css" />
-  <script src="<?php echo base_url(); ?>/assets/js/jquery.sweet-modal.min.js"></script>
-
+  <script src="<?php echo base_url(); ?>/assets/js/sweetalert.min.js"></script>
   
   <script type="text/javascript">
         tampil_resep();   //pemanggilan fungsi tampil barang.
@@ -220,36 +226,6 @@
       
   </script>
   <script type="text/javascript">
-    function dataTable(){}
-    $(document).ready(function(){
-      $('#datatable').DataTable();
-    });
-  </script>
-  <script type="text/javascript">
-    function tambah(no_obat){
-      var no_obat_value = no_obat;
-      var id_poli_umum_value = <?php echo $id_poli_umum; ?>;
-      
-        $.ajax({
-          url: "<?php echo base_url().'p_umum/check_up/tambahresep' ?>",
-          type: 'POST',
-          data: {no_obat: no_obat_value, id_poli_umum: id_poli_umum_value},
-          dataType: "JSON",
-          success: function(data) {
-            
-            new PNotify({
-              title: 'Sukses',
-              text: 'Obat telah berhasil ditambahkan ke resep',
-              type: 'success'
-            });
-            tampil_resep();
-          }
-          //tampil_resep();
-        });
-
-    }
-  </script>
-  <script type="text/javascript">
     function update_resep(no_id){
       var no_id_value = no_id;
       var kuantitas_value = $("#kuantitas_input"+no_id_value).val();
@@ -275,35 +251,51 @@
     }
   </script>
   <script type="text/javascript">
-    function hapus(no_id){
-    var no_id_value = no_id;
-    $.sweetModal.confirm('Konfirmasi Hapus', 'Anda yakin ingin menghapus.?', function() {
-      $.ajax({
-        url: "<?php echo base_url().'p_umum/check_up/hapusresep' ?>",
-        type: 'POST',
-        data: {no_id: no_id_value},
-        dataType: "JSON",
-        success: function(data) {
-          new PNotify({
-              title: 'Sukses',
-              text: 'Obat dari resep pasien telah berhasil dihapus!',
-              type: 'success',
-              nonblock: {
-                nonblock: true,
-                nonblock_opacity: .2
+    function selesai(){
+      swal({
+        title: "Ganti Status",
+        text: "Apakah anda ingin mengganti status pembayaran pasien menjadi Lunas.?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((simpan) => {
+        if (simpan) {
+          $.ajax({
+          url: "",
+          type: 'POST',
+          data: {},
+          dataType: "JSON",
+          success: function(data) {
+            swal({
+              title: "Pasien Telah Diperiksa",
+              text: "Rawat Jalan pasien telah selesai dilakukan",
+              icon: "success",
+              buttons: {
+                catch: {
+                  text: "Oke",
+                  value: "catch",
+                },
+              },
+            })
+            .then((value) => {
+              switch (value) {         
+                case "defeat":
+                  swal("");
+                  break;         
+                case "catch":
+                  window.close();
+                  break;     
+                default:
+                  window.close();
               }
             });
-          tampil_resep();
           }
+        });
+        } else {
+          
+        }
       });
-    }, function() {
-        
-    });
-  }
-  </script>
-  <script type="text/javascript">
-    function tutup(){
-      window.close();
     }
   </script>
 </body>

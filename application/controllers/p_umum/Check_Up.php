@@ -40,32 +40,66 @@ class Check_Up extends CI_Controller {
 	}
 
 	public function periksa($id_rawat){
-		// if(){
 
-		// }else{
-			
-		// }
-		$this->session->set_userdata('periksa', 'true');
-		$users = $this->AdminModel->tampilkan();
-		$tanggal = date("d-m-Y");
-        $waktu = date("H:i:s");
-		foreach ($users as $user) {
-			$data = array(
-			'id_rawat' => $id_rawat,
-			'user_id' => $user->user_id,
-			'tanggal_masuk' => $tanggal,
-			'jam_masuk' => $waktu
-			);
-			$this->UmumModel->tambah($data);
+		$status_where = array('id_rawat' => $id_rawat, );
+		$get_status = $this->RawatModel->viewStatus($status_where);
+
+		foreach ($get_status as $status_rawat) {
+			if($status_rawat->status == 'Selesai'){
+				echo '<body>';
+				echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
+
+				echo '<script type="text/javascript" >';
+				echo 'swal({';
+				echo '  title: "Pasien Telah Diperiksa",';
+				echo '  text: "Rawat Jalan yang anda Pilih telah selesai",';
+				echo '	icon: "success",';
+				echo '  buttons: {';
+				//echo '    cancel: "Run away!",';
+				echo '    catch: {';
+				echo '      text: "Oke",';
+				echo '      value: "catch",';
+				echo '    },';
+				//echo '    defeat: true,';
+				echo '  },';
+				echo '})';
+				echo '.then((value) => {';
+				echo '  switch (value) {';				 
+				echo '    case "defeat":';
+				echo '      swal("Pikachu fainted! You gained 500 XP!");';
+				echo '      break;';				 
+				echo '    case "catch":';
+				echo '      window.close();';
+				echo '      break;';				 
+				echo '    default:';
+				echo '      swal("Got away safely!");';
+				echo '  }';
+				echo '});';
+				echo '</script>';
+				echo  '</body>';
+			}else{
+				$users = $this->AdminModel->tampilkan();
+				$tanggal = date("d-m-Y");
+		        $waktu = date("H:i:s");
+				foreach ($users as $user) {
+					$data = array(
+					'id_rawat' => $id_rawat,
+					'user_id' => $user->user_id,
+					'tanggal_masuk' => $tanggal,
+					'jam_masuk' => $waktu
+					);
+					$this->UmumModel->tambah($data);
+				}
+				$data = array(
+					'status' => 'Dalam Pemeriksaan', 
+				);
+				$this->RawatModel->updateStatus($id_rawat, $data);
+				$data['users'] = $this->AdminModel->tampilkan();
+				$data['pasien_terdaftar'] = $this->RawatModel->cariStatus('tb_poli_umum','rawat_jalan.id_rawat',$id_rawat);
+				$data['id_rawat'] = $id_rawat;
+				$this->load->view('poli_umum/check_up',$data);
+			}
 		}
-		$data = array(
-			'status' => 'Dalam Pemeriksaan', 
-		);
-		$this->RawatModel->updateStatus($id_rawat, $data);
-		$data['users'] = $this->AdminModel->tampilkan();
-		$data['pasien_terdaftar'] = $this->RawatModel->cariStatus('tb_poli_umum','rawat_jalan.id_rawat',$id_rawat);
-		$data['id_rawat'] = $id_rawat;
-		$this->load->view('poli_umum/check_up',$data);
 	}
 
 	public function viewDiagnosa($id_rawat){
@@ -148,25 +182,25 @@ class Check_Up extends CI_Controller {
 
 		#menambahkan Transaksi baru
 		$tanggal = date("d-m-Y");
-    $waktu = date("H:i:s");
-    $status = 'Belum Lunas';
-    $trxData = array(
-      'id_rawat' => $id_rawat,
-      'tanggal_transaksi' => $tanggal,
-      'jam_transaksi' => $waktu,
-      'status' => $status 
-    );
-    $this->TransaksiModel->tambahTrx($trxData);
+	    $waktu = date("H:i:s");
+	    $status = 'Belum Lunas';
+	    $trxData = array(
+	      'id_rawat' => $id_rawat,
+	      'tanggal_transaksi' => $tanggal,
+	      'jam_transaksi' => $waktu,
+	      'status' => $status 
+	    );
+	    $this->TransaksiModel->tambahTrx($trxData);
 
 		#menambahkan item ke transaksi
-    $where_trx = array(
-    	'id_rawat' => $id_rawat, 
-    );
-    $transaksi = $this->TransaksiModel->viewTrx($where_trx);
-    foreach ($transaksi as $trx) {
-    	$where_poli = array(
-				'nama_poli' => 'Poliklinik Umum', 
-			);
+	    $where_trx = array(
+	    	'id_rawat' => $id_rawat, 
+	    );
+	    $transaksi = $this->TransaksiModel->viewTrx($where_trx);
+	    foreach ($transaksi as $trx) {
+	    	$where_poli = array(
+					'nama_poli' => 'Poli Umum', 
+				);
 			$poli = $this->PoliklinikModel->viewPoliWhere($where_poli);
 			foreach ($poli as $p) {
 				$transaksi = array(
@@ -176,7 +210,15 @@ class Check_Up extends CI_Controller {
 					'jumlah' => '1',
 					'harga' => $p->biaya_pendaftaran, 
 				);
-				$this->ItemTransaksiModel->tambahTrx($transaksi);			
+				$this->ItemTransaksiModel->tambahTrx($transaksi);
+				$transaksi2 = array(
+					'id_transaksi' => $trx->id_transaksi,
+					'jenis_transaksi' => 'Pemeriksaan',
+					'nama_transaksi' => $p->nama_poli,
+					'jumlah' => '1',
+					'harga' => '20000', 
+				);
+				$this->ItemTransaksiModel->tambahTrx($transaksi2);			
 			}
 
 			#menambahkan resep obat ke Transaksi
@@ -199,7 +241,7 @@ class Check_Up extends CI_Controller {
 					$this->ItemTransaksiModel->tambahTrx($data_item_trx);
 				}
 			}
-    }
+    	}
 
 		// $where_poli = array(
 		// 	'nama_poli' => 'Poliklinik Umum', 

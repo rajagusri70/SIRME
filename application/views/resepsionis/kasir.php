@@ -277,7 +277,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <?php foreach ($data as $dt) {?>
+                      <?php foreach ($data_trx as $dt) {?>
                       <tr>
                         <td><?php echo $dt->id_transaksi; ?></td>
                         <td><?php echo $dt->id_rawat; ?></td>

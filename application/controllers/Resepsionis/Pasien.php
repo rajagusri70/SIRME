@@ -34,19 +34,40 @@ class Pasien extends CI_Controller {
 			if($upload['result'] == "success"){
 				$this->PasienModel->input($upload);// Panggil fungsi input() yang ada di PasienModel.php
 				// $this->load->view('pasien/pasien_baru');
-				echo '<body>';
-				echo '<script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/notify/pnotify.core.js"></script>';
-				echo '<script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/notify/pnotify.buttons.js"></script>';
-				echo '<script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/notify/pnotify.nonblock.js"></script>';
-				echo "<script>";
-				echo "new PNotify({";
-				echo "title: 'Sukses',";
-                echo "text: 'Sticky success... I\'m not even gonna make a joke.',";
-                echo "type: 'success',";
-                echo "hide: false";
-                echo "});";
-                echo "</script>";
-                echo "</body>";
+				$no_ktp = $this->input->post('input_no_ktp');
+				$viewpasien = $this->PasienModel->viewPasien('no_ktp',$no_ktp);
+				foreach ($viewpasien as $vp) {
+					echo '<body>';
+					echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
+					echo '<script type="text/javascript" >';
+					echo 'swal({';
+					echo '  title: "Pendaftaran Berhasil.!!! Nomor Pasien : ['.$vp->no_pasien.']",';
+					echo '  text: "Pasien telah berhasil didaftarkan. Nomor pasien : '.$vp->no_pasien.'",';
+					echo '	icon: "success",';
+					echo '  buttons: {';
+					//echo '    cancel: "Run away!",';
+					echo '    catch: {';
+					echo '      text: "Oke",';
+					echo '      value: "catch",';
+					echo '    },';
+					//echo '    defeat: true,';
+					echo '  },';
+					echo '})';
+					echo '.then((value) => {';
+					echo '  switch (value) {';				 
+					echo '    case "defeat":';
+					echo '      swal("Pikachu fainted! You gained 500 XP!");';
+					echo '      break;';				 
+					echo '    case "catch":';
+					echo '      window.close();';
+					echo '      break;';				 
+					echo '    default:';
+					echo '      swal("Got away safely!");';
+					echo '  }';
+					echo '});';
+					echo '</script>';
+					echo  '</body>';
+				}
 				//$this->load->view('pasien/pasien_baru');
 			}else{
 				//$data['message'] = $upload['error'];
@@ -139,7 +160,7 @@ class Pasien extends CI_Controller {
 
 	public function profile_pasien($no_pasien){
 		$data['users'] = $this->AdminModel->tampilkan();
-		$data['pasien'] = $this->PasienModel->viewPasien($no_pasien);
+		$data['pasien'] = $this->PasienModel->viewPasien('no_pasien',$no_pasien);
 		$this->load->view('resepsionis/profile_pasien',$data);
 		// if($this->input->post('ubah_pasien')){
 		// 	$data = array(

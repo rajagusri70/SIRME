@@ -3,6 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Check_Up extends CI_Controller {
 
+	
+
 	function __construct(){
 		parent::__construct();
 		$this->load->model('AdminModel');
@@ -13,6 +15,8 @@ class Check_Up extends CI_Controller {
 		$this->load->model('TransaksiModel');
 		$this->load->model('PoliklinikModel');
 		$this->load->model('ItemTransaksiModel');
+		$this->load->model('RM1AModel');
+		$this->load->model('RM1BModel');
 		date_default_timezone_set("Asia/Jakarta");
  
 	}
@@ -97,6 +101,10 @@ class Check_Up extends CI_Controller {
 				$data['users'] = $this->AdminModel->tampilkan();
 				$data['pasien_terdaftar'] = $this->RawatModel->cariStatus('tb_poli_umum','rawat_jalan.id_rawat',$id_rawat);
 				$data['id_rawat'] = $id_rawat;
+
+				#cek apakah data di tabel rm1a dan rm1b eksis
+				$data['rm1a'] = $this->RM1AModel->tampilkan($id_rawat);
+				$data['rm1b'] = $this->RM1BModel->tampilkan($id_rawat);
 				$this->load->view('poli_umum/check_up',$data);
 			}
 		}
@@ -173,16 +181,70 @@ class Check_Up extends CI_Controller {
 	// 	echo json_encode($data);
 	// }
 
+	public function simpanRm1a($id_rawat){
+		$action = $this->input->post('actiona');
+		$data = array(
+			'id_rawat' => $this->input->post('id_rawat'),
+			'RM1A11' => $this->input->post('RM1A11'),
+			'RM1A12' => $this->input->post('RM1A12'), 
+			'RM1A21' => $this->input->post('RM1A21'),
+			'RM1A22' => $this->input->post('RM1A22'),
+			'RM1A23' => $this->input->post('RM1A23'),
+			'RM1A24' => $this->input->post('RM1A24'),
+			'RM1A25' => $this->input->post('RM1A25'),
+			'RM1A26' => $this->input->post('RM1A26'),
+			'RM1A27' => $this->input->post('RM1A27'),
+			'RM1A28' => $this->input->post('RM1A28'),
+			'RM1A31' => $this->input->post('RM1A31'),
+			'RM1A32' => $this->input->post('RM1A32'),
+			'RM1A33' => $this->input->post('RM1A33'),
+			'RM1A34' => $this->input->post('RM1A34'),
+		);
+		if($action == "Kirim"){
+			$this->RM1AModel->tambahAsesmen($data);
+		}else{
+			$this->RM1AModel->updateAsesmen($id_rawat,$data);
+		}
+		echo json_encode(array('status' => true));
+	}
+
+	public function simpanRm1b($id_rawat){
+		$action = $this->input->post('actionb');
+		$data = array(
+			'id_rawat' => $this->input->post('id_rawat'),
+			'RM1B11' => $this->input->post('RM1B11'),
+			'RM1B21' => $this->input->post('RM1B21'), 
+			'RM1B22' => $this->input->post('RM1B22'),
+			'RM1B23' => $this->input->post('RM1B23'),
+			'RM1B31' => $this->input->post('RM1B31'),
+			'RM1B32' => $this->input->post('RM1B32'),
+			'RM1B33' => $this->input->post('RM1B33'),
+			'RM1B34' => $this->input->post('RM1B34'),
+			'RM1B35' => $this->input->post('RM1B35'),
+			'RM1B36' => $this->input->post('RM1B36'),
+			'RM1B37' => $this->input->post('RM1B37'),
+		);
+		if($action == "Kirim"){
+			$this->RM1BModel->tambahAsesmen($data);
+			echo json_encode(array('status' => true));
+		}else{
+			$this->RM1BModel->updateAsesmen($id_rawat,$data);
+			echo json_encode(array('status' => true));
+		}
+		
+	}
+
 	public function selesai($id_rawat){
 		#update Status rawat jalan pasien
+		$tanggal = date("d-m-Y");
+		$waktu = date("H:i:s");
 		$data = array(
 			'status' => 'Selesai', 
 		);
 		$this->RawatModel->updateStatus($id_rawat, $data);
 
 		#menambahkan Transaksi baru
-		$tanggal = date("d-m-Y");
-	    $waktu = date("H:i:s");
+		
 	    $status = 'Belum Lunas';
 	    $trxData = array(
 	      'id_rawat' => $id_rawat,
@@ -228,6 +290,11 @@ class Check_Up extends CI_Controller {
 			$poli_umum = $this->UmumModel->viewWhere($where_umum);
 			foreach ($poli_umum as $pu) {
 				$id_poli_umum = $pu->id_poli_umum;
+				$waktuKeluar = array(
+					'tanggal_keluar' => $tanggal, 
+					'jam_keluar' => $waktu, 
+				);
+				$this->UmumModel->updateKeluar($id_poli_umum,$waktuKeluar);
 				$resep_obat = $this->ResepModel->viewResep('tb_resep.id_poli_umum',$id_poli_umum);
 				foreach ($resep_obat as $ro) {
 					$data_item_trx = array(

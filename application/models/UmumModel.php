@@ -24,4 +24,10 @@ class UmumModel extends CI_Model{
 	public function viewWhere($where){
 		return $this->db->get_where("tb_poli_umum",$where)->result();
 	}
+
+	public function updateKeluar($where,$data){
+		$this->db->where("id_poli_umum",$where);
+		$this->db->update("tb_poli_umum",$data);
+	}
+
 }

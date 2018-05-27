@@ -44,12 +44,12 @@
             <div class="col-md-12 col-sm-12 col-xs-12" style="align-items:  center;">
               <div class="x_panel">
                 <h3 align="center">Rumah Sakit Umum XYZ</h3>
-                <h2 align="center">Biaya Rawat Jalan No.</h2> 
+                <h2 align="center">Ringkasan Biaya Rawat Jalan No.</h2> 
                 <div class="clearfix"></div>
                 <div class="x_content">
                   <div class="ln_solid"></div>
                   <table style="font-size: 14px">
-                    <?php foreach ($data as $trx) {?>
+                    <?php foreach ($data_trx as $trx) {?>
                     <tr>
                       <td>Nama</td>
                       <td>&nbsp;:&nbsp;</td>
@@ -262,14 +262,14 @@
       .then((simpan) => {
         if (simpan) {
           $.ajax({
-          url: "",
+          url: "<?php echo base_url().'resepsionis/kasir/updatebayar/'.$id_rawat ?>",
           type: 'POST',
           data: {},
           dataType: "JSON",
           success: function(data) {
             swal({
-              title: "Pasien Telah Diperiksa",
-              text: "Rawat Jalan pasien telah selesai dilakukan",
+              title: "Transaksi Lunas",
+              text: "Semua pembiayaan rawat jalan pasien telah dilunasi",
               icon: "success",
               buttons: {
                 catch: {
@@ -284,7 +284,7 @@
                   swal("");
                   break;         
                 case "catch":
-                  window.close();
+                  location.reload();
                   break;     
                 default:
                   window.close();

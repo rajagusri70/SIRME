@@ -13,8 +13,8 @@ class PasienModel extends CI_Model{
 	}
 
 
-	public function viewPasien($no_pasien){
-		$this->db->where("no_pasien",$no_pasien);
+	public function viewPasien($where, $no_pasien){
+		$this->db->where($where,$no_pasien);
 		return $this->db->get("pasien")->result();
 	}
 

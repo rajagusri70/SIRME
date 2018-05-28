@@ -19,7 +19,7 @@ class Check_Up extends CI_Controller {
 		$this->load->model('RM1BModel');
 		$this->load->model('RiwayatPenyakitModel');
 		$this->load->model('RiwayatAlergiModel');
-		
+		$this->load->model('KeluhanModel');
 
 		date_default_timezone_set("Asia/Jakarta");
  
@@ -294,6 +294,15 @@ class Check_Up extends CI_Controller {
 			);
 			$this->RiwayatAlergiModel->tambahRiwayat($data);
 			echo json_encode(array('status' => true));
+		}elseif ($jenis == "Keluhan") {
+			$data = array(
+				'id_periksa' => $this->input->post('id_periksa'),
+				'jam_input' => $waktu,
+				'keluhan' => $this->input->post('keluhan'),
+				'keterangan' => $this->input->post('keterangan'),
+			);
+			$this->KeluhanModel->tambah($data);
+			echo json_encode(array('status' => true));
 		}
 	}
 
@@ -306,6 +315,12 @@ class Check_Up extends CI_Controller {
 	public function viewRiwayatAlergi(){
 		$no_pasien = $this->input->post('no_pasien');
 		$data = $this->RiwayatAlergiModel->viewRiwayat($no_pasien);
+		echo json_encode($data);
+	}
+
+	public function viewKeluhan(){
+		$id_periksa = $this->input->post('id_periksa');
+		$data = $this->KeluhanModel->view($id_periksa);
 		echo json_encode($data);
 	}
 
@@ -324,6 +339,12 @@ class Check_Up extends CI_Controller {
 				'id_alergi' => $item_id, 
 			);
 			$this->RiwayatAlergiModel->hapusRiwayatPenyakit($where);
+			echo json_encode(array('status' => true));
+		}elseif ($jenis == '3') {
+			$where = array(
+				'id_keluhan' => $item_id, 
+			);
+			$this->KeluhanModel->hapus($where);
 			echo json_encode(array('status' => true));
 		}
 	}

@@ -727,7 +727,7 @@
                                       <th align="center">Aksi</th>
                                     </tr>
                                   </thead>
-                                  <tbody id="show_data">
+                                  <tbody id="show_keluhan">
                                     
                                     <!-- <td colspan="7" align="center">Tidak ada Data</td> -->
                                   </tbody>
@@ -748,7 +748,7 @@
                             </tr>
                             <tr>
                               <td></td>
-                              <td ><button type="button" class="btn btn-info btn-xs">Tambah</button></td>
+                              <td ><button type="button" id="tambah_keluhan_button" name="tambah_keluhan_button" onclick="tambahKeluhan()" class="btn btn-info btn-xs">Tambah</button></td>
                             </tr>
                             <tr>
                               <td colspan="2" >Pemeriksaan</td>
@@ -988,8 +988,15 @@
       });
   </script>
   <script type="text/javascript">
-    tampilRiwayatPenyakit();
-    tampilRiwayatAlergi();
+
+    tampilkan();
+
+    function tampilkan() {
+      tampilRiwayatPenyakit();
+      tampilRiwayatAlergi();
+      tampilKeluhan();
+    }
+    
     //pemanggilan fungsi tampil barang.
     //fungsi tampil barang
     function tampilRiwayatPenyakit(){
@@ -1005,7 +1012,7 @@
               '<td colspan="8" align="center">Data pemeriksaan belum ada</td>'+
               '</tr>';
             $('#show_riwayat_penyakit').html(html);
-            setTimeout(tampil_diagnosa, 500)
+            //setTimeout(tampil_diagnosa, 500)
           }else{
             var html = '';
             var i;
@@ -1041,7 +1048,7 @@
               '<td colspan="8" align="center">Data pemeriksaan belum ada</td>'+
               '</tr>';
             $('#show_riwayat_alergi').html(html);
-            setTimeout(tampil_diagnosa, 500)
+            //setTimeout(tampil_diagnosa, 500)
           }else{
             var html = '';
             var i;
@@ -1057,6 +1064,41 @@
               '</tr>';
             }
             $('#show_riwayat_alergi').html(html);
+          }
+        }, 
+        error: function(){
+                  
+        }
+      });
+    }
+
+    function tampilKeluhan(){
+      $.ajax({
+        url   : '<?php echo base_url()?>p_umum/check_up/viewKeluhan',
+        type  : 'POST',
+        data : {id_periksa: <?php echo $id_periksa; ?>},
+        dataType : 'JSON',
+        success : function(data){
+          if (data.length <= 0){
+            html += 
+              '<tr>'+
+              '<td colspan="8" align="center">Data pemeriksaan belum ada</td>'+
+              '</tr>';
+            $('#show_keluhan').html(html);
+            //setTimeout(tampil_diagnosa, 500)
+          }else{
+            var html = '';
+            var i;
+            for(i=0; i<data.length; i++){
+              html += 
+              '<tr>'+
+              '<td align="center" >'+data[i].jam_input+'</td>'+
+              '<td align="center" >'+data[i].keluhan+'</td>'+
+              '<td>'+data[i].keterangan+'</td>'+
+              '<td title="Hapus Data" align="center"><a class="fa fa-remove" onclick="hapus(3,'+data[i].id_keluhan+')" style="cursor:pointer" ></a></td>'+
+              '</tr>';
+            }
+            $('#show_keluhan').html(html);
           }
         }, 
         error: function(){
@@ -1220,17 +1262,17 @@
         $.ajax({
           url: "<?php echo base_url().'p_umum/check_up/simpan' ?>",
           type: 'POST',
-          data: {jenis:'Keluhan',},
+          data: {jenis:'Keluhan', id_periksa: id_periksa_value, keluhan: rm3_keluhan_value, keterangan: rm3_keterangan_value},
           dataType: "JSON",
           success: function(data) {
-            tampilRiwayatPenyakit();
+            tampilKeluhan();
             new PNotify({
               title: 'Sukses',
               text: 'Data hasil diagnosa pasien telah berhasil disimpan!',
               type: 'success'
             });
-            $("#rm2_icd10").val('');
-            $("#rm2_diagnosa").val('');
+            $("#rm3_keluhan").val('');
+            $("#rm3_keterangan").val('');
           }
         });
     }
@@ -1263,8 +1305,7 @@
                     nonblock_opacity: .2
                 }
               });
-              tampilRiwayatPenyakit();
-              tampilRiwayatAlergi();
+              tampilkan();
             }
           });
         }else{

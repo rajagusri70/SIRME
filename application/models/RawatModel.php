@@ -49,7 +49,7 @@ class RawatModel extends CI_Model{
 
 		$this->db->select('*'); //memeilih semua field
 	    $this->db->from($table); //memeilih tabel
-	    $this->db->join('rawat_jalan', 'tb_poli_umum.id_rawat = rawat_jalan.id_rawat');
+	    $this->db->join('rawat_jalan', 'tb_periksa.id_rawat = rawat_jalan.id_rawat');
 	    $this->db->join('pasien', 'rawat_jalan.no_pasien = pasien.no_pasien');
 	    $this->db->where($where,$where_parameter);
 	    return $this->db->get()->result();

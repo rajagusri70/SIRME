@@ -22,7 +22,8 @@
   <link href="<?php echo base_url(); ?>/assets/css/icheck/flat/green.css" rel="stylesheet">
 
 
-  <script src="<?php echo base_url(); ?>/assets/js/jquery.min.js"></script>
+  <!-- <script src="<?php //echo base_url(); ?>/assets/js/jquery.min.js"></script> -->
+  <!-- <script src="https://clinicaltables.nlm.nih.gov/autocomplete-lhc-versions/15.1.1/autocomplete-lhc_jQuery.min.js"></script> -->
   <link href="<?php echo base_url(); ?>/assets/js/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
   <link href="<?php echo base_url(); ?>/assets/js/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="<?php echo base_url(); ?>/assets/js/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -141,6 +142,8 @@
           <div class="row">
             <?php
             foreach ($pasien_terdaftar as $pt) {
+
+              $no_pasien = $pt->no_pasien;
             ?>
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
@@ -588,13 +591,14 @@
                                 <table id="tabel_diagnosa" class="table table-striped table-bordered">
                                   <thead>
                                     <tr>
+                                      <th align="center">Tanggal</th>
                                       <th align="center">Jam Input</th>
                                       <th align="center">Kode ICD-10</th>
                                       <th align="center">Diagnosa</th>
                                       <th align="center">Aksi</th>
                                     </tr>
                                   </thead>
-                                  <tbody id="show_data">
+                                  <tbody id="show_riwayat_penyakit">
                                     
                                     <!-- <td colspan="7" align="center">Tidak ada Data</td> -->
                                   </tbody>
@@ -604,19 +608,19 @@
                             <tr>
                               <td style="text-align: right;width: 30%" >Nama Penyakit :</td>
                               <td>
-                                <input type="text" id="" required="required" class="form-control col-md-7 col-xs-12">
+                                <input type="text" id="rm2_diagnosa" class="form-control col-md-7 col-xs-12">
                               </td>
                             </tr>
                             <tr>
                               <td style="text-align: right;width: 30%" >Kode ICD-10 :</td>
                               <td>
-                                <input type="text" id="" required="required" class="form-control col-md-7 col-xs-12">
+                                <input type="text" id="rm2_icd10" class="form-control col-md-7 col-xs-12">
                                 
                               </td>
                             </tr>
                             <tr>
                               <td></td>
-                              <td ><button type="button" class="btn btn-info btn-xs">Tambah</button></td>
+                              <td ><button type="button" id="tambah_riwayat_button" class="btn btn-info btn-xs" onclick="tambahRiwayatPenyakit()" >Tambah</button></td>
                             </tr>
                             <tr>
                               <td colspan="2" ><b>RIWAYAT ALERGI</b></td>
@@ -634,7 +638,7 @@
                                       <th align="center">Aksi</th>
                                     </tr>
                                   </thead>
-                                  <tbody id="">
+                                  <tbody id="show_riwayat_alergi">
                                     
                                     <!-- <td colspan="7" align="center">Tidak ada Data</td> -->
                                   </tbody>
@@ -644,30 +648,30 @@
                             <tr>
                               <td style="text-align: right;width: 30%" >Organ Sasaran :</td>
                               <td>
-                                <input type="text" id="" required="required" class="form-control col-md-7 col-xs-12">
+                                <input type="text" id="rm2_organ_sasaran" name="rm2_organ_sasaran" class="form-control col-md-7 col-xs-12">
                               </td>
                             </tr>
                             <tr>
                               <td style="text-align: right;width: 30%" >Gejalan & Tanda :</td>
                               <td>
-                                <input type="text" id="" required="required" class="form-control col-md-7 col-xs-12">
+                                <input type="text" id="rm2_gejala" name="rm2_gejala" class="form-control col-md-7 col-xs-12">
                               </td>
                             </tr>
                             <tr>
                               <td style="text-align: right;width: 30%" >Bahan Kimia :</td>
                               <td>
-                                <input type="text" id="" required="required" class="form-control col-md-7 col-xs-12">
+                                <input type="text" id="rm2_bahan_kimia" name="rm2_bahan_kimia" class="form-control col-md-7 col-xs-12">
                               </td>
                             </tr>
                             <tr>
                               <td valign="top" style="text-align: right;width: 30%" >Keterangan :</td>
                               <td>
-                                <textarea class="form-control"  id="tindakan_input" rows="1" placeholder=''></textarea>
+                                <textarea class="form-control" id="rm2_keterangan" name="rm2_keterangan" rows="1" placeholder=''></textarea>
                               </td>
                             </tr>
                             <tr>
                               <td></td>
-                              <td ><button type="button" class="btn btn-info btn-xs">Tambah</button></td>
+                              <td ><button type="button" id="tambah_alergi_button" name="tambah_alergi_button" onclick="tambahAlergi()" class="btn btn-info btn-xs">Tambah</button></td>
                             </tr>
                             <tr>
                               <td colspan="2" ><b>RIWAYAT KEHAMILAN</b></td>
@@ -703,7 +707,6 @@
                           </table>                  
                         </div>
                         <div role="tabpanel" class="tab-pane fade" id="rm3" aria-labelledby="profile-tab">
-
                           <h2>ASESMEN MEDIS SEKARANG</h2>
                           <div class="ln_solid"></div>
                           <table id="form" style="width: 90% ">
@@ -734,20 +737,20 @@
                             <tr>
                               <td style="text-align: right;width: 30%" >Keluhan :</td>
                               <td>
-                                <input type="text" id="" required="required" class="form-control col-md-7 col-xs-12">
+                                <input type="text" id="rm3_keluhan" name="rm3_keluhan" class="form-control col-md-7 col-xs-12">
                               </td>
                             </tr>
                             <tr>
                               <td valign="top" style="text-align: right;width: 30%" >Keterangan :</td>
                               <td>
-                                <textarea class="form-control"  id="tindakan_input" rows="1" placeholder=''></textarea>
+                                <textarea class="form-control" id="rm3_keterangan" rows="1" placeholder=''></textarea>
                               </td>
                             </tr>
                             <tr>
                               <td></td>
                               <td ><button type="button" class="btn btn-info btn-xs">Tambah</button></td>
                             </tr>
-                                                        <tr>
+                            <tr>
                               <td colspan="2" >Pemeriksaan</td>
                             </tr>
                             <tr>
@@ -771,13 +774,13 @@
                             <tr>
                               <td style="text-align: right;width: 30%" >Periksa :</td>
                               <td>
-                                <input type="text" id="" required="required" class="form-control col-md-7 col-xs-12">
+                                <input type="text" id="rm3_periksa" name="rm3_periksa" class="form-control col-md-7 col-xs-12">
                               </td>
                             </tr>
                             <tr>
                               <td valign="top" style="text-align: right;width: 30%" >Keterangan :</td>
                               <td>
-                                <textarea class="form-control"  id="tindakan_input" rows="1" placeholder=''></textarea>
+                                <textarea class="form-control" id="rm3_keterangan_2" name="rm3_keterangan_2" rows="1" placeholder=''></textarea>
                               </td>
                             </tr>
                             <tr>
@@ -815,19 +818,19 @@
                             <tr>
                               <td style="text-align: right;width: 30%" >Kode ICD-10 :</td>
                               <td>
-                                <input type="text" id="" required="required" class="form-control col-md-7 col-xs-12">
+                                <input type="text" id="rm4_icd10" name="rm4_icd10" class="form-control col-md-7 col-xs-12">
                               </td>
                             </tr>
                             <tr>
                               <td valign="top" style="text-align: right;width: 30%" >Diagnosa :</td>
                               <td>
-                                <textarea class="form-control"  id="tindakan_input" rows="1" placeholder=''></textarea>
+                                <textarea class="form-control" id="rm4_diagnosa" name="rm4_diagnosa" rows="1" placeholder=''></textarea>
                               </td>
                             </tr>
                             <tr>
                               <td valign="top" style="text-align: right;width: 30%" >Keterangan :</td>
                               <td>
-                                <textarea class="form-control"  id="tindakan_input" rows="1" placeholder=''></textarea>
+                                <textarea class="form-control" id="rm4_keterangan" name="rm4_keterangan" rows="1" placeholder=''></textarea>
                               </td>
                             </tr>
                             <tr>
@@ -858,13 +861,13 @@
                             <tr>
                               <td style="text-align: right;width: 30%" >Rencana :</td>
                               <td>
-                                <input type="text" id="" required="required" class="form-control col-md-7 col-xs-12">
+                                <input type="text" id="rm4_rencana" name="rm4_rencana" class="form-control col-md-7 col-xs-12">
                               </td>
                             </tr>
                             <tr>
                               <td valign="top" style="text-align: right;width: 30%" >Keterangan :</td>
                               <td>
-                                <textarea class="form-control"  id="tindakan_input" rows="1" placeholder=''></textarea>
+                                <textarea class="form-control" id="rm4_keterangan_2" name="rm4_keterangan_2" rows="1" placeholder=''></textarea>
                               </td>
                             </tr>
                             <tr>
@@ -873,11 +876,7 @@
                             </tr>
                           </table>
                           <div class="ln_solid"></div>
-                          <div class="form-group">
-                            <div class="col-md-6 col-md-offset-3">
-                              <button type="button" onclick="save()" class="btn btn-success" >Kirim</button>
-                            </div>
-                          </div>             
+                                       
                         </div>
                         <div role="tabpanel" class="tab-pane fade" id="tindakan" aria-labelledby="profile-tab">
                           <h2>TINDAKAN LANJUT</h2>
@@ -895,7 +894,7 @@
                           </table>
                           <script type="text/javascript">
                                 function buka_popup(){
-                                  resepWindow = window.open('<?php echo base_url()?>p_umum/check_up/resep/<?php echo $pt->id_poli_umum ?>', '', 'width=820, height=720, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
+                                  resepWindow = window.open('<?php echo base_url()?>p_umum/check_up/resep/<?php echo $pt->id_periksa ?>', '', 'width=820, height=720, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
                                 }
                           </script>                      
                         </div>
@@ -934,6 +933,7 @@
     <div id="notif-group" class="tabbed_notifications"></div>
   </div>
 
+  <script src="https://clinicaltables.nlm.nih.gov/autocomplete-lhc-versions/15.1.1/autocomplete-lhc_jQuery.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/js/bootstrap.min.js"></script>
 
   <!-- bootstrap progress js -->
@@ -961,7 +961,7 @@
   <script src="<?php echo base_url(); ?>/assets/js/datatables/responsive.bootstrap.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/js/datatables/dataTables.scroller.min.js"></script>
   <link href='https://clinicaltables.nlm.nih.gov/autocomplete-lhc-versions/15.1.1/autocomplete-lhc_jQueryUI.min.css' rel="stylesheet">
-  <!-- <script src='https://clinicaltables.nlm.nih.gov/autocomplete-lhc-versions/15.1.1/autocomplete-lhc_jQuery.min.js'></script> -->
+  
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/jquery.sweet-modal.min.css" />
   <script src="<?php echo base_url(); ?>/assets/js/jquery.sweet-modal.min.js"></script>
   <script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/notify/pnotify.core.js"></script>
@@ -971,100 +971,100 @@
   <!-- range slider -->
   <script src="<?php echo base_url(); ?>/assets/js/ion_range/ion.rangeSlider.min.js"></script>
   
-        
-        <!-- <script type="text/javascript">
-          new Def.Autocompleter.Search('icd10', 'https://clinicaltables.nlm.nih.gov/api/icd10cm/v3/search?sf=code,name',
-            {tableFormat: true, valueCols: [0], colHeaders: ['Code', 'Name']});
-        </script> -->
-        <script>
-    
-      
+  <script type="text/javascript">
+    new Def.Autocompleter.Search('rm2_icd10', 'https://clinicaltables.nlm.nih.gov/api/icd10cm/v3/search?sf=code,name', {tableFormat: true, valueCols: [0], colHeaders: ['Code', 'Name']});
+  </script>
+  <script type="text/javascript">
+    new Def.Autocompleter.Search('rm4_icd10', 'https://clinicaltables.nlm.nih.gov/api/icd10cm/v3/search?sf=code,name', {tableFormat: true, valueCols: [0], colHeaders: ['Code', 'Name']});
+  </script>
+  <script>
       $("#RM1B32").ionRangeSlider({
         grid: true,
         values: [
         "Tidak Sakit", "Sedikit Sakit",
         "Agak Mengganggu ", "Mengganggu Aktivitas",
         "Sangat Mengganggu", "Tidak Tertahankan"
-    ]
+        ]
       });
   </script>
   <script type="text/javascript">
-        tampil_diagnosa();
-        tampil_resep();   //pemanggilan fungsi tampil barang.
-        //fungsi tampil barang
-        function tampil_diagnosa(){
-            $.ajax({
-                type  : 'POST',
-                url   : '<?php echo base_url()?>p_umum/check_up/viewdiagnosa/<?php echo $pt->id_poli_umum ?>',
-                dataType : 'json',
-                success : function(data){
-                  // console.log(data);
-                  if (data.length <= 0){
-                    html += '<tr>'+
-                                '<td colspan="8" align="center">Data pemeriksaan belum ada</td>'+
-                                '</tr>';
-                    $('#show_data').html(html);
-                    setTimeout(tampil_diagnosa, 500)
-                  }else{
-                    var html = '';
-                    var i;
-                    for(i=0; i<data.length; i++){
-                        html += '<tr>'+
-                                '<td align="center" >'+data[i].tanggal_cek+'</td>'+
-                                '<td align="center" >'+data[i].jam_cek+'</td>'+
-                                '<td>'+data[i].periksa+'</td>'+
-                                '<td>'+data[i].kode_penyakit+'</td>'+
-                                '<td>'+data[i].diagnosa+'</td>'+
-                                '<td>'+data[i].tindakan+'</td>'+
-                                '<td title="Hapus Data" align="center"><a class="fa fa-remove" onclick="hapus('+data[i].id_diagnosa+')" style="cursor:pointer" ></a></td>'+
-                                '</tr>';
-                    }
-                    $('#show_data').html(html);
-                    //setTimeout(tampil_diagnosa, 500)
-                  }
-                }, 
-                error: function(){
+    tampilRiwayatPenyakit();
+    tampilRiwayatAlergi();
+    //pemanggilan fungsi tampil barang.
+    //fungsi tampil barang
+    function tampilRiwayatPenyakit(){
+      $.ajax({
+        url   : '<?php echo base_url()?>p_umum/check_up/viewRiwayatPenyakit',
+        type  : 'POST',
+        data : {no_pasien: <?php echo $no_pasien; ?>},
+        dataType : 'JSON',
+        success : function(data){
+          if (data.length <= 0){
+            html += 
+              '<tr>'+
+              '<td colspan="8" align="center">Data pemeriksaan belum ada</td>'+
+              '</tr>';
+            $('#show_riwayat_penyakit').html(html);
+            setTimeout(tampil_diagnosa, 500)
+          }else{
+            var html = '';
+            var i;
+            for(i=0; i<data.length; i++){
+              html += 
+              '<tr>'+
+              '<td align="center" >'+data[i].tanggal_input+'</td>'+
+              '<td align="center" >'+data[i].jam_input+'</td>'+
+              '<td>'+data[i].kode_icd10+'</td>'+
+              '<td>'+data[i].diagnosa+'</td>'+
+              '<td title="Hapus Data" align="center"><a class="fa fa-remove" onclick="hapus(1,'+data[i].id_riwayat+')" style="cursor:pointer" ></a></td>'+
+              '</tr>';
+            }
+            $('#show_riwayat_penyakit').html(html);
+          }
+        }, 
+        error: function(){
                   
-                }
- 
-            });
         }
+      });
+    }
 
-        function tampil_resep(){
-            $.ajax({
-                type  : 'POST',
-                url   : '<?php echo base_url()?>p_umum/check_up/viewresep/<?php echo $pt->id_poli_umum ?>',
-                dataType : 'json',
-                success : function(data){
-                  // console.log(data);
-                  if (data.length <= 0){
-                    html += '<tr>'+
-                                '<td colspan="6" align="center">Belum ada Obat yang dimasukan ke resep</td>'+
-                                '</tr>';
-                    $('#show_resep').html(html);
-                    setTimeout(tampil_resep, 500)
-                  }else{
-                    var html = '';
-                    var i;
-                    for(i=0; i<data.length; i++){
-                        html += '<tr>'+
-                                '<td align="center">'+data[i].no_obat+'</td>'+
-                                '<td>'+data[i].nama_obat+'</td>'+
-                                '<td align="center">'+data[i].kuantitas+'</td>'+
-                                '<td>'+data[i].keterangan+'</td>'+
-                                '<td align="center"><a onclick="buka_popup()" style="cursor:pointer" data-dismiss="modal" class="fa fa-shopping-cart" ></a></td>'+
-                                '</tr>';
-                    }
-                    $('#show_resep').html(html);
-                    setTimeout(tampil_resep, 500)
-                  }
-                }, 
-                error: function(){
+    function tampilRiwayatAlergi(){
+      $.ajax({
+        url   : '<?php echo base_url()?>p_umum/check_up/viewRiwayatAlergi',
+        type  : 'POST',
+        data : {no_pasien: <?php echo $no_pasien; ?>},
+        dataType : 'JSON',
+        success : function(data){
+          if (data.length <= 0){
+            html += 
+              '<tr>'+
+              '<td colspan="8" align="center">Data pemeriksaan belum ada</td>'+
+              '</tr>';
+            $('#show_riwayat_alergi').html(html);
+            setTimeout(tampil_diagnosa, 500)
+          }else{
+            var html = '';
+            var i;
+            for(i=0; i<data.length; i++){
+              html += 
+              '<tr>'+
+              '<td align="center" >'+data[i].jam_input+'</td>'+
+              '<td align="center" >'+data[i].organ_sasaran+'</td>'+
+              '<td>'+data[i].gejala+'</td>'+
+              '<td>'+data[i].bahan_kimia+'</td>'+
+              '<td>'+data[i].keterangan+'</td>'+
+              '<td title="Hapus Data" align="center"><a class="fa fa-remove" onclick="hapus(2,'+data[i].id_alergi+')" style="cursor:pointer" ></a></td>'+
+              '</tr>';
+            }
+            $('#show_riwayat_alergi').html(html);
+          }
+        }, 
+        error: function(){
                   
-                }
- 
-            });
         }
+      });
+    }
+
 
   </script>
   <script type="text/javascript">
@@ -1076,7 +1076,7 @@
       }
       
       ?>
-      var id_rawat_value = '<?php echo $id_rawat ?>';
+      var id_periksa_value = '<?php echo $id_periksa ?>';
       var RM1A11_value = $('input[name=RM1A11]:checked').val();
       var RM1A12_value = $('input[name=RM1A12]:checked').val();
       var RM1A21_value = $('input[name=RM1A21]:checked').val();
@@ -1093,11 +1093,10 @@
       var RM1A34_value = $('input[name=RM1A34]:checked').val();
       // if(periksa_value && kode_value && keterangan_value && tindakan_value){
         $.ajax({
-          url: "<?php echo base_url().'p_umum/check_up/simpanRm1a/'.$id_rawat ?>",
+          url: "<?php echo base_url().'p_umum/check_up/simpanRm1a/'.$id_periksa ?>",
           type: 'POST',
-          data: {action: "<?php echo $actiona; ?>", id_rawat: id_rawat_value, RM1A11: RM1A11_value, RM1A12: RM1A12_value, RM1A21: RM1A21_value, RM1A22: RM1A22_value, RM1A23: RM1A23_value, RM1A24: RM1A24_value, RM1A25: RM1A25_value, RM1A26: RM1A26_value, RM1A27: RM1A27_value, RM1A28: RM1A28_value, RM1A31: RM1A31_value, RM1A32: RM1A32_value, RM1A33: RM1A33_value, RM1A34: RM1A34_value},
+          data: {action: "<?php echo $actiona; ?>", id_periksa: id_periksa_value, RM1A11: RM1A11_value, RM1A12: RM1A12_value, RM1A21: RM1A21_value, RM1A22: RM1A22_value, RM1A23: RM1A23_value, RM1A24: RM1A24_value, RM1A25: RM1A25_value, RM1A26: RM1A26_value, RM1A27: RM1A27_value, RM1A28: RM1A28_value, RM1A31: RM1A31_value, RM1A32: RM1A32_value, RM1A33: RM1A33_value, RM1A34: RM1A34_value},
           dataType: "JSON",
-          
           success: function(data) {
             $("#rm1a_submit").attr('disabled','disabled');
             new PNotify({
@@ -1119,7 +1118,7 @@
         $actionb = 'Update';
       }
       ?>
-      var id_rawat_value = '<?php echo $id_rawat ?>';
+      var id_periksa_value = '<?php echo $id_periksa ?>';
       var RM1B11_value = $('input[name=RM1B11]:checked').val();
       var RM1B21_value = $('input[name=RM1B21]:checked').val();
       var RM1B22_value = $('input[name=RM1B22]:checked').val();
@@ -1133,9 +1132,9 @@
       var RM1B37_value = $('input[name=RM1B37]:checked').val();
       // if(periksa_value && kode_value && keterangan_value && tindakan_value){
         $.ajax({
-          url: "<?php echo base_url().'p_umum/check_up/simpanRm1b/'.$id_rawat ?>",
+          url: "<?php echo base_url().'p_umum/check_up/simpanRm1b/'.$id_periksa ?>",
           type: 'POST',
-          data: {action: "<?php echo $actionb; ?>", id_rawat: id_rawat_value, RM1B11: RM1B11_value, RM1B21: RM1B21_value, RM1B22: RM1B22_value, RM1B23: RM1B23_value, RM1B31: RM1B31_value, RM1B32: RM1B32_value, RM1B33: RM1B33_value, RM1B34: RM1B34_value, RM1B35: RM1B35_value, RM1B36: RM1B36_value, RM1B37: RM1B37_value},
+          data: {action: "<?php echo $actionb; ?>", id_periksa: id_periksa_value, RM1B11: RM1B11_value, RM1B21: RM1B21_value, RM1B22: RM1B22_value, RM1B23: RM1B23_value, RM1B31: RM1B31_value, RM1B32: RM1B32_value, RM1B33: RM1B33_value, RM1B34: RM1B34_value, RM1B35: RM1B35_value, RM1B36: RM1B36_value, RM1B37: RM1B37_value},
           dataType: "JSON",
           
           success: function(data) {
@@ -1151,30 +1150,127 @@
     }
   </script>
   <script type="text/javascript">
-    function hapus(id_diagnosa){
-    var id_diagnosa_value = id_diagnosa;
-    $.sweetModal.confirm('Konfirmasi Hapus', 'Anda yakin ingin menghapus.?', function() {
-      $.ajax({
-        url: "<?php echo base_url().'p_umum/check_up/hapusDiagnosa' ?>",
-        type: 'POST',
-        data: {id_diagnosa: id_diagnosa_value},
-        dataType: "JSON",
-        success: function(data) {
-          new PNotify({
+    function tambahRiwayatPenyakit(){
+      var no_pasien_value = <?php echo $no_pasien; ?>;
+      var kode_icd10_value = $("#rm2_icd10").val();
+      var diagnosa_value = $("#rm2_diagnosa").val();
+      
+        $.ajax({
+          url: "<?php echo base_url().'p_umum/check_up/simpanRiwayatPenyakit' ?>",
+          type: 'POST',
+          data: {no_pasien: no_pasien_value, kode_icd10: kode_icd10_value, diagnosa: diagnosa_value},
+          dataType: "JSON",
+          success: function(data) {
+            tampilRiwayatPenyakit();
+            new PNotify({
               title: 'Sukses',
-              text: 'Data hasil diagnosa pasien telah berhasil dihapus!',
-              type: 'success',
-              nonblock: {
-                                    nonblock: true,
-                                    nonblock_opacity: .2
-                                }
+              text: 'Data hasil diagnosa pasien telah berhasil disimpan!',
+              type: 'success'
             });
-          tampil_diagnosa();
+            $("#rm2_icd10").val('');
+            $("#rm2_diagnosa").val('');
           }
+        });
+    }
+  </script>
+  <script type="text/javascript">
+
+    function tambahAlergi(){
+      var no_pasien_value = '<?php echo $no_pasien; ?>';
+      var id_periksa_value = '<?php echo $id_periksa ?>';
+      var rm2_organ_sasaran_value = $("#rm2_organ_sasaran").val();
+      var rm2_gejela_value = $("#rm2_gejala").val();
+      var rm2_bahan_kimia_value = $("#rm2_bahan_kimia").val();
+      var rm2_keterangan_value = $("#rm2_keterangan").val();
+      
+      var rm3_periksa_value = $("#rm3_periksa").val();
+      var rm3_keterangan_2_value = $("#rm3_keterangan_2").val();
+      var rm4_icd10_value = $("#rm4_icd10").val();
+      var rm4_diagnosa_value = $("#rm4_diagnosa").val();
+      var rm4_keterangan_value = $("#rm4_keterangan").val();
+      var rm4_rencana_value = $("#rm4_rencana").val();
+      var rm4_keterangan_2_value = $("#rm4_keterangan_2").val();
+      
+        $.ajax({
+          url: "<?php echo base_url().'p_umum/check_up/simpan' ?>",
+          type: 'POST',
+          data: {jenis:'Alergi', no_pasien: no_pasien_value, organ_sasaran: rm2_organ_sasaran_value, gejala: rm2_gejela_value, bahan_kimia: rm2_bahan_kimia_value, keterangan: rm2_keterangan_value},
+          dataType: "JSON",
+          success: function(data) {
+            tampilRiwayatAlergi();
+            new PNotify({
+              title: 'Sukses',
+              text: 'Data pasien telah berhasil disimpan!',
+              type: 'success'
+            });
+            $("#rm2_organ_sasaran").val('');
+            $("#rm2_gejala").val('');
+            $("#rm2_bahan_kimia").val('');
+            $("#rm2_keterangan").val('');
+          }
+        });
+    }
+  </script>
+  <script type="text/javascript">
+    function tambahKeluhan(){
+      var id_periksa_value = '<?php echo $id_periksa ?>';
+      var rm3_keluhan_value = $("#rm3_keluhan").val();
+      var rm3_keterangan_value = $("#rm3_keterangan").val();
+      
+        $.ajax({
+          url: "<?php echo base_url().'p_umum/check_up/simpan' ?>",
+          type: 'POST',
+          data: {jenis:'Keluhan',},
+          dataType: "JSON",
+          success: function(data) {
+            tampilRiwayatPenyakit();
+            new PNotify({
+              title: 'Sukses',
+              text: 'Data hasil diagnosa pasien telah berhasil disimpan!',
+              type: 'success'
+            });
+            $("#rm2_icd10").val('');
+            $("#rm2_diagnosa").val('');
+          }
+        });
+    }
+  </script>
+  <script type="text/javascript">
+    function hapus(jenis,item_id){
+    var item_id_value = item_id;
+    var jenis_value = jenis;
+    swal({
+        title: "Hapus Item",
+        text: "Apakah anda yakin ingin menghapus?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((simpan) => {
+        if (simpan) {
+          $.ajax({
+            url: "<?php echo base_url().'p_umum/check_up/hapusRM' ?>",
+            type: 'POST',
+            data: {jenis: jenis_value, item_id: item_id_value},
+            dataType: "JSON",
+            success: function(data) {
+              new PNotify({
+                  title: 'Sukses',
+                  text: 'Data hasil diagnosa pasien telah berhasil dihapus!',
+                  type: 'success',
+                  nonblock: {
+                    nonblock: true,
+                    nonblock_opacity: .2
+                }
+              });
+              tampilRiwayatPenyakit();
+              tampilRiwayatAlergi();
+            }
+          });
+        }else{
+          
+        }
       });
-    }, function() {
-        
-    });
   }
   </script>
   <script type="text/javascript">

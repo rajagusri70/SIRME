@@ -12,14 +12,14 @@ class RM1BModel extends CI_Model{
 	}
 
 	public function updateAsesmen($where,$data){
-		$this->db->where("id_rawat",$where);
+		$this->db->where("id_periksa",$where);
 		$this->db->update("tb_rm1b",$data);
 	}
 
 	public function tampilkan($where){
 		$this->db->select('*');
 		$this->db->from('tb_rm1b');
-		$this->db->where('id_rawat',$where);
+		$this->db->where('id_periksa',$where);
 		return $this->db->get()->result();
 	}
 	

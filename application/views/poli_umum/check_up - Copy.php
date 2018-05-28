@@ -22,7 +22,7 @@
   <link href="<?php echo base_url(); ?>/assets/css/icheck/flat/green.css" rel="stylesheet">
 
 
-  <script src="<?php echo base_url(); ?>/assets/js/jquery.min.js"></script>
+ <!--  <script src="<?php echo base_url(); ?>/assets/js/jquery.min.js"></script> -->
   <link href="<?php echo base_url(); ?>/assets/js/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
   <link href="<?php echo base_url(); ?>/assets/js/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="<?php echo base_url(); ?>/assets/js/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -533,6 +533,48 @@
       }
     }
   </script>
+
+  <script type="text/javascript">
+    function tambah(jenis){
+      var no_pasien_value = '<?php echo $no_pasien; ?>';
+      var id_periksa_value = '<?php echo $id_periksa ?>';
+      var jenis_value = jenis;
+      var rm2_organ_sasaran_value = $("#rm2_organ_sasaran").val();
+      var rm2_gejela_value = $("#rm2_gejala").val();
+      var rm2_bahan_kimia_value = $("#rm2_bahan_kimia").val();
+      var rm2_keterangan_value = $("#rm2_keterangan").val();
+      var rm3_keluhan_value = $("#rm3_keluhan").val();
+      var rm3_keterangan_value = $("#rm3_keterangan").val();
+      var rm3_periksa_value = $("#rm3_periksa").val();
+      var rm3_keterangan_2_value = $("#rm3_keterangan_2").val();
+      var rm4_icd10_value = $("#rm4_icd10").val();
+      var rm4_diagnosa_value = $("#rm4_diagnosa").val();
+      var rm4_keterangan_value = $("#rm4_keterangan").val();
+      var rm4_rencana_value = $("#rm4_rencana").val();
+      var rm4_keterangan_2_value = $("#rm4_keterangan_2").val();
+      
+      if(jenis == 'Alergi'){
+        var datas = {jenis: jenis_value, no_pasien: no_pasien_value, organ_sasaran: rm2_organ_sasaran_value, gejala: rm2_gejela_value, bahan_kimia: rm2_bahan_kimia_value, keterangan: rm2_keterangan};
+      }
+        $.ajax({
+          url: "<?php echo base_url().'p_umum/check_up/simpan' ?>",
+          type: 'POST',
+          data: datas,
+          dataType: "JSON",
+          success: function(data) {
+            
+            new PNotify({
+              title: 'Sukses',
+              text: 'Data pasien telah berhasil disimpan!',
+              type: 'success'
+            });
+            // $("#rm2_icd10").val('');
+            // $("#rm2_diagnosa").val('');
+          }
+        });
+    }
+  </script>
+
   <script type="text/javascript">
     function hapus(id_diagnosa){
     var id_diagnosa_value = id_diagnosa;

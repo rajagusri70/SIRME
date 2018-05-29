@@ -11,18 +11,23 @@ class Pasien extends CI_Controller {
 		$this->load->model('AdminModel');
 		$this->load->model('RawatModel');
 		$this->load->model('PoliklinikModel');
+		$this->load->model('TransaksiModel');
+		$this->load->model('ItemTransaksiModel');
+
+		date_default_timezone_set("Asia/Jakarta");
 	}
 	
 	public function index(){
-		$tipe_admin = $this->session->userdata("tipe_admin");
-		if($tipe_admin == "resepsionis"){
-			$users['users'] = $this->AdminModel->tampilkan();
-			$this->load->view('resepsionis/cari_pasien',$users);
-		}elseif($tipe_admin == "dokter"){
-			$data['users'] = $this->AdminModel->tampilkan();
-			$data['rawat_jalan'] = $this->PasienModel->tampilkanRawat('rawat_jalan');
-			$this->load->view('poli_umum/pasien_terdaftar',$data);	
-		}
+		redirect('resepsionis/pasien/cari');
+		// $tipe_admin = $this->session->userdata("tipe_admin");
+		// if($tipe_admin == "resepsionis"){
+		// 	$users['users'] = $this->AdminModel->tampilkan();
+		// 	$this->load->view('resepsionis/cari_pasien',$users);
+		// }elseif($tipe_admin == "dokter"){
+		// 	$data['users'] = $this->AdminModel->tampilkan();
+		// 	$data['rawat_jalan'] = $this->PasienModel->tampilkanRawat('rawat_jalan');
+		// 	$this->load->view('poli_umum/pasien_terdaftar',$data);	
+		// }
 	}
 	
 	public function daftar(){
@@ -92,10 +97,40 @@ class Pasien extends CI_Controller {
 
 	public function pasien_lama(){
 		$data['users'] = $this->AdminModel->tampilkan();
-		
+		$poliklinik = $this->input->post('input_poliklinik');
+		$biaya = $this->input->post('input_biaya');
+		//$no_pasien = $_GET['nomor_pasien'];
+		$tanggal = date("d-m-Y");
+		$waktu = date("H:i:s");
+		$microtime = microtime();
+		$timestamp = $tanggal.$microtime;//$tanggal.$waktu.$microtime;
 		$this->load->view('resepsionis/pasien_lama',$data);
 		if($this->input->post('daftar_poli')){
-			$this->RawatModel->poli();
+			$this->RawatModel->poli($timestamp);
+			$rawat_jalan = $this->RawatModel->viewWhere('timestamp',$timestamp);
+			foreach ($rawat_jalan as $rj) {
+				$id_rawat = $rj->id_rawat;
+			}
+			$datatrx = array(
+				'id_rawat' => $id_rawat, 
+				'tanggal_transaksi' => $tanggal, 
+				'jam_transaksi' => $waktu, 
+				'status' => 'Belum Lunas', 
+			);
+			$this->TransaksiModel->tambahTrx($datatrx);
+			$where = array('id_rawat' => $id_rawat, );
+			$transaksi = $this->TransaksiModel->viewTrx($where);
+			foreach ($transaksi as $trx) {
+				$id_transaksi = $trx->id_transaksi;
+			}
+			$dataTrxItem = array(
+				'id_transaksi' => $id_transaksi, 
+				'jenis_transaksi' => 'Pendaftaran', 
+				'nama_transaksi' => $poliklinik, 
+				'jumlah' => '1', 
+				'harga' => $biaya, 
+			);
+			$this->ItemTransaksiModel->tambahItem($dataTrxItem);
 			redirect ("resepsionis/pasien/pasien_lama");
 		}
 	}

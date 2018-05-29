@@ -7,6 +7,11 @@ class TransaksiModel extends CI_Model{
         
     }
 
+    public function tambahTransaksi(){
+    	$query = "INSERT IGNORE INTO `tb_transaksi` (`id_rawat`, `tanggal_transaksi`, `jam_transaksi`, `status`) VALUES ('$id_rawat', '$tanggal_transaksi', '$jam_transaksi', '$status')";
+		$this->db->query($query);
+    }
+
 	public function tambahTrx($data){
 		$id_rawat = $data['id_rawat'];
 		$tanggal_transaksi = $data['tanggal_transaksi'];

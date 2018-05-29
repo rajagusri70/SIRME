@@ -20,6 +20,10 @@ class Check_Up extends CI_Controller {
 		$this->load->model('RiwayatPenyakitModel');
 		$this->load->model('RiwayatAlergiModel');
 		$this->load->model('KeluhanModel');
+		$this->load->model('PemeriksaanModel');
+		$this->load->model('DiagnosaModel');
+		$this->load->model('PenatalaksanaanModel');
+		$this->load->model('TindakanModel');
 
 		date_default_timezone_set("Asia/Jakarta");
  
@@ -90,6 +94,7 @@ class Check_Up extends CI_Controller {
 				$tanggal = date("d-m-Y");
 		        $waktu = date("H:i:s");
 
+		        #menambahkan nama dokter pemeriksa
 				foreach ($users as $user) {
 					$data = array(
 					'id_rawat' => $id_rawat,
@@ -99,12 +104,24 @@ class Check_Up extends CI_Controller {
 					);
 					$this->PeriksaModel->tambah($data);
 				}
+				//end of menambahkan nama dokter pemeriksa
+
+				#merubah status rawat jalan menjadi Dalam Pemeriksaan
 				$data = array(
 					'status' => 'Dalam Pemeriksaan', 
 				);
 				$this->RawatModel->updateStatus($id_rawat, $data);
+				// end of merubah status rawat jalan
+
+				#menampilkan nama dokter
 				$data['users'] = $this->AdminModel->tampilkan();
+				//end of menampilkan nama dokter
+
+				#menampilkan data pasien yang diperiksa
 				$data['pasien_terdaftar'] = $this->RawatModel->cariStatus('tb_periksa','rawat_jalan.id_rawat',$id_rawat);
+				//end of menampilkan data pasien yang diperiksa
+
+				#untuk mempassing data id_periksa
 				$where = array(
 					'id_rawat' => $id_rawat, 
 				);
@@ -114,6 +131,13 @@ class Check_Up extends CI_Controller {
 				}
 				$data['id_rawat'] = $id_rawat;
 				$data['id_periksa'] = $id_periksa;
+				//end of mempassing data id_periksa
+
+				#menambahkan Biaya pemeriksaan ke Transaksi
+				// $datatrx = array(
+				// 	'' => , );
+				// $data_pendaftaran = $this->TransaksiModel->tambahTrx($datatrx);
+				//end of menambahkan biaya pemeriksaan ke Transaksi
 
 				#cek apakah data di tabel rm1a dan rm1b eksis
 				$data['rm1a'] = $this->RM1AModel->tampilkan($id_periksa);
@@ -123,10 +147,10 @@ class Check_Up extends CI_Controller {
 		}
 	}
 
-	public function viewDiagnosa($id_rawat){
-		$data = $this->RawatModel->viewDiagnosa($id_rawat);
-		echo json_encode($data);
-	}
+	// public function viewDiagnosa($id_rawat){
+	// 	$data = $this->RawatModel->viewDiagnosa($id_rawat);
+	// 	echo json_encode($data);
+	// }
 
 	public function hapusDiagnosa(){
 		$id_diagnosa = $this->input->post('id_diagnosa');
@@ -282,6 +306,7 @@ class Check_Up extends CI_Controller {
 
 	public function simpan(){
 		$jenis = $this->input->post('jenis');
+		$tanggal = date("d-m-Y");
 		$waktu = date("H:i:s");
 		if($jenis == 'Alergi'){
 			$data = array(
@@ -303,6 +328,43 @@ class Check_Up extends CI_Controller {
 			);
 			$this->KeluhanModel->tambah($data);
 			echo json_encode(array('status' => true));
+		}elseif ($jenis == "Pemeriksaan") {
+			$data = array(
+				'id_periksa' => $this->input->post('id_periksa'),
+				'jam_periksa' => $waktu,
+				'periksa' => $this->input->post('periksa'),
+				'keterangan' => $this->input->post('keterangan'),
+			);
+			$this->PemeriksaanModel->tambah($data);
+			echo json_encode(array('status' => true));
+		}elseif ($jenis == "Diagnosa") {
+			$data = array(
+				'id_periksa' => $this->input->post('id_periksa'),
+				'tanggal_cek' => $tanggal,
+				'jam_cek' => $waktu,
+				'kode_icd10' => $this->input->post('kode_icd10'),
+				'diagnosa' => $this->input->post('diagnosa'),
+				'keterangan' => $this->input->post('keterangan'),
+			);
+			$this->DiagnosaModel->tambah($data);
+			echo json_encode(array('status' => true));
+		}elseif ($jenis == "Rencana") {
+			$data = array(
+				'id_periksa' => $this->input->post('id_periksa'),
+				'rencana' => $this->input->post('rencana'),
+				'keterangan' => $this->input->post('keterangan'),
+			);
+			$this->PenatalaksanaanModel->tambah($data);
+			echo json_encode(array('status' => true));
+		}elseif ($jenis == "Tindakan") {
+			$data = array(
+				'id_periksa' => $this->input->post('id_periksa'),
+				'jam' => $waktu,
+				'tindakan' => $this->input->post('tindakan'),
+				'keterangan' => $this->input->post('keterangan'),
+			);
+			$this->TindakanModel->tambah($data);
+			echo json_encode(array('status' => true));
 		}
 	}
 
@@ -321,6 +383,36 @@ class Check_Up extends CI_Controller {
 	public function viewKeluhan(){
 		$id_periksa = $this->input->post('id_periksa');
 		$data = $this->KeluhanModel->view($id_periksa);
+		echo json_encode($data);
+	}
+
+	public function viewPemeriksaan(){
+		$id_periksa = $this->input->post('id_periksa');
+		$data = $this->PemeriksaanModel->view($id_periksa);
+		echo json_encode($data);
+	}
+
+	public function viewDiagnosa(){
+		$id_periksa = $this->input->post('id_periksa');
+		$data = $this->DiagnosaModel->view($id_periksa);
+		echo json_encode($data);
+	}
+
+	public function viewRencana(){
+		$id_periksa = $this->input->post('id_periksa');
+		$data = $this->PenatalaksanaanModel->view($id_periksa);
+		echo json_encode($data);
+	}
+
+	public function viewTindakan(){
+		$id_periksa = $this->input->post('id_periksa');
+		$data = $this->TindakanModel->view($id_periksa);
+		echo json_encode($data);
+	}
+
+	public function viewRiwayatHamil(){
+		$id_periksa = $this->input->post('id_periksa');
+		$data = $this->RiwayatHamilModel->view($id_periksa);
 		echo json_encode($data);
 	}
 
@@ -346,7 +438,32 @@ class Check_Up extends CI_Controller {
 			);
 			$this->KeluhanModel->hapus($where);
 			echo json_encode(array('status' => true));
+		}elseif ($jenis == '4') {
+			$where = array(
+				'id_pemeriksaan' => $item_id, 
+			);
+			$this->PemeriksaanModel->hapus($where);
+			echo json_encode(array('status' => true));
+		}elseif ($jenis == '5') {
+			$where = array(
+				'id_diagnosa' => $item_id, 
+			);
+			$this->DiagnosaModel->hapus($where);
+			echo json_encode(array('status' => true));
+		}elseif ($jenis == '6') {
+			$where = array(
+				'id_penatalaksanaan' => $item_id, 
+			);
+			$this->PenatalaksanaanModel->hapus($where);
+			echo json_encode(array('status' => true));
+		}elseif ($jenis == '7') {
+			$where = array(
+				'id_tindakan' => $item_id, 
+			);
+			$this->TindakanModel->hapus($where);
+			echo json_encode(array('status' => true));
 		}
+
 	}
 
 	public function selesai($id_rawat){

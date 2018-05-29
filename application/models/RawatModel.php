@@ -11,7 +11,7 @@ class RawatModel extends CI_Model{
     	return $this->db->get('rawat_jalan')->result_array();
     }
 
-	public function poli(){
+	public function poli($timestamp){
 		date_default_timezone_set("Asia/Jakarta");
 		$nomor_pasien = $_GET['nomor_pasien'];
 		$tanggal = date("d-m-Y");
@@ -21,6 +21,7 @@ class RawatModel extends CI_Model{
         $status = "Menunggu";
 		$data = array(
 			"no_pasien" => $nomor_pasien,
+			"timestamp" => $timestamp,
 			"tanggal" => $tanggal,
 			"waktu" => $waktu,
 			"biaya" => $biaya,
@@ -31,6 +32,13 @@ class RawatModel extends CI_Model{
 		// $trx = array(
 		// 	'' => '' 
 		// );
+	}
+
+	public function viewWhere($where, $where_parameter){
+		$this->db->select('*'); //memeilih semua field
+	    $this->db->from('rawat_jalan');
+	    $this->db->where($where,$where_parameter);
+	    return $this->db->get()->result();
 	}
 
 	public function statusRawat($table,$where,$where_parameter){

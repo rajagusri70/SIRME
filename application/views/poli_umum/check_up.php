@@ -256,7 +256,7 @@
                         </li>
                         <li role="presentation" class=""><a href="#tindakan" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Tindakan</a>
                         </li>
-                        <li role="presentation" id="tombol_selesai" class=""><button class="btn btn-success" onclick="selesai()" disabled="" ><b>SELESAI</b></button>
+                        <li role="presentation" id="tombol_selesai" class=""><button class="btn btn-success" onclick="selesai()" ><b>SELESAI</b></button>
                         </li>
                       </ul>
                       <div id="myTabContent" class="tab-content">
@@ -764,7 +764,7 @@
                                       <th align="center">Aksi</th>
                                     </tr>
                                   </thead>
-                                  <tbody id="show_data">
+                                  <tbody id="show_pemeriksaan">
                                     
                                     <!-- <td colspan="7" align="center">Tidak ada Data</td> -->
                                   </tbody>
@@ -785,7 +785,7 @@
                             </tr>
                             <tr>
                               <td></td>
-                              <td ><button type="button" class="btn btn-info btn-xs">Tambah</button></td>
+                              <td ><button type="button" id="tambah_periksa_button" name="tambah_periksa_button" onclick="tambahPemeriksaan()" class="btn btn-info btn-xs">Tambah</button></td>
                             </tr>
                           </table>                  
                         </div>
@@ -808,7 +808,7 @@
                                       <th align="center">Aksi</th>
                                     </tr>
                                   </thead>
-                                  <tbody id="show_data">
+                                  <tbody id="show_diagnosa">
                                     
                                     <!-- <td colspan="7" align="center">Tidak ada Data</td> -->
                                   </tbody>
@@ -835,8 +835,55 @@
                             </tr>
                             <tr>
                               <td></td>
-                              <td ><button type="button" class="btn btn-info btn-xs">Tambah</button></td>
+                              <td ><button type="button" id="tambah_diagnosa_button" name="tambah_diagnosa_button" onclick="tambahDiagnosa()" class="btn btn-info btn-xs">Tambah</button></td>
                             </tr>
+                            <tr>
+                              <td colspan="2" ><b>TINDAKAN YANG DIBERIKAN</b></td>
+                            </tr>
+                            <tr>
+                              <td colspan="2" >
+                                <table id="tabel_diagnosa" class="table table-striped table-bordered">
+                                  <thead>
+                                    <tr>
+                                      <th align="center">No.</th>
+                                      <th align="center">Jam</th>
+                                      <th align="center">Tindakan</th>
+                                      <th align="center">Keterangan</th>
+                                      <th align="center">Aksi</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody id="show_tindakan">
+                                    
+                                    <!-- <td colspan="7" align="center">Tidak ada Data</td> -->
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" >Tindakan :</td>
+                              <td>
+                                <input type="text" id="tindakan_input" name="tindakan_input" class="form-control col-md-7 col-xs-12">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td valign="top" style="text-align: right;width: 30%" >Keterangan :</td>
+                              <td>
+                                <textarea class="form-control" id="keterangan_input" name="keterangan_input" rows="1" placeholder=''></textarea>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td ><button type="button" id="tambah_rencana_button" name="tambah_rencana_button" onclick="tambahTindakan()" class="btn btn-info btn-xs">Tambah</button></td>
+                            </tr>
+                            
+                          </table>
+                          <div class="ln_solid"></div>
+                                       
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="tindakan" aria-labelledby="profile-tab">
+                          <h2>TINDAKAN LANJUT</h2>
+                          <div class="ln_solid"></div>
+                          <table id="form" style="width: 90% ">
                             <tr>
                               <td colspan="2" ><b>RENCANA PENATALAKSANAAN</b></td>
                             </tr>
@@ -851,7 +898,7 @@
                                       <th align="center">Aksi</th>
                                     </tr>
                                   </thead>
-                                  <tbody id="show_data">
+                                  <tbody id="show_rencana">
                                     
                                     <!-- <td colspan="7" align="center">Tidak ada Data</td> -->
                                   </tbody>
@@ -872,16 +919,8 @@
                             </tr>
                             <tr>
                               <td></td>
-                              <td ><button type="button" class="btn btn-info btn-xs">Tambah</button></td>
+                              <td ><button type="button" id="tambah_rencana_button" name="tambah_rencana_button" onclick="tambahRencana()" class="btn btn-info btn-xs">Tambah</button></td>
                             </tr>
-                          </table>
-                          <div class="ln_solid"></div>
-                                       
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade" id="tindakan" aria-labelledby="profile-tab">
-                          <h2>TINDAKAN LANJUT</h2>
-                          <div class="ln_solid"></div>
-                          <table id="form" style="width: 90% ">
                             <tr>
                               <td colspan="2" ><b>PENGOBATAN</b></td>
                             </tr>
@@ -898,19 +937,15 @@
                                 }
                           </script>                      
                         </div>
-                        
-                        
                       </div>
-                      
                       </form>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-                      </div>
+          </div>
         </div>
-
         <!-- footer content -->
         <footer>
           <div class="copyright-info">
@@ -995,6 +1030,10 @@
       tampilRiwayatPenyakit();
       tampilRiwayatAlergi();
       tampilKeluhan();
+      tampilPemeriksaan();
+      tampilDiagnosa();
+      tampilRencana();
+      tampilTindakan();
     }
     
     //pemanggilan fungsi tampil barang.
@@ -1107,6 +1146,195 @@
       });
     }
 
+   
+
+    function tampilPemeriksaan(){
+      $.ajax({
+        url   : '<?php echo base_url()?>p_umum/check_up/viewPemeriksaan',
+        type  : 'POST',
+        data : {id_periksa: <?php echo $id_periksa; ?>},
+        dataType : 'JSON',
+        success : function(data){
+          if (data.length <= 0){
+            html += 
+              '<tr>'+
+              '<td colspan="8" align="center">Data pemeriksaan belum ada</td>'+
+              '</tr>';
+            $('#show_pemeriksaan').html(html);
+            //setTimeout(tampil_diagnosa, 500)
+          }else{
+            var html = '';
+            var i;
+            for(i=0; i<data.length; i++){
+              html += 
+              '<tr>'+
+              '<td align="center" >'+data[i].jam_periksa+'</td>'+
+              '<td align="center" >'+data[i].periksa+'</td>'+
+              '<td>'+data[i].keterangan+'</td>'+
+              '<td title="Hapus Data" align="center"><a class="fa fa-remove" onclick="hapus(4,'+data[i].id_pemeriksaan+')" style="cursor:pointer" ></a></td>'+
+              '</tr>';
+            }
+            $('#show_pemeriksaan').html(html);
+          }
+        }, 
+        error: function(){
+                  
+        }
+      });
+    }
+
+    function tampilDiagnosa(){
+      $.ajax({
+        url   : '<?php echo base_url()?>p_umum/check_up/viewDiagnosa',
+        type  : 'POST',
+        data : {id_periksa: <?php echo $id_periksa; ?>},
+        dataType : 'JSON',
+        success : function(data){
+          if (data.length <= 0){
+            html += 
+              '<tr>'+
+              '<td colspan="8" align="center">Data pemeriksaan belum ada</td>'+
+              '</tr>';
+            $('#show_diagnosa').html(html);
+            //setTimeout(tampil_diagnosa, 500)
+          }else{
+            var html = '';
+            var i;
+            for(i=0; i<data.length; i++){
+              html += 
+              '<tr>'+
+              '<td align="center" >'+data[i].jam_cek+'</td>'+
+              '<td align="center" >'+data[i].kode_icd10+'</td>'+
+              '<td>'+data[i].diagnosa+'</td>'+
+              '<td>'+data[i].keterangan+'</td>'+
+              '<td title="Hapus Data" align="center"><a class="fa fa-remove" onclick="hapus(5,'+data[i].id_diagnosa+')" style="cursor:pointer" ></a></td>'+
+              '</tr>';
+            }
+            $('#show_diagnosa').html(html);
+          }
+        }, 
+        error: function(){
+                  
+        }
+      });
+    }
+
+    function tampilRencana(){
+      $.ajax({
+        url   : '<?php echo base_url()?>p_umum/check_up/viewRencana',
+        type  : 'POST',
+        data : {id_periksa: <?php echo $id_periksa; ?>},
+        dataType : 'JSON',
+        success : function(data){
+          if (data.length <= 0){
+            html += 
+              '<tr>'+
+              '<td colspan="8" align="center">Data pemeriksaan belum ada</td>'+
+              '</tr>';
+            $('#show_rencana').html(html);
+            //setTimeout(tampil_diagnosa, 500)
+          }else{
+            var html = '';
+            var i;
+            <?php $numb=0; ?>
+            for(i=0; i<data.length; i++){
+              var num = i+1;
+              html += 
+              '<tr>'+
+              '<td align="center" >'+num+'</td>'+
+              '<td align="center" >'+data[i].rencana+'</td>'+
+              '<td>'+data[i].keterangan+'</td>'+
+              '<td title="Hapus Data" align="center"><a class="fa fa-remove" onclick="hapus(6,'+data[i].id_penatalaksanaan+')" style="cursor:pointer" ></a></td>'+
+              '</tr>';
+            }
+            $('#show_rencana').html(html);
+          }
+        }, 
+        error: function(){
+                  
+        }
+      });
+    }
+
+    function tampilTindakan(){
+      $.ajax({
+        url   : '<?php echo base_url()?>p_umum/check_up/viewTindakan',
+        type  : 'POST',
+        data : {id_periksa: <?php echo $id_periksa; ?>},
+        dataType : 'JSON',
+        success : function(data){
+          if (data.length <= 0){
+            html += 
+              '<tr>'+
+              '<td colspan="8" align="center">Data pemeriksaan belum ada</td>'+
+              '</tr>';
+            $('#show_tindakan').html(html);
+            //setTimeout(tampil_diagnosa, 500)
+          }else{
+            var html = '';
+            var i;
+            <?php $numb=0; ?>
+            for(i=0; i<data.length; i++){
+              var num = i+1;
+              html += 
+              '<tr>'+
+              '<td align="center" >'+num+'</td>'+
+              '<td align="center" >'+data[i].jam+'</td>'+
+              '<td>'+data[i].tindakan+'</td>'+
+              '<td>'+data[i].keterangan+'</td>'+
+              '<td title="Hapus Data" align="center"><a class="fa fa-remove" onclick="hapus(7,'+data[i].id_tindakan+')" style="cursor:pointer" ></a></td>'+
+              '</tr>';
+            }
+            $('#show_tindakan').html(html);
+          }
+        }, 
+        error: function(){
+                  
+        }
+      });
+    }
+
+    function tampilRiwayatHamil(){
+      $.ajax({
+        url   : '<?php echo base_url()?>p_umum/check_up/viewRiwayatHamil',
+        type  : 'POST',
+        data : {no_pasien: <?php echo $no_pasien; ?>},
+        dataType : 'JSON',
+        success : function(data){
+          if (data.length <= 0){
+            html += 
+              '<tr>'+
+              '<td colspan="9" align="center">Data pemeriksaan belum ada</td>'+
+              '</tr>';
+            $('#show_riwayat_hamil').html(html);
+            //setTimeout(tampil_diagnosa, 500)
+          }else{
+            var html = '';
+            var i;
+            <?php $numb=0; ?>
+            for(i=0; i<data.length; i++){
+              var num = i+1;
+              html += 
+              '<tr>'+
+              '<td align="center" >'+num+'</td>'+
+              '<td align="center" >'+data[i].macam_persanlinan+'</td>'+
+              '<td>'+data[i].jenis_kelamin+'</td>'+
+              '<td>'+data[i].status_lahir+'</td>'+
+              '<td>'+data[i].waktu+'</td>'+
+              '<td>'+data[i].penolong_persalinan+'</td>'+
+              '<td>'+data[i].penyulit+'</td>'+
+              '<td>'+data[i].sebab_kematian+'</td>'+
+              '<td title="Hapus Data" align="center"><a class="fa fa-remove" onclick="hapus(7,'+data[i].id_hamil+')" style="cursor:pointer" ></a></td>'+
+              '</tr>';
+            }
+            $('#show_riwayat_hamil').html(html);
+          }
+        }, 
+        error: function(){
+                  
+        }
+      });
+    }
 
   </script>
   <script type="text/javascript">
@@ -1147,6 +1375,13 @@
               type: 'success'
             });
             setTimeout(location.reload.bind(location), 1000);
+          },
+          error: function(data) {
+            new PNotify({
+              title: 'Gagal Menyimpan Data!',
+              text: 'Terjadi gagal saat menyimpan data. Dikarenakan error di server atau database',
+              type: 'error'
+            });
           }
         });
     }
@@ -1187,6 +1422,13 @@
               type: 'success'
             });
             setTimeout(location.reload.bind(location), 1000);
+          },
+          error: function(data) {
+            new PNotify({
+              title: 'Gagal Menyimpan Data!',
+              text: 'Terjadi gagal saat menyimpan data. Dikarenakan error di server atau database',
+              type: 'error'
+            });
           }
         });
     }
@@ -1211,6 +1453,13 @@
             });
             $("#rm2_icd10").val('');
             $("#rm2_diagnosa").val('');
+          },
+          error: function(data) {
+            new PNotify({
+              title: 'Gagal Menyimpan Data!',
+              text: 'Terjadi gagal saat menyimpan data. Dikarenakan error di server atau database',
+              type: 'error'
+            });
           }
         });
     }
@@ -1224,14 +1473,6 @@
       var rm2_gejela_value = $("#rm2_gejala").val();
       var rm2_bahan_kimia_value = $("#rm2_bahan_kimia").val();
       var rm2_keterangan_value = $("#rm2_keterangan").val();
-      
-      var rm3_periksa_value = $("#rm3_periksa").val();
-      var rm3_keterangan_2_value = $("#rm3_keterangan_2").val();
-      var rm4_icd10_value = $("#rm4_icd10").val();
-      var rm4_diagnosa_value = $("#rm4_diagnosa").val();
-      var rm4_keterangan_value = $("#rm4_keterangan").val();
-      var rm4_rencana_value = $("#rm4_rencana").val();
-      var rm4_keterangan_2_value = $("#rm4_keterangan_2").val();
       
         $.ajax({
           url: "<?php echo base_url().'p_umum/check_up/simpan' ?>",
@@ -1249,6 +1490,13 @@
             $("#rm2_gejala").val('');
             $("#rm2_bahan_kimia").val('');
             $("#rm2_keterangan").val('');
+          },
+          error: function(data) {
+            new PNotify({
+              title: 'Gagal Menyimpan Data!',
+              text: 'Terjadi gagal saat menyimpan data. Dikarenakan error di server atau database',
+              type: 'error'
+            });
           }
         });
     }
@@ -1273,6 +1521,139 @@
             });
             $("#rm3_keluhan").val('');
             $("#rm3_keterangan").val('');
+          },
+          error: function(data) {
+            new PNotify({
+              title: 'Gagal Menyimpan Data!',
+              text: 'Terjadi gagal saat menyimpan data. Dikarenakan error di server atau database',
+              type: 'error'
+            });
+          }
+        });
+    }
+  </script>
+  <script type="text/javascript">
+    function tambahPemeriksaan(){
+      var id_periksa_value = '<?php echo $id_periksa ?>';
+      var rm3_periksa_value = $("#rm3_periksa").val();
+      var rm3_keterangan_2_value = $("#rm3_keterangan_2").val();
+      
+        $.ajax({
+          url: "<?php echo base_url().'p_umum/check_up/simpan' ?>",
+          type: 'POST',
+          data: {jenis:'Pemeriksaan', id_periksa: id_periksa_value, periksa: rm3_periksa_value, keterangan: rm3_keterangan_2_value},
+          dataType: "JSON",
+          success: function(data) {
+            tampilPemeriksaan();
+            new PNotify({
+              title: 'Sukses',
+              text: 'Data hasil diagnosa pasien telah berhasil disimpan!',
+              type: 'success'
+            });
+            $("#rm3_periksa").val('');
+            $("#rm3_keterangan_2").val('');
+          },
+          error: function(data) {
+            new PNotify({
+              title: 'Gagal Menyimpan Data!',
+              text: 'Terjadi gagal saat menyimpan data. Dikarenakan error di server atau database',
+              type: 'error'
+            });
+          }
+        });
+    }
+  </script>
+  <script type="text/javascript">
+    function tambahDiagnosa(){
+      var id_periksa_value = '<?php echo $id_periksa ?>';
+      var rm4_icd10_value = $("#rm4_icd10").val();
+      var rm4_diagnosa_value = $("#rm4_diagnosa").val();
+      var rm4_keterangan_value = $("#rm4_keterangan").val();
+      
+        $.ajax({
+          url: "<?php echo base_url().'p_umum/check_up/simpan' ?>",
+          type: 'POST',
+          data: {jenis:'Diagnosa', id_periksa: id_periksa_value, kode_icd10: rm4_icd10_value, diagnosa: rm4_diagnosa_value, keterangan: rm4_keterangan_value},
+          dataType: "JSON",
+          success: function(data) {
+            tampilDiagnosa();
+            new PNotify({
+              title: 'Sukses',
+              text: 'Data hasil diagnosa pasien telah berhasil disimpan!',
+              type: 'success'
+            });
+            $("#rm4_icd10").val('');
+            $("#rm4_diagnosa").val('');
+            $("#rm4_keterangan").val('');
+          },
+          error: function(data) {
+            new PNotify({
+              title: 'Gagal Menyimpan Data!',
+              text: 'Terjadi gagal saat menyimpan data. Dikarenakan error di server atau database',
+              type: 'error'
+            });
+          }
+        });
+    }
+  </script>
+  <script type="text/javascript">
+    function tambahRencana(){
+      var id_periksa_value = '<?php echo $id_periksa ?>';
+      var rm4_rencana_value = $("#rm4_rencana").val();
+      var rm4_keterangan_2_value = $("#rm4_keterangan_2").val();
+      
+        $.ajax({
+          url: "<?php echo base_url().'p_umum/check_up/simpan' ?>",
+          type: 'POST',
+          data: {jenis:'Rencana', id_periksa: id_periksa_value, rencana: rm4_rencana_value, keterangan: rm4_keterangan_2_value},
+          dataType: "JSON",
+          success: function(data) {
+            tampilRencana();
+            new PNotify({
+              title: 'Sukses',
+              text: 'Data hasil diagnosa pasien telah berhasil disimpan!',
+              type: 'success'
+            });
+            $("#rm4_rencana").val('');
+            $("#rm4_keterangan_2").val('');
+          },
+          error: function(data) {
+            new PNotify({
+              title: 'Gagal Menyimpan Data!',
+              text: 'Terjadi gagal saat menyimpan data. Dikarenakan error di server atau database',
+              type: 'error'
+            });
+          }
+        });
+    }
+  </script>
+  <script type="text/javascript">
+    function tambahTindakan(){
+      var id_periksa_value = '<?php echo $id_periksa ?>';
+      var tindakan_value = $("#tindakan_input").val();
+      var keterangan_value = $("#keterangan_input").val();
+      
+        $.ajax({
+          url: "<?php echo base_url().'p_umum/check_up/simpan' ?>",
+          type: 'POST',
+          data: {jenis:'Tindakan', id_periksa: id_periksa_value, tindakan: tindakan_value, keterangan: keterangan_value},
+          dataType: "JSON",
+          success: function(data) {
+            tampilTindakan();
+            new PNotify({
+              title: 'Sukses',
+              text: 'Data hasil diagnosa pasien telah berhasil disimpan!',
+              type: 'success'
+            });
+            $("#tindakan_input").val('');
+            $("#keterangan_input").val('');
+          },
+          error: function(data) {
+            new PNotify({
+              title: 'Gagal Menyimpan Data!',
+              text: 'Terjadi gagal saat menyimpan data. Dikarenakan error di server atau database',
+              type: 'error'
+            });
           }
         });
     }

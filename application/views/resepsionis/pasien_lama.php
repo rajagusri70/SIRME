@@ -441,7 +441,7 @@
                       }
                     </script>
                     <?php 
-                      $_SESSION['no_pasien'] = $p->no_pasien;
+                     // $_SESSION['no_pasien'] = $p->no_pasien;
                     ?>
                   </form>
                 </div>

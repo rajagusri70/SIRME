@@ -7,9 +7,7 @@ class ItemTransaksiModel extends CI_Model{
         
     }
 
-    
-
-	public function tambahTrx($data){
+	public function tambahItem($data){
 		$this->db->insert('tb_item_transaksi', $data);
 	}
 }

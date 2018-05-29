@@ -102,6 +102,12 @@
                     </li>
                   </ul>
                 </li>
+                <li><a><i class="fa fa-money"></i> Kasir <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu" style="display: none">
+                    <li><a href="<?php echo site_url('resepsionis/kasir/transaksi') ?>">Transaksi Diterima</a>
+                    </li>
+                  </ul>
+                </li>
               </ul>
             </div>
             </div>
@@ -265,7 +271,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="foto">Foto<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="file" id="foto" class="btn btn-primary" name="input_foto" required="" class="">
+                        <input type="file" id="foto" class="btn btn-primary" name="input_foto" class="">
                       </div>
                     </div>
                     <div class="item form-group">

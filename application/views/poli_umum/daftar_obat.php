@@ -184,7 +184,7 @@
         function tampil_resep(){
             $.ajax({
                 type  : 'POST',
-                url   : '<?php echo base_url()?>p_umum/check_up/viewresep/<?php echo $id_poli_umum ?>',
+                url   : '<?php echo base_url()?>p_umum/check_up/viewresep/<?php echo $id_periksa ?>',
                 dataType : 'json',
                 success : function(data){
                   // console.log(data);
@@ -228,12 +228,12 @@
   <script type="text/javascript">
     function tambah(no_obat){
       var no_obat_value = no_obat;
-      var id_poli_umum_value = <?php echo $id_poli_umum; ?>;
+      var id_periksa_value = <?php echo $id_periksa; ?>;
       
         $.ajax({
           url: "<?php echo base_url().'p_umum/check_up/tambahresep' ?>",
           type: 'POST',
-          data: {no_obat: no_obat_value, id_poli_umum: id_poli_umum_value},
+          data: {no_obat: no_obat_value, id_periksa: id_periksa_value},
           dataType: "JSON",
           success: function(data) {
             

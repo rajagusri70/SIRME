@@ -23,14 +23,23 @@ class Kasir extends CI_Controller {
 	}
 
 	public function detail($id_rawat){
-		$data['pendaftaran'] = $this->TransaksiModel->viewTrxItem('jenis_transaksi','Pendaftaran');
-		$data['pemeriksaan'] = $this->TransaksiModel->viewTrxItem('jenis_transaksi','Pemeriksaan');
-		$data['pengobatan'] = $this->TransaksiModel->viewTrxItem('jenis_transaksi','Pembelian Obat');
-		$data['data_trx'] = $this->TransaksiModel->viewAllTrxWhere('tb_transaksi.id_rawat',$id_rawat);
-		$sum = $this->TransaksiModel->viewAllTrx();
-		foreach ($sum as $sum) {
-			$data['sumBiaya'] = $this->TransaksiModel->sumBiaya($sum->id_transaksi);
+		$id_transaksi = '';
+		$where = array('id_rawat' => $id_rawat, );
+		$transaksi = $this->TransaksiModel->viewTrx($where);
+		foreach ($transaksi as $trx) {
+			$id_transaksi = $trx->id_transaksi;
 		}
+
+		$pendaftaran = array('jenis_transaksi' => 'Pendaftaran','tb_transaksi.id_transaksi' => $id_transaksi, );
+		$pemeriksaan = array('jenis_transaksi' => 'Pemeriksaan','tb_transaksi.id_transaksi' => $id_transaksi, );
+		$pengobatan = array('jenis_transaksi' => 'Pembelian Obat','tb_transaksi.id_transaksi' => $id_transaksi, );
+
+		$data['pendaftaran'] = $this->TransaksiModel->viewTrxItem($pendaftaran);
+		$data['pemeriksaan'] = $this->TransaksiModel->viewTrxItem($pemeriksaan);
+		$data['pengobatan'] = $this->TransaksiModel->viewTrxItem($pengobatan);
+		$data['data_trx'] = $this->TransaksiModel->viewAllTrxWhere('tb_transaksi.id_rawat',$id_rawat);
+		
+		$data['sumBiaya'] = $this->TransaksiModel->sumBiaya($id_transaksi);
 		$data['id_rawat'] = $id_rawat;
 		$this->load->view('resepsionis/transaksi',$data);
 	}

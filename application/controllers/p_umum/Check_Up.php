@@ -59,6 +59,9 @@ class Check_Up extends CI_Controller {
 
 		foreach ($get_status as $status_rawat) {
 			if($status_rawat->status == 'Selesai'){
+				echo "<head>";
+				echo '<link href='.base_url().'/assets/css/bootstrap.min.css" rel="stylesheet">';
+				echo "</head>";
 				echo '<body>';
 				echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
 
@@ -177,23 +180,23 @@ class Check_Up extends CI_Controller {
 	// 	echo json_encode(array('status' => true));
 	// }
 
-	public function resep($id_poli_umum){
+	public function resep($id_periksa){
 		$data['daftar_obat'] = $this->ObatModel->viewObat();
-		$data['id_poli_umum'] = $id_poli_umum;
+		$data['id_periksa'] = $id_periksa;
 		$this->load->view('poli_umum/daftar_obat',$data);
 	}
 
 	public function tambahResep(){
 		$data = array(
 			'no_obat' => $this->input->post('no_obat'),
-			'id_poli_umum' => $this->input->post('id_poli_umum')
+			'id_periksa' => $this->input->post('id_periksa')
 		);
 		$this->ResepModel->tambahResep($data);
 		echo json_encode(array('status' => true));
 	}
 
-	public function viewResep($id_poli_umum){
-		$data = $this->ResepModel->viewResep('tb_resep.id_poli_umum',$id_poli_umum);
+	public function viewResep($id_periksa){
+		$data = $this->ResepModel->viewResep('tb_resep.id_periksa',$id_periksa);
 		echo json_encode($data);
 	}
 
@@ -504,18 +507,10 @@ class Check_Up extends CI_Controller {
 		$data = array(
 			'status' => 'Selesai', 
 		);
+		$id_transaksi = '';
+		$biaya_daftar = '';
+		$id_periksa = '';
 		$this->RawatModel->updateStatus($id_rawat, $data);
-
-		#menambahkan Transaksi baru
-		
-	    $status = 'Belum Lunas';
-	    $trxData = array(
-	      'id_rawat' => $id_rawat,
-	      'tanggal_transaksi' => $tanggal,
-	      'jam_transaksi' => $waktu,
-	      'status' => $status 
-	    );
-	    $this->TransaksiModel->tambahTrx($trxData);
 
 		#menambahkan item ke transaksi
 	    $where_trx = array(
@@ -523,55 +518,53 @@ class Check_Up extends CI_Controller {
 	    );
 	    $transaksi = $this->TransaksiModel->viewTrx($where_trx);
 	    foreach ($transaksi as $trx) {
-	    	$where_poli = array(
-					'nama_poli' => 'Poli Umum', 
-				);
-			$poli = $this->PoliklinikModel->viewPoliWhere($where_poli);
-			foreach ($poli as $p) {
-				$transaksi = array(
-					'id_transaksi' => $trx->id_transaksi,
-					'jenis_transaksi' => 'Pendaftaran',
-					'nama_transaksi' => $p->nama_poli,
-					'jumlah' => '1',
-					'harga' => $p->biaya_pendaftaran, 
-				);
-				$this->ItemTransaksiModel->tambahTrx($transaksi);
-				$transaksi2 = array(
-					'id_transaksi' => $trx->id_transaksi,
-					'jenis_transaksi' => 'Pemeriksaan',
-					'nama_transaksi' => $p->nama_poli,
-					'jumlah' => '1',
-					'harga' => '20000', 
-				);
-				$this->ItemTransaksiModel->tambahTrx($transaksi2);			
-			}
-
-			#menambahkan resep obat ke Transaksi
-			$where_umum = array(
-				'id_rawat' => $id_rawat, 
-			);
-			$poli_umum = $this->PeriksaModel->viewWhere($where_umum);
-			foreach ($poli_umum as $pu) {
-				$id_poli_umum = $pu->id_poli_umum;
-				$waktuKeluar = array(
-					'tanggal_keluar' => $tanggal, 
-					'jam_keluar' => $waktu, 
-				);
-				$this->PeriksaModel->updateKeluar($id_poli_umum,$waktuKeluar);
-				$resep_obat = $this->ResepModel->viewResep('tb_resep.id_poli_umum',$id_poli_umum);
-				foreach ($resep_obat as $ro) {
-					$data_item_trx = array(
-						'id_transaksi' =>  $trx->id_transaksi,
-						'jenis_transaksi' => 'Pembelian Obat',
-						'nama_transaksi' => $ro->nama_obat,
-						'jumlah' => $ro->kuantitas,
-						'harga' => $ro->harga,
-
-					);
-					$this->ItemTransaksiModel->tambahTrx($data_item_trx);
-				}
-			}
+	    	$id_transaksi = $trx->id_transaksi;
     	}
+
+    	$where_poli = array(
+			'nama_poli' => 'Poli Umum', 
+		);
+		$poli = $this->PoliklinikModel->viewPoliWhere($where_poli);
+		foreach ($poli as $p) {
+			$nama_poli = $p->nama_poli;
+			$biaya_daftar = $p->biaya_pendaftaran;
+		}
+
+		$transaksi_item = array(
+			'id_transaksi' => $trx->id_transaksi,
+			'jenis_transaksi' => 'Pemeriksaan',
+			'nama_transaksi' => $p->nama_poli,
+			'jumlah' => '1',
+			'harga' => '20000', 
+		);
+		$this->ItemTransaksiModel->tambahItem($transaksi_item);
+
+		#menambahkan resep obat ke Transaksi
+		$where_umum = array(
+			'id_rawat' => $id_rawat, 
+		);
+		$periksa = $this->PeriksaModel->viewWhere($where_umum);
+		foreach ($periksa as $prks) {
+			$id_periksa = $prks->id_periksa;
+		}
+
+		$waktuKeluar = array(
+			'tanggal_keluar' => $tanggal, 
+			'jam_keluar' => $waktu, 
+		);
+		$this->PeriksaModel->updateKeluar($id_periksa,$waktuKeluar);
+		$resep_obat = $this->ResepModel->viewResep('tb_resep.id_periksa',$id_periksa);
+		foreach ($resep_obat as $ro) {
+			$data_item_trx = array(
+				'id_transaksi' =>  $trx->id_transaksi,
+				'jenis_transaksi' => 'Pembelian Obat',
+				'nama_transaksi' => $ro->nama_obat,
+				'jumlah' => $ro->kuantitas,
+				'harga' => $ro->harga,
+			);
+			$this->ItemTransaksiModel->tambahItem($data_item_trx);
+		}
+			
 
 		// $where_poli = array(
 		// 	'nama_poli' => 'Poliklinik Umum', 

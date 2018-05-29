@@ -24,6 +24,7 @@ class Check_Up extends CI_Controller {
 		$this->load->model('DiagnosaModel');
 		$this->load->model('PenatalaksanaanModel');
 		$this->load->model('TindakanModel');
+		$this->load->model('RiwayatHamilModel');
 
 		date_default_timezone_set("Asia/Jakarta");
  
@@ -366,6 +367,25 @@ class Check_Up extends CI_Controller {
 			$this->TindakanModel->tambah($data);
 			echo json_encode(array('status' => true));
 		}
+		elseif ($jenis == "RiwayatHamil") {
+			$data = array(
+				'no_pasien' => $this->input->post('no_pasien'),
+				'macam_persalinan' => $this->input->post('macam_persalinan'),
+				'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+				'status_lahir' => $this->input->post('status_lahir'),
+				'waktu' => $this->input->post('waktu'),
+				'penolong_persalinan' => $this->input->post('penolong_persalinan'),
+				'penyulit' => $this->input->post('penyulit'),
+				'sebab_kematian' => $this->input->post('sebab_kematian'),
+			);
+			// $data = array(
+			// 	'no_pasien' => '1003',
+			// 	'macam_persalinan' => 'ewewe',
+			// 	'jenis_kelamin' => 'addads',
+			// );
+			$this->RiwayatHamilModel->tambah($data);
+			echo json_encode(array('status' => true));
+		}
 	}
 
 	public function viewRiwayatPenyakit(){
@@ -411,9 +431,14 @@ class Check_Up extends CI_Controller {
 	}
 
 	public function viewRiwayatHamil(){
-		$id_periksa = $this->input->post('id_periksa');
-		$data = $this->RiwayatHamilModel->view($id_periksa);
+		$no_pasien = $this->input->post('no_pasien');
+		$data = $this->RiwayatHamilModel->view($no_pasien);
 		echo json_encode($data);
+	}
+
+	public function asesmen_hamil($no_pasien){
+		$data['no_pasien'] = $no_pasien; 
+		$this->load->view('poli_umum/form_hamil',$data);
 	}
 
 	public function hapusRM(){
@@ -461,6 +486,12 @@ class Check_Up extends CI_Controller {
 				'id_tindakan' => $item_id, 
 			);
 			$this->TindakanModel->hapus($where);
+			echo json_encode(array('status' => true));
+		}elseif ($jenis == '8') {
+			$where = array(
+				'id_hamil' => $item_id, 
+			);
+			$this->RiwayatHamilModel->hapus($where);
 			echo json_encode(array('status' => true));
 		}
 

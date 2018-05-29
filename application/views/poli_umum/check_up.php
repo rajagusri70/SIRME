@@ -677,32 +677,18 @@
                               <td colspan="2" ><b>RIWAYAT KEHAMILAN</b></td>
                             </tr>
                             <tr>
-                              <td colspan="2" >
-                                <table id="tabel_diagnosa" class="table table-striped table-bordered">
-                                  <thead>
-                                    <tr>
-                                      <th align="center">No.</th>
-                                      <th align="center">Macam Persalinan</th>
-                                      <th align="center">L/P</th>
-                                      <th align="center">Hidup/Mati</th>
-                                      <th align="center">Umur Skrg/Waktu Mnggl</th>
-                                      <th align="center">Penolong Persalinan</th>
-                                      <th align="center">Penyulit</th>
-                                      <th align="center">Sebab Kematian</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody id="">
-                                    
-                                    <!-- <td colspan="7" align="center">Tidak ada Data</td> -->
-                                  </tbody>
-                                </table>
-                              </td>
+                              <td colspan="2" title="" >Jika pasien mempunyai riwayat kehamilan, silahkan buka form Riwayat Kehamilan untuk memasukan data ke rekam medis</td>
                             </tr>
                             <tr>
                               <td style="text-align: right;width: 30%" >Buka Form Asesmen :</td>
                               <td>
-                                <button type="button" class="btn btn-info btn-xs">Buka</button>
+                                <button type="button" onclick="asesmenHamil()" class="btn btn-info btn-xs">Buka</button>
                               </td>
+                              <script type="text/javascript">
+                                function asesmenHamil(){
+                                  resepWindow = window.open('<?php echo base_url()?>p_umum/check_up/asesmen_hamil/<?php echo $no_pasien ?>', '', 'width=820, height=720, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
+                                }
+                              </script>
                             </tr>
                           </table>                  
                         </div>
@@ -1034,6 +1020,7 @@
       tampilDiagnosa();
       tampilRencana();
       tampilTindakan();
+      tampilRiwayatHamil();
     }
     
     //pemanggilan fungsi tampil barang.
@@ -1324,7 +1311,7 @@
               '<td>'+data[i].penolong_persalinan+'</td>'+
               '<td>'+data[i].penyulit+'</td>'+
               '<td>'+data[i].sebab_kematian+'</td>'+
-              '<td title="Hapus Data" align="center"><a class="fa fa-remove" onclick="hapus(7,'+data[i].id_hamil+')" style="cursor:pointer" ></a></td>'+
+              '<td title="Hapus Data" align="center"><a class="fa fa-remove" onclick="hapus(8,'+data[i].id_hamil+')" style="cursor:pointer" ></a></td>'+
               '</tr>';
             }
             $('#show_riwayat_hamil').html(html);

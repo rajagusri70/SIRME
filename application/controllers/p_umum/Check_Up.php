@@ -52,6 +52,13 @@ class Check_Up extends CI_Controller {
 		$this->load->view('poli_umum/status_selesai',$data);
 	}
 
+
+	// public function rekam_medis(){
+	// 	$data['users'] = $this->AdminModel->tampilkan();
+	// 	$data['pasien_terdaftar'] = $this->PasienModel->viewPasien('no_pasien',$no_pasien);
+	// 	$this->load->view('pasien/profile_pasien',$data);
+	// }
+
 	public function periksa($id_rawat){
 
 		$status_where = array('id_rawat' => $id_rawat, );
@@ -151,34 +158,12 @@ class Check_Up extends CI_Controller {
 		}
 	}
 
-	// public function viewDiagnosa($id_rawat){
-	// 	$data = $this->RawatModel->viewDiagnosa($id_rawat);
-	// 	echo json_encode($data);
-	// }
-
 	public function hapusDiagnosa(){
 		$id_diagnosa = $this->input->post('id_diagnosa');
 		$where = array('id_diagnosa' => $id_diagnosa);
 		$this->RawatModel->hapusDiagnosa($where);
 		echo json_encode(array('status' => true));
 	}
-
-	// public function simpan(){
-	// 	$tanggal = date("d-m-Y");
-	// 	$waktu = date("H:i:s");
-	// 	$data = array(
-	// 		'id_poli_umum' => $this->input->post('id_poli_umum'),
-	// 		'tanggal_cek' => $tanggal,
-	// 		'jam_cek' => $waktu,
-	// 		'periksa' => $this->input->post('periksa'),
-	// 		'kode_penyakit' => $this->input->post('kode'),
-	// 		'diagnosa' => $this->input->post('keterangan'),
-	// 		'tindakan' => $this->input->post('tindakan'),
-	// 		'biaya' => ''
-	// 	);
-	// 	$this->RawatModel->simpan($data);
-	// 	echo json_encode(array('status' => true));
-	// }
 
 	public function resep($id_periksa){
 		$data['daftar_obat'] = $this->ObatModel->viewObat();
@@ -217,10 +202,6 @@ class Check_Up extends CI_Controller {
 		echo json_encode(array('status' => true));
 	}
 
-	// public function viewObat(){
-	// 	$data = $this->ObatModel->viewObat();
-	// 	echo json_encode($data);
-	// }
 
 	public function simpanRm1a($id_periksa){
 		$action = $this->input->post('action');
@@ -241,24 +222,6 @@ class Check_Up extends CI_Controller {
 			'RM1A33' => $this->input->post('RM1A33'),
 			'RM1A34' => $this->input->post('RM1A34'),
 		);
-
-		// $data = array(
-		// 	'id_periksa' => '141',
-		// 	'RM1A11' => '',
-		// 	'RM1A12' => '', 
-		// 	'RM1A21' => '',
-		// 	'RM1A22' => 'adasda',
-		// 	'RM1A23' => '',
-		// 	'RM1A24' => 'adasd',
-		// 	'RM1A25' => '',
-		// 	'RM1A26' => 'adaas',
-		// 	'RM1A27' => '',
-		// 	'RM1A28' => '',
-		// 	'RM1A31' => '',
-		// 	'RM1A32' => '',
-		// 	'RM1A33' => '',
-		// 	'RM1A34' => '',
-		// );
 
 		if($action == "Kirim"){
 			$this->RM1AModel->tambahAsesmen($data);
@@ -564,71 +527,11 @@ class Check_Up extends CI_Controller {
 			);
 			$this->ItemTransaksiModel->tambahItem($data_item_trx);
 		}
-			
-
-		// $where_poli = array(
-		// 	'nama_poli' => 'Poliklinik Umum', 
-		// );
-		// $poli = $this->PoliklinikModel->viewPoliWhere($where_poli);
-		// foreach ($poli as $p) {
-		// 	$transaksi = array(
-		// 		'id_rawat' => $id_rawat,
-		// 		'nama_transaksi' => $p->nama_poli,
-		// 		'jenis_transaksi' => 'Pendaftaran',
-		// 		'biaya' => $p->biaya_pendaftaran 
-		// 	);
-		// 	$this->TransaksiModel->tambahTrx($transaksi);			
-		// }
-
-		// $datatrx = array(
-		// 	'id_rawat' => $id_rawat,
-		// 	'jenis' => 'Pendaftaran',
-		// 	'nama_transaksi' => 'Pendaftaran dan Pemeriksaan', 
-		// );
-		//$this->TransaksiModel->tambahTrx($data);
-
-		#menambahkan resep obat ke Transaksi
-		// $where_umum = array(
-		// 	'id_rawat' => $id_rawat, 
-		// );
-		// $poli_umum = $this->UmumModel->viewWhere($where_umum);
-		// foreach ($poli_umum as $pu) {
-		// 	$id_poli_umum = $pu->id_poli_umum;
-		// 	$resep_obat = $this->ResepModel->viewResep('tb_resep.id_poli_umum',$id_poli_umum);
-		// 	foreach ($resep_obat as $ro) {
-		// 		$data = array(
-		// 			'id_rawat' => $id_rawat,
-		// 			'jenis_transaksi' => 'Pembelian Obat',
-		// 			'nama_transaksi' => $ro->nama_obat,
-		// 			'biaya' => $ro->harga,
-		// 		);
-		// 		$this->TransaksiModel->tambahTrx($data);
-		// 	}
-		// }
-
-
-
-		# Menambahkan item di transaksi
-		// $where = array(
-		// 	'nama_poli' => 'Poliklinik Umum', 
-		// );
-		// $poli = $this->PoliklinikModel->viewPoliWhere($where);
-		// foreach ($poli as $p) {
-		// 	$transaksi = array(
-		// 		'id_rawat' => $id_rawat,
-		// 		'nama_transaksi' => 'Pendaftaran dan Pemeriksaan',
-		// 		'jenis_transaksi' => 'Pendaftaran',
-		// 		'biaya' => $p->biaya_pendaftaran 
-		// 	);
-		// 	$this->TransaksiModel->tambahTrx($transaksi);			
-		// }
-		//$biaya = $poli['biaya_pendaftaran'];
 	echo json_encode(array('status' => true));
 	}
 
 	public function test(){
 		$this->load->view('test');
 	}
-
 
 }

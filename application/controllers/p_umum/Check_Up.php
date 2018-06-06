@@ -39,7 +39,7 @@ class Check_Up extends CI_Controller {
 	public function pasien_terdaftar(){
 		
 		$data['users'] = $this->AdminModel->tampilkan();
-		$data['rawat_jalan'] = $this->RawatModel->tampilkanRawat('rawat_jalan');
+		$data['rawat_jalan'] = $this->RawatModel->tampilkanRawat();
 		$this->load->view('poli_umum/pasien_terdaftar',$data);
 	}
 
@@ -58,6 +58,16 @@ class Check_Up extends CI_Controller {
 	// 	$data['pasien_terdaftar'] = $this->PasienModel->viewPasien('no_pasien',$no_pasien);
 	// 	$this->load->view('pasien/profile_pasien',$data);
 	// }
+
+	public function getName($code){
+		//$code = 'A75.1';
+		//$code = $this->input->post('code');
+		$url = 'https://clinicaltables.nlm.nih.gov/api/icd10cm/v3/search?sf=code&terms='.$code.'';
+    	$data = file_get_contents($url);
+    	$content = json_decode($data, true);
+    	echo $content[3][0][1];
+    	
+	}
 
 	public function periksa($id_rawat){
 
@@ -266,6 +276,7 @@ class Check_Up extends CI_Controller {
 			'jam_input' => $waktu,
 			'kode_icd10' => $this->input->post('kode_icd10'),
 			'diagnosa' => $this->input->post('diagnosa'),
+			'keterangan' => $this->input->post('keterangan'),
 		);
 		$this->RiwayatPenyakitModel->tambahRiwayat($data);
 		echo json_encode(array('status' => true));
@@ -380,6 +391,7 @@ class Check_Up extends CI_Controller {
 
 	public function viewDiagnosa(){
 		$id_periksa = $this->input->post('id_periksa');
+		//$id_periksa = '180';
 		$data = $this->DiagnosaModel->view($id_periksa);
 		echo json_encode($data);
 	}
@@ -465,6 +477,7 @@ class Check_Up extends CI_Controller {
 
 	public function selesai($id_rawat){
 		#update Status rawat jalan pasien
+		$no_pasien = $this->input->post('no_pasien');
 		$tanggal = date("d-m-Y");
 		$waktu = date("H:i:s");
 		$data = array(
@@ -506,7 +519,7 @@ class Check_Up extends CI_Controller {
 		$where_umum = array(
 			'id_rawat' => $id_rawat, 
 		);
-		$periksa = $this->PeriksaModel->viewWhere($where_umum);
+		$periksa = $this->PeriksaModel->viewWhere($where_umum); //get id_periksa
 		foreach ($periksa as $prks) {
 			$id_periksa = $prks->id_periksa;
 		}
@@ -527,7 +540,27 @@ class Check_Up extends CI_Controller {
 			);
 			$this->ItemTransaksiModel->tambahItem($data_item_trx);
 		}
-	echo json_encode(array('status' => true));
+
+		#menambahkan diagnosa ke tabel riwayat penyakit
+		//1. Get semua data yang ada di tb diagnosa
+		$dataDiagnosa = $this->DiagnosaModel->view($id_periksa);
+		//2. Insert ke tabel Riwayat Penyakit
+		foreach ($dataDiagnosa as $dd) {
+			$tanggal = date("d-m-Y");
+			$waktu = date("H:i:s");
+			$dataDiagnosa = array(
+				'no_pasien' => $no_pasien,
+				'tanggal_input' => $dd->tanggal_cek,
+				'jam_input' => $dd->jam_cek,
+				'kode_icd10' => $dd->kode_icd10,
+				'diagnosa' => $dd->diagnosa,
+				'keterangan' => $dd->keterangan,
+			);
+			$this->RiwayatPenyakitModel->tambahRiwayat($dataDiagnosa);
+		}
+		
+		
+		echo json_encode(array('status' => true));
 	}
 
 	public function test(){

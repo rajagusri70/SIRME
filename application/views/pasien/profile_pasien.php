@@ -53,7 +53,6 @@
           </div>
           <div class="clearfix"></div>
 
-
           <!-- menu prile quick info -->
           <div class="profile">
             <div class="profile_pic">
@@ -129,7 +128,7 @@
           <div class="page-title">
             <div class="title_left">
               <h3>
-                Pemeriksaan Pasien
+                Rekam Medis Pasien
               </h3>
             </div>
 
@@ -148,7 +147,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>User Report</h2>
+                  <h2>[Nama Pasien]</h2>
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -165,15 +164,19 @@
                       <!-- required for floating -->
                       <!-- Nav tabs -->
                       <ul class="nav nav-tabs tabs-left">
-                        <li><a href="#profile" data-toggle="tab">Aktivitas Terakhir</a>
-                        </li>
                         <li class="active"><a href="#data_diri" data-toggle="tab">Data Diri</a>
                         </li>
-                        <li><a href="#profile" data-toggle="tab">Rawat Jalan</a>
+                        <li><a href="#profile" data-toggle="tab">Aktivitas Terakhir</a>
                         </li>
-                        <li><a href="#profile" data-toggle="tab">Riwayat Medis</a>
+                        <li><a href="#rawat_jalan" data-toggle="tab">Rawat Jalan</a>
                         </li>
-                        <li><a href="#messages" data-toggle="tab">Riwayat Pengobatan</a>
+                        <li><a href="#profile" data-toggle="tab">Riwayat Penyakit</a>
+                        </li>
+                        <li><a href="#riwayat_alergi" data-toggle="tab">Riwayat Alergi</a>
+                        </li>
+                        <li><a href="#riwayat_obat" data-toggle="tab">Riwayat Obat</a>
+                        </li>
+                        <li><a href="#riwayat_hamil" data-toggle="tab">Riwayat Kehamilan</a>
                         </li>
                       </ul>
                     </div>
@@ -209,9 +212,8 @@
                         </li>
                       </ul> -->
                       <div id="myTabContent" class="tab-content">
-
                         <div role="tabpanel" class="tab-pane fade active in" id="data_diri" aria-labelledby="home-tab">
-                          <h2>ASESMEN AWAL</h2>
+                          <h2>Rekam Medis</h2>
                           <div class="ln_solid"></div>
                           <style type="text/css">
                             #form td {
@@ -222,7 +224,6 @@
                               list-style-type: none;
                             }
                           </style>
-                          
                           <form>
                           <table id="form" style="width: 95% ">
                             <tr>
@@ -231,7 +232,6 @@
                             <tr>
                               <td style="text-align: right;width: 30%" title="[RM1A.11]" >Hubungan Pasien dengan Keluarga</td>
                               <td>
-                                
                               </td>
                             </tr>
                           </table>                     

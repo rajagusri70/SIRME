@@ -595,14 +595,20 @@
                                       <th align="center">Jam Input</th>
                                       <th align="center">Kode ICD-10</th>
                                       <th align="center">Diagnosa</th>
+                                      <th align="center">Keterangan</th>
                                       <th align="center">Aksi</th>
                                     </tr>
                                   </thead>
                                   <tbody id="show_riwayat_penyakit">
-                                    
                                     <!-- <td colspan="7" align="center">Tidak ada Data</td> -->
                                   </tbody>
                                 </table>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" >Kode ICD-10 :</td>
+                              <td>
+                                <input type="text" onchange="getNameRiwayat()" id="rm2_icd10" class="form-control col-md-7 col-xs-12">
                               </td>
                             </tr>
                             <tr>
@@ -612,10 +618,9 @@
                               </td>
                             </tr>
                             <tr>
-                              <td style="text-align: right;width: 30%" >Kode ICD-10 :</td>
+                              <td valign="top" style="text-align: right;width: 30%" >Keterangan :</td>
                               <td>
-                                <input type="text" id="rm2_icd10" class="form-control col-md-7 col-xs-12">
-                                
+                                <textarea class="form-control" id="rm2_keterangan_penyakit" name="rm2_keterangan_penyakit" rows="1" placeholder=''></textarea>
                               </td>
                             </tr>
                             <tr>
@@ -804,7 +809,7 @@
                             <tr>
                               <td style="text-align: right;width: 30%" >Kode ICD-10 :</td>
                               <td>
-                                <input type="text" id="rm4_icd10" name="rm4_icd10" class="form-control col-md-7 col-xs-12">
+                                <input type="text" onchange="getName()" id="rm4_icd10" name="rm4_icd10" class="form-control col-md-7 col-xs-12">
                               </td>
                             </tr>
                             <tr>
@@ -1025,6 +1030,47 @@
     
     //pemanggilan fungsi tampil barang.
     //fungsi tampil barang
+
+    function getName(){
+      var rm4_icd10_value = $("#rm4_icd10").val();
+      $("#rm4_diagnosa").attr('disabled','disabled');
+      $.ajax({
+        url   : '<?php echo base_url()?>p_umum/check_up/getName/'+rm4_icd10_value,
+        type  : 'GET',
+        success : function(data){
+          $("#rm4_diagnosa").val(data);
+          $("#rm4_diagnosa").removeAttr('disabled');
+        }, 
+        error: function(){
+          new PNotify({
+            title: 'Gagal ICD-10!',
+            text: 'Terjadi error saat mengambil kode ICD-10. Dikarenakan error di server atau database',
+            type: 'error'
+          });              
+        }
+      });
+    }
+
+    function getNameRiwayat(){
+      var kode_icd10_value = $("#rm2_icd10").val();
+      $("#rm2_diagnosa").attr('disabled','disabled');
+      $.ajax({
+        url   : '<?php echo base_url()?>p_umum/check_up/getName/'+kode_icd10_value,
+        type  : 'GET',
+        success : function(data){
+          $("#rm2_diagnosa").val(data);
+          $("#rm2_diagnosa").removeAttr('disabled');
+        }, 
+        error: function(){
+          new PNotify({
+            title: 'Gagal ICD-10!',
+            text: 'Terjadi error saat mengambil kode ICD-10. Dikarenakan error di server atau database',
+            type: 'error'
+          });            
+        }
+      });
+    }
+
     function tampilRiwayatPenyakit(){
       $.ajax({
         url   : '<?php echo base_url()?>p_umum/check_up/viewRiwayatPenyakit',
@@ -1049,6 +1095,7 @@
               '<td align="center" >'+data[i].jam_input+'</td>'+
               '<td>'+data[i].kode_icd10+'</td>'+
               '<td>'+data[i].diagnosa+'</td>'+
+              '<td>'+data[i].keterangan+'</td>'+
               '<td title="Hapus Data" align="center"><a class="fa fa-remove" onclick="hapus(1,'+data[i].id_riwayat+')" style="cursor:pointer" ></a></td>'+
               '</tr>';
             }
@@ -1425,11 +1472,12 @@
       var no_pasien_value = <?php echo $no_pasien; ?>;
       var kode_icd10_value = $("#rm2_icd10").val();
       var diagnosa_value = $("#rm2_diagnosa").val();
+      var keterangan_penyakit_value = $("#rm2_keterangan_penyakit").val();
       
         $.ajax({
           url: "<?php echo base_url().'p_umum/check_up/simpanRiwayatPenyakit' ?>",
           type: 'POST',
-          data: {no_pasien: no_pasien_value, kode_icd10: kode_icd10_value, diagnosa: diagnosa_value},
+          data: {no_pasien: no_pasien_value, kode_icd10: kode_icd10_value, diagnosa: diagnosa_value, keterangan: keterangan_penyakit_value},
           dataType: "JSON",
           success: function(data) {
             tampilRiwayatPenyakit();
@@ -1440,6 +1488,7 @@
             });
             $("#rm2_icd10").val('');
             $("#rm2_diagnosa").val('');
+            $("#rm2_keterangan_penyakit").val('')
           },
           error: function(data) {
             new PNotify({
@@ -1696,7 +1745,7 @@
           $.ajax({
           url: "<?php echo base_url().'p_umum/check_up/selesai/'.$id_rawat ?>",
           type: 'POST',
-          data: {},
+          data: {no_pasien: <?php echo $no_pasien; ?> },
           dataType: "JSON",
           success: function(data) {
             swal({

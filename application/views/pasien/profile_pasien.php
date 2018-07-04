@@ -147,7 +147,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>[Nama Pasien]</h2>
+                  <h2><?php echo $pt->nama; ?></h2>
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -166,11 +166,11 @@
                       <ul class="nav nav-tabs tabs-left">
                         <li class="active"><a href="#data_diri" data-toggle="tab">Data Diri</a>
                         </li>
-                        <li><a href="#profile" data-toggle="tab">Aktivitas Terakhir</a>
+                        <li><a href="#aktivitas" data-toggle="tab">Aktivitas Terakhir</a>
                         </li>
                         <li><a href="#rawat_jalan" data-toggle="tab">Rawat Jalan</a>
                         </li>
-                        <li><a href="#profile" data-toggle="tab">Riwayat Penyakit</a>
+                        <li><a href="#riwayat_penyakit" data-toggle="tab">Riwayat Penyakit</a>
                         </li>
                         <li><a href="#riwayat_alergi" data-toggle="tab">Riwayat Alergi</a>
                         </li>
@@ -180,40 +180,15 @@
                         </li>
                       </ul>
                     </div>
-                    
                   </div>
 
+                  
+
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                    <!-- <div class="profile_title">
-                      <div class="col-md-6">
-                        <h2>Pemeriksaan Pasien</h2>
-                      </div>
-                    </div> -->
-                    <!-- start of user-activity-graph -->
-                    
-                    
-                    
-                    <!-- </br> -->
                     <div class="" role="tabpanel" data-example-id="togglable-tabs">
-                      <!-- <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#rm1a" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">RM1A</a>
-                        </li>
-                        <li role="presentation" class=""><a href="#rm1b" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">RM1B</a>
-                        </li>
-                        <li role="presentation" class=""><a href="#rm2" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">RM2</a>
-                        </li>
-                        <li role="presentation" class=""><a href="#rm3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">RM3</a>
-                        </li>
-                        <li role="presentation" class=""><a href="#rm4" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">RM4</a>
-                        </li>
-                        <li role="presentation" class=""><a href="#tindakan" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Tindakan</a>
-                        </li>
-                        <li role="presentation" id="tombol_selesai" class=""><button class="btn btn-success" onclick="selesai()" ><b>SELESAI</b></button>
-                        </li>
-                      </ul> -->
                       <div id="myTabContent" class="tab-content">
                         <div role="tabpanel" class="tab-pane fade active in" id="data_diri" aria-labelledby="home-tab">
-                          <h2>Rekam Medis</h2>
+                          <h2>Data Diri</h2>
                           <div class="ln_solid"></div>
                           <style type="text/css">
                             #form td {
@@ -224,20 +199,358 @@
                               list-style-type: none;
                             }
                           </style>
-                          <form>
                           <table id="form" style="width: 95% ">
                             <tr>
-                              <td colspan="3" title="[RM1A.1]" ><b>RIWAYAT PSIKOLOG</b></td>
+                              <td colspan="3" title="" ><b>DATA DIRI</b></td>
                             </tr>
                             <tr>
-                              <td style="text-align: right;width: 30%" title="[RM1A.11]" >Hubungan Pasien dengan Keluarga</td>
-                              <td>
-                              </td>
+                              <td style="text-align: right;width: 30%" title="" >No Pasien :</td>
+                              <td><b><?php echo $pt->no_pasien; ?></b></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="" >Nomor KTP :</td>
+                              <td><?php echo $pt->no_ktp; ?></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="" >Nomor KK :</td>
+                              <td><?php echo $pt->no_kk; ?></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="" >Nama :</td>
+                              <td><?php echo $pt->nama; ?></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="" >Jenis Kelamin :</td>
+                              <td><?php echo $pt->jenis_kelamin; ?></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="" >Tanggal Lahir :</td>
+                              <td><?php echo $pt->tanggal_lahir; ?></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="" >Tempat Lahir :</td>
+                              <td><?php echo $pt->tempat_lahir; ?></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="" >Umur :</td>
+                              <td><?php echo $pt->umur; ?></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="" >Alamat :</td>
+                              <td><?php echo $pt->alamat; ?></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="" >Pekerjaan :</td>
+                              <td><?php echo $pt->pekerjaan; ?></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="" >Pendidikan Terakhir :</td>
+                              <td><?php echo $pt->pendidikan; ?></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="" >Golongan Darah :</td>
+                              <td><?php echo $pt->golongan_darah; ?></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="" >Status Pernikahan :</td>
+                              <td><?php echo $pt->status_pernikahan; ?></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="" >Nama Orangtua :</td>
+                              <td><?php echo $pt->nama_orangtua; ?></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="" >Pekerjaan Orangtua :</td>
+                              <td><?php echo $pt->pekerjaan_orangtua; ?></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="" >Nama Suami/Istri :</td>
+                              <td><?php echo $pt->nama_suamistri; ?></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="" >Agama :</td>
+                              <td><?php echo $pt->agama; ?></td>
+                            </tr>
+                            <tr>
+                              <td colspan="3" title="" ><b>KONTAK PASIEN</b></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="" >No Kontak :</td>
+                              <td><?php echo $pt->no_telpon; ?></td>
                             </tr>
                           </table>                     
                         </div>
+                        <?php } ?>
+
+                        <div role="tabpanel" class="tab-pane fade active in" id="aktivitas" aria-labelledby="home-tab">
+                          <h2>Aktivitas Terakhir</h2>
+                          <div class="ln_solid"></div>
+                          <style type="text/css">
+                            #form td {
+                              padding: 5px;
+                            }
+
+                            ul{
+                              list-style-type: none;
+                            }
+                          </style>
+                          <ul class="messages">
+                            <?php
+                            foreach ($data_rawat as $dr) {
+                            ?>
+                            <li>
+                              <img src="<?php echo base_url('images/pasien/').$pt->foto ?>" class="avatar" alt="Avatar">
+                              <div class="message_date">
+                                <h3 class="date text-info"><?php echo substr($dr->tanggal, 0,2) ?></h3>
+                                  <p class="month">
+                                  <?php 
+                                  $b = substr($dr->tanggal, 3,2);
+                                  if($b=="01"){
+                                    $bulan = "Januari";
+                                  }elseif ($b=="02") {
+                                    $bulan = "Februari";
+                                  }elseif ($b=="03") {
+                                    $bulan = "Maret";
+                                  }elseif ($b=="04") {
+                                    $bulan = "April";
+                                  }elseif($b == "05"){
+                                    $bulan = "Mei";
+                                  }elseif ($b=="06") {
+                                    $bulan = "Juni";
+                                  }elseif ($b=="07") {
+                                    $bulan = "Juli";
+                                  }elseif ($b=="08") {
+                                    $bulan = "Agustus";
+                                  }
+                                  echo $bulan;
+                                  ?></p>
+                              </div>
+                              <div class="message_wrapper">
+                                <h4 class=""><?php echo $pt->nama; ?></h4>
+                                <blockquote class="message">Pasien telah mengunjungi/dirujuk ke poliklinik <b><?php echo $dr->poliklinik; ?></b>.</blockquote>
+                                <br/>
+                                <p class="url">
+                                  <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+                                </p>
+                              </div>
+                            </li>
+                            <?php } ?>
+                          </ul>             
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade active in" id="rawat_jalan" aria-labelledby="home-tab">
+                          <h2>Rawat Jalan Pasien</h2>
+                          <div class="ln_solid"></div>
+                          <style type="text/css">
+                            #form td {
+                              padding: 5px;
+                            }
+
+                            ul{
+                              list-style-type: none;
+                            }
+                          </style>
+                          
+                          <table id="datatable" class="table table-striped table-bordered">
+                            <thead>
+                              <tr>
+                                <th align="center">No Rawat Jalan</th>
+                                <th align="center">Poliklinik</th>
+                                <th align="center">Tanggal Masuk</th>
+                                <th align="center">Jam</th>
+                                <th align="center">Aksi</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php
+                              foreach ($data_rawat as $dr) {
+                              ?>
+                              <tr>
+                                <td><?php echo $dr->id_rawat ?></td>
+                                <td><?php echo $dr->poliklinik ?></td>
+                                <td><?php echo $dr->tanggal ?></td>
+                                <td><?php echo $dr->waktu ?></td>
+                                <td align="center"><a onclick="buka_popup(<?php echo $dr->id_rawat ?>)" style="cursor:pointer" >Lihat</a></td>
+                              </tr>
+                              <?php } ?>
+                              <script type="text/javascript">
+                                function buka_popup(id_rawat){
+                                  resepWindow = window.open('<?php echo base_url()?>rekam_medis/rawat_jalan/'+id_rawat, '', 'width=820, height=720, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
+                                }
+                              </script>
+                            </tbody>
+                          </table>   
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade active in" id="riwayat_penyakit" aria-labelledby="home-tab">
+                          <h2>Riwayat Penyakit</h2>
+                          <div class="ln_solid"></div>
+                          <style type="text/css">
+                            #form td {
+                              padding: 5px;
+                            }
+
+                            ul{
+                              list-style-type: none;
+                            }
+                          </style>
+                          
+                          <table id="datatable2" class="table table-striped table-bordered">
+                            <thead>
+                              <tr>
+                                <th align="center">No.</th>
+                                <th align="center">ID</th>
+                                <th align="center">Tanggal Masuk</th>
+                                <th align="center">Kode ICD</th>
+                                <th align="center">Diagnosa Penyakit</th>
+                                <th align="center">Keterangan</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php
+                              $n=1;
+                              foreach ($riwayat_penyakit as $rp) {
+                              ?>
+                              <tr>
+                                <td><?php echo $n++; ?></td>
+                                <td><?php echo $rp->id_riwayat ?></td>
+                                <td><?php echo $rp->tanggal_input ?></td>
+                                <td><?php echo $rp->kode_icd10 ?></td>
+                                <td><?php echo $rp->diagnosa ?></td>
+                                <td><?php echo $rp->keterangan ?></td>
+                              </tr>
+                              <?php } ?>
+                            </tbody>
+                          </table>   
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade active in" id="riwayat_alergi" aria-labelledby="home-tab">
+                          <h2>Riwayat Alergi</h2>
+                          <div class="ln_solid"></div>
+                          <style type="text/css">
+                            #form td {
+                              padding: 5px;
+                            }
+
+                            ul{
+                              list-style-type: none;
+                            }
+                          </style>
+                          
+                          <table id="datatable3" class="table table-striped table-bordered">
+                            <thead>
+                              <tr>
+                                <th align="center">No.</th>
+                                <th align="center">ID</th>
+                                <th align="center">Tanggal Masuk</th>
+                                <th align="center">Organ Sasaran</th>
+                                <th align="center">Gejala</th>
+                                <th align="center">Bahan Kimia</th>
+                                <th align="center">Keterangan</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php
+                              $n=1;
+                              foreach ($riwayat_alergi as $ra) {
+                              ?>
+                              <tr>
+                                <td><?php echo $n++; ?></td>
+                                <td><?php echo $ra->id_alergi ?></td>
+                                <td><?php echo $ra->tanggal_input ?></td>
+                                <td><?php echo $ra->organ_sasaran ?></td>
+                                <td><?php echo $ra->gejala ?></td>
+                                <td><?php echo $ra->bahan_kimia ?></td>
+                                <td><?php echo $ra->keterangan ?></td>
+                              </tr>
+                              <?php } ?>
+                            </tbody>
+                          </table>   
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade active in" id="riwayat_hamil" aria-labelledby="home-tab">
+                          <h2>Riwayat Kehamilan</h2>
+                          <div class="ln_solid"></div>
+                          <style type="text/css">
+                            #form td {
+                              padding: 5px;
+                            }
+
+                            ul{
+                              list-style-type: none;
+                            }
+                          </style>
+                          
+                          <table id="datatable4" class="table table-striped table-bordered">
+                            <thead>
+                              <tr>
+                                <th align="center">No.</th>
+                                <th align="center">Macam Persalinan</th>
+                                <th align="center">Jenis Kelamin</th>
+                                <th align="center">Status Lahir</th>
+                                <th align="center">Waktu</th>
+                                <th align="center">Penolong</th>
+                                <th align="center">Penyulit</th>
+                                <th align="center">Sebab Kematian</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php
+                              $n=1;
+                              foreach ($riwayat_kehamilan as $rk) {
+                              ?>
+                              <tr>
+                                <td><?php echo $n++; ?></td>
+                                <td><?php echo $rk->macam_persalinan ?></td>
+                                <td><?php echo $rk->jenis_kelamin ?></td>
+                                <td><?php echo $rk->status_lahir ?></td>
+                                <td><?php echo $rk->waktu ?></td>
+                                <td><?php echo $rk->penolong_persalinan ?></td>
+                                <td><?php echo $rk->penyulit ?></td>
+                                <td><?php echo $rk->sebab_kematian ?></td>
+                              </tr>
+                              <?php } ?>
+                            </tbody>
+                          </table>   
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade active in" id="riwayat_obat" aria-labelledby="home-tab">
+                          <h2>Riwayat Obat</h2>
+                          <div class="ln_solid"></div>
+                          <style type="text/css">
+                            #form td {
+                              padding: 5px;
+                            }
+
+                            ul{
+                              list-style-type: none;
+                            }
+                          </style>
+                          
+                          <table id="datatable5" class="table table-striped table-bordered">
+                            <thead>
+                              <tr>
+                                <th align="center">Tanggal</th>
+                                <th align="center">Nama Obat</th>
+                                <th align="center">Jenis</th>
+                                <th align="center">Kategori</th>
+                                <th align="center">Kuantitas</th>
+                                <th align="center">Keterangan</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php
+                              $n=1;
+                              foreach ($resep_obat as $ro) {
+                              ?>
+                              <tr>
+                                <td><?php echo $ro->tanggal_masuk ?></td>
+                                <td><?php echo $ro->nama_obat ?></td>
+                                <td><?php echo $ro->jenis ?></td>
+                                <td><?php echo $ro->kategori ?></td>
+                                <td><?php echo $ro->kuantitas ?></td>
+                                <td><?php echo $ro->keterangan ?></td>
+                              </tr>
+                              <?php } ?>
+                            </tbody>
+                          </table>   
+                        </div>
                       </div>
-                      </form>
                     </div>
                   </div>
                 </div>
@@ -304,25 +617,37 @@
   <script src="<?php echo base_url(); ?>/assets/js/sweetalert.min.js"></script>
   <!-- range slider -->
   <script src="<?php echo base_url(); ?>/assets/js/ion_range/ion.rangeSlider.min.js"></script>
-  
   <script type="text/javascript">
-    new Def.Autocompleter.Search('rm2_icd10', 'https://clinicaltables.nlm.nih.gov/api/icd10cm/v3/search?sf=code,name', {tableFormat: true, valueCols: [0], colHeaders: ['Code', 'Name']});
+    function dataTable(){}
+    $(document).ready(function(){
+      $('#datatable').DataTable();
+    });
   </script>
   <script type="text/javascript">
-    new Def.Autocompleter.Search('rm4_icd10', 'https://clinicaltables.nlm.nih.gov/api/icd10cm/v3/search?sf=code,name', {tableFormat: true, valueCols: [0], colHeaders: ['Code', 'Name']});
+    function dataTable(){}
+    $(document).ready(function(){
+      $('#datatable2').DataTable();
+    });
   </script>
-  <script>
-      $("#RM1B32").ionRangeSlider({
-        grid: true,
-        values: [
-        "Tidak Sakit", "Sedikit Sakit",
-        "Agak Mengganggu ", "Mengganggu Aktivitas",
-        "Sangat Mengganggu", "Tidak Tertahankan"
-        ]
-      });
+  <script type="text/javascript">
+    function dataTable(){}
+    $(document).ready(function(){
+      $('#datatable3').DataTable();
+    });
   </script>
-  
-            <?php } ?>
+  <script type="text/javascript">
+    function dataTable(){}
+    $(document).ready(function(){
+      $('#datatable4').DataTable();
+    });
+  </script>
+  <script type="text/javascript">
+    function dataTable(){}
+    $(document).ready(function(){
+      $('#datatable5').DataTable();
+    });
+  </script>
+
   
 </body>
 

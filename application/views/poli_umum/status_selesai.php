@@ -220,7 +220,7 @@
                         <td><?php echo $rj->waktu ?></td><!-- 
                         <td>Rp. <?php //echo $rj->biaya ?></td> -->
                         <td><?php echo $rj->status ?></td>
-                        <td align="center"><a title="Lihat Hasil Medis" href="<?php echo base_url().'p_umum/check_up/rekam_medis/'.$rj->no_pasien ?>" target="_blank" class="fa fa-file-text"></span></a></td>
+                        <td align="center"><a title="Lihat Hasil Medis" href="<?php echo base_url().'rekam_medis/pasien/'.$rj->no_pasien ?>" target="_blank" class="fa fa-file-text"></span></a></td>
                       </tr>
                       <?php
                       }

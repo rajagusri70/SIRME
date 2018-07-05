@@ -11,11 +11,15 @@ class Home extends CI_Controller {
 		$this->load->model('AdminModel');
 		$this->load->model('TransaksiModel');
 		$this->load->model('PasienModel');
+		$this->load->model('RawatModel');
 	}
 
 	public function index(){
 		$data['users'] = $this->AdminModel->tampilkan();
 		$data['pasien_hari_ini'] = $this->PasienModel->pasienBaruHariIni();
+		$data['rawat_hari_ini'] = $this->RawatModel->hariIni();
+		$data['antrian'] = $this->RawatModel->antrian();
+		$data['selesai'] = $this->RawatModel->selesai();
 		$this->load->view('resepsionis/home',$data);
 	}
 }

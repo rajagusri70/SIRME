@@ -112,4 +112,25 @@ class RawatModel extends CI_Model{
 	public function viewStatus($where){
 		return $this->db->get_where('rawat_jalan',$where)->result();
 	}
+
+	public function hariIni(){
+		$tanggal = date("d-m-Y");
+		$this->db->where('tanggal',$tanggal);
+		$this->db->from("rawat_jalan");
+		return $this->db->count_all_results();
+	}
+
+	public function antrian(){
+		$this->db->where('status','Menunggu');
+		$this->db->from("rawat_jalan");
+		return $this->db->count_all_results();
+	}
+
+	public function selesai(){
+		$tanggal = date("d-m-Y");
+		$this->db->where('status','Selesai');
+		$this->db->where('tanggal',$tanggal);
+		$this->db->from("rawat_jalan");
+		return $this->db->count_all_results();
+	}
 }

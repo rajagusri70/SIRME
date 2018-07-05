@@ -182,7 +182,7 @@
               <div class="tile-stats">
                 <div class="icon"><i class="fa fa-comments-o"></i>
                 </div>
-                <div class="count">179</div>
+                <div class="count"><?php echo $rawat_hari_ini; ?></div>
 
                 <h3>Pasien Lama</h3>
                 <p>Jumlah Pasien Lama yang sedang menjalani rawat jalan hari ini</p>
@@ -192,7 +192,7 @@
               <div class="tile-stats">
                 <div class="icon"><i class="fa fa-sort-amount-desc"></i>
                 </div>
-                <div class="count">179</div>
+                <div class="count"><?php echo $antrian; ?></div>
 
                 <h3>Antrian Pasien</h3>
                 <p>Jumlah Antrian Pasien dari semua Poli yang terdaftar hari ini</p>
@@ -202,7 +202,7 @@
               <div class="tile-stats">
                 <div class="icon"><i class="fa fa-check-square-o"></i>
                 </div>
-                <div class="count">179</div>
+                <div class="count"><?php echo $selesai; ?></div>
 
                 <h3>Selesai</h3>
                 <p>Jumlah Pasien yang telah selesai melakukan rawat jalan hari ini di semua poli</p>

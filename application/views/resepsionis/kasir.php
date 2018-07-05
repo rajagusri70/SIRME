@@ -68,7 +68,7 @@
               <ul class="nav side-menu">
                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li><a href="index.html">Dashboard</a>
+                    <li><a href="<?php echo site_url('resepsionis/home') ?>">Dashboard</a>
                     </li>
                   </ul>
                 </li>

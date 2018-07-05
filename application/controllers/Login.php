@@ -43,7 +43,36 @@ class Login extends CI_Controller {
 				redirect(base_url('p_umum/check_up/pasien_terdaftar'));
 			}
 		}else{
-			echo "Username dan password salah !";
+			echo '<body>';
+			echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
+			echo '<script type="text/javascript" >';
+			echo 'swal({';
+			echo '  title: "Password Salah",';
+			echo '  text: "Data yang dimasukan untuk Login salah. Silahkan Login menggunakan data yang benar.!",';
+			echo '	icon: "warning",';
+			echo '  buttons: {';
+					//echo '    cancel: "Run away!",';
+			echo '    catch: {';
+			echo '      text: "Oke",';
+			echo '      value: "catch",';
+			echo '    },';
+					//echo '    defeat: true,';
+			echo '  },';
+			echo '})';
+			echo '.then((value) => {';
+			echo '  switch (value) {';				 
+			echo '    case "defeat":';
+			echo '      swal("Pikachu fainted! You gained 500 XP!");';
+			echo '      break;';				 
+			echo '    case "catch":';
+			echo '      window.location = "'.base_url().'login/";';
+			echo '      break;';				 
+			echo '    default:';
+			echo '      swal("Got away safely!");';
+			echo '  }';
+			echo '});';
+			echo '</script>';
+			echo  '</body>';
 		}
 	}
 }

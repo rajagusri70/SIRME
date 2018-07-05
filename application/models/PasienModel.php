@@ -4,7 +4,8 @@ class PasienModel extends CI_Model{
 
 
 	function __construct() {
-        parent::__construct();    
+        parent::__construct(); 
+        date_default_timezone_set("Asia/Jakarta");   
         
     }
 
@@ -41,6 +42,7 @@ class PasienModel extends CI_Model{
 		$bulan = $this->input->post('input_bulan_lahir');
 		$tahun = $this->input->post('input_tahun_lahir');
 		$tanggal_lahir_lengkap = $tanggal.' - '.$bulan.' - '.$tahun;
+		$tanggal = date("d-m-Y");
 		$data = array(
 			"no_ktp" => $this->input->post('input_no_ktp'),
 			"no_kk" => $this->input->post('input_no_kk'),
@@ -59,6 +61,7 @@ class PasienModel extends CI_Model{
 			"nama_suamistri" => $this->input->post('input_nama_suamistri'),
 			"agama" => $this->input->post('input_agama'),
 			"no_telpon" => $this->input->post('input_no_telpon'),
+			"tanggal_daftar" => $tanggal,
 			"foto" => $upload['file']['file_name']
 		);
 		$this->db->insert('pasien', $data);
@@ -93,11 +96,11 @@ class PasienModel extends CI_Model{
     	$this->db->or_like('nama', $cari_input);
 		return $this->db->get('pasien')->result();
 		// $this->db->select('*'); //memeilih semua field
-	 //    $this->db->from($table); //memeilih tabel
-	 //    $this->db->join('rawat_jalan', 'rawat_jalan.no_pasien = pasien.no_pasien');
-	 //    $this->db->like($where,$where_parameter);
-	 //    $this->db->or_like($where2,$where_parameter2);
-	 //    return $this->db->get()->result();
+	//    $this->db->from($table); //memeilih tabel
+	//    $this->db->join('rawat_jalan', 'rawat_jalan.no_pasien = pasien.no_pasien');
+	//    $this->db->like($where,$where_parameter);
+	//    $this->db->or_like($where2,$where_parameter2);
+	//    return $this->db->get()->result();
 
 	}
 
@@ -138,6 +141,13 @@ class PasienModel extends CI_Model{
 	public function update($where,$data){
 		$this->db->where("no_pasien",$where);
 		$this->db->update("pasien",$data);
+	}
+
+	public function pasienBaruHariIni(){
+		$tanggal = date("d-m-Y");
+		$this->db->where('tanggal_daftar',$tanggal);
+		$this->db->from("pasien");
+		return $this->db->count_all_results();
 	}
 
 	public function test(){

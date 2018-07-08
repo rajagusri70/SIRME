@@ -153,4 +153,12 @@ class PasienModel extends CI_Model{
 	public function test(){
 		return $this->db->get("poli_umum")->result();
 	}
+
+	public function pasienRawatJalan($id_rawat){
+		$this->db->select('*'); //memeilih semua field
+	    $this->db->from('pasien'); //memeilih tabel
+	    $this->db->join('rawat_jalan', 'rawat_jalan.no_pasien = pasien.no_pasien');
+	    $this->db->where('rawat_jalan.id_rawat', $id_rawat);
+	    return $this->db->get()->result();
+	}
 }

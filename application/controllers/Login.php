@@ -36,10 +36,9 @@ class Login extends CI_Controller {
 				);
 			if($tipe_admin[0]['tipe_admin'] == 'resepsionis'){
 				$this->session->set_userdata($data_session);
-				redirect(base_url('home'));
+				redirect(base_url('resepsionis/home'));
 			}else{
 				$this->session->set_userdata($data_session);
-				// echo "<b>Fitur untuk Dokter/Perawat Sedang dalam tahap pengembangan</b>";
 				redirect(base_url('p_umum/check_up/pasien_terdaftar'));
 			}
 		}else{

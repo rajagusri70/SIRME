@@ -7,6 +7,11 @@ class Check_Up extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
+		if($this->session->userdata('status') != "login"){
+			redirect(base_url("login"));
+		}else{
+			
+		}
 		$this->load->model('AdminModel');
 		$this->load->model('RawatModel');
 		$this->load->model('ObatModel');
@@ -163,6 +168,7 @@ class Check_Up extends CI_Controller {
 				#cek apakah data di tabel rm1a dan rm1b eksis
 				$data['rm1a'] = $this->RM1AModel->tampilkan($id_periksa);
 				$data['rm1b'] = $this->RM1BModel->tampilkan($id_periksa);
+				$data['tanggal'] = $tanggal;
 				$this->load->view('poli_umum/check_up',$data);
 			}
 		}
@@ -550,6 +556,7 @@ class Check_Up extends CI_Controller {
 			$waktu = date("H:i:s");
 			$dataDiagnosa = array(
 				'no_pasien' => $no_pasien,
+				'id_rawat' => $id_rawat,
 				'tanggal_input' => $dd->tanggal_cek,
 				'jam_input' => $dd->jam_cek,
 				'kode_icd10' => $dd->kode_icd10,
@@ -558,8 +565,6 @@ class Check_Up extends CI_Controller {
 			);
 			$this->RiwayatPenyakitModel->tambahRiwayat($dataDiagnosa);
 		}
-		
-		
 		echo json_encode(array('status' => true));
 	}
 

@@ -398,6 +398,7 @@
                               <tr>
                                 <th align="center">No.</th>
                                 <th align="center">ID</th>
+                                <th align="center">Rawat Jalan</th>
                                 <th align="center">Tanggal Masuk</th>
                                 <th align="center">Kode ICD</th>
                                 <th align="center">Diagnosa Penyakit</th>
@@ -412,6 +413,7 @@
                               <tr>
                                 <td><?php echo $n++; ?></td>
                                 <td><?php echo $rp->id_riwayat ?></td>
+                                <td><a onclick="buka_popup(<?php echo $rp->id_rawat ?>)" style="cursor:pointer" ><?php echo $rp->id_rawat ?></a></td>
                                 <td><?php echo $rp->tanggal_input ?></td>
                                 <td><?php echo $rp->kode_icd10 ?></td>
                                 <td><?php echo $rp->diagnosa ?></td>

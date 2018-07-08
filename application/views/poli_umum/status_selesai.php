@@ -83,6 +83,12 @@
                     </li>
                   </ul>
                 </li>
+                <li><a><i class="fa fa-edit"></i> Pasien <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu" style="display: none">
+                    <li><a href="<?php echo base_url().'p_umum/pasien/cari' ?>">Cari Pasien</a>
+                    </li>
+                  </ul>
+                </li>
               </ul>
             </div>
           </div>

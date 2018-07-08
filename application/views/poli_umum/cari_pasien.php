@@ -78,31 +78,21 @@
               <ul class="nav side-menu">
                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo site_url('resepsionis/home') ?>">Dashboard</a>
+                    <li><a href="index.html">Dashboard</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a><i class="fa fa-user-md"></i> Check Up <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu" style="display: none">
+                    <li><a href="<?php echo base_url().'p_umum/check_up/pasien_terdaftar' ?>">Pasien Terdaftar</a>
+                    </li>
+                    <li><a href="<?php echo base_url().'p_umum/check_up/status_selesai' ?>">Status Selesai</a>
                     </li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-edit"></i> Pasien <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
                     <li><a href="<?php echo $_SERVER['REQUEST_URI']; ?>">Cari Pasien</a>
-                    </li>
-                    <li><a href="<?php echo site_url('resepsionis/pasien/daftar') ?>" >Pendaftaran Pasien Baru</a>
-                    </li>
-                    <li><a href="<?php echo site_url('resepsionis/pasien/pasien_lama') ?>">Pendaftaran Pasien Lama</a>
-                    </li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-user-md"></i> Rawat Jalan <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo site_url('resepsionis/rawat/status') ?>">Status Rawat Pasien</a>
-                    </li>
-                    <li><a href="index2.html">Status Selesai</a>
-                    </li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-money"></i> Kasir <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo site_url('resepsionis/kasir/transaksi') ?>">Transaksi Diterima</a>
                     </li>
                   </ul>
                 </li>
@@ -193,7 +183,7 @@
                 </div>
                 <div class="x_content">
 
-                  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('resepsionis/pasien/cari'); ?>" method="post" enctype="multipart/form-data" >
+                  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('p_umum/pasien/cari'); ?>" method="post" enctype="multipart/form-data" >
 
                     <p>Silahkan masukan kata kunci untuk melakukan pencarian. Kata kunci yang diproses sebagai parameter pencarian adalah Nomor Pasien dan Nama. Dapat dimasukan sebagian atau secara lengkap.
                     </p>

@@ -132,6 +132,36 @@ class Pasien extends CI_Controller {
 			);
 			$this->ItemTransaksiModel->tambahItem($dataTrxItem);
 			redirect ("resepsionis/pasien/pasien_lama");
+			echo '<body>';
+			echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
+			echo '<script type="text/javascript" >';
+			echo 'swal({';
+			echo '  title: "Pendaftaran Berhasil.!",';
+			echo '  text: "Pasien telah berhasil didaftarkan Pada Poliklinik.",';
+			echo '	icon: "success",';
+			echo '  buttons: {';
+			//echo '    cancel: "Run away!",';
+			echo '    catch: {';
+			echo '      text: "Oke",';
+			echo '      value: "catch",';
+			echo '    },';
+			//echo '    defeat: true,';
+			echo '  },';
+			echo '})';
+			echo '.then((value) => {';
+			echo '  switch (value) {';				 
+			echo '    case "defeat":';
+			echo '      swal("Pikachu fainted! You gained 500 XP!");';
+			echo '      break;';				 
+			echo '    case "catch":';
+			echo '      window.close();';
+			echo '      break;';				 
+			echo '    default:';
+			echo '      swal("Got away safely!");';
+			echo '  }';
+			echo '});';
+			echo '</script>';
+			echo  '</body>';
 		}
 	}
 

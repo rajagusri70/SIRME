@@ -121,7 +121,9 @@ class RawatModel extends CI_Model{
 	}
 
 	public function antrian(){
+		$tanggal = date("d-m-Y");
 		$this->db->where('status','Menunggu');
+		$this->db->where('tanggal',$tanggal);
 		$this->db->from("rawat_jalan");
 		return $this->db->count_all_results();
 	}
@@ -133,4 +135,6 @@ class RawatModel extends CI_Model{
 		$this->db->from("rawat_jalan");
 		return $this->db->count_all_results();
 	}
+
+	
 }

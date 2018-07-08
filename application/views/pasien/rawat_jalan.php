@@ -44,167 +44,276 @@
             <div class="col-md-12 col-sm-12 col-xs-12" style="align-items:  center;">
               <div class="x_panel">
                 <h3 align="center">Rumah Sakit Umum XYZ</h3>
-                <h2 align="center">Perincian Rawat Jalan</h2> 
+                <h2 align="center">Perincian Rawat Jalan</h2>
+                <h2 align="center">No. Rekam Medis <b><?php foreach ($rawat_jalan as $rj) { echo $rj->id_rawat; } ?></b></h2> 
                 <div class="clearfix"></div>
                 <div class="x_content">
                   <div class="ln_solid"></div>
-                  <table style="font-size: 14px">
+                  <?php foreach ($rawat_jalan as $rj) {?>
+                  <table>
                     <tr>
                       <td><b>Tanggal</b></td>
                       <td>&nbsp;:&nbsp;</td>
-                      <td>02 Juni 2018</td>
+                      <td><?php echo substr($rj->tanggal, 0,2) ?> <?php 
+                                  $b = substr($rj->tanggal, 3,2);
+                                  if($b=="01"){
+                                    $bulan = "Januari";
+                                  }elseif ($b=="02") {
+                                    $bulan = "Februari";
+                                  }elseif ($b=="03") {
+                                    $bulan = "Maret";
+                                  }elseif ($b=="04") {
+                                    $bulan = "April";
+                                  }elseif($b == "05"){
+                                    $bulan = "Mei";
+                                  }elseif ($b=="06") {
+                                    $bulan = "Juni";
+                                  }elseif ($b=="07") {
+                                    $bulan = "Juli";
+                                  }elseif ($b=="08") {
+                                    $bulan = "Agustus";
+                                  }
+                                  echo $bulan;
+                                  ?> <?php echo substr($rj->tanggal, 6) ?></td>
                       <td>&nbsp;&nbsp;</td>
                       <td><b>Jam</b></std>
                       <td>&nbsp;:&nbsp;</td>
-                      <td>15:30 WIB</td>
+                      <td><?php echo substr($rj->waktu, 0,5) ?> WIB</td>
                     </tr>
                   </table>
+                <?php } ?>
+                  </br>
+                  <table >
+                    <tr>
+                      <td>
+                        <?php foreach ($pasien as $ps) {
+                        ?>
+                        <table>
+                          <tr>
+                            <td><b>Nama Pasien</b></td>
+                            <td>&nbsp;:&nbsp;</td>
+                            <td><?php echo $ps->nama; ?></td>
+                          </tr>
+                          <tr>
+                            <td><b>Tgl. Lahir</b></td>
+                            <td>&nbsp;:&nbsp;</td>
+                            <td><?php echo $ps->tanggal_lahir; ?></td>
+                          </tr>
+                          <tr>
+                            <td><b>Jenis Kelamin</b></td>
+                            <td>&nbsp;:&nbsp;</td>
+                            <td><?php echo $ps->jenis_kelamin; ?></td>
+                          </tr>
+                          <tr>
+                            <td><b>Agama</b></td>
+                            <td>&nbsp;:&nbsp;</td>
+                            <td><?php echo $ps->agama; ?></td>
+                          </tr>
+                          <tr>
+                            <td><b>Status Perkawinan</b></td>
+                            <td>&nbsp;:&nbsp;</td>
+                            <td><?php echo $ps->status_pernikahan; ?></td>
+                          </tr>
+                          <tr>
+                            <td><b>Kontak</b></td>
+                            <td>&nbsp;:&nbsp;</td>
+                            <td><?php echo $ps->no_telpon; ?></td>
+                          </tr>
+                        </table>
+                      <?php } ?>
+                      </td>
+                    </tr>
+                  </table>
+                  <div class="ln_solid"></div>
                 </br>
                   <table class="table table-striped table-bordered">
                       <tr style="font-weight: bold;">
                         <td colspan="2">I. Pengkajian Keperawatan</td>
                       </tr>
                       <tr>
+                        <?php foreach ($rm1a as $r) {?>
                         <td>
-                          <table>
-                            <tr>
-                              <td colspan="4"><b>Riwayat Psikolog</b></td>
-                            </tr>
-                            <tr>
-                              <td>&bull;&nbsp;</td>
-                              <td>Hubungan dengan keluarga </td>
-                              <td>:</td>
-                              <td><b> Baik</b></td>
-                            </tr>
-                            <tr>
-                              <td>&bull;&nbsp;</td>
-                              <td>Status Psikologi</td>
-                              <td>:</td>
-                              <td><b> Cemas</b></td>
-                            </tr>
-                          </table>
+                          <b>Status Fungsional</b>
+                          <ul>
+                            <li>Hubungan dengan keluarga : <b><u><?php echo $r->RM1A11; ?></u></b></li>
+                            <li>Status Psikologi : <b><u><?php echo $r->RM1A12; ?></u></b></li>
+                          </ul>
+                          <b>Status Nutrisi</b>
+                          <ul>
+                            <li>Keluhan nafsu makan : <b><u><?php echo $r->RM1A31; ?></u></b></li>
+                            <li>Penurunan berat badan dalam 3 bulan terakhir : <b><u><?php echo $r->RM1A32; ?></u></b></li>
+                            <li>Mual : <b><u><?php echo $r->RM1A33; ?></u></b></li>
+                            <li>Muntah : <b><u><?php echo $r->RM1A34; ?></u></b></li>
+                          </ul>
                         </td>
                         <td>
-                          <table>
-                            <tr>
-                              <td colspan="4"><b>Pemeriksaan Fisik</b></td>
+                          <b>Pemeriksaan Fisik</b>
+                          <ul>
+                            <li>Kesadaran : <b><u><?php echo $r->RM1A21; ?></u></b></li>
+                            <li>Tekanan Darah : <b><u><?php echo $r->RM1A22; ?> mmHg</u></b></li>
+                            <li>Denyut Nadi : <b><u><?php echo $r->RM1A23; ?> kali/menit</u></b></li>
+                            <li>Frekuensi Pernapasan : <b><u><?php echo $r->RM1A24; ?> kali/menit</u></b></li>
+                            <li>Suhu Badan : <b><u><?php echo $r->RM1A25; ?> Celcius</u></b></li>
+                            <li>Tinggi Badan : <b><u><?php echo $r->RM1A26; ?> cm</u></b></li>
+                            <li>Berat Badan : <b><u><?php echo $r->RM1A27; ?> kg</u></b></li>
+                            <li>Lingkar Kepala : <b><u><?php echo $r->RM1A28; ?> cm</u></b></li>
+                          </ul>
+                        </td>
+                        <?php } ?>
+                      </tr>
+                      <tr>
+                        <?php foreach ($rm1b as $r) {?>
+                        <td>
+                          <b>Status Fungsional</b>
+                          <ul>
+                            <li>Status Mobilitas Pasien : <b><u><?php echo $r->RM1B11; ?></u></b></li>
+                          </ul>
+                          <b>Skrinning Resiko Cedera/Jatuh</b>
+                          <ul>
+                            <li>Perhatikan cara berjalan pasien saat akan duduk di kursi. Apakah</br> pasien tampak tidak seimbang (sempoyongan / limbung) : <b><u><?php echo $r->RM1B21; ?></u></b></li>
+                            <li>Apakah pasien pegang pinggiran kursi atau meja, </br>benda lain sebagai penopang saat akan duduk : <b><u><?php echo $r->RM1B22; ?></u></b></li>
+                            <li>Status Resiko Cedera/Jatuh : <b><u><?php echo $r->RM1B23; ?></u></b></li>
+                          </ul>
+                        </td>
+                        <td>
+                          <b>Skrinning Nyeri</b>
+                          <ul>
+                            <li>Nyeri : <b><u><?php echo $r->RM1B31; ?></u></b></li>
+                            <li>Skala Nyeri : <b><u><?php echo $r->RM1B32; ?></u></b></li>
+                            <li>Lokasi : <b><u><?php echo $r->RM1B33; ?></u></b></li>
+                            <li>Karakteristik : <b><u><?php echo $r->RM1B34; ?></u></b></li>
+                            <li>Durasi : <b><u><?php echo $r->RM1B35; ?></u></b></li>
+                            <li>Frekuensi : <b><u><?php echo $r->RM1B36; ?></u></b></li>
+                            <li>Nyeri Hilang Bila : <b><u><?php echo $r->RM1B37; ?></u></b></li>
+                          </ul>
+                        </td>
+                        <?php } ?>
+                      </tr>
+                      <tr>
+                        <td colspan="2">
+                          <b>Riwayat Penyakit</b>
+                          <table class="table table-striped table-bordered">
+                            <tr align="center">
+                              <td><b>No.</b></td>
+                              <td><b>Tanggal</b></td>
+                              <td><b>Kode ICD-10</b></td>
+                              <td><b>Diagnosa</b></td>
+                              <td><b>Keterangan</b></td>
                             </tr>
+                            <?php $n=1;
+                            foreach ($riwayat_penyakit as $rp) {
+                            ?>
                             <tr>
-                              <td>&bull;&nbsp;</td>
-                              <td>Kesadaran </td>
-                              <td>:</td>
-                              <td><b> Sadar</b></td>
+                              <td align="center"><?php echo $n++; ?></td>
+                              <td><?php echo $rp->tanggal_input; ?></td>
+                              <td><?php echo $rp->kode_icd10; ?></td>
+                              <td><?php echo $rp->diagnosa; ?></td>
+                              <td><?php echo $rp->keterangan; ?></td>
                             </tr>
+                            <?php } ?>
+                          </table>
+                          <b>Riwayat Alergi</b>
+                          <table class="table table-striped table-bordered">
+                            <tr align="center">
+                              <td align="center"><b>No.</b></td>
+                              <td><b>Organ Sasaran</b></td>
+                              <td><b>Gejala</b></td>
+                              <td><b>Bahan Kimia</b></td>
+                              <td><b>Keterangan</b></td>
+                            </tr>
+                            <?php $n=1;
+                            foreach ($riwayat_alergi as $ra) {
+                            ?>
                             <tr>
-                              <td>&bull;&nbsp;</td>
-                              <td>Tekanan Darah</td>
-                              <td>:</td>
-                              <td><b> 103mmHg</b></td>
+                              <td align="center"><?php echo $n++; ?></td>
+                              <td><?php echo $ra->organ_sasaran; ?></td>
+                              <td><?php echo $ra->gejala; ?></td>
+                              <td><?php echo $ra->bahan_kimia; ?></td>
+                              <td><?php echo $ra->keterangan; ?></td>
                             </tr>
-                            <tr>
-                              <td>&bull;&nbsp;</td>
-                              <td>Denyut Nadi</td>
-                              <td>:</td>
-                              <td><b> kali/menit</b></td>
-                            </tr>
-                            <tr>
-                              <td>&bull;&nbsp;</td>
-                              <td>Frekuensi Pernapasan</td>
-                              <td>:</td>
-                              <td><b> kali/menit</b></td>
-                            </tr>
-                            <tr>
-                              <td>&bull;&nbsp;</td>
-                              <td>Suhu Badan</td>
-                              <td>:</td>
-                              <td><b> Celcius</b></td>
-                            </tr>
-                            <tr>
-                              <td>&bull;&nbsp;</td>
-                              <td>Tinggi Badan</td>
-                              <td>:</td>
-                              <td><b> cm</b></td>
-                            </tr>
-                            <tr>
-                              <td>&bull;&nbsp;</td>
-                              <td>Berat Badan</td>
-                              <td>:</td>
-                              <td><b> kg</b></td>
-                            </tr>
-                            <tr>
-                              <td colspan="4">&nbsp;</td>
-                            </tr>
-                            <tr>
-                              <td colspan="4"><b>Status Nutrisi</b></td>
-                            </tr>
-                            <tr>
-                              <td>&bull;&nbsp;</td>
-                              <td>Keluhan Nafsu Makan</td>
-                              <td>:</td>
-                              <td><b> Ada</b></td>
-                            </tr>
-                            <tr>
-                              <td>&bull;&nbsp;</td>
-                              <td>Mual</td>
-                              <td>:</td>
-                              <td><b> Ya</b></td>
-                            </tr>
-                            <tr>
-                              <td>&bull;&nbsp;</td>
-                              <td>Muntah</td>
-                              <td>:</td>
-                              <td><b> Tidak</b></td>
-                            </tr>
+                            <?php } ?>
                           </table>
                         </td>
                       </tr>
+                  </table></br>
+                  <table class="table table-striped table-bordered">
                       <tr style="font-weight: bold;">
                         <td colspan="2">II. Pengkajian Dokter</td>
                       </tr>
                       <tr>
-                        <td>
-                          <table>
-                            <tr>
-                              <td colspan="4"><b>Anamnesa</b></td>
+                        <td colspan="2">
+                          <b>Anamnesa</b></br>
+                          Keluhan Utama
+                          <table class="table table-striped table-bordered">
+                            <tr align="center">
+                              <td><b>No.</b></td>
+                              <td><b>Keluhan</b></td>
+                              <td><b>Keterangan</b></td>
                             </tr>
+                            <?php $n=1;
+                            foreach ($keluhan as $k) {
+                            ?>
                             <tr>
-                              <td>Keluhan Utama </td>
+                              <td align="center"><?php echo $n++; ?></td>
+                              <td><?php echo $k->keluhan; ?></td>
+                              <td><?php echo $k->keterangan; ?></td>
                             </tr>
-                            <tr>
-                              <td>
-                                <table class="table table-striped d">
-                                  <tr>
-                                    <td>Keluhan</td>
-                                    <td>Keterangan</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Gatal-gatal</td>
-                                    <td>Seluruh badan mengalami pembengkakan</td>
-                                  </tr>
-                                </table>
-                              </td>
-                            </tr>
+                            <?php } ?>
                           </table>
-                        </td>
-                        <td>
-                          <table>
-                            <tr>
-                              <td colspan="4"><b>Pemeriksaan</b></td>
+                          Pemeriksaan
+                          <table class="table table-striped table-bordered">
+                            <tr align="center">
+                              <td><b>No.</b></td>
+                              <td><b>Jam</b></td>
+                              <td><b>Bagian yang Diperiksa</b></td>
+                              <td><b>Keterangan</b></td>
                             </tr>
+                            <?php $n=1;
+                            foreach ($pemeriksaan as $p) {
+                            ?>
                             <tr>
-                              <td>
-                                <table class="table table-striped d">
-                                  <tr>
-                                    <td>Bagian yang Diperiksa</td>
-                                    <td>Keterangan</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Gatal-gatal</td>
-                                    <td>Seluruh badan mengalami pembengkakan</td>
-                                  </tr>
-                                </table>
-                              </td>
+                              <td align="center"><?php echo $n++; ?></td>
+                              <td><?php echo $p->jam_periksa; ?></td>
+                              <td><?php echo $p->periksa; ?></td>
+                              <td><?php echo $p->keterangan; ?></td>
                             </tr>
+                            <?php } ?>
+                          </table>
+                          <b>Diagnosa</b>
+                          <table class="table table-striped table-bordered">
+                            <tr align="center">
+                              <td><b>No.</b></td>
+                              <td><b>Kode ICD-10</b></td>
+                              <td><b>Diagnosa</b></td>
+                              <td><b>Keterangan</b></td>
+                            </tr>
+                            <?php $n=1;
+                            foreach ($diagnosa as $d) {
+                            ?>
+                            <tr>
+                              <td align="center"><?php echo $n++; ?></td>
+                              <td><?php echo $d->kode_icd10; ?></td>
+                              <td><?php echo $d->diagnosa; ?></td>
+                              <td><?php echo $d->keterangan; ?></td>
+                            </tr>
+                            <?php } ?>
+                          </table>
+                          <b>Tindakan yang Diberikan</b>
+                          <table class="table table-striped table-bordered">
+                            <tr align="center">
+                              <td><b>No.</b></td>
+                              <td><b>Tindakan</b></td>
+                              <td><b>Keterangan</b></td>
+                            </tr>
+                            <?php $n=1;
+                            foreach ($tindakan as $t) {
+                            ?>
+                            <tr>
+                              <td align="center"><?php echo $n++; ?></td>
+                              <td><?php echo $t->tindakan; ?></td>
+                              <td><?php echo $t->keterangan; ?></td>
+                            </tr>
+                            <?php } ?>
                           </table>
                         </td>
                       </tr>

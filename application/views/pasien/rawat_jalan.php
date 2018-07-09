@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Transaksi Pasien</title>
+  <title>Rekam Medis Rawat Jalan</title>
 
   <!-- Bootstrap core CSS -->
 
@@ -318,6 +318,20 @@
                         </td>
                       </tr>
                   </table>
+                  </br>
+                  <style>
+
+                    div.b {
+                        position: absolute;
+                        right: 0;
+                    } 
+                  </style>
+                  <div class="b">Dokter Pemeriksa</div>
+                </br></br></br></br>
+                <?php foreach ($dokter_pemeriksa as $dp) {?>
+                <div class="b"><?php echo $dp->nama; ?></div>
+                <?php } ?>
+                </br></br>
                 </div>
               </div>
               <div style="text-align: center;">

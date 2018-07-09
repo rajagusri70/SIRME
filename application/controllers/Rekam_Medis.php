@@ -56,6 +56,7 @@ class rekam_medis extends CI_Controller {
 		$periksa = $this->PeriksaModel->viewWhere($where_rawat_jalan); //get id_periksa
 		foreach ($periksa as $prks) {
 			$id_periksa = $prks->id_periksa;
+			$user_id = $prks->user_id;
 		}
 		$data['rm1a'] = $this->RM1AModel->tampilkan($id_periksa);
 		$data['rm1b'] = $this->RM1BModel->tampilkan($id_periksa);
@@ -65,6 +66,7 @@ class rekam_medis extends CI_Controller {
 		$data['pemeriksaan'] = $this->PemeriksaanModel->view($id_periksa);
 		$data['diagnosa'] = $this->DiagnosaModel->view($id_periksa);
 		$data['tindakan'] = $this->TindakanModel->view($id_periksa);
+		$data['dokter_pemeriksa'] = $this->AdminModel->view($user_id);
 		$this->load->view('pasien/rawat_jalan',$data);
 	}
 }

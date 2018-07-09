@@ -29,4 +29,10 @@ class AdminModel extends CI_Model{
 	function cek_login($table,$where){		
 		return $this->db->get_where($table,$where);
 	}
+
+	function view($user_id){
+		$where = array(
+			'user_id' => $user_id);
+		return $this->db->get_where("admin",$where)->result();
+	}
 }

@@ -35,51 +35,87 @@ class Pasien extends CI_Controller {
 		$data = array();
 		$this->load->view('resepsionis/pasien_baru',$users);
 		if($this->input->post('submit')){ // Jika user mengklik tombol submit yang ada di form
-			$upload = $this->PasienModel->upload();
-			if($upload['result'] == "success"){
-				$this->PasienModel->input($upload);// Panggil fungsi input() yang ada di PasienModel.php
-				// $this->load->view('pasien/pasien_baru');
-				$no_ktp = $this->input->post('input_no_ktp');
-				$viewpasien = $this->PasienModel->viewPasien('no_ktp',$no_ktp);
-				foreach ($viewpasien as $vp) {
-					echo '<body>';
-					echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
-					echo '<script type="text/javascript" >';
-					echo 'swal({';
-					echo '  title: "Pendaftaran Berhasil.!!! Nomor Pasien : ['.$vp->no_pasien.']",';
-					echo '  text: "Pasien telah berhasil didaftarkan. Nomor pasien : '.$vp->no_pasien.'",';
-					echo '	icon: "success",';
-					echo '  buttons: {';
-					//echo '    cancel: "Run away!",';
-					echo '    catch: {';
-					echo '      text: "Oke",';
-					echo '      value: "catch",';
-					echo '    },';
-					//echo '    defeat: true,';
-					echo '  },';
-					echo '})';
-					echo '.then((value) => {';
-					echo '  switch (value) {';				 
-					echo '    case "defeat":';
-					echo '      swal("Pikachu fainted! You gained 500 XP!");';
-					echo '      break;';				 
-					echo '    case "catch":';
-					echo '      window.close();';
-					echo '      break;';				 
-					echo '    default:';
-					echo '      swal("Got away safely!");';
-					echo '  }';
-					echo '});';
-					echo '</script>';
-					echo  '</body>';
-				}
-				//$this->load->view('pasien/pasien_baru');
+			$no_ktp = $this->input->post('input_no_ktp');
+			$nama_pasien = $this->input->post('input_nama');
+			$cek = $this->PasienModel->cek_pasien($no_ktp,$nama_pasien)->num_rows();
+			if($cek > 0){
+				echo '<body>';
+				echo '<script type="text/javascript" >';
+				echo 'swal({';
+				echo '  title: "Pasien Telah Terdaftar",';
+				echo '  text: "Data Pasien yang dimasukkan telah terdaftar.Silahkan coba cari data pasien menggunakan fitur Cari",';
+				echo '	icon: "warning",';
+				echo '  buttons: {';
+						//echo '    cancel: "Run away!",';
+				echo '    catch: {';
+				echo '      text: "Pergi ke Cari",';
+				echo '      value: "catch",';
+				echo '    },';
+						//echo '    defeat: true,';
+				echo '  },';
+				echo '})';
+				echo '.then((value) => {';
+				echo '  switch (value) {';				 
+				echo '    case "defeat":';
+				echo '      swal("Pikachu fainted! You gained 500 XP!");';
+				echo '      break;';				 
+				echo '    case "catch":';
+				echo '      window.location = "'.base_url().'resepsionis/pasien/cari";';
+				echo '      break;';				 
+
+				echo '  }';
+				echo '});';
+				echo '</script>';
+				echo  '</body>';
+				
 			}else{
-				//$data['message'] = $upload['error'];
-				echo "galat";
-				$this->PasienModel->input($upload);// Panggil fungsi input() yang ada di PasienModel.php
-				redirect('pasien/daftar');
+				$upload = $this->PasienModel->upload();
+				if($upload['result'] == "success"){
+					$this->PasienModel->input($upload);// Panggil fungsi input() yang ada di PasienModel.php
+					// $this->load->view('pasien/pasien_baru');
+					$no_ktp = $this->input->post('input_no_ktp');
+					$viewpasien = $this->PasienModel->viewPasien('no_ktp',$no_ktp);
+					foreach ($viewpasien as $vp) {
+						echo '<body>';
+						echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
+						echo '<script type="text/javascript" >';
+						echo 'swal({';
+						echo '  title: "Pendaftaran Berhasil.!!! Nomor Pasien : ['.$vp->no_pasien.']",';
+						echo '  text: "Pasien telah berhasil didaftarkan. Nomor pasien : '.$vp->no_pasien.'",';
+						echo '	icon: "success",';
+						echo '  buttons: {';
+						//echo '    cancel: "Run away!",';
+						echo '    catch: {';
+						echo '      text: "Oke",';
+						echo '      value: "catch",';
+						echo '    },';
+						//echo '    defeat: true,';
+						echo '  },';
+						echo '})';
+						echo '.then((value) => {';
+						echo '  switch (value) {';				 
+						echo '    case "defeat":';
+						echo '      swal("Pikachu fainted! You gained 500 XP!");';
+						echo '      break;';				 
+						echo '    case "catch":';
+						echo '      window.close();';
+						echo '      break;';				 
+						echo '    default:';
+						echo '      swal("Got away safely!");';
+						echo '  }';
+						echo '});';
+						echo '</script>';
+						echo  '</body>';
+					}
+					//$this->load->view('pasien/pasien_baru');
+				}else{
+					//$data['message'] = $upload['error'];
+					echo "galat";
+					$this->PasienModel->input($upload);// Panggil fungsi input() yang ada di PasienModel.php
+					redirect('pasien/resepsionis/daftar');
+				}
 			}
+			
 		}
 	}
 
@@ -97,6 +133,10 @@ class Pasien extends CI_Controller {
 
 	public function pasien_lama(){
 		$data['users'] = $this->AdminModel->tampilkan();
+		$admin = $this->AdminModel->tampilkan();
+		foreach ($admin as $adm) {
+			$user_id = $adm->user_id;
+		}
 		$poliklinik = $this->input->post('input_poliklinik');
 		$biaya = $this->input->post('input_biaya');
 		//$no_pasien = $_GET['nomor_pasien'];
@@ -106,7 +146,7 @@ class Pasien extends CI_Controller {
 		$timestamp = $tanggal.$microtime;//$tanggal.$waktu.$microtime;
 		$this->load->view('resepsionis/pasien_lama',$data);
 		if($this->input->post('daftar_poli')){
-			$this->RawatModel->poli($timestamp);
+			$this->RawatModel->poli($timestamp,$user_id);
 			$rawat_jalan = $this->RawatModel->viewWhere('timestamp',$timestamp);
 			foreach ($rawat_jalan as $rj) {
 				$id_rawat = $rj->id_rawat;
@@ -131,7 +171,7 @@ class Pasien extends CI_Controller {
 				'harga' => $biaya, 
 			);
 			$this->ItemTransaksiModel->tambahItem($dataTrxItem);
-			redirect ("resepsionis/pasien/pasien_lama");
+			// redirect ("resepsionis/pasien/pasien_lama");
 			echo '<body>';
 			echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
 			echo '<script type="text/javascript" >';
@@ -154,7 +194,7 @@ class Pasien extends CI_Controller {
 			echo '      swal("Pikachu fainted! You gained 500 XP!");';
 			echo '      break;';				 
 			echo '    case "catch":';
-			echo '      window.close();';
+			echo '      window.location = "'.base_url().'resepsionis/pasien/pasien_lama";';
 			echo '      break;';				 
 			echo '    default:';
 			echo '      swal("Got away safely!");';
@@ -169,21 +209,21 @@ class Pasien extends CI_Controller {
 		$parameter = $this->input->post('parameter_input');
 		$data['users'] = $this->AdminModel->tampilkan();
 		$data['poliklinik'] = $this->PoliklinikModel->viewPoli();
-		if($parameter == 'id_pasien'){
+		// if($parameter == 'id_pasien'){
 			$data['pasien'] = $this->PasienModel->cariPasienLama('id_pasien');
 			$this->load->view('resepsionis/pasien_lama',$data);
-		}elseif ($parameter == 'nama_pasien') {
-			$data['pasien'] = $this->PasienModel->cariPasienLama('nama_pasien');
-			$this->load->view('resepsionis/pasien_lama',$data);
-		}elseif ($parameter == 'no_ktp'){
-			$data['pasien'] = $this->PasienModel->cariPasienLama('no_ktp');
-			$this->load->view('resepsionis/pasien_lama',$data);
-		}elseif ($parameter == 'no_kk') {
-			$data['pasien'] = $this->PasienModel->cariPasienLama('no_kk');
-			$this->load->view('resepsionis/pasien_lama',$data);
-		}else{
-			$this->load->view('resepsionis/pasien_lama',$data);
-		}
+		// }elseif ($parameter == 'nama_pasien') {
+		// 	$data['pasien'] = $this->PasienModel->cariPasienLama('nama_pasien');
+		// 	$this->load->view('resepsionis/pasien_lama',$data);
+		// // }elseif ($parameter == 'no_ktp'){
+		// 	$data['pasien'] = $this->PasienModel->cariPasienLama('no_ktp');
+		// 	$this->load->view('resepsionis/pasien_lama',$data);
+		// // }elseif ($parameter == 'no_kk') {
+		// 	$data['pasien'] = $this->PasienModel->cariPasienLama('no_kk');
+		// 	$this->load->view('resepsionis/pasien_lama',$data);
+		// }else{
+		// 	$this->load->view('resepsionis/pasien_lama',$data);
+		// }
 	}
 
 	// public function pasien_baru(){

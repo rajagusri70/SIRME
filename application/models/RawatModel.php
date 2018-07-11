@@ -11,7 +11,7 @@ class RawatModel extends CI_Model{
     	return $this->db->get('rawat_jalan')->result_array();
     }
 
-	public function poli($timestamp){
+	public function poli($timestamp,$user_id){
 		date_default_timezone_set("Asia/Jakarta");
 		$nomor_pasien = $_GET['nomor_pasien'];
 		$tanggal = date("d-m-Y");
@@ -26,7 +26,9 @@ class RawatModel extends CI_Model{
 			"waktu" => $waktu,
 			"biaya" => $biaya,
 			"poliklinik" => $poliklinik,
-			"status" => $status
+			"status" => $status,
+			"pendaftar" => $user_id
+
 		);
 		$this->db->insert('rawat_jalan', $data);
 		// $trx = array(

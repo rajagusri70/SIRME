@@ -12,7 +12,8 @@
 
   <!-- Bootstrap core CSS -->
 
-  <link href="<?php echo base_url(); ?>/assets/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
 
   <link href="<?php echo base_url(); ?>/assets/fonts/css/font-awesome.min.css" rel="stylesheet">
   <link href="<?php echo base_url(); ?>/assets/css/animate.min.css" rel="stylesheet">
@@ -20,6 +21,26 @@
   <!-- Custom styling plus plugins -->
   <link href="<?php echo base_url(); ?>/assets/css/custom.css" rel="stylesheet">
   <link href="<?php echo base_url(); ?>/assets/css/icheck/flat/green.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>/assets/css/bootstrap-datepicker3.min.css" rel="stylesheet">
+  <style type="text/css">
+    .float{
+      position:fixed;
+      width:60px;
+      height:60px;
+      bottom:40px;
+      right:40px;
+      background-color:#0C9;
+      color:#FFF;
+      border-radius:50px;
+      text-align:center;
+      box-shadow: 2px 2px 3px #999;
+    }
+
+    .my-float{
+      margin-top:22px;
+    }
+  </style>
+  
 
 
   <script src="<?php echo base_url(); ?>/assets/js/jquery.min.js"></script>
@@ -141,77 +162,6 @@
                   </li>
                 </ul>
               </li>
-
-              <li role="presentation" class="dropdown">
-                
-                <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
-                  <li>
-                    <a>
-                      <span class="image">
-                                        <img src="images/img.jpg" alt="Profile Image" />
-                                    </span>
-                      <span>
-                                        <span>John Smith</span>
-                      <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                    </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image">
-                                        <img src="images/img.jpg" alt="Profile Image" />
-                                    </span>
-                      <span>
-                                        <span>John Smith</span>
-                      <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                    </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image">
-                                        <img src="images/img.jpg" alt="Profile Image" />
-                                    </span>
-                      <span>
-                                        <span>John Smith</span>
-                      <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                    </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image">
-                                        <img src="images/img.jpg" alt="Profile Image" />
-                                    </span>
-                      <span>
-                                        <span>John Smith</span>
-                      <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                    </span>
-                    </a>
-                  </li>
-                  <li>
-                    <div class="text-center">
-                      <a>
-                        <strong>See All Alerts</strong>
-                        <i class="fa fa-angle-right"></i>
-                      </a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-
             </ul>
           </nav>
         </div>
@@ -236,40 +186,13 @@
           <div class="clearfix"></div>
 
           <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('resepsionis/pasien/daftar'); ?>" method="post" enctype="multipart/form-data" >
+            <div class="col-md-6 col-xs-12">
               <div class="x_panel">
-                <div class="x_title">
-                  <h2>Data Pribadi</h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
+                
                 <div class="x_content">
-                  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('resepsionis/pasien/daftar'); ?>" method="post" enctype="multipart/form-data" >
+                  <br />
                     
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="foto">Foto<span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="file" id="foto" class="btn btn-primary" name="input_foto" class="">
-                      </div>
-                    </div>
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nomor KTP<span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="nomor_ktp" name="input_no_ktp" required="required" class="normal-form-long">
-                      </div>
-                    </div>
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Nomor KK<span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" name="input_no_kk" id="input_no_kk" required="required" class="normal-form-long">
-                      </div>
-                    </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Nama<span class="required">*</span>
                       </label>
@@ -291,44 +214,11 @@
                       </div>
                     </div>
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal Lahir<span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Tgl. Lahir<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select class="normal-form" name="input_tanggal_lahir" id="tanggal-lahir" required="required">
-                          <option>-pilih tanggal-</option>
-                          <?php for ($x=1; $x<=31; $x++){
-                            if($x<10){
-                              echo "<option value=".'0'."$x>".'0'."$x</option>";
-                            }else{
-                              echo "<option value=$x>$x</option>";
-                            }
-                          }
-                          ?>
-                        </select>
-                        <select class="normal-form" id="bulan_lahir" name="input_bulan_lahir">
-                          <option id="none" value="none">-pilih bulan-</option>
-                          <option value="Januari">Januari</option>
-                          <option value="Februari">Februari</option>
-                          <option value="Maret">Maret</option>
-                          <option value="April">April</option>
-                          <option value="Mei">Mei</option>
-                          <option value="Juni">Juni</option>
-                          <option value="Juli">Juli</option>
-                          <option value="Agustus">Agustus</option>
-                          <option value="September">September</option>
-                          <option value="Oktober">Oktober</option>
-                          <option value="November">November</option>
-                          <option value="Desember">Desember</option>
-                        </select>
-                        <select class="normal-form" id="tahun_lahir" name="input_tahun_lahir">
-                          <option>-pilih tahun-</option>
-                          <?php for ($year=1900; $year<=date("Y"); $year++){
-                            echo "<option value=$year>$year</option>";
-                          }
-                          ?>
-                        </select>
+                        <input type="text" name="input_tanggal_lahir" id="tanggal_lahir" required="required" class="normal-form-long">
                       </div>
-
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Tempat Lahir<span class="required">*</span>
@@ -338,22 +228,27 @@
                       </div>
                     </div>
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Umur<span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nomor KTP<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="birthday" name="input_umur" class="normal-form-long" required="required" type="text">
+                        <input type="number" id="nomor_ktp" name="input_no_ktp" required="required" class="normal-form-long">
                       </div>
                     </div>
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Golongan Darah<span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Nomor KK<span></span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select class="normal-form" name="input_golongan_darah">
-                          <option value="A">A</option>
-                          <option value="B">B</option>
-                          <option value="AB">AB</option>
-                          <option value="O">O</option>
-                        </select>
+                        <input type="number" name="input_no_kk" id="input_no_kk" class="normal-form-long">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Gol. Darah<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <label><input type="radio" class="flat" name="input_golongan_darah" id="" value="A" /> A</label>
+                        <labek><input type="radio" class="flat" name="input_golongan_darah" id="" value="B" /> B</labek>
+                        <label><input type="radio" class="flat" name="input_golongan_darah" id="" value="AB" /> AB</label>
+                        <label><input type="radio" class="flat" name="input_golongan_darah" id="" value="O" /> O</label>
                       </div>
                     </div>
                     <div class="item form-group">
@@ -364,7 +259,26 @@
                       </div>
                     </div>
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Pekerjaan<span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="foto">Foto<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="file" id="foto" class="btn btn-primary" name="input_foto" class="">
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-6 col-xs-12">
+
+              <div class="x_panel">
+              
+                <div class="x_content">
+                  <br />
+                  
+
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Pekerjaan</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input id="birthday" name="input_pekerjaan" class="normal-form-long" required="required" type="text">
@@ -378,7 +292,7 @@
                       </div>
                     </div>
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Status Pernikahan<span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Status Pernikahan</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select class="normal-form-long" name="input_status_pernikahan">
@@ -398,14 +312,14 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Pekerjaan Orangtua<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="birthday" name="input_pekerjaan_orangtua" class="normal-form-long" required="required" type="text">
+                        <input id="birthday" name="input_pekerjaan_orangtua" class="normal-form-long"  type="text">
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Suami/Istri<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="birthday" name="input_nama_suamistri" class="normal-form-long" required="required" type="text">
+                        <input id="birthday" name="input_nama_suamistri" class="normal-form-long" type="text">
                       </div>
                     </div>
                     <div class="item form-group">
@@ -423,23 +337,14 @@
                       </div>
                     </div>
                     <!-- ============== -->
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12">
-                      </div>
-                    </div>
-                    <div class="ln_solid"></div>
-                    <div class="form-group">
-                      <div class="col-md-6 col-md-offset-3">
-                        <input type="submit" name="submit" class="btn btn-success" value="Daftarkan Pasien">
-                      </div>
-                    </div>
-                  </form>
                 </div>
               </div>
             </div>
+              <input type="submit" name="submit" class="btn float" value="Daftar" style="font-weight: bold; font-size: 12px" >
+            
+            </form>
+
+
           </div>
         </div>
 
@@ -477,7 +382,16 @@
   <script src="<?php echo base_url(); ?>/assets/js/custom.js"></script>
   <!-- form validation -->
   <script src="<?php echo base_url(); ?>/assets/js/validator/validator.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/js/datepicker/bootstrap-datepicker.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/js/datepicker/locales/bootstrap-datepicker.id.min.js">
+  </script>
   
+  <script type="text/javascript">
+    $('#tanggal_lahir').datepicker({
+      language: 'id',
+      format: 'dd - MM - yyyy',
+    });
+  </script>
   
 </body>
 

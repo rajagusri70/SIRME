@@ -19,6 +19,14 @@ class PasienModel extends CI_Model{
 		return $this->db->get("pasien")->result();
 	}
 
+	function cek_pasien($no_ktp,$nama){
+		$this->db->where('no_ktp', $no_ktp);
+		$this->db->or_where('nama', $nama);		
+		// $this->db->where('no_ktp', $no_ktp);
+  //   	$this->db->or_like('nama', $nama);
+    	return $this->db->get('pasien');
+	}
+
 	public function upload(){
 		$newname = $this->input->post('input_no_ktp');
 	    $config['upload_path'] = './images/pasien/';
@@ -38,19 +46,19 @@ class PasienModel extends CI_Model{
     }
 
 	public function input($upload){
-		$tanggal = $this->input->post('input_tanggal_lahir');
-		$bulan = $this->input->post('input_bulan_lahir');
-		$tahun = $this->input->post('input_tahun_lahir');
-		$tanggal_lahir_lengkap = $tanggal.' - '.$bulan.' - '.$tahun;
+		$tanggal_lahir = $this->input->post('input_tanggal_lahir');
 		$tanggal = date("d-m-Y");
+		$tahun = date("Y");
+		$tahun_lahir = substr($tanggal_lahir, -4);
+		$umur = $tahun - $tahun_lahir;
 		$data = array(
 			"no_ktp" => $this->input->post('input_no_ktp'),
 			"no_kk" => $this->input->post('input_no_kk'),
 			"nama" => $this->input->post('input_nama'),
 			"jenis_kelamin" => $this->input->post('input_jenis_kelamin'),
-			"tanggal_lahir" => $tanggal_lahir_lengkap,
+			"tanggal_lahir" => $tanggal_lahir,
 			"tempat_lahir" => $this->input->post('input_tempat_lahir'),
-			"umur" => $this->input->post('input_umur'),
+			"umur" => $umur,
 			"alamat" => $this->input->post('input_alamat'),
 			"pekerjaan" => $this->input->post('input_pekerjaan'),
 			"pendidikan" => $this->input->post('input_pendidikan'),
@@ -69,23 +77,28 @@ class PasienModel extends CI_Model{
 
 	public function cariPasienLama($parameter_cari){
 		$cari_input = $this->input->post('cari_input');
-		if($parameter_cari == 'id_pasien'){
-			$where = array(
-			'no_pasien' => $cari_input);
-			return $this->db->get_where("pasien",$where)->result();
-		}elseif ($parameter_cari == 'nama_pasien') {
-			$where = $cari_input; 
-			$this->db->like("nama",$where);
-			return $this->db->get("pasien")->result();
-		}elseif($parameter_cari == 'no_ktp'){
-			$where = array(
-			'no_ktp' => $cari_input);
-			return $this->db->get_where("pasien",$where)->result();
-		}elseif ($parameter_cari == 'no_kk') {
-			$where = array(
-			'no_kk' => $cari_input);
-			return $this->db->get_where("pasien",$where)->result();
-		}
+		// if($parameter_cari == 'id_pasien'){
+		// 	$where = array(
+		// 	'no_pasien' => $cari_input);
+		// 	return $this->db->get_where("pasien",$where)->result();
+		// }elseif ($parameter_cari == 'nama_pasien') {
+		// 	$where = $cari_input; 
+		// 	$this->db->like("nama",$where);
+		// 	return $this->db->get("pasien")->result();
+		// }elseif($parameter_cari == 'no_ktp'){
+		// 	$where = array(
+		// 	'no_ktp' => $cari_input);
+		// 	return $this->db->get_where("pasien",$where)->result();
+		// }elseif ($parameter_cari == 'no_kk') {
+		// 	$where = array(
+		// 	'no_kk' => $cari_input);
+		// 	return $this->db->get_where("pasien",$where)->result();
+		// }
+		$this->db->like('no_pasien', $cari_input);
+		$this->db->or_like('no_ktp', $cari_input);
+    	$this->db->or_like('nama', $cari_input);
+    	$this->db->or_like('no_kk', $cari_input);
+		return $this->db->get("pasien")->result();
 		//return $this->db->get()->result();
 	}
 

@@ -23,7 +23,7 @@ class AdminModel extends CI_Model{
 
 		$where = array(
 			'username' => $session_id);
-			return $this->db->get_where("admin",$where)->result();
+		return $this->db->get_where("admin",$where)->result();
 	}
 
 	function cek_login($table,$where){		

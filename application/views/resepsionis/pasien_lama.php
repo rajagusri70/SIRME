@@ -285,9 +285,9 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <div id="parameter_input" class="btn-group" data-toggle="buttons">
-                          <input type="radio" name="parameter_input" value="id_pasien" checked=""> Nomor Pasien&nbsp; &nbsp;
-                          <input type="radio" name="parameter_input" value="no_ktp"> No. KTP&nbsp; &nbsp;
-                          <input type="radio" name="parameter_input" value="no_kk"> No. KK&nbsp; &nbsp;
+                          <!-- <input type="radio" name="parameter_input" value="id_pasien" checked=""> Nomor Pasien&nbsp; &nbsp; -->
+                          <!-- <input type="radio" name="parameter_input" value="no_ktp"> No. KTP&nbsp; &nbsp;
+                          <input type="radio" name="parameter_input" value="no_kk"> No. KK&nbsp; &nbsp; -->
                         </div>
                       </div>
                     </div>

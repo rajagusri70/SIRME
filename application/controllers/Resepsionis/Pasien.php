@@ -40,6 +40,7 @@ class Pasien extends CI_Controller {
 			$cek = $this->PasienModel->cek_pasien($no_ktp,$nama_pasien)->num_rows();
 			if($cek > 0){
 				echo '<body>';
+				echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
 				echo '<script type="text/javascript" >';
 				echo 'swal({';
 				echo '  title: "Pasien Telah Terdaftar",';

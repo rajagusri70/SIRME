@@ -88,15 +88,11 @@
                     </li>
                     <li><a href="<?php echo site_url('resepsionis/pasien/daftar') ?>" >Pendaftaran Pasien Baru</a>
                     </li>
-                    <li><a href="<?php echo site_url('resepsionis/pasien/pasien_lama') ?>">Pendaftaran Pasien Lama</a>
-                    </li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-user-md"></i> Rawat Jalan <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo site_url('resepsionis/rawat/status') ?>">Status Rawat Pasien</a>
-                    </li>
-                    <li><a href="index2.html">Status Selesai</a>
+                    <li><a href="<?php echo site_url('resepsionis/pasien/pasien_lama') ?>">Pendaftaran Pasien Lama</a>
                     </li>
                   </ul>
                 </li>

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class PasienModel extends CI_Model{
+class DokterModel extends CI_Model{
 
 
 	function __construct() {
@@ -8,6 +8,8 @@ class PasienModel extends CI_Model{
         date_default_timezone_set("Asia/Jakarta");   
         
     }
+
+
 
 	public function view(){
 		return $this->db->get("pasien")->result();
@@ -19,41 +21,13 @@ class PasienModel extends CI_Model{
 		return $this->db->get("pasien")->result();
 	}
 
-	public function cek_tgl($nama,$tanggal_lahir){
+	public function cekID($no_ktp,$nama){
+		$this->db->where('no_ktp', $no_ktp);
+		$this->db->or_where('nama', $nama);		
 		// $this->db->where('no_ktp', $no_ktp);
-		// $this->db->or_where('nama', $nama);		
-		// $this->db->where('no_ktp', $no_ktp);
-		$this->db->where('nama', $nama);
-		$this->db->where('tanggal_lahir', $tanggal_lahir);
-		return $this->db->get('pasien');
-		// $this->db->like('no_ktp', $where);
-  // 	   	$this->db->or_like('nama', $where);
-  //   	return $this->db->get('pasien');
+    	// $this->db->or_like('nama', $nama);
+    	return $this->db->get('pasien');
 	}
-
-	public function cek_data($parameter, $nama){
-		$this->db->where($parameter, $nama);
-		return $this->db->get('pasien');		
-	}
-
-
-	public function upload(){
-		$newname = $this->input->post('input_no_ktp');
-	    $config['upload_path'] = './images/pasien/';
-	    $config['allowed_types'] = 'jpg|png|jpeg';
-	    $config['max_size']	= '2048';
-	    $config['remove_space'] = TRUE;
-	    $config['file_name'] = $newname; 
-  
-    	$this->load->library('upload', $config); // Load konfigurasi uploadnya
-    	if ( $this->upload->do_upload('input_foto')){
-			$return = array('result' => 'success', 'file' => $this->upload->data(), 'error' => '');
-      		return $return;
-		}else{
-			$return = array('result' => 'failed', 'file' => '', 'error' => $this->upload->display_errors());
-      		return $return;
-		}
-    }
 
 	public function input($upload){
 		$tanggal_lahir = $this->input->post('input_tanggal_lahir');

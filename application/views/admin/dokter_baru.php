@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>SIRME | Pasien</title>
+  <title>SIRME | Dokter</title>
 
   <!-- Bootstrap core CSS -->
 
@@ -93,7 +93,7 @@
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
-              <h3>General</h3>
+              <h3>&nbsp;</h3>
               <ul class="nav side-menu">
                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
@@ -101,13 +101,10 @@
                     </li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-edit"></i> Pasien <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-edit"></i> Manajemen User <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo site_url('resepsionis/pasien/') ?>">Cari Pasien</a>
+                    <li><a href="<?php echo $_SERVER['REQUEST_URI']; ?>" >Tambah Dokter</a>
                     </li>
-                    <li><a href="<?php echo $_SERVER['REQUEST_URI']; ?>" >Pendaftaran Pasien Baru</a>
-                    </li>
-                    
                   </ul>
                 </li>
                 <li><a><i class="fa fa-user-md"></i> Rawat Jalan <span class="fa fa-chevron-down"></span></a>
@@ -172,7 +169,7 @@
           <div class="page-title">
             <div class="title_left">
               <h3>
-                Pendaftaran Pasien Baru
+                Penambahan Dokter
               </h3>
             </div>
 
@@ -186,15 +183,16 @@
             <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('resepsionis/pasien/daftar'); ?>" method="post" enctype="multipart/form-data" >
             <div class="col-md-6 col-xs-12">
               <div class="x_panel">
-                
+                <div class="x_title">
+                  <h2>Data Pribadi</h2>
+                  <div class="clearfix"></div>
+                </div>
                 <div class="x_content">
-                  <br />
-                    
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Nama<span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Nama Dokter<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" name="input_nama" id="nama" required="required" class="normal-form-long"  >
+                        <input type="text" name="input_nama" id="nama" required="required" class="normal-form-long">
                       </div>
                     </div>
                     <div class="item form-group">
@@ -202,50 +200,12 @@
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <div id="gender" class="btn-group" data-toggle="buttons">
                           <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="radio" name="input_jenis_kelamin" value="Laki-laki" > &nbsp; Laki-laki &nbsp;
+                            <input type="radio" name="input_jenis_kelamin" value="Laki-laki" checked="" > &nbsp; Laki-laki &nbsp;
                           </label>
                           <label class="btn btn-primary active" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="radio" name="input_jenis_kelamin" value="Perempuan" checked=""> Perempuan
+                            <input type="radio" name="input_jenis_kelamin" value="Perempuan" > Perempuan
                           </label>
                         </div>
-                      </div>
-                    </div>
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Tgl. Lahir<span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" name="input_tanggal_lahir" id="tanggal_lahir" required="required" class="normal-form-long" onchange="cekData()" >
-                      </div>
-                    </div>
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Tempat Lahir<span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="tempat_lahir" name="input_tempat_lahir" class="normal-form-long" required="required" type="text">
-                      </div>
-                    </div>
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nomor KTP<span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="nomor_ktp" name="input_no_ktp" required="required" class="normal-form-long">
-                      </div>
-                    </div>
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Nomor KK<span></span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" name="input_no_kk" id="input_no_kk" class="normal-form-long">
-                      </div>
-                    </div>
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Gol. Darah<span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <label><input type="radio" class="flat" name="input_golongan_darah" id="" value="A" /> A</label>
-                        <labek><input type="radio" class="flat" name="input_golongan_darah" id="" value="B" /> B</labek>
-                        <label><input type="radio" class="flat" name="input_golongan_darah" id="" value="AB" /> AB</label>
-                        <label><input type="radio" class="flat" name="input_golongan_darah" id="" value="O" /> O</label>
                       </div>
                     </div>
                     <div class="item form-group">
@@ -256,92 +216,95 @@
                       </div>
                     </div>
                     <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Kota<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="kota" name="input_kota" class="normal-form-long" required="required" type="text">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">No. HP<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="no_hp" name="input_no_hp" class="normal-form-long" required="required" type="number">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Email<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="email" name="input_email" class="normal-form-long" required="required" type="number">
+                      </div>
+                    </div>
+                    <div class="item form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="foto">Foto<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="file" id="foto" class="btn btn-primary" name="input_foto" class="">
                       </div>
                     </div>
+                  </br></br></br>
                 </div>
               </div>
             </div>
             
             <div class="col-md-6 col-xs-12">
-
               <div class="x_panel">
-              
+                <div class="x_title">
+                  <h2>Spesialisasi</h2>
+                  <div class="clearfix"></div>
+                </div>
                 <div class="x_content">
-                  <br />
-                  
-
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Pekerjaan</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Spesialis</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="birthday" name="input_pekerjaan" class="normal-form-long" required="required" type="text">
-                      </div>
-                    </div>
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Pendidikan Terakhir<span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="birthday" name="input_pendidikan" class="normal-form-long" required="required" type="text">
-                      </div>
-                    </div>
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Status Pernikahan</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select class="normal-form-long" name="input_status_pernikahan">
-                          <option value="Belum Nikah">Belum Nikah</option>
-                          <option value="Sudah Nikah">Sudah Nikah</option>
+                        <select class="normal-form-long" name="input_spesialis">
+                          <option value="none">- pilih spesialis -</option>
+                          <?php foreach ($poliklinik as $poli) {?>
+                          <option value="<?php echo $poli->nama_poli ?>"><?php echo $poli->nama_poli ?></option>
+                        <?php } ?>
                         </select>
-                      </div>
-                    </div>
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Orangtua<span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="birthday" name="input_nama_orangtua" class="normal-form-long" required="required" type="text">
-                      </div>
-                    </div>
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Pekerjaan Orangtua<span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="birthday" name="input_pekerjaan_orangtua" class="normal-form-long"  type="text">
-                      </div>
-                    </div>
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Suami/Istri<span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="birthday" name="input_nama_suamistri" class="normal-form-long" type="text">
-                      </div>
-                    </div>
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Agama<span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="birthday" name="input_agama" class="normal-form-long" required="required" type="text">
-                      </div>
-                    </div>
-                    <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">No. Telepon<span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="birthday" name="input_no_telpon" class="normal-form-long" required="required" type="number">
                       </div>
                     </div>
                     <!-- ============== -->
                 </div>
               </div>
             </div>
+
+            <div class="col-md-6 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Informasi Akun</h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">User ID<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="user_id" name="input_user_id" class="normal-form-long" required="required" type="">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Password<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="password" name="input_password" class="normal-form-long" required="required" type="password">
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+
               <input type="submit" name="submit" class="btn float" value="Daftar" style="font-weight: bold; font-size: 12px" >
             
             </form>
 
 
+          </div>
+          <div class="row">
+            
           </div>
         </div>
 
@@ -382,8 +345,6 @@
   <script src="<?php echo base_url(); ?>/assets/js/datepicker/bootstrap-datepicker.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/js/datepicker/locales/bootstrap-datepicker.id.min.js">
   </script>
-  <script src="<?php echo base_url(); ?>/assets/js/sweetalert.min.js"></script>
-
   
   <script type="text/javascript">
     $('#tanggal_lahir').datepicker({
@@ -392,50 +353,35 @@
     });
   </script>
   <script type="text/javascript">
-    
-    function cekData(){
-      var nama_value = $("input[name=input_nama]").val();
-      var tanggal_lahir_value = $("input[name=input_tanggal_lahir]").val();
+    function tambahDokter(){
+      var no_pasien_value = <?php echo $no_pasien; ?>;
+      var kode_icd10_value = $("#rm2_icd10").val();
+      var nama_value = $('input[name=input_nama]').val();
+      var jenis_kelamin_value = $('input[name=input_jenis_kelamin]:checked').val();
+      var no_ktp_value = $('input[name=RM1A22]').val();
+      
         $.ajax({
-          url: "<?php echo base_url().'resepsionis/pasien/cek_id' ?>",
+          url: "<?php echo base_url().'p_umum/check_up/simpanRiwayatPenyakit' ?>",
           type: 'POST',
-          data: {jenis_cek: 'nama', nama: nama_value, tanggal_lahir: tanggal_lahir_value},
+          data: {no_pasien: no_pasien_value, kode_icd10: kode_icd10_value, diagnosa: diagnosa_value, keterangan: keterangan_penyakit_value},
           dataType: "JSON",
           success: function(data) {
-            swal({
-              title: "Nama Pasien telah terdaftar.!",
-              text: "Nama yang dimasukan mungkin telah terdaftar. Untuk memastikan, silahkan gunakan fitur Cari Pasien untuk mencari nama yang bersangkutan",
-              icon: "warning",
-              button: "Oke",
+            tampilRiwayatPenyakit();
+            new PNotify({
+              title: 'Sukses',
+              text: 'Data hasil diagnosa pasien telah berhasil disimpan!',
+              type: 'success'
             });
+            $("#rm2_icd10").val('');
+            $("#rm2_diagnosa").val('');
+            $("#rm2_keterangan_penyakit").val('')
           },
           error: function(data) {
-            //window.alert('eh ngentot error');
-          }
-        });
-    }
-  </script>
-  <script type="text/javascript">
-    
-    function cekNamaTgl(jenis_cek_value){
-      var nama_value = $("input[name=input_nama]").val();
-      var nomor_ktp_value = $("input[name=input_no_ktp]").val();
-      var tanggal_lahir_value = $("input[name=input_tanggal_lahir]").val();
-        $.ajax({
-          url: "<?php echo base_url().'resepsionis/pasien/cek_id' ?>",
-          type: 'POST',
-          data: {jenis_cek: jenis_cek_value, nama: nama_value, no_ktp: nomor_ktp_value},
-          dataType: "JSON",
-          success: function(data) {
-            swal({
-              title: "Nama telah terdaftar.!!!",
-              text: "Nama yang dimasukan mungkin telah terdaftar. Untuk memastikan, silahkan gunakan fitur Cari Pasien untuk mencari nama yang bersangkutan",
-              icon: "warning",
-              button: "Oke",
+            new PNotify({
+              title: 'Gagal Menyimpan Data!',
+              text: 'Terjadi gagal saat menyimpan data. Dikarenakan error di server atau database',
+              type: 'error'
             });
-          },
-          error: function(data) {
-            window.alert('eh ngentot error');
           }
         });
     }

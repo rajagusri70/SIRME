@@ -121,7 +121,7 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="images/img.jpg" alt="">Dr. 
+                  <img src="images/img.jpg" alt="">Ddr. 
                   <?php foreach ($users as $user) {
                     echo $user->nama;
                   } ?>
@@ -132,6 +132,10 @@
                   <li><a href="<?php echo base_url('admin/logout') ?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                   </li>
                 </ul>
+              </li>
+              <li class="">
+                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Anda Login sebagai
+                </a>
               </li>
 
               

@@ -120,6 +120,40 @@ class Pasien extends CI_Controller {
 		}
 	}
 
+	public function cek_nama(){
+		$nama = $this->input->post('nama');
+		$cek = $this->PasienModel->cek_data('nama',$nama)->num_rows();
+		if($cek > 0){
+			echo json_encode(array('status' => true));
+		}else{
+
+		}
+	}
+
+	public function cek_id(){
+		$nama = $this->input->post('nama');
+		//$nama = 'John Doe';
+		$no_ktp = $this->input->post('no_ktp');
+		$jenis_cek = $this->input->post('jenis_cek');
+		$tanggal_lahir = $this->input->post('tanggal_lahir');
+		//$jenis_cek = 'nama';
+
+		if($jenis_cek == 'nama'){
+			$cek = $this->PasienModel->cek_tgl($nama,$tanggal_lahir)->num_rows();
+			
+		}elseif ( $jenis_cek == '2') {
+			
+			$where = $no_ktp;
+			$cek = $this->PasienModel->cek_pasien($where)->num_rows();
+		}
+		
+		if($cek > 0){
+			echo json_encode(array('status' => true));
+		}else{
+
+		}
+	}
+
 	public function cari(){
 		$cari_input = $this->input->post('cari_input');
 		$data['users'] = $this->AdminModel->tampilkan();

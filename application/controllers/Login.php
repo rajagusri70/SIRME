@@ -23,7 +23,7 @@ class Login extends CI_Controller {
 		$password = $this->input->post('password');
 		$where = array(
 			'username' => $username,
-			'password' => md5($password)
+			'password' => $password
 			);
 		$cek = $this->AdminModel->cek_login("admin",$where)->num_rows();
 		$cek_tipe = $this->AdminModel->cek_login("admin",$where);
@@ -34,40 +34,46 @@ class Login extends CI_Controller {
 				'status' => "login",
 				'tipe_admin' => $tipe_admin[0]['tipe_admin']
 				);
-			if($tipe_admin[0]['tipe_admin'] == 'resepsionis'){
+			if($tipe_admin[0]['tipe_admin'] == 'Resepsionis'){
 				$this->session->set_userdata($data_session);
 				redirect(base_url('resepsionis/home'));
-			}else{
+			}
+			elseif($tipe_admin[0]['tipe_admin'] == 'Admin'){
+				$this->session->set_userdata($data_session);
+				redirect(base_url('admin/user'));
+			}
+			elseif($tipe_admin[0]['tipe_admin'] == 'Dokter'){
 				$this->session->set_userdata($data_session);
 				redirect(base_url('p_umum/check_up/pasien_terdaftar'));
 			}
 		}else{
+			$this->load->view('login');
+			echo "<head>";
+			echo '<link href='.base_url().'/assets/css/bootstrap.min.css" rel="stylesheet">';
+			echo "</head>";
 			echo '<body>';
 			echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
 			echo '<script type="text/javascript" >';
 			echo 'swal({';
-			echo '  title: "Password Salah",';
+			echo '  title: "Username atau Password Salah.!!!",';
 			echo '  text: "Data yang dimasukan untuk Login salah. Silahkan Login menggunakan data yang benar.!",';
 			echo '	icon: "warning",';
 			echo '  buttons: {';
 					//echo '    cancel: "Run away!",';
 			echo '    catch: {';
 			echo '      text: "Oke",';
-			echo '      value: "catch",';
+			echo '      value: "oke",';
 			echo '    },';
 					//echo '    defeat: true,';
 			echo '  },';
 			echo '})';
 			echo '.then((value) => {';
 			echo '  switch (value) {';				 
-			echo '    case "defeat":';
-			echo '      swal("Pikachu fainted! You gained 500 XP!");';
-			echo '      break;';				 
-			echo '    case "catch":';
+			echo '    case "oke":';
 			echo '      window.location = "'.base_url().'login/";';
 			echo '      break;';				 
 			echo '    default:';
-			echo '      swal("Got away safely!");';
+			echo '      window.location = "'.base_url().'login/";';
 			echo '  }';
 			echo '});';
 			echo '</script>';

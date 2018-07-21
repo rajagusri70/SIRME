@@ -141,10 +141,8 @@ class Pasien extends CI_Controller {
 		if($jenis_cek == 'nama'){
 			$cek = $this->PasienModel->cek_tgl($nama,$tanggal_lahir)->num_rows();
 			
-		}elseif ( $jenis_cek == '2') {
-			
-			$where = $no_ktp;
-			$cek = $this->PasienModel->cek_pasien($where)->num_rows();
+		}elseif ( $jenis_cek == 'no_ktp') {
+			$cek = $this->PasienModel->cek_data('no_ktp',$no_ktp)->num_rows();
 		}
 		
 		if($cek > 0){

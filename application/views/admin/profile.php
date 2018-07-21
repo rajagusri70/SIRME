@@ -121,6 +121,7 @@
                         document.getElementById('password').removeAttribute('readonly');
                         <?php if($a->tipe_admin == "Dokter"){?>
                         document.getElementById('spesialis').removeAttribute('disabled');
+                        document.getElementById('no_sip').removeAttribute('readonly');
                         <?php }else{ ?>
                         document.getElementById('jabatan').removeAttribute('disabled');
                         <?php } ?>
@@ -221,6 +222,13 @@
                             <?php
                             if ($tipe_admin == 'Dokter') {?>
                             <div class="item form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Nomor SIP 
+                              </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="no_sip" class="form-control" name="input_no_sip"  required="required" type="text" value="<?php echo $a->no_sip; ?>" readonly >
+                              </div>
+                            </div>
+                            <div class="item form-group">
                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Spesialis 
                               </label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
@@ -234,6 +242,7 @@
                                 </select>
                               </div>
                             </div>
+                            
                             <?php }else{?>
                             <div class="item form-group">
                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Jabatan 

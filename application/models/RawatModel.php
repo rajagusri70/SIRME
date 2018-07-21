@@ -138,5 +138,15 @@ class RawatModel extends CI_Model{
 		return $this->db->count_all_results();
 	}
 
-	
+	public function count($where){
+		$this->db->where($where);
+		$this->db->from("rawat_jalan");
+		return $this->db->count_all_results();
+	}
+
+	public function hari($where){
+		$this->db->where($where);
+		$this->db->from("tb_jadwal");
+		return $this->db->get()->result();
+	}
 }

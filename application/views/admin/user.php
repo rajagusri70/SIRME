@@ -104,13 +104,21 @@
               <ul class="nav side-menu">
                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo site_url('resepsionis/home') ?>">Dashboard</a>
+                    <li><a href="<?php echo site_url('home') ?>">Dashboard</a>
                     </li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-edit"></i> Manajemen User <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
                     <li><a href="<?php echo $_SERVER['REQUEST_URI']; ?>" > Daftar User</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a><i class="fa fa-info-circle"></i> Manajemen Informasi <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu" style="display: none">
+                    <li><a href="<?php echo site_url('admin/informasi') ?>" > Poliklinik</a>
+                    </li>
+                    <li><a href="<?php echo site_url('admin/jabatan') ?>" > Jabatan</a>
                     </li>
                   </ul>
                 </li>

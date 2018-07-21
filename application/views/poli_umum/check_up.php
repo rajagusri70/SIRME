@@ -73,11 +73,13 @@
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
-              <h3>General</h3>
+              <h3><?php foreach ($users as $user) { ?>
+                <?php echo $user->tipe_admin ?> <?php echo $user->spesialis ?>
+              <?php } ?></h3>
               <ul class="nav side-menu">
                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li><a href="index.html">Dashboard</a>
+                    <li><a href="<?php echo base_url().'p_umum/home' ?>">Dashboard</a>
                     </li>
                   </ul>
                 </li>
@@ -873,7 +875,6 @@
                             
                           </table>
                           <div class="ln_solid"></div>
-                                       
                         </div>
                         <div role="tabpanel" class="tab-pane fade" id="tindakan" aria-labelledby="profile-tab">
                           <h2>TINDAKAN LANJUT</h2>
@@ -922,13 +923,18 @@
                             <tr>
                               <td style="text-align: right;width: 30%" >Susun Resep Obat :</td>
                               <td>
-                                <button type="button" class="btn btn-primary" onclick="buka_popup()"><a class="fa fa-shopping-cart" style="color: white"></a>&nbsp;&nbsp;Atur Resep</button>
+                                <button type="button" class="btn btn-primary" onclick="buka_popup()"><a class="fa fa-shopping-cart" style="color: white"></a>&nbsp;&nbsp;Atur Resep</button>&nbsp;<button type="button" class="btn btn-primary" onclick="buka_detail()"><a class="fa fa-eye" style="color: white"></a>&nbsp;&nbsp;Lihat Resep</button>
                               </td>
                             </tr>
+                            
                           </table>
                           <script type="text/javascript">
                                 function buka_popup(){
                                   resepWindow = window.open('<?php echo base_url()?>p_umum/check_up/resep/<?php echo $pt->id_periksa ?>', '', 'width=820, height=720, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
+                                }
+
+                                function buka_detail(){
+                                  resepWindow = window.open('<?php echo base_url()?>p_umum/check_up/detail/<?php echo $pt->id_periksa ?>', '', 'width=480, height=720, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
                                 }
                           </script>                      
                         </div>

@@ -30,6 +30,7 @@ class Check_Up extends CI_Controller {
 		$this->load->model('PenatalaksanaanModel');
 		$this->load->model('TindakanModel');
 		$this->load->model('RiwayatHamilModel');
+		$this->load->library('pdf');
 
 		date_default_timezone_set("Asia/Jakarta");
  
@@ -187,6 +188,34 @@ class Check_Up extends CI_Controller {
 		$this->load->view('poli_umum/daftar_obat',$data);
 	}
 
+	public function detail($id_periksa){
+		$data['daftar_resep'] = $this->ResepModel->viewResep('id_periksa',$id_periksa);
+		$where = array('tb_periksa.id_periksa' => $id_periksa, );
+		$user_data = $this->ResepModel->viewAll($where);
+		foreach ($user_data as $ud) {
+			$nama = $ud->nama;
+			$umur = $ud->umur;
+			$alamat = $ud->alamat;
+			$tanggal_masuk = $ud->tanggal_masuk;
+			$nama_dokter = $ud->nama_dokter;
+			$nip = $ud->no_sip;
+
+		}
+		$data['nama'] = $nama;
+		$data['umur'] = $umur;
+		$data['alamat'] = $alamat;
+		$data['nama_dokter'] = $nama_dokter;
+		$data['nip'] = $nip;
+		$data['tanggal_masuk'] = $tanggal_masuk;
+		$tanggal = date("d-m-Y");
+		$waktu = date("H:i:s");
+
+		#menambahkan nama dokter pemeriksa
+		
+		
+		$this->load->view('poli_umum/resep',$data);
+	}
+
 	public function tambahResep(){
 		$data = array(
 			'no_obat' => $this->input->post('no_obat'),
@@ -217,6 +246,8 @@ class Check_Up extends CI_Controller {
 		$this->ResepModel->updateResep($no_id,$data);
 		echo json_encode(array('status' => true));
 	}
+
+	
 
 
 	public function simpanRm1a($id_periksa){

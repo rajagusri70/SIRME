@@ -11,9 +11,9 @@ class Admin extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
-		// if($this->session->userdata('status') == "login"){
-		// 	$this->load->view('welcome_message');
-		// }
+		if($this->session->userdata('status') != "login"){
+			redirect(base_url("login"));
+		}
 				
 		$this->load->model('AdminModel');
 		$this->load->model('PoliklinikModel');
@@ -196,6 +196,7 @@ class Admin extends CI_Controller {
 			if($tipe_admin == 'Dokter'){
 				$data = array(
 					'spesialis' => $this->input->post('input_spesialis'),
+					'no_sip' => $this->input->post('input_no_sip'),
 				);
 				$this->AdminModel->update($user_id,$data);
 				echo '<body>';

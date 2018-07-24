@@ -12,6 +12,7 @@ class rekam_medis extends CI_Controller {
 		$this->load->model('RiwayatPenyakitModel');
 		$this->load->model('RiwayatAlergiModel');
 		$this->load->model('RiwayatHamilModel');
+		$this->load->model('ItemResepModel');
 		$this->load->model('ResepModel');
 		$this->load->model('RM1AModel');
 		$this->load->model('RM1BModel');
@@ -39,7 +40,8 @@ class rekam_medis extends CI_Controller {
 		$data['riwayat_penyakit'] = $this->RiwayatPenyakitModel->viewRiwayatPenyakit($no_pasien);
 		$data['riwayat_alergi'] = $this->RiwayatAlergiModel->viewRiwayat($no_pasien);
 		$data['riwayat_kehamilan'] = $this->RiwayatHamilModel->view($no_pasien);
-		$data['resep_obat'] = $this->ResepModel->viewResepPasien($no_pasien);
+		$where = array('pasien.no_pasien' => $no_pasien, );
+		$data['resep_obat'] = $this->ItemResepModel->viewAll($where);
 		$this->load->view('pasien/profile_pasien',$data);
 	}
 

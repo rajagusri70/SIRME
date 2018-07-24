@@ -106,5 +106,11 @@ class AdminModel extends CI_Model{
 	public function hapus($where){
 		$this->db->delete('admin',$where);
 	}
+
+	public function dokter($where,$like){
+		$this->db->where($where);
+		$this->db->like($like);
+		return $this->db->get('admin')->result();
+	}
 	
 }

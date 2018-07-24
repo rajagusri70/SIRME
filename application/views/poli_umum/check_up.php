@@ -930,11 +930,11 @@
                           </table>
                           <script type="text/javascript">
                                 function buka_popup(){
-                                  resepWindow = window.open('<?php echo base_url()?>p_umum/check_up/resep/<?php echo $pt->id_periksa ?>', '', 'width=820, height=720, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
+                                  resepWindow = window.open('<?php echo base_url()?>p_umum/check_up/resep/<?php echo $id_resep ?>', '', 'width=820, height=720, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
                                 }
 
                                 function buka_detail(){
-                                  resepWindow = window.open('<?php echo base_url()?>p_umum/check_up/detail/<?php echo $pt->id_periksa ?>', '', 'width=480, height=720, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
+                                  resepWindow = window.open('<?php echo base_url()?>p_umum/check_up/detail/<?php echo $id_resep ?>', '', 'width=480, height=720, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
                                 }
                           </script>                      
                         </div>

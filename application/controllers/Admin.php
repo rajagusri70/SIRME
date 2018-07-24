@@ -34,7 +34,6 @@ class Admin extends CI_Controller {
 						//$this->load->view('admin/user',$data);
 						
 						echo '<body>';
-						echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
 						echo '<script type="text/javascript" >';
 						echo 'swal({';
 						echo '  title: "Data Berhasil Ditambahkan.!!!",';
@@ -193,10 +192,13 @@ class Admin extends CI_Controller {
 						echo '</script>';
 						echo  '</body>';
 		}elseif($this->input->post('tombol_submit_jabatan')){
+			$array_praktek = $this->input->post('Praktek');
+			$jadwal_praktek = implode(",", $array_praktek);
 			if($tipe_admin == 'Dokter'){
 				$data = array(
 					'spesialis' => $this->input->post('input_spesialis'),
 					'no_sip' => $this->input->post('input_no_sip'),
+					'jadwal_praktek' => $jadwal_praktek,
 				);
 				$this->AdminModel->update($user_id,$data);
 				echo '<body>';

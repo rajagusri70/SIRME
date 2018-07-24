@@ -32,7 +32,8 @@ class Login extends CI_Controller {
 			$data_session = array(
 				'nama' => $username,
 				'status' => "login",
-				'tipe_admin' => $tipe_admin[0]['tipe_admin']
+				'tipe_admin' => $tipe_admin[0]['tipe_admin'],
+				'user_id' => $tipe_admin[0]['user_id'],
 				);
 			if($tipe_admin[0]['tipe_admin'] == 'Resepsionis'){
 				$this->session->set_userdata($data_session);

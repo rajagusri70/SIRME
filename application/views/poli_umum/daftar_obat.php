@@ -91,8 +91,6 @@
                         <td>Nama Obat</td>
                         <td>Jenis</td>
                         <td>Kategori</td>
-                        <td>Harga (Rp.)</td>
-                        <td>Stok</td>
                         <td>Aksi</td>
                       </tr>
                     </thead>
@@ -103,8 +101,6 @@
                         <td><?php echo $do->nama_obat ?></td>
                         <td><?php echo $do->jenis ?></td>
                         <td align="center"><?php echo $do->kategori ?></td>
-                        <td align="right"><?php echo $do->harga ?></td>
-                        <td align="center"><?php echo $do->stok ?></td>
                         <td align="center"><a class="fa fa-plus-circle" onclick="tambah(<?php echo "$do->no_obat"; ?>)" style="cursor:pointer" ></a></td>
                       </tr>
                       <?php } ?>
@@ -177,14 +173,19 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/jquery.sweet-modal.min.css" />
   <script src="<?php echo base_url(); ?>/assets/js/jquery.sweet-modal.min.js"></script>
 
-  
+   <script type="text/javascript">
+    function dataTable(){}
+    $(document).ready(function(){
+      $('#datatable').DataTable();
+    });
+  </script>
   <script type="text/javascript">
         tampil_resep();   //pemanggilan fungsi tampil barang.
         //fungsi tampil barang
         function tampil_resep(){
             $.ajax({
                 type  : 'POST',
-                url   : '<?php echo base_url()?>p_umum/check_up/viewresep/<?php echo $id_periksa ?>',
+                url   : '<?php echo base_url()?>p_umum/check_up/viewresep/<?php echo $id_resep ?>',
                 dataType : 'json',
                 success : function(data){
                   // console.log(data);
@@ -201,10 +202,10 @@
                         html += '<tr>'+
                                 '<td align="center">'+data[i].no_obat+'</td>'+
                                 '<td>'+data[i].nama_obat+'</td>'+
-                                '<td><input id="kuantitas_input'+data[i].no_id+'" value="'+data[i].kuantitas+'" type="number"  ></td>'+
-                                '<td><input id="keterangan_input'+data[i].no_id+'" value="'+data[i].keterangan+'"></td>'+
-                                '<td align="center"><button class="" onclick="update_resep('+data[i].no_id+')">Kirim</button></td>'+
-                                '<td align="center"><a class="fa fa-remove" onclick="hapus('+data[i].no_id+')" style="cursor:pointer" ></a></td>'+
+                                '<td><input id="kuantitas_input'+data[i].item_id+'" value="'+data[i].kuantitas+'" type="number"  ></td>'+
+                                '<td><input id="keterangan_input'+data[i].item_id+'" value="'+data[i].keterangan+'"></td>'+
+                                '<td align="center"><button class="" onclick="update_resep('+data[i].item_id+')">Kirim</button></td>'+
+                                '<td align="center"><a class="fa fa-remove" onclick="hapus('+data[i].item_id+')" style="cursor:pointer" ></a></td>'+
                                 '</tr>';
                     }
                     $('#show_resep').html(html);
@@ -219,21 +220,16 @@
         }
       
   </script>
-  <script type="text/javascript">
-    function dataTable(){}
-    $(document).ready(function(){
-      $('#datatable').DataTable();
-    });
-  </script>
+ 
   <script type="text/javascript">
     function tambah(no_obat){
       var no_obat_value = no_obat;
-      var id_periksa_value = <?php echo $id_periksa; ?>;
+      var id_resep_value = <?php echo $id_resep; ?>;
       
         $.ajax({
           url: "<?php echo base_url().'p_umum/check_up/tambahresep' ?>",
           type: 'POST',
-          data: {no_obat: no_obat_value, id_periksa: id_periksa_value},
+          data: {no_obat: no_obat_value, no_id: id_resep_value},
           dataType: "JSON",
           success: function(data) {
             
@@ -251,14 +247,14 @@
   </script>
   <script type="text/javascript">
     function update_resep(no_id){
-      var no_id_value = no_id;
-      var kuantitas_value = $("#kuantitas_input"+no_id_value).val();
-      var keterangan_value = $("#keterangan_input"+no_id_value).val();;
+      var item_id_value = no_id;
+      var kuantitas_value = $("#kuantitas_input"+item_id_value).val();
+      var keterangan_value = $("#keterangan_input"+item_id_value).val();;
       
         $.ajax({
           url: "<?php echo base_url().'p_umum/check_up/updateresep' ?>",
           type: 'POST',
-          data: {no_id: no_id_value, kuantitas: kuantitas_value, keterangan: keterangan_value},
+          data: {item_id: item_id_value, kuantitas: kuantitas_value, keterangan: keterangan_value},
           dataType: "JSON",
           success: function(data) {
             
@@ -281,7 +277,7 @@
       $.ajax({
         url: "<?php echo base_url().'p_umum/check_up/hapusresep' ?>",
         type: 'POST',
-        data: {no_id: no_id_value},
+        data: {item_id: no_id_value},
         dataType: "JSON",
         success: function(data) {
           new PNotify({

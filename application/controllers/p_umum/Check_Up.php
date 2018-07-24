@@ -20,6 +20,7 @@ class Check_Up extends CI_Controller {
 		$this->load->model('TransaksiModel');
 		$this->load->model('PoliklinikModel');
 		$this->load->model('ItemTransaksiModel');
+		$this->load->model('ItemResepModel');
 		$this->load->model('RM1AModel');
 		$this->load->model('RM1BModel');
 		$this->load->model('RiwayatPenyakitModel');
@@ -43,9 +44,9 @@ class Check_Up extends CI_Controller {
 	}
 
 	public function pasien_terdaftar(){
-		
+		$user_id = $this->session->userdata('user_id');
 		$data['users'] = $this->AdminModel->tampilkan();
-		$data['rawat_jalan'] = $this->RawatModel->tampilkanRawat();
+		$data['rawat_jalan'] = $this->RawatModel->tampilkanRawat($user_id);
 		$this->load->view('poli_umum/pasien_terdaftar',$data);
 	}
 
@@ -170,6 +171,25 @@ class Check_Up extends CI_Controller {
 				$data['rm1a'] = $this->RM1AModel->tampilkan($id_periksa);
 				$data['rm1b'] = $this->RM1BModel->tampilkan($id_periksa);
 				$data['tanggal'] = $tanggal;
+
+				#menambahkan resep per rawat jalan
+				$where = array('id_periksa' => $id_periksa, );
+				$cek = $this->ResepModel->cek($where)->num_rows();
+				if($cek > 0){
+			
+				}else{
+					$data_resep = array(
+						'id_periksa' => $id_periksa, 
+						'tanggal' => $tanggal, 
+					);
+					$this->ResepModel->tambahResep($data_resep);
+				}
+				$where_resep = array('id_periksa' => $id_periksa, );
+				$resep_data = $this->ResepModel->viewResep($where_resep);
+				foreach ($resep_data as $rd) {
+					$id_resep = $rd->no_id;
+				}
+				$data['id_resep'] = $id_resep;
 				$this->load->view('poli_umum/check_up',$data);
 			}
 		}
@@ -182,16 +202,36 @@ class Check_Up extends CI_Controller {
 		echo json_encode(array('status' => true));
 	}
 
-	public function resep($id_periksa){
+	public function resep($id_resep){
+		$tanggal = date("d-m-Y");
+		// $where = array('id_periksa' => $id_periksa, );
+		// $cek = $this->ResepModel->cek($where)->num_rows();
+		// if($cek > 0){
+			
+		// }else{
+		// 	$data_resep = array(
+		// 		'id_periksa' => $id_periksa, 
+		// 		'tanggal' => $tanggal, 
+		// 		'status' => 'Belum Diambil', 
+		// 	);
+		// 	$this->ResepModel->tambahResep($data_resep);
+		// }
 		$data['daftar_obat'] = $this->ObatModel->viewObat();
-		$data['id_periksa'] = $id_periksa;
+		$data['id_resep'] = $id_resep;
 		$this->load->view('poli_umum/daftar_obat',$data);
 	}
 
-	public function detail($id_periksa){
-		$data['daftar_resep'] = $this->ResepModel->viewResep('id_periksa',$id_periksa);
-		$where = array('tb_periksa.id_periksa' => $id_periksa, );
-		$user_data = $this->ResepModel->viewAll($where);
+	public function detail($id_resep){
+		$where = array('no_id' => $id_resep, );
+		$data['daftar_resep'] = $this->ItemResepModel->viewResep($where);
+		$where_all = array('tb_resep.no_id' => $id_resep, );
+		$user_data = $this->ItemResepModel->viewAll($where_all);
+		$data['nama'] = '';
+		$data['umur'] = '';
+		$data['alamat'] = '';
+		$data['nama_dokter'] = '';
+		$data['nip'] = '';
+		$data['tanggal_masuk'] = '';
 		foreach ($user_data as $ud) {
 			$nama = $ud->nama;
 			$umur = $ud->umur;
@@ -200,13 +240,20 @@ class Check_Up extends CI_Controller {
 			$nama_dokter = $ud->nama_dokter;
 			$nip = $ud->no_sip;
 
+			$data['nama'] = $nama;
+			$data['umur'] = $umur;
+			$data['alamat'] = $alamat;
+			$data['nama_dokter'] = $nama_dokter;
+			$data['nip'] = $nip;
+			$data['tanggal_masuk'] = $tanggal_masuk;
+
 		}
-		$data['nama'] = $nama;
-		$data['umur'] = $umur;
-		$data['alamat'] = $alamat;
-		$data['nama_dokter'] = $nama_dokter;
-		$data['nip'] = $nip;
-		$data['tanggal_masuk'] = $tanggal_masuk;
+		// $data['nama'] = $nama;
+		// $data['umur'] = $umur;
+		// $data['alamat'] = $alamat;
+		// $data['nama_dokter'] = $nama_dokter;
+		// $data['nip'] = $nip;
+		// $data['tanggal_masuk'] = $tanggal_masuk;
 		$tanggal = date("d-m-Y");
 		$waktu = date("H:i:s");
 
@@ -219,36 +266,35 @@ class Check_Up extends CI_Controller {
 	public function tambahResep(){
 		$data = array(
 			'no_obat' => $this->input->post('no_obat'),
-			'id_periksa' => $this->input->post('id_periksa')
+			'no_id' => $this->input->post('no_id')
 		);
-		$this->ResepModel->tambahResep($data);
+		$this->ItemResepModel->tambahResep($data);
 		echo json_encode(array('status' => true));
 	}
 
-	public function viewResep($id_periksa){
-		$data = $this->ResepModel->viewResep('tb_resep.id_periksa',$id_periksa);
+	public function viewResep($id_resep){
+		$where = array('tb_item_resep.no_id' => $id_resep, );
+		$data = $this->ItemResepModel->viewResep($where);
 		echo json_encode($data);
 	}
 
 	public function hapusResep(){
-		$no_id = $this->input->post('no_id');
-		$where = array('no_id' => $no_id);
-		$this->ResepModel->hapusResep($where);
+		$item_id = $this->input->post('item_id');
+		$where = array('item_id' => $item_id);
+		$this->ItemResepModel->hapusResep($where);
 		echo json_encode(array('status' => true));
 	}
 
 	public function updateResep(){
-		$no_id = $this->input->post('no_id');
+		$item_id = $this->input->post('item_id');
+		$where = array('item_id' => $item_id, );
 		$data = array(
 			'kuantitas' => $this->input->post('kuantitas'),
 			'keterangan' => $this->input->post('keterangan')
 		);
-		$this->ResepModel->updateResep($no_id,$data);
+		$this->ItemResepModel->updateResep($where,$data);
 		echo json_encode(array('status' => true));
 	}
-
-	
-
 
 	public function simpanRm1a($id_periksa){
 		$action = $this->input->post('action');
@@ -535,7 +581,7 @@ class Check_Up extends CI_Controller {
     	}
 
     	$where_poli = array(
-			'nama_poli' => 'Poli Umum', 
+			'nama_poli' => 'Umum', 
 		);
 		$poli = $this->PoliklinikModel->viewPoliWhere($where_poli);
 		foreach ($poli as $p) {

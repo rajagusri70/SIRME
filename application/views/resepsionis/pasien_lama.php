@@ -63,7 +63,7 @@
             <div class="profile_info">
               <span>Welcome,</span>
               <?php foreach ($users as $user) { ?>
-                <h2>Dr. <?php echo $user->nama ?></h2>
+                <h2><?php echo $user->nama ?></h2>
               <?php } ?>
             </div>
           </div>
@@ -74,7 +74,9 @@
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
-              <h3>General</h3>
+              <h3><?php foreach ($users as $user) { ?>
+                <?php echo $user->tipe_admin ?> <?php echo $user->spesialis ?>
+              <?php } ?></h3>
               <ul class="nav side-menu">
                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
@@ -136,91 +138,13 @@
                   
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
-                  <li><a href="javascript:;">  Profile</a>
-                  </li>
-                  <li>
-                    <a href="javascript:;">
-                      <span class="badge bg-red pull-right">50%</span>
-                      <span>Settings</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="javascript:;">Help</a>
-                  </li>
+                  
                   <li><a href="<?php echo base_url('admin/logout') ?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                   </li>
                 </ul>
               </li>
 
-              <li role="presentation" class="dropdown">
-                
-                <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
-                  <li>
-                    <a>
-                      <span class="image">
-                                        <img src="images/img.jpg" alt="Profile Image" />
-                                    </span>
-                      <span>
-                                        <span>John Smith</span>
-                      <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                    </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image">
-                                        <img src="images/img.jpg" alt="Profile Image" />
-                                    </span>
-                      <span>
-                                        <span>John Smith</span>
-                      <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                    </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image">
-                                        <img src="images/img.jpg" alt="Profile Image" />
-                                    </span>
-                      <span>
-                                        <span>John Smith</span>
-                      <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                    </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image">
-                                        <img src="images/img.jpg" alt="Profile Image" />
-                                    </span>
-                      <span>
-                                        <span>John Smith</span>
-                      <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                    </span>
-                    </a>
-                  </li>
-                  <li>
-                    <div class="text-center">
-                      <a>
-                        <strong>See All Alerts</strong>
-                        <i class="fa fa-angle-right"></i>
-                      </a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
+              
 
             </ul>
           </nav>
@@ -387,7 +311,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Pilih Poliklinik<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select id="poliklinik" name="input_poliklinik" onchange="biaya();" class="normal-form-long" >
+                        <select id="poliklinik" name="input_poliklinik" onchange="biaya();getDokter();" class="normal-form-long" >
                           <option value="none">-Pilih Poliklinik-</option>
                           <?php foreach ($poliklinik as $poli) {?>
                           <option value="<?php echo $poli->nama_poli ?>"><?php echo $poli->nama_poli ?></option>
@@ -395,11 +319,20 @@
                         </select>
                       </div>
                     </div>
-                    <div class="item form-group">
+                    <div class="item form-group" id="biaya">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Biaya Pendaftaran (Rp.)<span ></span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input id="biaya_daftar" name="input_biaya" type="text" class="normal-form-long" readonly required="" placeholder="Biaya yang dikeluarkan untuk pendaftaran Poli">
+                      </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Pilih Dokter<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select id="show_dokter" name="input_dokter" " class="normal-form-long" >
+                        <option value="" >- tidak ada data -</option>
+                        </select>
                       </div>
                     </div>
                     
@@ -411,19 +344,28 @@
                     </div>
                     <script type="text/javascript">
                       function biaya(){
-                        var poli = document.getElementById("poliklinik").value;
-                        
+                        var poli = document.getElementById("poliklinik");
+                        var biaya = document.getElementById("biaya");
+                        var dokter = poli.options[poli.selectedIndex].value;
+
+
                         if(poli == "none"){
                           document.getElementById("tombol_poli").disabled = true;
                           document.getElementById("biaya_daftar").value = "";
                         }
                         <?php foreach ($poliklinik as $poli) { ?>
-                        else if(poli == "<?php echo $poli->nama_poli ?>"){
+                        else if(poli.value == "<?php echo $poli->nama_poli ?>"){
                           document.getElementById("biaya_daftar").value = "<?php echo $poli->biaya_pendaftaran ?>";
                           document.getElementById("tombol_poli").disabled = false;
                         }
                       <?php } ?>
+                        // if(dokter == 'Umum'){
+                        //   alert('Hello');
+                        //   biaya.style.display = "block";
+                        // }
                       }
+
+                      
                     </script>
                     <?php 
                      // $_SESSION['no_pasien'] = $p->no_pasien;
@@ -482,6 +424,37 @@
   <script src="<?php echo base_url(); ?>/assets/js/custom.js"></script>
   <!-- form validation -->
   <script src="<?php echo base_url(); ?>/assets/js/validator/validator.js"></script>
+  <script type="text/javascript">
+    function getDokter(){
+      var poli_value = document.getElementById("poliklinik");
+      var dokter_value = poli_value.options[poli_value.selectedIndex].value;
+      $.ajax({
+        url   : '<?php echo base_url()?>resepsionis/pasien/getDokter',
+        type  : 'POST',
+        data : {poli: dokter_value},
+        dataType : 'JSON',
+        success : function(data){
+          if (data.length <= 0){
+            html += 
+              '<option value="" >-kosong-</option>';
+            $('#show_dokter').html(html);
+            //setTimeout(tampil_diagnosa, 500)
+          }else{
+            var html = '';
+            var i;
+            for(i=0; i<data.length; i++){
+              html += 
+              '<option value="'+data[i].user_id+'" >'+data[i].nama+'</option>';
+            }
+            $('#show_dokter').html(html);
+          }
+        }, 
+        error: function(){
+                  
+        }
+      });
+    }
+  </script>
   
 </body>
 

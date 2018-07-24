@@ -19,13 +19,23 @@ class PasienModel extends CI_Model{
 		return $this->db->get("pasien")->result();
 	}
 
-	function cek_pasien($no_ktp,$nama){
-		$this->db->where('no_ktp', $no_ktp);
-		$this->db->or_where('nama', $nama);		
+	public function cek_tgl($nama,$tanggal_lahir){
 		// $this->db->where('no_ktp', $no_ktp);
-  //   	$this->db->or_like('nama', $nama);
-    	return $this->db->get('pasien');
+		// $this->db->or_where('nama', $nama);		
+		// $this->db->where('no_ktp', $no_ktp);
+		$this->db->where('nama', $nama);
+		$this->db->where('tanggal_lahir', $tanggal_lahir);
+		return $this->db->get('pasien');
+		// $this->db->like('no_ktp', $where);
+  // 	   	$this->db->or_like('nama', $where);
+  //   	return $this->db->get('pasien');
 	}
+
+	public function cek_data($parameter, $nama){
+		$this->db->where($parameter, $nama);
+		return $this->db->get('pasien');		
+	}
+
 
 	public function upload(){
 		$newname = $this->input->post('input_no_ktp');

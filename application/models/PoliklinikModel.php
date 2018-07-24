@@ -14,4 +14,17 @@ class PoliklinikModel extends CI_Model{
 	public function viewPoliWhere($where){
 		return $this->db->get_where('tb_poliklinik',$where)->result();
 	}
+
+	public function count($where){
+		$this->db->where($where);
+		$this->db->from("tb_poliklinik");
+		return $this->db->count_all_results();
+	}
+
+	public function update($where,$data){
+		$this->db->where($where);
+		$this->db->update("tb_poliklinik",$data);
+	}
+
+	
 }

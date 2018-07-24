@@ -93,7 +93,9 @@
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
-              <h3>General</h3>
+              <h3><?php foreach ($users as $user) { ?>
+                <?php echo $user->tipe_admin ?> <?php echo $user->spesialis ?>
+              <?php } ?></h3>
               <ul class="nav side-menu">
                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
@@ -194,7 +196,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Nama Lengkap<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" name="input_nama" id="nama" required="required" class="normal-form-long">
+                        <input type="text" name="input_nama" id="nama" required="required" class="normal-form-long"  >
                       </div>
                     </div>
                     <div class="item form-group">
@@ -214,7 +216,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Tgl. Lahir<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" name="input_tanggal_lahir" id="tanggal_lahir" required="required" class="normal-form-long">
+                        <input type="text" name="input_tanggal_lahir" id="tanggal_lahir" required="required" class="normal-form-long" onchange="cekData()" >
                       </div>
                     </div>
                     <div class="item form-group">
@@ -228,7 +230,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nomor KTP<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="nomor_ktp" name="input_no_ktp" required="required" class="normal-form-long">
+                        <input type="number" id="nomor_ktp" name="input_no_ktp" required="required" class="normal-form-long" onchange="cekKtp()" >
                       </div>
                     </div>
                     <div class="item form-group">
@@ -337,7 +339,7 @@
                 </div>
               </div>
             </div>
-              <input type="submit" name="submit" class="btn float" value="Daftar" style="font-weight: bold; font-size: 12px" >
+              <input id="tombol_submit" type="submit" name="submit" class="btn float" value="Daftar" style="font-weight: bold; font-size: 12px" >
             
             </form>
 
@@ -384,12 +386,62 @@
   <script src="<?php echo base_url(); ?>/assets/js/datepicker/bootstrap-datepicker.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/js/datepicker/locales/bootstrap-datepicker.id.min.js">
   </script>
+  <script src="<?php echo base_url(); ?>/assets/js/sweetalert.min.js"></script>
+
   
   <script type="text/javascript">
     $('#tanggal_lahir').datepicker({
       language: 'id',
       format: 'dd - MM - yyyy',
     });
+  </script>
+  <script type="text/javascript">
+    function cekKtp(){
+      var nomor_ktp_value = $("input[name=input_no_ktp]").val();
+        $.ajax({
+          url: "<?php echo base_url().'resepsionis/pasien/cek_id' ?>",
+          type: 'POST',
+          data: {jenis_cek: 'no_ktp', no_ktp: nomor_ktp_value},
+          dataType: "JSON",
+          success: function(data) {
+            swal({
+              title: "No KTP Telah Terdaftar.!",
+              text: "No. KTP yang dimasukkan telah terdaftar. Pendaftaran tidak dapat dilanjutkan. Silahkan gunakan fitur Cari Pasien untuk mencari pasien dengan No. KTP tersebut.",
+              icon: "warning",
+              button: "Oke",
+            });
+            $("#tombol_submit").prop('disabled', true);
+          },
+          error: function(data) {
+            $("#tombol_submit").prop('disabled', false);
+          }
+        });
+    }
+  </script>
+  <script type="text/javascript">
+    
+    function cekNamaTgl(jenis_cek_value){
+      var nama_value = $("input[name=input_nama]").val();
+      var nomor_ktp_value = $("input[name=input_no_ktp]").val();
+      var tanggal_lahir_value = $("input[name=input_tanggal_lahir]").val();
+        $.ajax({
+          url: "<?php echo base_url().'resepsionis/pasien/cek_id' ?>",
+          type: 'POST',
+          data: {jenis_cek: jenis_cek_value, nama: nama_value, no_ktp: nomor_ktp_value},
+          dataType: "JSON",
+          success: function(data) {
+            swal({
+              title: "Nama telah terdaftar.!!!",
+              text: "Nama yang dimasukan mungkin telah terdaftar. Untuk memastikan, silahkan gunakan fitur Cari Pasien untuk mencari nama yang bersangkutan",
+              icon: "warning",
+              button: "Oke",
+            });
+          },
+          error: function(data) {
+            
+          }
+        });
+    }
   </script>
   
 </body>

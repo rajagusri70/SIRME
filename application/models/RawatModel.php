@@ -18,6 +18,7 @@ class RawatModel extends CI_Model{
         $waktu = date("H:i:s");
         $biaya = $this->input->post('input_biaya');
         $poliklinik = $this->input->post('input_poliklinik');
+        $dokter = $this->input->post('input_dokter');
         $status = "Menunggu";
 		$data = array(
 			"no_pasien" => $nomor_pasien,
@@ -27,13 +28,21 @@ class RawatModel extends CI_Model{
 			"biaya" => $biaya,
 			"poliklinik" => $poliklinik,
 			"status" => $status,
-			"pendaftar" => $user_id
+			"pendaftar" => $user_id,
+			"dokter" => $dokter
 
 		);
 		$this->db->insert('rawat_jalan', $data);
 		// $trx = array(
 		// 	'' => '' 
 		// );
+	}
+
+	public function cekPasien(){
+		$nomor_pasien = $_GET['nomor_pasien'];
+		$query = "SELECT * FROM `rawat_jalan` WHERE no_pasien = {$nomor_pasien} AND (status = 'Menunggu' OR status = 'Dalam Pemeriksaan')";
+		
+		return $this->db->query($query);
 	}
 
 	public function viewWhere($where, $where_parameter){
@@ -65,13 +74,14 @@ class RawatModel extends CI_Model{
 	    return $this->db->get()->result();
 	}
 
-	public function tampilkanRawat(){
-		// $this->db->select('*'); //memeilih semua field
-	 //    $this->db->from($table); //memeilih tabel
-	 //    $this->db->join('pasien', ''.$table.'.no_pasien = pasien.no_pasien');
-	 //    $this->db->or_where($where);
-	 //    return $this->db->get()->result();
-		$querry = "SELECT * FROM `rawat_jalan` JOIN `pasien` ON `rawat_jalan`.`no_pasien` = `pasien`.`no_pasien` WHERE rawat_jalan.poliklinik = 'Poli Umum' AND `rawat_jalan`.`status` = 'Menunggu' OR `rawat_jalan`.`status` = 'Dalam Pemeriksaan'";
+	public function tampilkanRawat($user_id){
+	//		$this->db->select('*'); //memeilih semua field
+	//    	$this->db->from($table); //memeilih tabel
+	//    	$this->db->join('pasien', ''.$table.'.no_pasien = pasien.no_pasien');
+	//    	$this->db->or_where($where);
+	//    	return $this->db->get()->result();
+		
+		$querry = "SELECT * FROM `rawat_jalan` JOIN `pasien` ON `rawat_jalan`.`no_pasien` = `pasien`.`no_pasien` WHERE rawat_jalan.poliklinik = 'Umum' AND (`rawat_jalan`.`status` = 'Menunggu' OR `rawat_jalan`.`status` = 'Dalam Pemeriksaan') AND `dokter` = '".$user_id."'"; 
 		return $this->db->query($querry)->result();
 	}
 
@@ -138,5 +148,15 @@ class RawatModel extends CI_Model{
 		return $this->db->count_all_results();
 	}
 
-	
+	public function count($where){
+		$this->db->where($where);
+		$this->db->from("rawat_jalan");
+		return $this->db->count_all_results();
+	}
+
+	public function hari($where){
+		$this->db->where($where);
+		$this->db->from("tb_jadwal");
+		return $this->db->get()->result();
+	}
 }

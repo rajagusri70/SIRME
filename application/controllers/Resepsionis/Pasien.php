@@ -120,6 +120,38 @@ class Pasien extends CI_Controller {
 		}
 	}
 
+	public function cek_nama(){
+		$nama = $this->input->post('nama');
+		$cek = $this->PasienModel->cek_data('nama',$nama)->num_rows();
+		if($cek > 0){
+			echo json_encode(array('status' => true));
+		}else{
+
+		}
+	}
+
+	public function cek_id(){
+		$nama = $this->input->post('nama');
+		//$nama = 'John Doe';
+		$no_ktp = $this->input->post('no_ktp');
+		$jenis_cek = $this->input->post('jenis_cek');
+		$tanggal_lahir = $this->input->post('tanggal_lahir');
+		//$jenis_cek = 'nama';
+
+		if($jenis_cek == 'nama'){
+			$cek = $this->PasienModel->cek_tgl($nama,$tanggal_lahir)->num_rows();
+			
+		}elseif ( $jenis_cek == 'no_ktp') {
+			$cek = $this->PasienModel->cek_data('no_ktp',$no_ktp)->num_rows();
+		}
+		
+		if($cek > 0){
+			echo json_encode(array('status' => true));
+		}else{
+
+		}
+	}
+
 	public function cari(){
 		$cari_input = $this->input->post('cari_input');
 		$data['users'] = $this->AdminModel->tampilkan();
@@ -146,73 +178,135 @@ class Pasien extends CI_Controller {
 		$microtime = microtime();
 		$timestamp = $tanggal.$microtime;//$tanggal.$waktu.$microtime;
 		$this->load->view('resepsionis/pasien_lama',$data);
+
 		if($this->input->post('daftar_poli')){
-			$this->RawatModel->poli($timestamp,$user_id);
-			$rawat_jalan = $this->RawatModel->viewWhere('timestamp',$timestamp);
-			foreach ($rawat_jalan as $rj) {
-				$id_rawat = $rj->id_rawat;
+			$cek = $this->RawatModel->cekPasien()->num_rows(); 
+			if($cek > 0){
+				echo '<body>';
+				echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
+				echo '<script type="text/javascript" >';
+				echo 'swal({';
+				echo '  title: "Pendaftaran Gagal.!",';
+				echo '  text: "Pasien sedang melakukan rawat jalan.!",';
+				echo '	icon: "success",';
+				echo '  buttons: {';
+				//echo '    cancel: "Run away!",';
+				echo '    catch: {';
+				echo '      text: "Oke",';
+				echo '      value: "catch",';
+				echo '    },';
+				//echo '    defeat: true,';
+				echo '  },';
+				echo '})';
+				echo '.then((value) => {';
+				echo '  switch (value) {';				 
+				echo '    case "defeat":';
+				echo '      swal("Pikachu fainted! You gained 500 XP!");';
+				echo '      break;';				 
+				echo '    case "catch":';
+				echo '      window.location = "'.base_url().'resepsionis/pasien/pasien_lama";';
+				echo '      break;';				 
+				echo '    default:';
+				echo '      swal("Got away safely!");';
+				echo '  }';
+				echo '});';
+				echo '</script>';
+				echo  '</body>';
+			}else{
+				$this->RawatModel->poli($timestamp,$user_id);
+				$rawat_jalan = $this->RawatModel->viewWhere('timestamp',$timestamp);
+				foreach ($rawat_jalan as $rj) {
+					$id_rawat = $rj->id_rawat;
+				}
+				$datatrx = array(
+					'id_rawat' => $id_rawat, 
+					'tanggal_transaksi' => $tanggal, 
+					'jam_transaksi' => $waktu, 
+					'status' => 'Belum Lunas', 
+				);
+				$this->TransaksiModel->tambahTrx($datatrx);
+				$where = array('id_rawat' => $id_rawat, );
+				$transaksi = $this->TransaksiModel->viewTrx($where);
+				foreach ($transaksi as $trx) {
+					$id_transaksi = $trx->id_transaksi;
+				}
+				$dataTrxItem = array(
+					'id_transaksi' => $id_transaksi, 
+					'jenis_transaksi' => 'Pendaftaran', 
+					'nama_transaksi' => $poliklinik, 
+					'jumlah' => '1', 
+					'harga' => $biaya, 
+				);
+				$this->ItemTransaksiModel->tambahItem($dataTrxItem);
+				// redirect ("resepsionis/pasien/pasien_lama");
+				echo '<body>';
+				echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
+				echo '<script type="text/javascript" >';
+				echo 'swal({';
+				echo '  title: "Pendaftaran Berhasil.!",';
+				echo '  text: "Pasien telah berhasil didaftarkan Pada Poliklinik.",';
+				echo '	icon: "success",';
+				echo '  buttons: {';
+				//echo '    cancel: "Run away!",';
+				echo '    catch: {';
+				echo '      text: "Oke",';
+				echo '      value: "catch",';
+				echo '    },';
+				//echo '    defeat: true,';
+				echo '  },';
+				echo '})';
+				echo '.then((value) => {';
+				echo '  switch (value) {';				 
+				echo '    case "defeat":';
+				echo '      swal("Pikachu fainted! You gained 500 XP!");';
+				echo '      break;';				 
+				echo '    case "catch":';
+				echo '      window.location = "'.base_url().'resepsionis/pasien/pasien_lama";';
+				echo '      break;';				 
+				echo '    default:';
+				echo '      swal("Got away safely!");';
+				echo '  }';
+				echo '});';
+				echo '</script>';
+				echo  '</body>';
 			}
-			$datatrx = array(
-				'id_rawat' => $id_rawat, 
-				'tanggal_transaksi' => $tanggal, 
-				'jam_transaksi' => $waktu, 
-				'status' => 'Belum Lunas', 
-			);
-			$this->TransaksiModel->tambahTrx($datatrx);
-			$where = array('id_rawat' => $id_rawat, );
-			$transaksi = $this->TransaksiModel->viewTrx($where);
-			foreach ($transaksi as $trx) {
-				$id_transaksi = $trx->id_transaksi;
-			}
-			$dataTrxItem = array(
-				'id_transaksi' => $id_transaksi, 
-				'jenis_transaksi' => 'Pendaftaran', 
-				'nama_transaksi' => $poliklinik, 
-				'jumlah' => '1', 
-				'harga' => $biaya, 
-			);
-			$this->ItemTransaksiModel->tambahItem($dataTrxItem);
-			// redirect ("resepsionis/pasien/pasien_lama");
-			echo '<body>';
-			echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
-			echo '<script type="text/javascript" >';
-			echo 'swal({';
-			echo '  title: "Pendaftaran Berhasil.!",';
-			echo '  text: "Pasien telah berhasil didaftarkan Pada Poliklinik.",';
-			echo '	icon: "success",';
-			echo '  buttons: {';
-			//echo '    cancel: "Run away!",';
-			echo '    catch: {';
-			echo '      text: "Oke",';
-			echo '      value: "catch",';
-			echo '    },';
-			//echo '    defeat: true,';
-			echo '  },';
-			echo '})';
-			echo '.then((value) => {';
-			echo '  switch (value) {';				 
-			echo '    case "defeat":';
-			echo '      swal("Pikachu fainted! You gained 500 XP!");';
-			echo '      break;';				 
-			echo '    case "catch":';
-			echo '      window.location = "'.base_url().'resepsionis/pasien/pasien_lama";';
-			echo '      break;';				 
-			echo '    default:';
-			echo '      swal("Got away safely!");';
-			echo '  }';
-			echo '});';
-			echo '</script>';
-			echo  '</body>';
 		}
 	}
 
 	public function daftar_pasien_lama(){
-		$parameter = $this->input->post('parameter_input');
-		$data['users'] = $this->AdminModel->tampilkan();
-		$data['poliklinik'] = $this->PoliklinikModel->viewPoli();
-		// if($parameter == 'id_pasien'){
+		
+		if($this->input->post('search')){
+			$day = date ("D");
+			if ($day == 'Sun') {
+				$hari = 'Minggu';
+			}elseif ($day == 'Mon') {
+				$hari = 'Senin';
+			}elseif ($day == 'Tue') {
+				$hari = 'Selasa';
+			}elseif ($day == 'Wed') {
+				$hari = 'Rabu';
+			}elseif ($day == 'Thu') {
+				$hari = 'Kamis';
+			}elseif ($day == 'Fri') {
+				$hari = "Jum'at";
+			}elseif ($day == 'Sat') {
+				$hari = 'Sabtu';
+			}
+			$parameter = $this->input->post('parameter_input');
+			$data['users'] = $this->AdminModel->tampilkan();
+			$data['poliklinik'] = $this->PoliklinikModel->viewPoli();
+			// if($parameter == 'id_pasien'){
+			$where_umum = array('spesialis' => 'Umum', );
+			$like_umum = array('jadwal_praktek' => $hari, );
+			$data['dokter_umum'] = $this->AdminModel->dokter($where_umum,$like_umum);
 			$data['pasien'] = $this->PasienModel->cariPasienLama('id_pasien');
 			$this->load->view('resepsionis/pasien_lama',$data);
+		}else{
+			redirect ("resepsionis/pasien/pasien_lama");
+		}
+
+
+		
 		// }elseif ($parameter == 'nama_pasien') {
 		// 	$data['pasien'] = $this->PasienModel->cariPasienLama('nama_pasien');
 		// 	$this->load->view('resepsionis/pasien_lama',$data);
@@ -225,6 +319,40 @@ class Pasien extends CI_Controller {
 		// }else{
 		// 	$this->load->view('resepsionis/pasien_lama',$data);
 		// }
+	}
+
+	public function getDokter(){
+		$day = date ("D");
+		if ($day == 'Sun') {
+			$hari = 'Minggu';
+		}elseif ($day == 'Mon') {
+			$hari = 'Senin';
+		}elseif ($day == 'Tue') {
+			$hari = 'Selasa';
+		}elseif ($day == 'Wed') {
+			$hari = 'Rabu';
+		}elseif ($day == 'Thu') {
+			$hari = 'Kamis';
+		}elseif ($day == 'Fri') {
+			$hari = "Jum'at";
+		}elseif ($day == 'Sat') {
+			$hari = 'Sabtu';
+		}
+		$poli = $this->input->post('poli');
+		if($poli == 'Umum'){
+			$where_umum = array('spesialis' => 'Umum', );
+			$like_umum = array('jadwal_praktek' => $hari, );
+			$data = $this->AdminModel->dokter($where_umum,$like_umum);
+			echo json_encode($data);
+		}elseif ($poli == 'Mata') {
+			$where_umum = array('spesialis' => 'Mata', );
+			$like_umum = array('jadwal_praktek' => $hari, );
+			$data = $this->AdminModel->dokter($where_umum,$like_umum);
+			echo json_encode($data);
+		}elseif ($poli == 'none') {
+			echo "- tidak ada data -";
+		}
+		
 	}
 
 	// public function pasien_baru(){

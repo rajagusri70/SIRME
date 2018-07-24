@@ -74,11 +74,13 @@
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
-              <h3>General</h3>
+              <h3><?php foreach ($users as $user) { ?>
+                <?php echo $user->tipe_admin ?> <?php echo $user->spesialis ?>
+              <?php } ?></h3>
               <ul class="nav side-menu">
                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li><a href="index.html">Dashboard</a>
+                    <li><a href="<?php echo base_url().'p_umum/home' ?>">Dashboard</a>
                     </li>
                   </ul>
                 </li>
@@ -121,7 +123,7 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="images/img.jpg" alt="">Dr. 
+                  <img src="images/img.jpg" alt="">Ddr. 
                   <?php foreach ($users as $user) {
                     echo $user->nama;
                   } ?>
@@ -132,6 +134,10 @@
                   <li><a href="<?php echo base_url('admin/logout') ?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                   </li>
                 </ul>
+              </li>
+              <li class="">
+                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Anda Login sebagai
+                </a>
               </li>
 
               

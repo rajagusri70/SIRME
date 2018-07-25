@@ -24,13 +24,13 @@ class Home extends CI_Controller {
 		$tanggal = date("d-m-Y");
 		$data['users'] = $this->AdminModel->tampilkan();
 		$antrian = array(
-			'poliklinik' => 'Poli Umum',
+			'poliklinik' => 'Umum',
 			'status' => 'Menunggu', 
 			'tanggal' => $tanggal, 
 		);
 		$total = array(
 			'status' => 'Selesai',
-			'poliklinik' => 'Poli Umum', 
+			'poliklinik' => 'Umum', 
 		);
 		$maksimum_array = array(
 			'nama_poli' => 'Umum',
@@ -44,7 +44,7 @@ class Home extends CI_Controller {
 		}
 		$selesai = array(
 			'status' => 'Selesai',
-			'poliklinik' => 'Poli Umum',
+			'poliklinik' => 'Umum',
 			'tanggal' => $tanggal, 
 		);
 		$jadwal = array('id_poli' => 1, );

@@ -180,95 +180,138 @@ class Pasien extends CI_Controller {
 		$this->load->view('resepsionis/pasien_lama',$data);
 
 		if($this->input->post('daftar_poli')){
-			$cek = $this->RawatModel->cekPasien()->num_rows(); 
-			if($cek > 0){
-				echo '<body>';
-				echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
-				echo '<script type="text/javascript" >';
-				echo 'swal({';
-				echo '  title: "Pendaftaran Gagal.!",';
-				echo '  text: "Pasien sedang melakukan rawat jalan.!",';
-				echo '	icon: "success",';
-				echo '  buttons: {';
-				//echo '    cancel: "Run away!",';
-				echo '    catch: {';
-				echo '      text: "Oke",';
-				echo '      value: "catch",';
-				echo '    },';
-				//echo '    defeat: true,';
-				echo '  },';
-				echo '})';
-				echo '.then((value) => {';
-				echo '  switch (value) {';				 
-				echo '    case "defeat":';
-				echo '      swal("Pikachu fainted! You gained 500 XP!");';
-				echo '      break;';				 
-				echo '    case "catch":';
-				echo '      window.location = "'.base_url().'resepsionis/pasien/pasien_lama";';
-				echo '      break;';				 
-				echo '    default:';
-				echo '      swal("Got away safely!");';
-				echo '  }';
-				echo '});';
-				echo '</script>';
-				echo  '</body>';
+			$where = array('nama_poli' => $poliklinik );
+			$data_poli = $this->PoliklinikModel->viewPoliWhere($where);
+			foreach ($data_poli as $dp) {
+				$poli = $dp->maksimum_pasien;
+			}
+			$where_count = array(
+				'tanggal' => $tanggal , 
+				'poliklinik' => $poliklinik , 
+			);
+			$jumlah_rawat = $this->RawatModel->count($where_count);
+			if($jumlah_rawat < $poli){
+				$cek = $this->RawatModel->cekPasien()->num_rows(); 
+				if($cek > 0){
+					echo '<body>';
+					echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
+					echo '<script type="text/javascript" >';
+					echo 'swal({';
+					echo '  title: "Pendaftaran Gagal.!",';
+					echo '  text: "Pasien sedang melakukan rawat jalan.!",';
+					echo '	icon: "success",';
+					echo '  buttons: {';
+					//echo '    cancel: "Run away!",';
+					echo '    catch: {';
+					echo '      text: "Oke",';
+					echo '      value: "catch",';
+					echo '    },';
+					//echo '    defeat: true,';
+					echo '  },';
+					echo '})';
+					echo '.then((value) => {';
+					echo '  switch (value) {';				 
+					echo '    case "defeat":';
+					echo '      swal("Pikachu fainted! You gained 500 XP!");';
+					echo '      break;';				 
+					echo '    case "catch":';
+					echo '      window.location = "'.base_url().'resepsionis/pasien/pasien_lama";';
+					echo '      break;';				 
+					echo '    default:';
+					echo '      swal("Got away safely!");';
+					echo '  }';
+					echo '});';
+					echo '</script>';
+					echo  '</body>';
+				}else{
+					$this->RawatModel->poli($timestamp,$user_id);
+					$rawat_jalan = $this->RawatModel->viewWhere('timestamp',$timestamp);
+					foreach ($rawat_jalan as $rj) {
+						$id_rawat = $rj->id_rawat;
+					}
+					$datatrx = array(
+						'id_rawat' => $id_rawat, 
+						'tanggal_transaksi' => $tanggal, 
+						'jam_transaksi' => $waktu, 
+						'status' => 'Belum Lunas', 
+					);
+					$this->TransaksiModel->tambahTrx($datatrx);
+					$where = array('id_rawat' => $id_rawat, );
+					$transaksi = $this->TransaksiModel->viewTrx($where);
+					foreach ($transaksi as $trx) {
+						$id_transaksi = $trx->id_transaksi;
+					}
+					$dataTrxItem = array(
+						'id_transaksi' => $id_transaksi, 
+						'jenis_transaksi' => 'Pendaftaran', 
+						'nama_transaksi' => $poliklinik, 
+						'jumlah' => '1', 
+						'harga' => $biaya, 
+					);
+					$this->ItemTransaksiModel->tambahItem($dataTrxItem);
+					// redirect ("resepsionis/pasien/pasien_lama");
+					echo '<body>';
+					echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
+					echo '<script type="text/javascript" >';
+					echo 'swal({';
+					echo '  title: "Pendaftaran Berhasil.!",';
+					echo '  text: "Pasien telah berhasil didaftarkan Pada Poliklinik.",';
+					echo '	icon: "success",';
+					echo '  buttons: {';
+					//echo '    cancel: "Run away!",';
+					echo '    catch: {';
+					echo '      text: "Oke",';
+					echo '      value: "catch",';
+					echo '    },';
+					//echo '    defeat: true,';
+					echo '  },';
+					echo '})';
+					echo '.then((value) => {';
+					echo '  switch (value) {';				 
+					echo '    case "defeat":';
+					echo '      swal("Pikachu fainted! You gained 500 XP!");';
+					echo '      break;';				 
+					echo '    case "catch":';
+					echo '      window.location = "'.base_url().'resepsionis/pasien/pasien_lama";';
+					echo '      break;';				 
+					echo '    default:';
+					echo '      swal("Got away safely!");';
+					echo '  }';
+					echo '});';
+					echo '</script>';
+					echo  '</body>';
+				}
 			}else{
-				$this->RawatModel->poli($timestamp,$user_id);
-				$rawat_jalan = $this->RawatModel->viewWhere('timestamp',$timestamp);
-				foreach ($rawat_jalan as $rj) {
-					$id_rawat = $rj->id_rawat;
-				}
-				$datatrx = array(
-					'id_rawat' => $id_rawat, 
-					'tanggal_transaksi' => $tanggal, 
-					'jam_transaksi' => $waktu, 
-					'status' => 'Belum Lunas', 
-				);
-				$this->TransaksiModel->tambahTrx($datatrx);
-				$where = array('id_rawat' => $id_rawat, );
-				$transaksi = $this->TransaksiModel->viewTrx($where);
-				foreach ($transaksi as $trx) {
-					$id_transaksi = $trx->id_transaksi;
-				}
-				$dataTrxItem = array(
-					'id_transaksi' => $id_transaksi, 
-					'jenis_transaksi' => 'Pendaftaran', 
-					'nama_transaksi' => $poliklinik, 
-					'jumlah' => '1', 
-					'harga' => $biaya, 
-				);
-				$this->ItemTransaksiModel->tambahItem($dataTrxItem);
-				// redirect ("resepsionis/pasien/pasien_lama");
 				echo '<body>';
-				echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
-				echo '<script type="text/javascript" >';
-				echo 'swal({';
-				echo '  title: "Pendaftaran Berhasil.!",';
-				echo '  text: "Pasien telah berhasil didaftarkan Pada Poliklinik.",';
-				echo '	icon: "success",';
-				echo '  buttons: {';
-				//echo '    cancel: "Run away!",';
-				echo '    catch: {';
-				echo '      text: "Oke",';
-				echo '      value: "catch",';
-				echo '    },';
-				//echo '    defeat: true,';
-				echo '  },';
-				echo '})';
-				echo '.then((value) => {';
-				echo '  switch (value) {';				 
-				echo '    case "defeat":';
-				echo '      swal("Pikachu fainted! You gained 500 XP!");';
-				echo '      break;';				 
-				echo '    case "catch":';
-				echo '      window.location = "'.base_url().'resepsionis/pasien/pasien_lama";';
-				echo '      break;';				 
-				echo '    default:';
-				echo '      swal("Got away safely!");';
-				echo '  }';
-				echo '});';
-				echo '</script>';
-				echo  '</body>';
+					echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
+					echo '<script type="text/javascript" >';
+					echo 'swal({';
+					echo '  title: "Poliklinik Telah Ditutup",';
+					echo '  text: "Pendaftaran ke poliklinik tujuan telah ditutup karena telah mencapai kuota per hari",';
+					echo '	icon: "warning",';
+					echo '  buttons: {';
+					//echo '    cancel: "Run away!",';
+					echo '    catch: {';
+					echo '      text: "Oke",';
+					echo '      value: "catch",';
+					echo '    },';
+					//echo '    defeat: true,';
+					echo '  },';
+					echo '})';
+					echo '.then((value) => {';
+					echo '  switch (value) {';				 
+					echo '    case "defeat":';
+					echo '      swal("Pikachu fainted! You gained 500 XP!");';
+					echo '      break;';				 
+					echo '    case "catch":';
+					echo '      window.location = "'.base_url().'resepsionis/pasien/pasien_lama";';
+					echo '      break;';				 
+					echo '    default:';
+					echo '      swal("Got away safely!");';
+					echo '  }';
+					echo '});';
+					echo '</script>';
+					echo  '</body>';
 			}
 		}
 	}

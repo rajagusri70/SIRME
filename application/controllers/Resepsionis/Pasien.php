@@ -37,39 +37,7 @@ class Pasien extends CI_Controller {
 		if($this->input->post('submit')){ // Jika user mengklik tombol submit yang ada di form
 			$no_ktp = $this->input->post('input_no_ktp');
 			$nama_pasien = $this->input->post('input_nama');
-			$cek = $this->PasienModel->cek_pasien($no_ktp,$nama_pasien)->num_rows();
-			if($cek > 0){
-				echo '<body>';
-				echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
-				echo '<script type="text/javascript" >';
-				echo 'swal({';
-				echo '  title: "Pasien Telah Terdaftar",';
-				echo '  text: "Data Pasien yang dimasukkan telah terdaftar.Silahkan coba cari data pasien menggunakan fitur Cari",';
-				echo '	icon: "warning",';
-				echo '  buttons: {';
-						//echo '    cancel: "Run away!",';
-				echo '    catch: {';
-				echo '      text: "Pergi ke Cari",';
-				echo '      value: "catch",';
-				echo '    },';
-						//echo '    defeat: true,';
-				echo '  },';
-				echo '})';
-				echo '.then((value) => {';
-				echo '  switch (value) {';				 
-				echo '    case "defeat":';
-				echo '      swal("Pikachu fainted! You gained 500 XP!");';
-				echo '      break;';				 
-				echo '    case "catch":';
-				echo '      window.location = "'.base_url().'resepsionis/pasien/cari";';
-				echo '      break;';				 
 
-				echo '  }';
-				echo '});';
-				echo '</script>';
-				echo  '</body>';
-				
-			}else{
 				$upload = $this->PasienModel->upload();
 				if($upload['result'] == "success"){
 					$this->PasienModel->input($upload);// Panggil fungsi input() yang ada di PasienModel.php
@@ -99,7 +67,7 @@ class Pasien extends CI_Controller {
 						echo '      swal("Pikachu fainted! You gained 500 XP!");';
 						echo '      break;';				 
 						echo '    case "catch":';
-						echo '      window.close();';
+						echo '     ';
 						echo '      break;';				 
 						echo '    default:';
 						echo '      swal("Got away safely!");';
@@ -115,7 +83,41 @@ class Pasien extends CI_Controller {
 					$this->PasienModel->input($upload);// Panggil fungsi input() yang ada di PasienModel.php
 					redirect('pasien/resepsionis/daftar');
 				}
-			}
+
+			// $cek = $this->PasienModel->cek_pasien($no_ktp,$nama_pasien)->num_rows();
+			// if($cek > 0){
+			// 	echo '<body>';
+			// 	echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
+			// 	echo '<script type="text/javascript" >';
+			// 	echo 'swal({';
+			// 	echo '  title: "Pasien Telah Terdaftar",';
+			// 	echo '  text: "Data Pasien yang dimasukkan telah terdaftar.Silahkan coba cari data pasien menggunakan fitur Cari",';
+			// 	echo '	icon: "warning",';
+			// 	echo '  buttons: {';
+			// 			//echo '    cancel: "Run away!",';
+			// 	echo '    catch: {';
+			// 	echo '      text: "Pergi ke Cari",';
+			// 	echo '      value: "catch",';
+			// 	echo '    },';
+			// 			//echo '    defeat: true,';
+			// 	echo '  },';
+			// 	echo '})';
+			// 	echo '.then((value) => {';
+			// 	echo '  switch (value) {';				 
+			// 	echo '    case "defeat":';
+			// 	echo '      swal("Pikachu fainted! You gained 500 XP!");';
+			// 	echo '      break;';				 
+			// 	echo '    case "catch":';
+			// 	echo '      window.location = "'.base_url().'resepsionis/pasien/cari";';
+			// 	echo '      break;';				 
+
+			// 	echo '  }';
+			// 	echo '});';
+			// 	echo '</script>';
+			// 	echo  '</body>';
+				
+			// }else{
+			// }
 			
 		}
 	}

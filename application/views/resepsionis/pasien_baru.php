@@ -388,13 +388,32 @@
   </script>
   <script src="<?php echo base_url(); ?>/assets/js/sweetalert.min.js"></script>
 
+   
   
   <script type="text/javascript">
-    $('#tanggal_lahir').datepicker({
-      language: 'id',
-      format: 'dd - MM - yyyy',
-    });
+    function cekData(){
+      var nama_value = $("input[name=input_nama]").val();
+      var tanggal_lahir_value = $("input[name=input_tanggal_lahir]").val();
+        $.ajax({
+          url: "<?php echo base_url().'resepsionis/pasien/cek_id' ?>",
+          type: 'POST',
+          data: {jenis_cek: 'nama', nama: nama_value, tanggal_lahir: tanggal_lahir_value},
+          dataType: "JSON",
+          success: function(data) {
+            swal({
+              title: "Nama telah terdaftar.!!!",
+              text: "Nama yang dimasukan mungkin telah terdaftar. Untuk memastikan, silahkan gunakan fitur Cari Pasien untuk mencari nama yang bersangkutan",
+              icon: "warning",
+              button: "Oke",
+            });
+          },
+          error: function(data) {
+            
+          }
+        });
+    }
   </script>
+  
   <script type="text/javascript">
     function cekKtp(){
       var nomor_ktp_value = $("input[name=input_no_ktp]").val();
@@ -419,29 +438,10 @@
     }
   </script>
   <script type="text/javascript">
-    
-    function cekNamaTgl(jenis_cek_value){
-      var nama_value = $("input[name=input_nama]").val();
-      var nomor_ktp_value = $("input[name=input_no_ktp]").val();
-      var tanggal_lahir_value = $("input[name=input_tanggal_lahir]").val();
-        $.ajax({
-          url: "<?php echo base_url().'resepsionis/pasien/cek_id' ?>",
-          type: 'POST',
-          data: {jenis_cek: jenis_cek_value, nama: nama_value, no_ktp: nomor_ktp_value},
-          dataType: "JSON",
-          success: function(data) {
-            swal({
-              title: "Nama telah terdaftar.!!!",
-              text: "Nama yang dimasukan mungkin telah terdaftar. Untuk memastikan, silahkan gunakan fitur Cari Pasien untuk mencari nama yang bersangkutan",
-              icon: "warning",
-              button: "Oke",
-            });
-          },
-          error: function(data) {
-            
-          }
-        });
-    }
+    $('#tanggal_lahir').datepicker({
+      language: 'id',
+      format: 'dd - MM - yyyy',
+    });
   </script>
   
 </body>

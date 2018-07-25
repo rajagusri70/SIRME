@@ -406,10 +406,10 @@
               icon: "warning",
               button: "Oke",
             });
-            $("#tombol_submit").prop('disabled', true);
+            
           },
           error: function(data) {
-            $("#tombol_submit").prop('disabled', false);
+           
           
           }
         });

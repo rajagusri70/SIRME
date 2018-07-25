@@ -288,7 +288,7 @@ class Pasien extends CI_Controller {
 					echo 'swal({';
 					echo '  title: "Poliklinik Telah Ditutup",';
 					echo '  text: "Pendaftaran ke poliklinik tujuan telah ditutup karena telah mencapai kuota per hari",';
-					echo '	icon: "success",';
+					echo '	icon: "warning",';
 					echo '  buttons: {';
 					//echo '    cancel: "Run away!",';
 					echo '    catch: {';

@@ -110,7 +110,7 @@
                 </li>
                 <li><a><i class="fa fa-medkit"></i> Resep Obat <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo site_url('apotek/resep') ?>" > Resep Obat Diterima</a>
+                    <li><a href="<?php echo site_url('apotek/resep_diterima') ?>" > Resep Obat Diterima</a>
                     </li>
                   </ul>
                 </li>

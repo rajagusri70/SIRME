@@ -68,15 +68,18 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 
-                <h1 align="center" style="font-size: 21px"><b>Rumah Sakit XYZ</b></h1> 
-                <h2 align="center">Poliklinik Umum</h2> 
+                <h1 align="center" style="font-size: 21px"><b>Apotek XYZ</b></h1> 
+                <h2 align="center">Rumah Sakit PQR</h2> 
                 <div class="clearfix"></div>
                 
                 <div class="x_content">
                   
                   <div class="ln_solid"></div>
-                  <span style="position: absolute; right: 0" >Bandung, 
-                    <?php
+                  <h5 align="center">SALINAN RESEP</h5>
+                  
+                    Salinan Resep No. : <?php echo $id_resep ?> <br>
+                    Dari dokter : <?php echo $nama_dokter ?> <br>
+                    Ditulis tanggal : <?php 
                     $bulan = '';
                     echo substr($tanggal_masuk, 0,2) ?> <?php 
                     $b = substr($tanggal_masuk, 3,2);
@@ -98,17 +101,15 @@
                       $bulan = "Agustus";
                     }
                     echo $bulan;
-                    ?> <?php echo substr($tanggal_masuk, 6) ?></span>
-                  <br>
-                  Nama Dokter : <b><?php echo $nama_dokter ?></b> <br>
-                  SIP : <b><?php echo $nip ?></b><br>
+                    ?> <?php echo substr($tanggal_masuk, 6) ?> <br>
+                    Pro : <?php echo $nama ?> <br>
                   <br>
                   <i style="font-size: 24px">R/</i>
                   <br>
                   <ul>
                     <?php foreach ($daftar_resep as $dr) {?>
                     <li style="font-size: 16px"><b><?php echo $dr->nama_obat ?></b></li>
-                    <li><?php echo $dr->keterangan ?></li>
+                    <li><?php echo $dr->keterangan ?> .......... <?php if ($dr->status_resep == 'det'){echo '<b>'.$dr->status_resep.'</b>';}else{echo '<b>ne det</b>';} ?> </li>
                     <?php } ?>
                     <!-- <li style="font-size: 16px">Paracetamol 120mg</li>
                     <li>s.t.d.d C. P</li>
@@ -118,11 +119,36 @@
                   <br>
                   <br>
                   <div class="ln_solid"></div>
-                  Pro : <b><?php echo $nama; ?></b> <br>
-                  Umur : <b><?php echo $umur; ?> Tahun</b><br>
-                  Alamat : <b><?php echo $alamat; ?></b><br>
+                  <div style="position: absolute; right: 0px">
+                    Bandung, <?php 
+                    $bulan = '';
+                    echo substr($tanggal, 0,2) ?> <?php 
+                    $b = substr($tanggal, 3,2);
+                    if($b=="01"){
+                      $bulan = "Januari";
+                    }elseif ($b=="02") {
+                      $bulan = "Februari";
+                    }elseif ($b=="03") {
+                      $bulan = "Maret";
+                    }elseif ($b=="04") {
+                      $bulan = "April";
+                    }elseif($b == "05"){
+                      $bulan = "Mei";
+                    }elseif ($b=="06") {
+                      $bulan = "Juni";
+                    }elseif ($b=="07") {
+                      $bulan = "Juli";
+                    }elseif ($b=="08") {
+                      $bulan = "Agustus";
+                    }
+                    echo $bulan;
+                    ?> <?php echo substr($tanggal, 6) ?> <br>
+                    <br>
+                    <br>
+                    Apotek PQR
+                  </div>
                   <br>
-                  <br>
+                  <br><br><br>
                   <a href="" onclick="window.print()">Cetak</a>
                 </div>
               </div>

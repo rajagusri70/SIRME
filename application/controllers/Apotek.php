@@ -105,7 +105,7 @@ class Apotek extends CI_Controller {
 		$data['users'] = $this->AdminModel->tampilkan();
 		$where = array('tb_resep.tanggal' => $tanggal, );
 		$data['resep_diterima'] = $this->ResepModel->viewAllWhere($where);
-		$this->load->view('apotek/resep',$data);
+		$this->load->view('apotek/resep_diterima',$data);
 	}
 
 
@@ -143,7 +143,7 @@ class Apotek extends CI_Controller {
 		#menambahkan nama dokter pemeriksa
 		
 		
-		$this->load->view('poli_umum/resep',$data);
+		$this->load->view('apotek/resep',$data);
 	}
 
 	public function atur_resep($id_resep){
@@ -177,6 +177,43 @@ class Apotek extends CI_Controller {
 		$tanggal = date("d-m-Y");
 		$waktu = date("H:i:s");
 		$this->load->view('apotek/atur_resep',$data);
+	}
+
+	public function copy_resep($id_resep){
+		$where = array('no_id' => $id_resep, );
+		$data['daftar_resep'] = $this->ItemResepModel->viewResep($where);
+		$where_all = array('tb_resep.no_id' => $id_resep, );
+		$user_data = $this->ItemResepModel->viewAll($where_all);
+		$data['nama'] = '';
+		$data['umur'] = '';
+		$data['alamat'] = '';
+		$data['nama_dokter'] = '';
+		$data['nip'] = '';
+		$data['tanggal_masuk'] = '';
+		foreach ($user_data as $ud) {
+			$nama = $ud->nama;
+			$umur = $ud->umur;
+			$alamat = $ud->alamat;
+			$tanggal_masuk = $ud->tanggal_masuk;
+			$nama_dokter = $ud->nama_dokter;
+			$nip = $ud->no_sip;
+			$data['id_resep'] = $id_resep;
+			$data['nama'] = $nama;
+			$data['umur'] = $umur;
+			$data['alamat'] = $alamat;
+			$data['nama_dokter'] = $nama_dokter;
+			$data['nip'] = $nip;
+			$data['tanggal_masuk'] = $tanggal_masuk;
+			$tanggal = date("d-m-Y");
+			$data['tanggal'] = $tanggal;
+		}
+		$tanggal = date("d-m-Y");
+		$waktu = date("H:i:s");
+
+		#menambahkan nama dokter pemeriksa
+		
+		
+		$this->load->view('apotek/copy_resep',$data);
 	}
 
 	public function update_status(){

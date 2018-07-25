@@ -193,7 +193,7 @@
                   <br />
                     
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Nama<span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Nama Lengkap<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="text" name="input_nama" id="nama" required="required" class="normal-form-long"  >
@@ -308,14 +308,14 @@
                       </div>
                     </div>
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Pekerjaan Orangtua<span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Pekerjaan Orangtua
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input id="birthday" name="input_pekerjaan_orangtua" class="normal-form-long"  type="text">
                       </div>
                     </div>
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Suami/Istri<span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Suami/Istri
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input id="birthday" name="input_nama_suamistri" class="normal-form-long" type="text">
@@ -345,7 +345,9 @@
 
 
           </div>
+        </br></br>
         </div>
+
 
         <!-- footer content -->
         <footer>

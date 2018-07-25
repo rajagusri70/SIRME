@@ -40,7 +40,8 @@ class Pasien extends CI_Controller {
 
 				$upload = $this->PasienModel->upload();
 				if($upload['result'] == "success"){
-					$this->PasienModel->input($upload);// Panggil fungsi input() yang ada di PasienModel.php
+					$upload_ktp = $this->PasienModel->upload_ktp();
+					$this->PasienModel->input($upload,$upload_ktp);// Panggil fungsi input() yang ada di PasienModel.php
 					// $this->load->view('pasien/pasien_baru');
 					$no_ktp = $this->input->post('input_no_ktp');
 					$viewpasien = $this->PasienModel->viewPasien('no_ktp',$no_ktp);

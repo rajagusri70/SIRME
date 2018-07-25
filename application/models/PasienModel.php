@@ -55,7 +55,25 @@ class PasienModel extends CI_Model{
 		}
     }
 
-	public function input($upload){
+    public function upload_ktp(){
+		$newname = $this->input->post('input_no_ktp');
+	    $config['upload_path'] = './images/pasien/ktp/';
+	    $config['allowed_types'] = 'jpg|png|jpeg';
+	    $config['max_size']	= '2048';
+	    $config['remove_space'] = TRUE;
+	    $config['file_name'] = $newname; 
+  
+    	$this->load->library('upload', $config); // Load konfigurasi uploadnya
+    	if ( $this->upload->do_upload('input_foto_ktp')){
+			$return = array('result' => 'success', 'file' => $this->upload->data(), 'error' => '');
+      		return $return;
+		}else{
+			$return = array('result' => 'failed', 'file' => '', 'error' => $this->upload->display_errors());
+      		return $return;
+		}
+    }
+
+	public function input($upload,$upload_ktp){
 		$tanggal_lahir = $this->input->post('input_tanggal_lahir');
 		$tanggal = date("d-m-Y");
 		$tahun = date("Y");
@@ -80,7 +98,8 @@ class PasienModel extends CI_Model{
 			"agama" => $this->input->post('input_agama'),
 			"no_telpon" => $this->input->post('input_no_telpon'),
 			"tanggal_daftar" => $tanggal,
-			"foto" => $upload['file']['file_name']
+			"foto" => $upload['file']['file_name'],
+			"foto_ktp" => $upload_ktp['file']['file_name']
 		);
 		$this->db->insert('pasien', $data);
 	}

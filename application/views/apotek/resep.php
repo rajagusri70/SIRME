@@ -107,7 +107,7 @@
                   <br>
                   <ul>
                     <?php foreach ($daftar_resep as $dr) {?>
-                    <li style="font-size: 16px"><b><?php echo $dr->nama_obat ?></b></li>
+                    <li style="font-size: 16px"><b><?php echo $dr->nama_obat ?> &nbsp;&nbsp;No.<?php echo $dr->kuantitas ?> </b></li>
                     <li><?php echo $dr->keterangan ?></li>
                     <?php } ?>
                     <!-- <li style="font-size: 16px">Paracetamol 120mg</li>

@@ -59,13 +59,6 @@ class Check_Up extends CI_Controller {
 		$this->load->view('poli_umum/status_selesai',$data);
 	}
 
-
-	// public function rekam_medis(){
-	// 	$data['users'] = $this->AdminModel->tampilkan();
-	// 	$data['pasien_terdaftar'] = $this->PasienModel->viewPasien('no_pasien',$no_pasien);
-	// 	$this->load->view('pasien/profile_pasien',$data);
-	// }
-
 	public function getName($code){
 		//$code = 'A75.1';
 		//$code = $this->input->post('code');

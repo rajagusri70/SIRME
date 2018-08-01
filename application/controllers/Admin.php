@@ -17,6 +17,7 @@ class Admin extends CI_Controller {
 				
 		$this->load->model('AdminModel');
 		$this->load->model('PoliklinikModel');
+		$this->load->model('JadwalPraktekModel');
  
 	}
 
@@ -70,6 +71,13 @@ class Admin extends CI_Controller {
 					redirect('admin/user');
 				}
 		}
+	}
+
+	public function jadwal(){
+		$data['users'] = $this->AdminModel->tampilkan();
+		$where = array('tipe_admin' => 'Dokter', );
+		$data['data_admin'] = $this->AdminModel->selectWheres($where);
+		$this->load->view('admin/user-jadwal',$data);
 	}
 
 	public function dokter(){
@@ -264,6 +272,50 @@ class Admin extends CI_Controller {
 						echo  '</body>';
 			}
 			
+		}
+	}
+
+	public function atur_jadwal($user_id){
+		$data['users'] = $this->AdminModel->tampilkan();
+		$data['admin'] = $this->AdminModel->selectWhere($user_id);
+		
+		$this->load->view('admin/profile-jadwal',$data);
+		
+		if($this->input->post('tombol_submit_jadwal')){
+			$array_praktek = $this->input->post('Praktek');
+			$jadwal_praktek = implode(",", $array_praktek);
+			$data = array(
+					'jadwal_praktek' => $jadwal_praktek,
+				);
+			$this->AdminModel->update($user_id,$data);
+			echo '<body>';
+			echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
+			echo '<script type="text/javascript" >';
+			echo 'swal({';
+			echo '  title: "Data berhasil diganti.!!!",';
+			echo '  text: "Data User telah berhasil diganti dengan yang baru",';
+			echo '	icon: "success",';
+			echo '  buttons: {';
+			echo '    catch: {';
+			echo '      text: "Oke",';
+			echo '      value: "catch",';
+			echo '    },';
+			echo '  },';
+			echo '})';
+			echo '.then((value) => {';
+			echo '  switch (value) {';				 
+			echo '    case "defeat":';
+			echo '      swal("Pikachu fainted! You gained 500 XP!");';
+			echo '      break;';				 
+			echo '    case "catch":';
+			echo '      window.location = "'.base_url().'admin/atur_jadwal/'.$user_id.'";';
+			echo '      break;';				 
+			echo '    default:';
+			echo '      window.location = "'.base_url().'admin/atur_jadwal/'.$user_id.'";';
+			echo '  }';
+			echo '});';
+			echo '</script>';
+			echo  '</body>';
 		}
 	}
 

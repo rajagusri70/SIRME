@@ -105,13 +105,13 @@
                 
                 <li><a><i class="fa fa-edit"></i> Manajemen User <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo $_SERVER['REQUEST_URI']; ?>" > Daftar User</a>
+                    <li><a href="<?php echo site_url('admin/user') ?>" > Daftar User</a>
                     </li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-info-circle"></i> Manajemen Jadwal <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo site_url('admin/jadwal') ?>" > Atur Jadwal Dokter</a>
+                    <li><a href="<?php echo $_SERVER['REQUEST_URI']; ?>" > Atur Jadwal Dokter</a>
                     </li>
                   </ul>
                 </li>
@@ -196,130 +196,7 @@
                 <div class="x_content">
                   <a class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-plus"></i> <b>Tambah</b></a>
                   <!-- Modal --> 
-                  <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                          </button>
-                          <h4 class="modal-title" id="myModalLabel"><b>Tambah User</b></h4>
-                        </div>
-                        <div class="modal-body">
-                          <!-- <h4>Text in a modal</h4> -->
-                          <div class="row">
-                                  <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <div class="x_panel">
-                                      <div class="x_title">
-                                        <h2>Data Pribadi</h2>
-                                        <div class="clearfix"></div>
-                                      </div>
-                                      <div class="x_content" >
-                                        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('admin/user'); ?>" method="post" enctype="multipart/form-data" >
-                                          <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Nama <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                              <input type="text" name="input_nama" id="nama" required="required" class="normal-form-long">
-                                            </div>
-                                          </div>
-                                          <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Jenis Kelamin</label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                              <div id="gender" class="btn-group" data-toggle="buttons">
-                                                <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                                  <input type="radio" name="input_jenis_kelamin" value="Laki-laki" checked="" > &nbsp; Laki-laki &nbsp;
-                                                </label>
-                                                <label class="btn btn-primary active" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                                  <input type="radio" name="input_jenis_kelamin" value="Perempuan" > Perempuan
-                                                </label>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Alamat<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                              <input id="birthday" name="input_alamat" class="normal-form-long" required="required" type="text">
-                                            </div>
-                                          </div>
-                                          <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Kota<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                              <input id="kota" name="input_kota" class="normal-form-long" required="required" type="text">
-                                            </div>
-                                          </div>
-                                          <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">No. HP<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                              <input id="no_hp" name="input_no_hp" class="normal-form-long" required="required" type="number">
-                                            </div>
-                                          </div>
-                                          <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Email<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                              <input id="email" name="input_email" class="normal-form-long" required="required" type="email">
-                                            </div>
-                                          </div>
-                                          <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="foto">Foto<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                              <input type="file" id="foto" class="btn btn-primary" name="input_foto" class="">
-                                            </div>
-                                          </div>
-                                          <div class="x_title">
-                                            <h2>Jabatan</h2>  
-                                            <div class="clearfix"></div>
-                                          </div>
-                                          <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Jabatan
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                              <select class="normal-form-long" name="input_jabatan">
-                                                <option value="none">- pilih jabatan -</option>
-                                                <?php foreach ($jabatan as $jb) {?>
-                                                <option value="<?php echo $jb->nama_jabatan ?>"><?php echo $jb->nama_jabatan ?></option>
-                                              <?php } ?>
-                                              </select>
-                                            </div>
-                                          </div>
-                                          <div class="x_title">
-                                            <h2>Informasi Akun</h2>  
-                                            <div class="clearfix"></div>
-                                          </div>
-                                          <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">User ID<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                              <input id="user_id" name="input_user_id" class="normal-form-long" required="required" type="" onchange="cekUserId()">
-                                            </div>
-                                          </div>
-                                          <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Password<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                              <input id="password" name="input_password" class="normal-form-long" required="required" type="password">
-                                            </div>
-                                          </div>
-                                          <br>
-                                          <div class="modal-footer">
-                                            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-                                            <input type="submit" name="submit_dokter" id="submit_dokter" class="btn btn-primary" value="Simpan" >
-                                            <!-- <button type="button" class="btn btn-primary">Simpan</button> -->
-                                          </div>
-                                        </form>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <p>Tabel dibawah ini merupakan daftar pegawai yang ada di rumah sakit
+                  <p>Tabel dibawah ini merupakan daftar dokter yang ada di rumah sakit
                   </p>
                   <table id="datatable" class="table table-striped table-bordered">
                     <thead>
@@ -341,14 +218,14 @@
                           <td style="vertical-align: middle;"><?php echo $da->tipe_admin; ?> <?php echo $da->spesialis; ?></td>
                           <td style="vertical-align: middle;"><?php echo $da->kota; ?></td>
                           <td style="vertical-align: middle;"><?php echo $da->no_hp; ?></td>
-                          <td style="vertical-align: middle;" align="center"><button type="button" class="btn btn-danger" onclick="hapus(1,<?php echo $da->user_id ?>)"><i class="fa fa-remove"></i> Hapus</button>&nbsp;<button type="button" class="btn btn-primary" onclick="buka_popup(<?php echo $da->user_id ?>)" ><i class="fa fa-edit"></i> Edit</button></td>
+                          <td style="vertical-align: middle;" align="center"><button type="button" class="btn btn-primary" onclick="buka_popup(<?php echo $da->user_id ?>)" ><i class="fa fa-edit"></i> Edit</button></td>
                         </tr>
                       <?php } ?>
                     </tbody>
                   </table>
                   <script type="text/javascript">
                     function buka_popup(user_id){
-                      resepWindow = window.open('<?php echo base_url()?>admin/profile/'+user_id,'', 'width=920, height=720, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
+                      resepWindow = window.open('<?php echo base_url()?>admin/atur_jadwal/'+user_id,'', 'width=920, height=720, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
                     }
                   </script>
                 </div>

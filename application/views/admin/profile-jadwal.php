@@ -108,9 +108,6 @@
 
                     </div>
                     <h3><?php echo $a->nama; ?></h3>
-
-                  
-
                   </div>
                   <div class="col-md-9 col-sm-9 col-xs-12">
 

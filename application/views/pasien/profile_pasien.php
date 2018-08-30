@@ -269,7 +269,7 @@
                         </div>
                         <?php } ?>
 
-                        <div role="tabpanel" class="tab-pane fade active in" id="aktivitas" aria-labelledby="home-tab">
+                        <div role="tabpanel" class="tab-pane fade active" id="aktivitas" aria-labelledby="home-tab">
                           <h2>Aktivitas Terakhir</h2>
                           <div class="ln_solid"></div>
                           <style type="text/css">
@@ -324,7 +324,7 @@
                             <?php } ?>
                           </ul>             
                         </div>
-                        <div role="tabpanel" class="tab-pane fade active in" id="rawat_jalan" aria-labelledby="home-tab">
+                        <div role="tabpanel" class="tab-pane fade active" id="rawat_jalan" aria-labelledby="home-tab">
                           <h2>Rawat Jalan Pasien</h2>
                           <div class="ln_solid"></div>
                           <style type="text/css">
@@ -367,7 +367,7 @@
                             </tbody>
                           </table>   
                         </div>
-                        <div role="tabpanel" class="tab-pane fade active in" id="riwayat_penyakit" aria-labelledby="home-tab">
+                        <div role="tabpanel" class="tab-pane fade" id="riwayat_penyakit" aria-labelledby="home-tab">
                           <h2>Riwayat Penyakit</h2>
                           <div class="ln_solid"></div>
                           <style type="text/css">
@@ -410,7 +410,7 @@
                             </tbody>
                           </table>   
                         </div>
-                        <div role="tabpanel" class="tab-pane fade active in" id="riwayat_alergi" aria-labelledby="home-tab">
+                        <div role="tabpanel" class="tab-pane fade" id="riwayat_alergi" aria-labelledby="home-tab">
                           <h2>Riwayat Alergi</h2>
                           <div class="ln_solid"></div>
                           <style type="text/css">
@@ -453,7 +453,7 @@
                             </tbody>
                           </table>   
                         </div>
-                        <div role="tabpanel" class="tab-pane fade active in" id="riwayat_hamil" aria-labelledby="home-tab">
+                        <div role="tabpanel" class="tab-pane fade" id="riwayat_hamil" aria-labelledby="home-tab">
                           <h2>Riwayat Kehamilan</h2>
                           <div class="ln_solid"></div>
                           <style type="text/css">
@@ -498,7 +498,7 @@
                             </tbody>
                           </table>   
                         </div>
-                        <div role="tabpanel" class="tab-pane fade active in" id="riwayat_obat" aria-labelledby="home-tab">
+                        <div role="tabpanel" class="tab-pane fade" id="riwayat_obat" aria-labelledby="home-tab">
                           <h2>Riwayat Obat</h2>
                           <div class="ln_solid"></div>
                           <style type="text/css">

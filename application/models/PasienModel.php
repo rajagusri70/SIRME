@@ -19,6 +19,11 @@ class PasienModel extends CI_Model{
 		return $this->db->get("pasien")->result();
 	}
 
+	public function viewPasiens($where, $no_pasien){
+		$this->db->where($where,$no_pasien);
+		return $this->db->get("pasien");
+	}
+
 	public function cek_tgl($nama,$tanggal_lahir){
 		// $this->db->where('no_ktp', $no_ktp);
 		// $this->db->or_where('nama', $nama);		
@@ -73,14 +78,14 @@ class PasienModel extends CI_Model{
 		}
     }
 
-	public function input($upload,$upload_ktp){
+	public function input($upload){
 		$tanggal_lahir = $this->input->post('input_tanggal_lahir');
 		$tanggal = date("d-m-Y");
 		$tahun = date("Y");
 		$tahun_lahir = substr($tanggal_lahir, -4);
 		$umur = $tahun - $tahun_lahir;
+		$user_id = $this->session->userdata('user_id');
 		$data = array(
-			"no_ktp" => 'UUID',
 			"no_ktp" => $this->input->post('input_no_ktp'),
 			"no_kk" => $this->input->post('input_no_kk'),
 			"nama" => $this->input->post('input_nama'),
@@ -89,18 +94,21 @@ class PasienModel extends CI_Model{
 			"tempat_lahir" => $this->input->post('input_tempat_lahir'),
 			"umur" => $umur,
 			"alamat" => $this->input->post('input_alamat'),
-			"pekerjaan" => $this->input->post('input_pekerjaan'),
-			"pendidikan" => $this->input->post('input_pendidikan'),
-			"golongan_darah" => $this->input->post('input_golongan_darah'),
+			"kecamatan" => $this->input->post('input_kecamatan'),
+			"kota" => $this->input->post('input_kota'),
+			"provinsi" => $this->input->post('input_provinsi'),
 			"status_pernikahan" => $this->input->post('input_status_pernikahan'),
 			"nama_orangtua" => $this->input->post('input_nama_orangtua'),
-			"pekerjaan_orangtua" => $this->input->post('input_pekerjaan_orangtua'),
-			"nama_suamistri" => $this->input->post('input_nama_suamistri'),
-			"agama" => $this->input->post('input_agama'),
+			"no_telpon_orangtua" => $this->input->post('input_no_telpon_orangtua'),
+			"nama_saudara" => $this->input->post('input_nama_saudara'),
+			"no_telpon_saudara" => $this->input->post('input_no_telpon_saudara'),
+			"nama_pasangan" => $this->input->post('input_nama_pasangan'),
+			"no_telepon_pasangan" => $this->input->post('input_no_telpon_pasangan'),
 			"no_telpon" => $this->input->post('input_no_telpon'),
+			"email" => $this->input->post('input_email'),
 			"tanggal_daftar" => $tanggal,
 			"foto" => $upload['file']['file_name'],
-			"foto_ktp" => $upload_ktp['file']['file_name']
+			"user_id" => $user_id
 		);
 		$this->db->set('uuid', 'UUID()', FALSE);
 		$this->db->insert('pasien', $data);

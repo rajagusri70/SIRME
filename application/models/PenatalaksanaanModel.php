@@ -14,7 +14,7 @@ class PenatalaksanaanModel extends CI_Model{
 	public function view($where){
 		$this->db->select('*');
 		$this->db->from('tb_penatalaksanaan');
-		$this->db->where('id_periksa',$where);
+		$this->db->where($where);
 		return $this->db->get()->result();
 	}
 

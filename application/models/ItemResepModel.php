@@ -30,7 +30,7 @@ class ItemResepModel extends CI_Model{
 	}
 
 	public function viewResepPasien($no_pasien){
-		$this->db->select('tb_obat.nama_obat,tb_obat.jenis,tb_obat.kategori,tb_resep.id_periksa,tb_resep.no_obat,tb_resep.kuantitas,tb_resep.keterangan,tb_periksa.tanggal_masuk'); //memeilih semua field
+		$this->db->select('tb_obat.nama_obat,tb_obat.jenis,tb_obat.kategori,tb_resep.no_rawat_jalan,tb_resep.no_obat,tb_resep.kuantitas,tb_resep.keterangan,tb_periksa.tanggal_masuk'); //memeilih semua field
 	    $this->db->from('tb_resep'); //memeilih tabel
 	    $this->db->join('tb_periksa','tb_resep.id_periksa = tb_periksa.id_periksa');
 	    $this->db->join('rawat_jalan','tb_periksa.id_rawat = rawat_jalan.id_rawat');
@@ -41,12 +41,12 @@ class ItemResepModel extends CI_Model{
 	}
 
 	public function viewAll($where){
-		$this->db->select('*, admin.nama AS nama_dokter'); 
+		$this->db->select('*, admin.nama AS nama_dokter, tb_resep.tanggal AS tanggal_resep'); 
 	    $this->db->from('tb_item_resep'); 
-	    $this->db->join('tb_resep','tb_item_resep.no_id = tb_resep.no_id');
-	    $this->db->join('tb_periksa','tb_resep.id_periksa = tb_periksa.id_periksa');
-	    $this->db->join('admin', 'admin.user_id = tb_periksa.user_id');
-	    $this->db->join('rawat_jalan','tb_periksa.id_rawat = rawat_jalan.id_rawat');
+	    $this->db->join('tb_resep','tb_item_resep.id_resep = tb_resep.id');
+	    $this->db->join('rawat_jalan','tb_resep.no_rawat_jalan = rawat_jalan.id_rawat');
+	    $this->db->join('admin', 'admin.user_id = rawat_jalan.dokter');
+	    // $this->db->join('rawat_jalan','tb_periksa.id_rawat = rawat_jalan.id_rawat');
 	    $this->db->join('pasien','rawat_jalan.no_pasien = pasien.no_pasien');
 	    $this->db->join('tb_obat', 'tb_item_resep.no_obat = tb_obat.no_obat');
 	    $this->db->where($where);

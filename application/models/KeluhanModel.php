@@ -14,7 +14,7 @@ class KeluhanModel extends CI_Model{
 	public function view($where){
 		$this->db->select('*');
 		$this->db->from('tb_keluhan');
-		$this->db->where('id_periksa',$where);
+		$this->db->where($where);
 		return $this->db->get()->result();
 	}
 

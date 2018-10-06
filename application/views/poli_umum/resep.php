@@ -78,7 +78,8 @@
                   <span style="position: absolute; right: 0" >Bandung, 
                     <?php
                     $bulan = '';
-                    echo substr($tanggal_masuk, 0,2) ?> <?php 
+                    echo substr($tanggal_masuk, 0,2) ?> 
+                    <?php 
                     $b = substr($tanggal_masuk, 3,2);
                     if($b=="01"){
                       $bulan = "Januari";
@@ -96,6 +97,14 @@
                       $bulan = "Juli";
                     }elseif ($b=="08") {
                       $bulan = "Agustus";
+                    }elseif ($b=="09") {
+                      $bulan = "September";
+                    }elseif ($b=="10") {
+                      $bulan = "Oktober";
+                    }elseif ($b=="11") {
+                      $bulan = "November";
+                    }elseif ($b=="12") {
+                      $bulan = "Desember";
                     }
                     echo $bulan;
                     ?> <?php echo substr($tanggal_masuk, 6) ?></span>

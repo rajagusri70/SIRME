@@ -7,6 +7,10 @@ class RawatModel extends CI_Model{
         
     }
 
+    public function add($data){
+		$this->db->insert('rawat_jalan', $data);
+	}
+
     public function view(){
     	return $this->db->get('rawat_jalan')->result_array();
     }
@@ -33,9 +37,6 @@ class RawatModel extends CI_Model{
 
 		);
 		$this->db->insert('rawat_jalan', $data);
-		// $trx = array(
-		// 	'' => '' 
-		// );
 	}
 
 	public function cekPasien(){
@@ -45,10 +46,10 @@ class RawatModel extends CI_Model{
 		return $this->db->query($query);
 	}
 
-	public function viewWhere($where, $where_parameter){
+	public function viewWhere($where){
 		$this->db->select('*'); //memeilih semua field
 	    $this->db->from('rawat_jalan');
-	    $this->db->where($where,$where_parameter);
+	    $this->db->where($where);
 	    return $this->db->get()->result();
 	}
 
@@ -68,7 +69,6 @@ class RawatModel extends CI_Model{
 
 		$this->db->select('*'); //memeilih semua field
 	    $this->db->from($table); //memeilih tabel
-	    $this->db->join('rawat_jalan', 'tb_periksa.id_rawat = rawat_jalan.id_rawat');
 	    $this->db->join('pasien', 'rawat_jalan.no_pasien = pasien.no_pasien');
 	    $this->db->where($where,$where_parameter);
 	    return $this->db->get()->result();

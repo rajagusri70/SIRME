@@ -250,10 +250,10 @@
                     <!-- </br> -->
                     <div class="" role="tabpanel" data-example-id="togglable-tabs">
                       <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#rm1a" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">RM1</a>
-                        </li><!-- 
+                        <li role="presentation" class="active"><a href="#rm1a" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">RM1A</a>
+                        </li>
                         <li role="presentation" class=""><a href="#rm1b" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">RM1B</a>
-                        </li> -->
+                        </li>
                         <li role="presentation" class=""><a href="#rm2" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">RM2</a>
                         </li>
                         <li role="presentation" class=""><a href="#rm3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">RM3</a>
@@ -307,87 +307,179 @@
                             $RM1B36 = '';
                             $RM1B37 = '';
     
-                            // foreach ($rm1a as $a) {
-                            //   $RM1A11 = $a->RM1A11;
-                            //   $RM1A12 = $a->RM1A12;
-                            //   $RM1A21 = $a->RM1A21;
-                            //   $RM1A22 = $a->RM1A22;
-                            //   $RM1A23 = $a->RM1A23;
-                            //   $RM1A24 = $a->RM1A24;
-                            //   $RM1A25 = $a->RM1A25;
-                            //   $RM1A26 = $a->RM1A26;
-                            //   $RM1A27 = $a->RM1A27;
-                            //   $RM1A28 = $a->RM1A28;
-                            //   $RM1A31 = $a->RM1A31;
-                            //   $RM1A32 = $a->RM1A32;
-                            //   $RM1A33 = $a->RM1A33;
-                            //   $RM1A34 = $a->RM1A34;
-                            // }
-                            // foreach ($rm1b as $b) {
-                            //   $RM1B11 = $b->RM1B11;
-                            //   $RM1B21 = $b->RM1B21;
-                            //   $RM1B22 = $b->RM1B22;
-                            //   $RM1B23 = $b->RM1B23;
-                            //   $RM1B31 = $b->RM1B31;
-                            //   $RM1B32 = $b->RM1B32;
-                            //   $RM1B33 = $b->RM1B33;
-                            //   $RM1B34 = $b->RM1B34;
-                            //   $RM1B35 = $b->RM1B35;
-                            //   $RM1B36 = $b->RM1B36;
-                            //   $RM1B37 = $b->RM1B37;
-                            // } 
+                            foreach ($rm1a as $a) {
+                              $RM1A11 = $a->RM1A11;
+                              $RM1A12 = $a->RM1A12;
+                              $RM1A21 = $a->RM1A21;
+                              $RM1A22 = $a->RM1A22;
+                              $RM1A23 = $a->RM1A23;
+                              $RM1A24 = $a->RM1A24;
+                              $RM1A25 = $a->RM1A25;
+                              $RM1A26 = $a->RM1A26;
+                              $RM1A27 = $a->RM1A27;
+                              $RM1A28 = $a->RM1A28;
+                              $RM1A31 = $a->RM1A31;
+                              $RM1A32 = $a->RM1A32;
+                              $RM1A33 = $a->RM1A33;
+                              $RM1A34 = $a->RM1A34;
+                            }
+                            foreach ($rm1b as $b) {
+                              $RM1B11 = $b->RM1B11;
+                              $RM1B21 = $b->RM1B21;
+                              $RM1B22 = $b->RM1B22;
+                              $RM1B23 = $b->RM1B23;
+                              $RM1B31 = $b->RM1B31;
+                              $RM1B32 = $b->RM1B32;
+                              $RM1B33 = $b->RM1B33;
+                              $RM1B34 = $b->RM1B34;
+                              $RM1B35 = $b->RM1B35;
+                              $RM1B36 = $b->RM1B36;
+                              $RM1B37 = $b->RM1B37;
+                            } 
                           // }else{
 
                           // } ?>
                           <form>
                           <table id="form" style="width: 95% ">
                             <tr>
+                              <td colspan="3" title="[RM1A.1]" ><b>RIWAYAT PSIKOLOG</b></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="[RM1A.11]" >Hubungan Pasien dengan Keluarga</td>
+                              <td>
+                                <label><input type="radio" class="flat" name="RM1A11" id="RM1A11a" value="Baik" <?php if($RM1A11 == "Baik"){ echo "checked"; }elseif($RM1A11==''){echo "checked";} ?> /> Baik</label>
+                                <label><input type="radio" class="flat" name="RM1A11" id="RM1A11b" value="Tidak Baik" <?php if($RM1A11 == "Tidak Baik"){ echo "checked"; } ?> /> Tidak Baik</label>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="[RM1A.12]" >Status Psikologi :</td>
+                              <td>
+                                <label><input type="radio" class="flat" name="RM1A12" id="RM1A12a" value="Tenang" <?php if($RM1A12 == "Tenang"){ echo "checked"; }elseif($RM1A12==''){echo "checked";} ?> />Tenang</label>
+                                <label><input type="radio" class="flat" name="RM1A12" id="RM1A12b" value="Cemas" <?php if($RM1A12 == "Cemas"){ echo "checked"; } ?> /> Cemas</label>
+                                <label><input type="radio" class="flat" name="RM1A12" id="RM1A12c" value="Takut" <?php if($RM1A12 == "Takut"){ echo "checked"; } ?> /> Takut</label>
+                                <label><input type="radio" class="flat" name="RM1A12" id="RM1A12d" value="Marah" <?php if($RM1A12 == "Marah"){ echo "checked"; } ?> /> Marah</label>
+                                <label><input type="radio" class="flat" name="RM1A12" id="RM1A12f" value="Sedih" <?php if($RM1A12 == "Sedih"){ echo "checked"; } ?> /> Sedih</label>
+                                <label><input type="radio" class="flat" name="RM1A12" id="RM1A12g" value="Lain-lain" <?php if($RM1A12 == "Lain-lain"){ echo "checked"; } ?> /> Lain-lain</label>
+                              </td>
+                            </tr>
+                            <tr>
                               <td colspan="2" title="[RM1A.2]" ><b>PEMERIKSAAN FISIK</b></td>
                             </tr>
                             <tr>
-                              <td colspan="2" >
-                                <table id="tabel_diagnosa" class="table table-striped table-bordered">
-                                  <thead>
-                                    <tr>
-                                      <th align="center">Tanggal</th>
-                                      <th align="center">Jam Input</th>
-                                      <th align="center">Kategori</th>
-                                      <th align="center">Tipe</th>
-                                      <th align="center">Hasil</th>
-                                      <th align="center">Aksi</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody id="show_obeservation">
-                                    <!-- <td colspan="7" align="center">Tidak ada Data</td> -->
-                                  </tbody>
-                                </table>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td style="text-align: right;width: 30%" >Tipe Pemeriksaan :</td>
+                              <td style="text-align: right;width: 30%" title="[RM1A.21]" >Kesadaran :</td>
                               <td>
-                                <select class="normal-form-long" id="input_tipe">
-                                  <option value="Tekanan Darah">Tekanan Darah</option>
-                                  <option value="Nadi">Nadi</option>
-                                  <option value="Pernapasan">Pernapasan</option>
-                                  <option value="Suhu">Suhu</option>
-                                  <option value="Tinggi Badan">Tinggi Badan</option>
-                                  <option value="Berat Badan">Berat Badan</option>
-                                </select>
+                                <label><input type="radio" class="flat" name="RM1A21" id="RM1A21a" value="Somnolen" <?php if($RM1A21 == "Somnolen"){ echo "checked"; }elseif($RM1A21==''){echo "checked";} ?> /> Somnolen</label>
+                                <label><input type="radio" class="flat" name="RM1A21" id="RM1A21b" value="Sopor" <?php if($RM1A21 == "Sopor"){ echo "checked"; } ?> /> Sopor</label>
+                                <label><input type="radio" class="flat" name="RM1A21" id="RM1A21c" value="<?php if($RM1A21 == "Coma"){ echo "checked"; } ?>" /> Coma</label>
                               </td>
                             </tr>
                             <tr>
-                              <td style="text-align: right;width: 30%" >Hasil Pemeriksaan :</td>
+                              <td style="text-align: right;width: 30%" title="[RM1A.22]" >TD :</td>
                               <td>
-                                <input type="text" id="input_hasil" class="form-control col-md-7 col-xs-12">
+                                  <div class="has-feedback">
+                                  <input type="text" class="form-control" id="RM1A22" name="RM1A22" placeholder="" value="<?php echo $RM1A22 ?>">
+                                  <span class="form-control-feedback right" aria-hidden="true">&nbsp;mmHg</span>
+                                </div>
                               </td>
                             </tr>
                             <tr>
-                              <td></td>
-                              <td ><button type="button" id="tambah_riwayat_button" class="btn btn-info btn-xs" onclick="tambahObservation()" >Tambah</button></td>
+                              <td style="text-align: right;width: 30%" title="[RM1A.23]" >N :</td>
+                              <td>
+                                  <div class="has-feedback">
+                                  <input type="text" class="form-control" id="RM1A23" name="RM1A23" placeholder="" value="<?php echo $RM1A23 ?>" >
+                                  <span class="form-control-feedback right" aria-hidden="true">&nbsp;x/menit</span>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="[RM1A.24]" >RR :</td>
+                              <td>
+                                  <div class="has-feedback">
+                                  <input type="text" class="form-control" id="RM1A24" name="RM1A24" placeholder="" value="<?php echo $RM1A24 ?>" >
+                                  <span class="form-control-feedback right" aria-hidden="true">&nbsp;x/menit</span>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="[RM1A.25]" >T :</td>
+                              <td>
+                                  <div class="has-feedback">
+                                  <input type="text" class="form-control" id="RM1A25" name="RM1A25" placeholder="" value="<?php echo $RM1A25 ?>" >
+                                  <span class="form-control-feedback right" aria-hidden="true">&nbsp;&#8451;</span>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="[RM1A.26]" >TB :</td>
+                              <td>
+                                  <div class="has-feedback">
+                                  <input type="text" class="form-control" id="RM1A26" name="RM1A26" placeholder="" value="<?php echo $RM1A26 ?>" >
+                                  <span class="form-control-feedback right" aria-hidden="true">&nbsp;cm</span>
+                                </div>
+                              </td>
+                            </tr>
+                             <tr>
+                              <td style="text-align: right;width: 30%" title="[RM1A.27]" >BB :</td>
+                              <td>
+                                  <div class="has-feedback">
+                                  <input type="text" class="form-control" id="RM1A27" name="RM1A27" placeholder="" value="<?php echo $RM1A27 ?>" >
+                                  <span class="form-control-feedback right" aria-hidden="true">&nbsp;Kg</span>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="[RM1A.28]" >Linkgar Kepala :</td>
+                              <td>
+                                  <div class="has-feedback">
+                                  <input type="text" class="form-control" id="RM1A28" name="RM1A28" placeholder="" value="<?php echo $RM1A28 ?>" >
+                                  <span class="form-control-feedback right" aria-hidden="true">&nbsp;cm</span>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td colspan="2" title="[RM1A.3]" ><b>STATUS NUTRISI</b></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="[RM1A.31]" >Keluhan nafsu makan :</td>
+                              <td>
+                                <label><input type="radio" class="flat" name="RM1A31" id="RM1A31a" value="Ada" <?php if($RM1A31 == "Ada"){ echo "checked"; }elseif ($RM1A31 == '') { echo "checked"; } ?> /> Ada</label>
+                                <label><input type="radio" class="flat" name="RM1A31" id="RM1A31b" value="Tidak Ada" <?php if($RM1A31 == "Tidak Ada"){ echo "checked"; } ?> /> Tidak Ada</label>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="[RM1A.32]" >Penurunan Berat Badan dalam 3 bulan terakhir</td>
+                              <td>
+                                <label><input type="radio" class="flat" name="RM1A32" id="RM1A32a" value="Ada" <?php if($RM1A32 == "Ada"){ echo "checked"; }elseif($RM1A32==''){ echo "checked"; } ?> /> Ada</label>
+                                <label><input type="radio" class="flat" name="RM1A32" id="RM1A32b" value="Tidak" <?php if($RM1A32 == "Tidak"){ echo "checked"; } ?> /> Tidak</label>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="[RM1A.33]" >Mual :</td>
+                              <td>
+                                <label><input type="radio" class="flat" name="RM1A33" id="RM1A33a" value="Ya" <?php if($RM1A33 == "Ya"){ echo "checked"; }elseif($RM1A33==''){ echo "checked"; } ?> /> Ya</label>
+                                <label><input type="radio" class="flat" name="RM1A33" id="RM1A33b" value="Tidak" <?php if($RM1A33 == "Tidak"){ echo "checked"; } ?> /> Tidak</label>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="[RM1A.34]" >Muntah :</td>
+                              <td>
+                                <label><input type="radio" class="flat" name="RM1A34" id="RM1A34a" value="Ya" <?php if($RM1A34 == "Ya"){ echo "checked"; }elseif($RM1A34==''){ echo "checked"; } ?> /> Ya</label>
+                                <label><input type="radio" class="flat" name="RM1A34" id="RM1A34b" value="Tidak" <?php if($RM1A34 == "Tidak"){ echo "checked"; } ?> /> Tidak</label>
+                              </td>
                             </tr>
                           </table>
                           <div class="ln_solid"></div>
+                          <div class="form-group">
+                            <div class="col-md-6 col-md-offset-3">
+                              <?php 
+                              $buttona = 'Kirim';
+                              foreach ($rm1a as $a) {
+                                $buttona = 'Update';
+                              }
+                              ?>
+                              <button type="button" id="rm1a_submit" onclick="rm1a()" class="btn btn-success" value="" ><?php echo $buttona; ?></button>
+                            </div>
+                          </div>
                           </form>
                         </div>
                         <div role="tabpanel" class="tab-pane fade" id="rm1b" aria-labelledby="profile-tab">
@@ -592,21 +684,41 @@
                               <td></td>
                               <td ><button type="button" id="tambah_alergi_button" name="tambah_alergi_button" onclick="tambahAlergi()" class="btn btn-info btn-xs">Tambah</button></td>
                             </tr>
+                            <tr>
+                              <td colspan="2" ><b>RIWAYAT KEHAMILAN</b></td>
+                            </tr>
+                            <tr>
+                              <td colspan="2" title="" >Jika pasien mempunyai riwayat kehamilan, silahkan buka form Riwayat Kehamilan untuk memasukan data ke rekam medis</td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" >Buka Form Asesmen :</td>
+                              <td>
+                                <button type="button" onclick="asesmenHamil()" class="btn btn-info btn-xs">Buka</button>
+                              </td>
+                              <script type="text/javascript">
+                                function asesmenHamil(){
+                                  resepWindow = window.open('<?php echo base_url()?>p_umum/check_up/asesmen_hamil/<?php echo $no_pasien ?>', '', 'width=820, height=720, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
+                                }
+                              </script>
+                            </tr>
                           </table>                  
                         </div>
                         <div role="tabpanel" class="tab-pane fade" id="rm3" aria-labelledby="profile-tab">
-                          <h2>ANAMNESIS</h2>
+                          <h2>ASESMEN MEDIS SEKARANG</h2>
                           <div class="ln_solid"></div>
                           <table id="form" style="width: 90% ">
                             <tr>
-                              <td colspan="2" ><b>KELUHAN UTAMA</b></td>
+                              <td colspan="2" ><b>ANAMNESA</b></td>
+                            </tr>
+                            <tr>
+                              <td colspan="2" >Keluhan Utama</td>
                             </tr>
                             <tr>
                               <td colspan="2" >
                                 <table id="tabel_diagnosa" class="table table-striped table-bordered">
                                   <thead>
                                     <tr>
-                                      <th align="center">No.</th>
+                                      <th align="center">Jam</th>
                                       <th align="center">Keluhan</th>
                                       <th align="center">Keterangan</th>
                                       <th align="center">Aksi</th>
@@ -633,53 +745,10 @@
                             </tr>
                             <tr>
                               <td></td>
-                              <td ><button type="button" id="tambah_keluhan_button" name="tambah_keluhan_button" onclick="tambahKeluhan('Keluhan Utama')" class="btn btn-info btn-xs">Tambah</button></td>
+                              <td ><button type="button" id="tambah_keluhan_button" name="tambah_keluhan_button" onclick="tambahKeluhan()" class="btn btn-info btn-xs">Tambah</button></td>
                             </tr>
                             <tr>
-                              <td colspan="2" ><b>KELUHAN TAMBAHAN</b></td>
-                            </tr>
-                            <tr>
-                              <td colspan="2" >
-                                <table id="tabel_diagnosa" class="table table-striped table-bordered">
-                                  <thead>
-                                    <tr>
-                                      <th align="center">No.</th>
-                                      <th align="center">Keluhan</th>
-                                      <th align="center">Keterangan</th>
-                                      <th align="center">Aksi</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody id="show_keluhan_tambahan">
-                                    
-                                    <!-- <td colspan="7" align="center">Tidak ada Data</td> -->
-                                  </tbody>
-                                </table>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td style="text-align: right;width: 30%" >Keluhan :</td>
-                              <td>
-                                <input type="text" id="rm3_keluhan_tambahan" name="rm3_keluhan_tambahan" class="form-control col-md-7 col-xs-12">
-                              </td>
-                            </tr>
-                            <tr>
-                              <td valign="top" style="text-align: right;width: 30%" >Keterangan :</td>
-                              <td>
-                                <textarea class="form-control" id="rm3_keterangan_tambahan" rows="1" placeholder=''></textarea>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <td ><button type="button" id="tambah_keluhan_button" name="tambah_keluhan_button" onclick="tambahKeluhan('Keluhan Tambahan')" class="btn btn-info btn-xs">Tambah</button></td>
-                            </tr>
-                          </table>                  
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade" id="rm4" aria-labelledby="profile-tab">
-                          <h2>DIAGNOSIS</h2>
-                          <div class="ln_solid"></div>
-                          <table id="form" style="width: 90% ">
-                            <tr>
-                              <td colspan="2"><b>PEMERIKSAAN</b></td>
+                              <td colspan="2" >Pemeriksaan</td>
                             </tr>
                             <tr>
                               <td colspan="2" >
@@ -715,22 +784,28 @@
                               <td></td>
                               <td ><button type="button" id="tambah_periksa_button" name="tambah_periksa_button" onclick="tambahPemeriksaan()" class="btn btn-info btn-xs">Tambah</button></td>
                             </tr>
+                          </table>                  
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="rm4" aria-labelledby="profile-tab">
+                          <h2>DIAGNOSA</h2>
+                          <div class="ln_solid"></div>
+                          <table id="form" style="width: 90% ">
                             <tr>
-                              <td colspan="2" ><b>DIAGNOSIS</b></td>
+                              <td colspan="2" ><b>DIAGNOSA</b></td>
                             </tr>
                             <tr>
                               <td colspan="2" >
-                                <table id="tabel_diagnosis" class="table table-striped table-bordered">
+                                <table id="tabel_diagnosa" class="table table-striped table-bordered">
                                   <thead>
                                     <tr>
                                       <th align="center">Jam Periksa</th>
                                       <th align="center">Kode ICD-10</th>
-                                      <th align="center">Diagnosis</th>
+                                      <th align="center">Diagnosa</th>
                                       <th align="center">Keterangan</th>
                                       <th align="center">Aksi</th>
                                     </tr>
                                   </thead>
-                                  <tbody id="show_diagnosis">
+                                  <tbody id="show_diagnosa">
                                     
                                     <!-- <td colspan="7" align="center">Tidak ada Data</td> -->
                                   </tbody>
@@ -746,7 +821,7 @@
                             <tr>
                               <td valign="top" style="text-align: right;width: 30%" >Diagnosa :</td>
                               <td>
-                                <textarea class="form-control" id="rm4_diagnosis" name="rm4_diagnosis" rows="1" placeholder=''></textarea>
+                                <textarea class="form-control" id="rm4_diagnosa" name="rm4_diagnosa" rows="1" placeholder=''></textarea>
                               </td>
                             </tr>
                             <tr>
@@ -757,8 +832,47 @@
                             </tr>
                             <tr>
                               <td></td>
-                              <td ><button type="button" id="tambah_diagnosis_button" name="tambah_diagnosis_button" onclick="tambahDiagnosis()" class="btn btn-info btn-xs">Tambah</button></td>
+                              <td ><button type="button" id="tambah_diagnosa_button" name="tambah_diagnosa_button" onclick="tambahDiagnosa()" class="btn btn-info btn-xs">Tambah</button></td>
                             </tr>
+                            <tr>
+                              <td colspan="2" ><b>TINDAKAN YANG DIBERIKAN</b></td>
+                            </tr>
+                            <tr>
+                              <td colspan="2" >
+                                <table id="tabel_diagnosa" class="table table-striped table-bordered">
+                                  <thead>
+                                    <tr>
+                                      <th align="center">No.</th>
+                                      <th align="center">Jam</th>
+                                      <th align="center">Tindakan</th>
+                                      <th align="center">Keterangan</th>
+                                      <th align="center">Aksi</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody id="show_tindakan">
+                                    
+                                    <!-- <td colspan="7" align="center">Tidak ada Data</td> -->
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" >Tindakan :</td>
+                              <td>
+                                <input type="text" id="tindakan_input" name="tindakan_input" class="form-control col-md-7 col-xs-12">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td valign="top" style="text-align: right;width: 30%" >Keterangan :</td>
+                              <td>
+                                <textarea class="form-control" id="keterangan_input" name="keterangan_input" rows="1" placeholder=''></textarea>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td ><button type="button" id="tambah_rencana_button" name="tambah_rencana_button" onclick="tambahTindakan()" class="btn btn-info btn-xs">Tambah</button></td>
+                            </tr>
+                            
                           </table>
                           <div class="ln_solid"></div>
                         </div>
@@ -917,11 +1031,11 @@
       tampilRiwayatPenyakit();
       tampilRiwayatAlergi();
       tampilKeluhan();
-      tampilKeluhanTambahan();
       tampilPemeriksaan();
-      tampilDiagnosis();
+      tampilDiagnosa();
       tampilRencana();
-      showObservation();
+      tampilTindakan();
+      tampilRiwayatHamil();
     }
     
     //pemanggilan fungsi tampil barang.
@@ -929,13 +1043,13 @@
 
     function getName(){
       var rm4_icd10_value = $("#rm4_icd10").val();
-      $("#rm4_diagnosis").attr('disabled','disabled');
+      $("#rm4_diagnosa").attr('disabled','disabled');
       $.ajax({
         url   : '<?php echo base_url()?>p_umum/check_up/getName/'+rm4_icd10_value,
         type  : 'GET',
         success : function(data){
-          $("#rm4_diagnosis").val(data);
-          $("#rm4_diagnosis").removeAttr('disabled');
+          $("#rm4_diagnosa").val(data);
+          $("#rm4_diagnosa").removeAttr('disabled');
         }, 
         error: function(){
           new PNotify({
@@ -967,44 +1081,6 @@
       });
     }
 
-    function showObservation(){
-      $.ajax({
-        url   : '<?php echo base_url()?>p_umum/check_up/viewObservation',
-        type  : 'POST',
-        data : {id_rawat: <?php echo $id_rawat; ?>},
-        dataType : 'JSON',
-        success : function(data){
-          if (data.length <= 0){
-            html += 
-              '<tr>'+
-              '<td colspan="6" align="center">Data pemeriksaan belum ada</td>'+
-              '</tr>';
-            $('#show_obeservation').html(html);
-            //setTimeout(tampil_diagnosa, 500)
-          }else{
-            var html = '';
-            var i;
-            for(i=0; i<data.length; i++){
-              html += 
-              '<tr>'+
-              '<td align="center" >'+data[i].tanggal+'</td>'+
-              '<td align="center" >'+data[i].jam+'</td>'+
-              '<td>'+data[i].kategori+'</td>'+
-              '<td>'+data[i].tipe_pemeriksaan+'</td>'+
-              '<td>'+data[i].hasil+' '+data[i].unit+'</td>'+
-              '<td title="Hapus Data" align="center"><a class="fa fa-remove" onclick="hapus(1,\''+data[i].id+'\')" style="cursor:pointer" ></a></td>'+
-              '</tr>';
-
-            }
-            $('#show_obeservation').html(html);
-          }
-        }, 
-        error: function(){
-                  
-        }
-      });
-    }
-
     function tampilRiwayatPenyakit(){
       $.ajax({
         url   : '<?php echo base_url()?>p_umum/check_up/viewRiwayatPenyakit',
@@ -1030,7 +1106,7 @@
               '<td>'+data[i].kode_icd10+'</td>'+
               '<td>'+data[i].diagnosa+'</td>'+
               '<td>'+data[i].keterangan+'</td>'+
-              '<td title="Hapus Data" align="center"><a class="fa fa-remove" onclick="hapus(8,'+data[i].id_riwayat+')" style="cursor:pointer" ></a></td>'+
+              '<td title="Hapus Data" align="center"><a class="fa fa-remove" onclick="hapus(1,'+data[i].id_riwayat+')" style="cursor:pointer" ></a></td>'+
               '</tr>';
             }
             $('#show_riwayat_penyakit').html(html);
@@ -1080,17 +1156,16 @@
     }
 
     function tampilKeluhan(){
-      var jenis_value = 'Keluhan Utama';
       $.ajax({
         url   : '<?php echo base_url()?>p_umum/check_up/viewKeluhan',
         type  : 'POST',
-        data : {jenis_keluhan: jenis_value, no_rawat_jalan: <?php echo $id_rawat; ?>},
+        data : {id_periksa: <?php echo $id_periksa; ?>},
         dataType : 'JSON',
         success : function(data){
           if (data.length <= 0){
             html += 
               '<tr>'+
-              '<td colspan="4" align="center">Data pemeriksaan belum ada</td>'+
+              '<td colspan="8" align="center">Data pemeriksaan belum ada</td>'+
               '</tr>';
             $('#show_keluhan').html(html);
             //setTimeout(tampil_diagnosa, 500)
@@ -1098,10 +1173,9 @@
             var html = '';
             var i;
             for(i=0; i<data.length; i++){
-              var num = i+1;
               html += 
               '<tr>'+
-              '<td align="center" >'+num+'</td>'+
+              '<td align="center" >'+data[i].jam_input+'</td>'+
               '<td align="center" >'+data[i].keluhan+'</td>'+
               '<td>'+data[i].keterangan+'</td>'+
               '<td title="Hapus Data" align="center"><a class="fa fa-remove" onclick="hapus(3,'+data[i].id_keluhan+')" style="cursor:pointer" ></a></td>'+
@@ -1116,54 +1190,19 @@
       });
     }
 
-    function tampilKeluhanTambahan(){
-      var jenis_value = 'Keluhan Tambahan';
-      $.ajax({
-        url   : '<?php echo base_url()?>p_umum/check_up/viewKeluhan',
-        type  : 'POST',
-        data : {jenis_keluhan: jenis_value, no_rawat_jalan: <?php echo $id_rawat; ?>},
-        dataType : 'JSON',
-        success : function(data){
-          if (data.length <= 0){
-            html += 
-              '<tr>'+
-              '<td colspan="4" align="center">Data pemeriksaan belum ada</td>'+
-              '</tr>';
-            $('#show_keluhan_tambahan').html(html);
-            //setTimeout(tampil_diagnosa, 500)
-          }else{
-            var html = '';
-            var i;
-            for(i=0; i<data.length; i++){
-              var num = i+1;
-              html += 
-              '<tr>'+
-              '<td align="center" >'+num+'</td>'+
-              '<td align="center" >'+data[i].keluhan+'</td>'+
-              '<td>'+data[i].keterangan+'</td>'+
-              '<td title="Hapus Data" align="center"><a class="fa fa-remove" onclick="hapus(3,'+data[i].id_keluhan+')" style="cursor:pointer" ></a></td>'+
-              '</tr>';
-            }
-            $('#show_keluhan_tambahan').html(html);
-          }
-        }, 
-        error: function(){
-                  
-        }
-      });
-    }
+   
 
     function tampilPemeriksaan(){
       $.ajax({
         url   : '<?php echo base_url()?>p_umum/check_up/viewPemeriksaan',
         type  : 'POST',
-        data : {no_rawat_jalan: <?php echo $id_rawat; ?>},
+        data : {id_periksa: <?php echo $id_periksa; ?>},
         dataType : 'JSON',
         success : function(data){
           if (data.length <= 0){
             html += 
               '<tr>'+
-              '<td colspan="4" align="center">Data pemeriksaan belum ada</td>'+
+              '<td colspan="8" align="center">Data pemeriksaan belum ada</td>'+
               '</tr>';
             $('#show_pemeriksaan').html(html);
             //setTimeout(tampil_diagnosa, 500)
@@ -1188,19 +1227,19 @@
       });
     }
 
-    function tampilDiagnosis(){
+    function tampilDiagnosa(){
       $.ajax({
-        url   : '<?php echo base_url()?>p_umum/check_up/viewDiagnosis',
+        url   : '<?php echo base_url()?>p_umum/check_up/viewDiagnosa',
         type  : 'POST',
-        data : {id_rawat: <?php echo $id_rawat; ?>},
+        data : {id_periksa: <?php echo $id_periksa; ?>},
         dataType : 'JSON',
         success : function(data){
           if (data.length <= 0){
             html += 
               '<tr>'+
-              '<td colspan="5" align="center">Data pemeriksaan belum ada</td>'+
+              '<td colspan="8" align="center">Data pemeriksaan belum ada</td>'+
               '</tr>';
-            $('#show_diagnosis').html(html);
+            $('#show_diagnosa').html(html);
             //setTimeout(tampil_diagnosa, 500)
           }else{
             var html = '';
@@ -1208,14 +1247,14 @@
             for(i=0; i<data.length; i++){
               html += 
               '<tr>'+
-              '<td align="center" >'+data[i].jam+'</td>'+
-              '<td align="center" >'+data[i].kode_diagnosis+'</td>'+
-              '<td>'+data[i].diagnosis+'</td>'+
+              '<td align="center" >'+data[i].jam_cek+'</td>'+
+              '<td align="center" >'+data[i].kode_icd10+'</td>'+
+              '<td>'+data[i].diagnosa+'</td>'+
               '<td>'+data[i].keterangan+'</td>'+
-              '<td title="Hapus Data" align="center"><a class="fa fa-remove" onclick="hapus(5,\''+data[i].id+'\')" style="cursor:pointer" ></a></td>'+
+              '<td title="Hapus Data" align="center"><a class="fa fa-remove" onclick="hapus(5,'+data[i].id_diagnosa+')" style="cursor:pointer" ></a></td>'+
               '</tr>';
             }
-            $('#show_diagnosis').html(html);
+            $('#show_diagnosa').html(html);
           }
         }, 
         error: function(){
@@ -1228,13 +1267,13 @@
       $.ajax({
         url   : '<?php echo base_url()?>p_umum/check_up/viewRencana',
         type  : 'POST',
-        data : {no_rawat_jalan: <?php echo $id_rawat; ?>},
+        data : {id_periksa: <?php echo $id_periksa; ?>},
         dataType : 'JSON',
         success : function(data){
           if (data.length <= 0){
             html += 
               '<tr>'+
-              '<td colspan="4" align="center">Data pemeriksaan belum ada</td>'+
+              '<td colspan="8" align="center">Data pemeriksaan belum ada</td>'+
               '</tr>';
             $('#show_rencana').html(html);
             //setTimeout(tampil_diagnosa, 500)
@@ -1260,28 +1299,173 @@
         }
       });
     }
+
+    function tampilTindakan(){
+      $.ajax({
+        url   : '<?php echo base_url()?>p_umum/check_up/viewTindakan',
+        type  : 'POST',
+        data : {id_periksa: <?php echo $id_periksa; ?>},
+        dataType : 'JSON',
+        success : function(data){
+          if (data.length <= 0){
+            html += 
+              '<tr>'+
+              '<td colspan="8" align="center">Data pemeriksaan belum ada</td>'+
+              '</tr>';
+            $('#show_tindakan').html(html);
+            //setTimeout(tampil_diagnosa, 500)
+          }else{
+            var html = '';
+            var i;
+            <?php $numb=0; ?>
+            for(i=0; i<data.length; i++){
+              var num = i+1;
+              html += 
+              '<tr>'+
+              '<td align="center" >'+num+'</td>'+
+              '<td align="center" >'+data[i].jam+'</td>'+
+              '<td>'+data[i].tindakan+'</td>'+
+              '<td>'+data[i].keterangan+'</td>'+
+              '<td title="Hapus Data" align="center"><a class="fa fa-remove" onclick="hapus(7,'+data[i].id_tindakan+')" style="cursor:pointer" ></a></td>'+
+              '</tr>';
+            }
+            $('#show_tindakan').html(html);
+          }
+        }, 
+        error: function(){
+                  
+        }
+      });
+    }
+
+    function tampilRiwayatHamil(){
+      $.ajax({
+        url   : '<?php echo base_url()?>p_umum/check_up/viewRiwayatHamil',
+        type  : 'POST',
+        data : {no_pasien: <?php echo $no_pasien; ?>},
+        dataType : 'JSON',
+        success : function(data){
+          if (data.length <= 0){
+            html += 
+              '<tr>'+
+              '<td colspan="9" align="center">Data pemeriksaan belum ada</td>'+
+              '</tr>';
+            $('#show_riwayat_hamil').html(html);
+            //setTimeout(tampil_diagnosa, 500)
+          }else{
+            var html = '';
+            var i;
+            <?php $numb=0; ?>
+            for(i=0; i<data.length; i++){
+              var num = i+1;
+              html += 
+              '<tr>'+
+              '<td align="center" >'+num+'</td>'+
+              '<td align="center" >'+data[i].macam_persanlinan+'</td>'+
+              '<td>'+data[i].jenis_kelamin+'</td>'+
+              '<td>'+data[i].status_lahir+'</td>'+
+              '<td>'+data[i].waktu+'</td>'+
+              '<td>'+data[i].penolong_persalinan+'</td>'+
+              '<td>'+data[i].penyulit+'</td>'+
+              '<td>'+data[i].sebab_kematian+'</td>'+
+              '<td title="Hapus Data" align="center"><a class="fa fa-remove" onclick="hapus(8,'+data[i].id_hamil+')" style="cursor:pointer" ></a></td>'+
+              '</tr>';
+            }
+            $('#show_riwayat_hamil').html(html);
+          }
+        }, 
+        error: function(){
+                  
+        }
+      });
+    }
+
   </script>
   <script type="text/javascript">
-    function tambahObservation(){
-      var no_rawat_value = <?php echo $id_rawat; ?>;
-      var no_pasien_value = <?php echo $no_pasien; ?>;
-      var tipe_value = $('#input_tipe').find(":selected").text();
-      var hasil_value = $("#input_hasil").val();
+    function rm1a(){
+      <?php 
+      $actiona = 'Kirim';
+      foreach ($rm1a as $a) {
+        $actiona = 'Update';
+      }
       
+      ?>
+      var id_periksa_value = '<?php echo $id_periksa ?>';
+      var RM1A11_value = $('input[name=RM1A11]:checked').val();
+      var RM1A12_value = $('input[name=RM1A12]:checked').val();
+      var RM1A21_value = $('input[name=RM1A21]:checked').val();
+      var RM1A22_value = $('input[name=RM1A22]').val();
+      var RM1A23_value = $('input[name=RM1A23]').val();
+      var RM1A24_value = $('input[name=RM1A24]').val();
+      var RM1A25_value = $('input[name=RM1A25]').val();
+      var RM1A26_value = $('input[name=RM1A26]').val();
+      var RM1A27_value = $('input[name=RM1A27]').val();
+      var RM1A28_value = $('input[name=RM1A28]').val();
+      var RM1A31_value = $('input[name=RM1A31]:checked').val();
+      var RM1A32_value = $('input[name=RM1A32]:checked').val();
+      var RM1A33_value = $('input[name=RM1A33]:checked').val();
+      var RM1A34_value = $('input[name=RM1A34]:checked').val();
+      // if(periksa_value && kode_value && keterangan_value && tindakan_value){
         $.ajax({
-          url: "<?php echo base_url().'p_umum/check_up/simpanObservation' ?>",
+          url: "<?php echo base_url().'p_umum/check_up/simpanRm1a/'.$id_periksa ?>",
           type: 'POST',
-          data: {no_rawat_jalan: no_rawat_value, no_pasien: no_pasien_value, tipe: tipe_value, hasil: hasil_value},
+          data: {action: "<?php echo $actiona; ?>", id_periksa: id_periksa_value, RM1A11: RM1A11_value, RM1A12: RM1A12_value, RM1A21: RM1A21_value, RM1A22: RM1A22_value, RM1A23: RM1A23_value, RM1A24: RM1A24_value, RM1A25: RM1A25_value, RM1A26: RM1A26_value, RM1A27: RM1A27_value, RM1A28: RM1A28_value, RM1A31: RM1A31_value, RM1A32: RM1A32_value, RM1A33: RM1A33_value, RM1A34: RM1A34_value},
           dataType: "JSON",
           success: function(data) {
-            tampilRiwayatPenyakit();
+            $("#rm1a_submit").attr('disabled','disabled');
             new PNotify({
               title: 'Sukses',
               text: 'Data hasil diagnosa pasien telah berhasil disimpan!',
               type: 'success'
             });
-            $("#input_hasil").val('');
-            showObservation();
+            setTimeout(location.reload.bind(location), 1000);
+          },
+          error: function(data) {
+            new PNotify({
+              title: 'Gagal Menyimpan Data!',
+              text: 'Terjadi gagal saat menyimpan data. Dikarenakan error di server atau database',
+              type: 'error'
+            });
+          }
+        });
+    }
+  </script>
+  <script type="text/javascript">
+
+    function rm1b(){
+      <?php 
+      $actionb = 'Kirim';
+      foreach ($rm1b as $b) {
+        $actionb = 'Update';
+      }
+      ?>
+      var id_periksa_value = '<?php echo $id_periksa ?>';
+      var RM1B11_value = $('input[name=RM1B11]:checked').val();
+      var RM1B21_value = $('input[name=RM1B21]:checked').val();
+      var RM1B22_value = $('input[name=RM1B22]:checked').val();
+      var RM1B23_value = $('input[name=RM1B23]:checked').val();
+      var RM1B31_value = $('input[name=RM1B31]:checked').val();
+      var RM1B32_value = $('input[name=RM1B32]').val();
+      var RM1B33_value = $('input[name=RM1B33]').val();
+      var RM1B34_value = $('input[name=RM1B34]').val();
+      var RM1B35_value = $('input[name=RM1B35]').val();
+      var RM1B36_value = $('input[name=RM1B36]').val();
+      var RM1B37_value = $('input[name=RM1B37]:checked').val();
+      // if(periksa_value && kode_value && keterangan_value && tindakan_value){
+        $.ajax({
+          url: "<?php echo base_url().'p_umum/check_up/simpanRm1b/'.$id_periksa ?>",
+          type: 'POST',
+          data: {action: "<?php echo $actionb; ?>", id_periksa: id_periksa_value, RM1B11: RM1B11_value, RM1B21: RM1B21_value, RM1B22: RM1B22_value, RM1B23: RM1B23_value, RM1B31: RM1B31_value, RM1B32: RM1B32_value, RM1B33: RM1B33_value, RM1B34: RM1B34_value, RM1B35: RM1B35_value, RM1B36: RM1B36_value, RM1B37: RM1B37_value},
+          dataType: "JSON",
+          
+          success: function(data) {
+            $("#rm1b_submit").attr('disabled','disabled');
+            new PNotify({
+              title: 'Sukses',
+              text: 'Data hasil diagnosa pasien telah berhasil disimpan!',
+              type: 'success'
+            });
+            setTimeout(location.reload.bind(location), 1000);
           },
           error: function(data) {
             new PNotify({
@@ -1296,7 +1480,6 @@
   <script type="text/javascript">
     function tambahRiwayatPenyakit(){
       var no_pasien_value = <?php echo $no_pasien; ?>;
-      var no_rawat_value = <?php echo $id_rawat; ?>;
       var kode_icd10_value = $("#rm2_icd10").val();
       var diagnosa_value = $("#rm2_diagnosa").val();
       var keterangan_penyakit_value = $("#rm2_keterangan_penyakit").val();
@@ -1304,7 +1487,7 @@
         $.ajax({
           url: "<?php echo base_url().'p_umum/check_up/simpanRiwayatPenyakit' ?>",
           type: 'POST',
-          data: {no_pasien: no_pasien_value, no_rawat_jalan: no_rawat_value, kode_icd10: kode_icd10_value, diagnosa: diagnosa_value, keterangan: keterangan_penyakit_value},
+          data: {no_pasien: no_pasien_value, kode_icd10: kode_icd10_value, diagnosa: diagnosa_value, keterangan: keterangan_penyakit_value},
           dataType: "JSON",
           success: function(data) {
             tampilRiwayatPenyakit();
@@ -1331,7 +1514,7 @@
 
     function tambahAlergi(){
       var no_pasien_value = '<?php echo $no_pasien; ?>';
-      var no_rawat_value = '<?php echo $id_rawat ?>';
+      var id_periksa_value = '<?php echo $id_periksa ?>';
       var rm2_organ_sasaran_value = $("#rm2_organ_sasaran").val();
       var rm2_gejela_value = $("#rm2_gejala").val();
       var rm2_bahan_kimia_value = $("#rm2_bahan_kimia").val();
@@ -1340,7 +1523,7 @@
         $.ajax({
           url: "<?php echo base_url().'p_umum/check_up/simpan' ?>",
           type: 'POST',
-          data: {jenis:'Alergi', no_pasien: no_pasien_value, no_rawat_jalan: no_rawat_value, organ_sasaran: rm2_organ_sasaran_value, gejala: rm2_gejela_value, bahan_kimia: rm2_bahan_kimia_value, keterangan: rm2_keterangan_value},
+          data: {jenis:'Alergi', no_pasien: no_pasien_value, organ_sasaran: rm2_organ_sasaran_value, gejala: rm2_gejela_value, bahan_kimia: rm2_bahan_kimia_value, keterangan: rm2_keterangan_value},
           dataType: "JSON",
           success: function(data) {
             tampilRiwayatAlergi();
@@ -1365,37 +1548,25 @@
     }
   </script>
   <script type="text/javascript">
-    function tambahKeluhan(jenis){
-      var jenis_value = jenis;
-      var no_rawat_value = '<?php echo $id_rawat ?>';
-      if (jenis == 'Keluhan Utama') {
-        var rm3_keluhan_value = $("#rm3_keluhan").val();
-        var rm3_keterangan_value = $("#rm3_keterangan").val();
-      }else{
-        var rm3_keluhan_value = $("#rm3_keluhan_tambahan").val();
-        var rm3_keterangan_value = $("#rm3_keterangan_tambahan").val();
-      }
+    function tambahKeluhan(){
+      var id_periksa_value = '<?php echo $id_periksa ?>';
+      var rm3_keluhan_value = $("#rm3_keluhan").val();
+      var rm3_keterangan_value = $("#rm3_keterangan").val();
+      
         $.ajax({
           url: "<?php echo base_url().'p_umum/check_up/simpan' ?>",
           type: 'POST',
-          data: {jenis:'Keluhan', jenis_keluhan: jenis_value, no_rawat_jalan: no_rawat_value, keluhan: rm3_keluhan_value, keterangan: rm3_keterangan_value},
+          data: {jenis:'Keluhan', id_periksa: id_periksa_value, keluhan: rm3_keluhan_value, keterangan: rm3_keterangan_value},
           dataType: "JSON",
           success: function(data) {
             tampilKeluhan();
-            tampilKeluhanTambahan();
             new PNotify({
               title: 'Sukses',
               text: 'Data hasil diagnosa pasien telah berhasil disimpan!',
               type: 'success'
             });
-            
-            if (jenis == 'Keluhan Utama') {
-              $("#rm3_keluhan").val('');
-              $("#rm3_keterangan").val('');
-            }else{
-              $("#rm3_keluhan_tambahan").val('');
-              $("#rm3_keterangan_tambahan").val('');
-            }
+            $("#rm3_keluhan").val('');
+            $("#rm3_keterangan").val('');
           },
           error: function(data) {
             new PNotify({
@@ -1409,14 +1580,14 @@
   </script>
   <script type="text/javascript">
     function tambahPemeriksaan(){
-      var no_rawat_value = '<?php echo $id_rawat ?>';
+      var id_periksa_value = '<?php echo $id_periksa ?>';
       var rm3_periksa_value = $("#rm3_periksa").val();
       var rm3_keterangan_2_value = $("#rm3_keterangan_2").val();
       
         $.ajax({
           url: "<?php echo base_url().'p_umum/check_up/simpan' ?>",
           type: 'POST',
-          data: {jenis:'Pemeriksaan', no_rawat_jalan: no_rawat_value, periksa: rm3_periksa_value, keterangan: rm3_keterangan_2_value},
+          data: {jenis:'Pemeriksaan', id_periksa: id_periksa_value, periksa: rm3_periksa_value, keterangan: rm3_keterangan_2_value},
           dataType: "JSON",
           success: function(data) {
             tampilPemeriksaan();
@@ -1439,27 +1610,26 @@
     }
   </script>
   <script type="text/javascript">
-    function tambahDiagnosis(){
-      var id_rawat_value = '<?php echo $id_rawat ?>';
+    function tambahDiagnosa(){
+      var id_periksa_value = '<?php echo $id_periksa ?>';
       var rm4_icd10_value = $("#rm4_icd10").val();
-      var rm4_diagnosis_value = $("#rm4_diagnosis").val();
+      var rm4_diagnosa_value = $("#rm4_diagnosa").val();
       var rm4_keterangan_value = $("#rm4_keterangan").val();
-      var no_pasien_value = <?php echo $no_pasien; ?>;
       
         $.ajax({
           url: "<?php echo base_url().'p_umum/check_up/simpan' ?>",
           type: 'POST',
-          data: {jenis:'Diagnosis', id_rawat: id_rawat_value, no_pasien: no_pasien_value, kode_icd10: rm4_icd10_value, diagnosis: rm4_diagnosis_value, keterangan: rm4_keterangan_value},
+          data: {jenis:'Diagnosa', id_periksa: id_periksa_value, kode_icd10: rm4_icd10_value, diagnosa: rm4_diagnosa_value, keterangan: rm4_keterangan_value},
           dataType: "JSON",
           success: function(data) {
-            tampilDiagnosis();
+            tampilDiagnosa();
             new PNotify({
               title: 'Sukses',
-              text: 'Data hasil diagnosis pasien telah berhasil disimpan!',
+              text: 'Data hasil diagnosa pasien telah berhasil disimpan!',
               type: 'success'
             });
             $("#rm4_icd10").val('');
-            $("#rm4_diagnosis").val('');
+            $("#rm4_diagnosa").val('');
             $("#rm4_keterangan").val('');
           },
           error: function(data) {
@@ -1474,14 +1644,14 @@
   </script>
   <script type="text/javascript">
     function tambahRencana(){
-      var no_rawat_value = '<?php echo $id_rawat ?>';
+      var id_periksa_value = '<?php echo $id_periksa ?>';
       var rm4_rencana_value = $("#rm4_rencana").val();
       var rm4_keterangan_2_value = $("#rm4_keterangan_2").val();
       
         $.ajax({
           url: "<?php echo base_url().'p_umum/check_up/simpan' ?>",
           type: 'POST',
-          data: {jenis:'Rencana', no_rawat_jalan: no_rawat_value, rencana: rm4_rencana_value, keterangan: rm4_keterangan_2_value},
+          data: {jenis:'Rencana', id_periksa: id_periksa_value, rencana: rm4_rencana_value, keterangan: rm4_keterangan_2_value},
           dataType: "JSON",
           success: function(data) {
             tampilRencana();
@@ -1492,6 +1662,37 @@
             });
             $("#rm4_rencana").val('');
             $("#rm4_keterangan_2").val('');
+          },
+          error: function(data) {
+            new PNotify({
+              title: 'Gagal Menyimpan Data!',
+              text: 'Terjadi gagal saat menyimpan data. Dikarenakan error di server atau database',
+              type: 'error'
+            });
+          }
+        });
+    }
+  </script>
+  <script type="text/javascript">
+    function tambahTindakan(){
+      var id_periksa_value = '<?php echo $id_periksa ?>';
+      var tindakan_value = $("#tindakan_input").val();
+      var keterangan_value = $("#keterangan_input").val();
+      
+        $.ajax({
+          url: "<?php echo base_url().'p_umum/check_up/simpan' ?>",
+          type: 'POST',
+          data: {jenis:'Tindakan', id_periksa: id_periksa_value, tindakan: tindakan_value, keterangan: keterangan_value},
+          dataType: "JSON",
+          success: function(data) {
+            tampilTindakan();
+            new PNotify({
+              title: 'Sukses',
+              text: 'Data hasil diagnosa pasien telah berhasil disimpan!',
+              type: 'success'
+            });
+            $("#tindakan_input").val('');
+            $("#keterangan_input").val('');
           },
           error: function(data) {
             new PNotify({

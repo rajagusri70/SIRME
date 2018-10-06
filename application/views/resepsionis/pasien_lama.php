@@ -130,7 +130,7 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="images/img.jpg" alt="">Dr. 
+                  Dr. 
                   <?php foreach ($users as $user) {
                     echo $user->nama;
                   } ?>
@@ -258,8 +258,6 @@
                         <th>Jenis Kelamin</th>
                         <th>Tanggal Lahir</th>
                         <th>Umur</th>
-                        <th>Pekerjaan</th>
-                        <th>Gol. Darah</th>
                         <th>Aksi</th>
                       </tr>
                     </thead>
@@ -272,8 +270,6 @@
                         <td><?php echo $p->jenis_kelamin; ?></td>
                         <td><?php echo $p->tanggal_lahir; ?></td>
                         <td><?php echo $p->umur; ?></td>
-                        <td><?php echo $p->pekerjaan; ?></td>
-                        <td><?php echo $p->golongan_darah; ?></td>
                         <td>
                           <button type="button" class=" btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg-id-<?php echo $p->no_pasien; ?>">Daftarkan ke Poli</button>
                           <!-- <a href="#" class=""><i class="fa fa-hospital-o"></i> Daftar ke Poli </a> -->

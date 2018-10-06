@@ -206,16 +206,16 @@
                     </thead>
                     <tbody>
                       <?php
-                      foreach ($rawat_jalan as $rj) {
+                      foreach ($antrian as $an) {
                       ?>
                       <tr>
-                        <td><?php echo $rj->no_pasien ?></td>
-                        <td><?php echo $rj->nama ?></td>
-                        <td align="center"><?php echo $rj->tanggal ?></td>
-                        <td><?php echo $rj->waktu ?></td><!-- 
+                        <td><?php echo $an->no_pasien ?></td>
+                        <td><?php echo $an->nama ?></td>
+                        <td align="center"><?php echo $an->tanggal ?></td>
+                        <td><?php echo $an->jam ?></td><!-- 
                         <td>Rp. <?php //echo $rj->biaya ?></td> -->
-                        <td><?php echo $rj->status ?></td>
-                        <td align="center"><a title="Lakukan Pemeriksaan" href="<?php echo base_url() ?>p_umum/check_up/periksa/<?php echo $rj->id_rawat ?>" target="_blank"><span class="glyphicon glyphicon-check"></span></a></td>
+                        <td><?php echo $an->status ?></td>
+                        <td align="center"><a title="Lakukan Pemeriksaan" href="<?php echo base_url() ?>p_umum/check_up/encounter/<?php echo $an->id ?>/<?php echo $an->no_pasien ?>" target="_blank"><span class="glyphicon glyphicon-check"></span></a></td>
                       </tr>
                       <?php
                       }

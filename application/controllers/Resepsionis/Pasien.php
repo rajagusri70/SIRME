@@ -9,6 +9,7 @@ class Pasien extends CI_Controller {
 		}
 		$this->load->model('PasienModel');
 		$this->load->model('AdminModel');
+		$this->load->model('AntrianModel');
 		$this->load->model('RawatModel');
 		$this->load->model('PoliklinikModel');
 		$this->load->model('TransaksiModel');
@@ -176,9 +177,8 @@ class Pasien extends CI_Controller {
 		$biaya = $this->input->post('input_biaya');
 		//$no_pasien = $_GET['nomor_pasien'];
 		$tanggal = date("d-m-Y");
-		$waktu = date("H:i:s");
-		$microtime = microtime();
-		$timestamp = $tanggal.$microtime;//$tanggal.$waktu.$microtime;
+		$jam = date("H:i:s");
+		$kode = 'AN'.date("dmy").uniqid();
 		$this->load->view('resepsionis/pasien_lama',$data);
 
 		if($this->input->post('daftar_poli')){
@@ -191,9 +191,9 @@ class Pasien extends CI_Controller {
 				'tanggal' => $tanggal , 
 				'poliklinik' => $poliklinik , 
 			);
-			$jumlah_rawat = $this->RawatModel->count($where_count);
+			$jumlah_rawat = $this->AntrianModel->count($where_count);
 			if($jumlah_rawat < $poli){
-				$cek = $this->RawatModel->cekPasien()->num_rows(); 
+				$cek = $this->AntrianModel->cekPasien()->num_rows(); 
 				if($cek > 0){
 					echo '<body>';
 					echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
@@ -201,14 +201,14 @@ class Pasien extends CI_Controller {
 					echo 'swal({';
 					echo '  title: "Pendaftaran Gagal.!",';
 					echo '  text: "Pasien sedang melakukan rawat jalan.!",';
-					echo '	icon: "success",';
+					echo '	icon: "warning",';
 					echo '  buttons: {';
-					//echo '    cancel: "Run away!",';
+					
 					echo '    catch: {';
 					echo '      text: "Oke",';
 					echo '      value: "catch",';
 					echo '    },';
-					//echo '    defeat: true,';
+					
 					echo '  },';
 					echo '})';
 					echo '.then((value) => {';
@@ -226,25 +226,19 @@ class Pasien extends CI_Controller {
 					echo '</script>';
 					echo  '</body>';
 				}else{
-					$this->RawatModel->poli($timestamp,$user_id);
-					$rawat_jalan = $this->RawatModel->viewWhere('timestamp',$timestamp);
-					foreach ($rawat_jalan as $rj) {
-						$id_rawat = $rj->id_rawat;
-					}
+					$this->AntrianModel->poli($kode, $user_id);
+					$antrian = $this->AntrianModel->viewWhere('id',$kode);
+					#menambahkan pendaftaran ke transaksi
 					$datatrx = array(
-						'id_rawat' => $id_rawat, 
+						'id_transaksi' => $kode, 
 						'tanggal_transaksi' => $tanggal, 
-						'jam_transaksi' => $waktu, 
+						'jam_transaksi' => $jam, 
 						'status' => 'Belum Lunas', 
 					);
 					$this->TransaksiModel->tambahTrx($datatrx);
-					$where = array('id_rawat' => $id_rawat, );
-					$transaksi = $this->TransaksiModel->viewTrx($where);
-					foreach ($transaksi as $trx) {
-						$id_transaksi = $trx->id_transaksi;
-					}
+	
 					$dataTrxItem = array(
-						'id_transaksi' => $id_transaksi, 
+						'id_transaksi' => $kode, 
 						'jenis_transaksi' => 'Pendaftaran', 
 						'nama_transaksi' => $poliklinik, 
 						'jumlah' => '1', 
@@ -289,7 +283,7 @@ class Pasien extends CI_Controller {
 					echo '<script type="text/javascript" >';
 					echo 'swal({';
 					echo '  title: "Poliklinik Telah Ditutup",';
-					echo '  text: "Pendaftaran ke poliklinik tujuan telah ditutup karena telah mencapai kuota per hari",';
+					echo '  text: "Pendaftaran ke poliklinik tujuan telah ditutup",';
 					echo '	icon: "warning",';
 					echo '  buttons: {';
 					//echo '    cancel: "Run away!",';

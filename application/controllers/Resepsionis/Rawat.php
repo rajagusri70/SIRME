@@ -8,7 +8,7 @@ class Rawat extends CI_Controller {
 			redirect(base_url("login"));
 		}
 		$this->load->model('RawatModel');
-		$this->load->model('AdminModel');
+		$this->load->model('UserModel');
 	}
 
 	public function index(){
@@ -16,12 +16,12 @@ class Rawat extends CI_Controller {
 	}
 
 	public function status(){
-		$users['users'] = $this->AdminModel->tampilkan();
+		$users['users'] = $this->UserModel->tampilkan();
 		$this->load->view('resepsionis/status_rawat',$users);
 	}
 
 	public function status_rawat(){
-		$data['users'] = $this->AdminModel->tampilkan();
+		$data['users'] = $this->UserModel->tampilkan();
 		$poliklinik = $this->input->post('input_poliklinik');
 		$where = array(
 			'rawat_jalan.poliklinik' => $poliklinik, 

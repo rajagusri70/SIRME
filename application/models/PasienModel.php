@@ -84,8 +84,10 @@ class PasienModel extends CI_Model{
 		$tahun = date("Y");
 		$tahun_lahir = substr($tanggal_lahir, -4);
 		$umur = $tahun - $tahun_lahir;
+		$kode = 'P'.date("dmy").uniqid();
 		$user_id = $this->session->userdata('user_id');
 		$data = array(
+			"pid" => $kode,
 			"no_ktp" => $this->input->post('input_no_ktp'),
 			"no_kk" => $this->input->post('input_no_kk'),
 			"nama" => $this->input->post('input_nama'),
@@ -110,7 +112,6 @@ class PasienModel extends CI_Model{
 			"foto" => $upload['file']['file_name'],
 			"user_id" => $user_id
 		);
-		$this->db->set('uuid', 'UUID()', FALSE);
 		$this->db->insert('pasien', $data);
 	}
 

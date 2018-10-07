@@ -12,7 +12,7 @@ class Check_Up extends CI_Controller {
 		}else{
 			
 		}
-		$this->load->model('AdminModel');
+		$this->load->model('UserModel');
 		$this->load->model('AntrianModel');
 		$this->load->model('RawatModel');
 		$this->load->model('ObatModel');
@@ -47,7 +47,7 @@ class Check_Up extends CI_Controller {
 
 	public function pasien_terdaftar(){
 		$user_id = $this->session->userdata('user_id');
-		$data['users'] = $this->AdminModel->tampilkan();
+		$data['users'] = $this->UserModel->tampilkan();
 		$data['antrian'] = $this->AntrianModel->tampilkanAntrian($user_id);
 		$this->load->view('poli_umum/pasien_terdaftar',$data);
 	}
@@ -56,7 +56,7 @@ class Check_Up extends CI_Controller {
 		$where = array(
 			'rawat_jalan.status' => 'Selesai' 
 		);
-		$data['users'] = $this->AdminModel->tampilkan();
+		$data['users'] = $this->UserModel->tampilkan();
 		$data['rawat_jalan'] = $this->RawatModel->tampilkanSelesai('rawat_jalan');
 		$this->load->view('poli_umum/status_selesai',$data);
 	}
@@ -93,6 +93,10 @@ class Check_Up extends CI_Controller {
 			$data = array(
 				'id' => $kode,
 				'no_pasien' => $no_pasien,
+				'classSystem' => 'http://hl7.org/fhir/v3/ActCode', 
+				'classCode' => 'amb', 
+				'classDisplay' => 'ambulatory', 
+				'typeText' => 'Rawat Jalan', 
 				'tanggal' => $tanggal, 
 				'waktu' => $waktu, 
 				'status' => 'in-progress', 
@@ -106,7 +110,11 @@ class Check_Up extends CI_Controller {
 			}
 			$statusWhere = array('id' => $id_antrian, );
 			$statusData = array('status' => 'Dalam Pemeriksaan', );
-			$antrian = $this->AntrianModel->updateStatus($statusWhere,$statusData);
+			$this->AntrianModel->updateStatus($statusWhere,$statusData);
+			#update no rawat jalan ke transaksi
+			$update = array('no_rawat_jalan' => $no_rawat_jalan, );
+			$updateWhere = array('id_transaksi' => $id_antrian, );
+			$this->TransaksiModel->updateTrx($updateWhere,$update);
 			redirect(base_url()."p_umum/check_up/periksa/".$no_rawat_jalan);
 		}
 	}
@@ -153,7 +161,7 @@ class Check_Up extends CI_Controller {
 				echo '</script>';
 				echo  '</body>';
 			}else{
-				$users = $this->AdminModel->tampilkan();
+				$users = $this->UserModel->tampilkan();
 				$tanggal = date("d-m-Y");
 		        $waktu = date("H:i:s");
 
@@ -175,7 +183,7 @@ class Check_Up extends CI_Controller {
 				// end of merubah status rawat jalan
 
 				#menampilkan nama dokter
-				$data['users'] = $this->AdminModel->tampilkan();
+				$data['users'] = $this->UserModel->tampilkan();
 				//end of menampilkan nama dokter
 
 				#menampilkan data pasien yang diperiksa
@@ -289,17 +297,13 @@ class Check_Up extends CI_Controller {
 		// $data['tanggal_masuk'] = $tanggal_masuk;
 		$tanggal = date("d-m-Y");
 		$waktu = date("H:i:s");
-
-		#menambahkan nama dokter pemeriksa
-		
-		
 		$this->load->view('poli_umum/resep',$data);
 	}
 
 	public function tambahResep(){
 		$data = array(
 			'no_obat' => $this->input->post('no_obat'),
-			'no_id' => $this->input->post('no_id')
+			'id_resep' => $this->input->post('no_id')
 		);
 		$this->ItemResepModel->tambahResep($data);
 		echo json_encode(array('status' => true));
@@ -459,19 +463,22 @@ class Check_Up extends CI_Controller {
 
 	public function viewObservation(){
 		$id_rawat = $this->input->post('id_rawat');
-		$data = $this->ObservationModel->viewObservation($id_rawat);
+		$where = array('no_rawat_jalan' => $id_rawat, );
+		$data = $this->ObservationModel->viewObservation($where);
 		echo json_encode($data);
 	}
 
 	public function viewRiwayatPenyakit(){
-		$no_pasien = $this->input->post('no_pasien');
-		$data = $this->RiwayatPenyakitModel->viewRiwayatPenyakit($no_pasien);
+		$no_rawat_jalan = $this->input->post('no_rawat_jalan');
+		$where = array('no_rawat_jalan' => $no_rawat_jalan, );
+		$data = $this->RiwayatPenyakitModel->viewRiwayatPenyakit($where);
 		echo json_encode($data);
 	}
 
 	public function viewRiwayatAlergi(){
-		$no_pasien = $this->input->post('no_pasien');
-		$data = $this->RiwayatAlergiModel->viewRiwayat($no_pasien);
+		$no_rawat_jalan = $this->input->post('no_rawat_jalan');
+		$where = array('no_rawat_jalan' => $no_rawat_jalan, );
+		$data = $this->RiwayatAlergiModel->viewRiwayat($where);
 		echo json_encode($data);
 	}
 
@@ -564,12 +571,13 @@ class Check_Up extends CI_Controller {
 	}
 
 	public function selesai($id_rawat){
-		#update Status rawat jalan pasien
+		#update Status rawat jalan pasien dan waktu
 		$no_pasien = $this->input->post('no_pasien');
 		$tanggal = date("d-m-Y");
 		$waktu = date("H:i:s");
 		$data = array(
-			'status' => 'Selesai', 
+			'status' => 'finished',
+			'jam_keluar' => $waktu, 
 		);
 		$id_transaksi = '';
 		$biaya_daftar = '';
@@ -578,7 +586,7 @@ class Check_Up extends CI_Controller {
 
 		#menambahkan item ke transaksi
 	    $where_trx = array(
-	    	'id_rawat' => $id_rawat, 
+	    	'no_rawat_jalan' => $id_rawat, 
 	    );
 	    $transaksi = $this->TransaksiModel->viewTrx($where_trx);
 	    foreach ($transaksi as $trx) {
@@ -588,6 +596,7 @@ class Check_Up extends CI_Controller {
     	$where_poli = array(
 			'nama_poli' => 'Umum', 
 		);
+
 		$poli = $this->PoliklinikModel->viewPoliWhere($where_poli);
 		foreach ($poli as $p) {
 			$nama_poli = $p->nama_poli;
@@ -603,50 +612,12 @@ class Check_Up extends CI_Controller {
 		);
 		$this->ItemTransaksiModel->tambahItem($transaksi_item);
 
-		#menambahkan resep obat ke Transaksi
-		$where_umum = array(
-			'id_rawat' => $id_rawat, 
-		);
-		$periksa = $this->PeriksaModel->viewWhere($where_umum); //get id_periksa
-		foreach ($periksa as $prks) {
-			$id_periksa = $prks->id_periksa;
-		}
+		#update status antrian
+		$whereAntrian = array('id' => $id_transaksi, );
+		$dataAntrian = array('status' => 'Selesai', );
+		$this->AntrianModel->updateStatus($whereAntrian,$dataAntrian);
 
-		$waktuKeluar = array(
-			'tanggal_keluar' => $tanggal, 
-			'jam_keluar' => $waktu, 
-		);
-		$this->PeriksaModel->updateKeluar($id_periksa,$waktuKeluar);
-		$resep_obat = $this->ResepModel->viewResep('tb_resep.id_periksa',$id_periksa);
-		foreach ($resep_obat as $ro) {
-			$data_item_trx = array(
-				'id_transaksi' =>  $trx->id_transaksi,
-				'jenis_transaksi' => 'Pembelian Obat',
-				'nama_transaksi' => $ro->nama_obat,
-				'jumlah' => $ro->kuantitas,
-				'harga' => $ro->harga,
-			);
-			$this->ItemTransaksiModel->tambahItem($data_item_trx);
-		}
 
-		#menambahkan diagnosa ke tabel riwayat penyakit
-		//1. Get semua data yang ada di tb diagnosa
-		$dataDiagnosa = $this->DiagnosaModel->view($id_periksa);
-		//2. Insert ke tabel Riwayat Penyakit
-		foreach ($dataDiagnosa as $dd) {
-			$tanggal = date("d-m-Y");
-			$waktu = date("H:i:s");
-			$dataDiagnosa = array(
-				'no_pasien' => $no_pasien,
-				'id_rawat' => $id_rawat,
-				'tanggal_input' => $dd->tanggal_cek,
-				'jam_input' => $dd->jam_cek,
-				'kode_icd10' => $dd->kode_icd10,
-				'diagnosa' => $dd->diagnosa,
-				'keterangan' => $dd->keterangan,
-			);
-			$this->RiwayatPenyakitModel->tambahRiwayat($dataDiagnosa);
-		}
 		echo json_encode(array('status' => true));
 	}
 

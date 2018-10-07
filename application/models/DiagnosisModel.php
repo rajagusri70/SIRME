@@ -14,7 +14,7 @@ class DiagnosisModel extends CI_Model{
 	public function view($where){
 		$this->db->select('*');
 		$this->db->from('tb_diagnosis');
-		$this->db->where('no_rawat_jalan',$where);
+		$this->db->where($where);
 		return $this->db->get()->result();
 	}
 

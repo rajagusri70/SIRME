@@ -14,7 +14,7 @@ class RiwayatAlergiModel extends CI_Model{
 	public function viewRiwayat($where){
 		$this->db->select('*');
 		$this->db->from('tb_riwayat_alergi');
-		$this->db->where('no_pasien',$where);
+		$this->db->where($where);
 		return $this->db->get()->result();
 	}
 

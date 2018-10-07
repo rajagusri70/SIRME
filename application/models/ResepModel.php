@@ -34,10 +34,10 @@ class ResepModel extends CI_Model{
 	}
 
 	// public function viewAll(){
-	// 	$this->db->select('*, admin.nama AS nama_dokter'); 
+	// 	$this->db->select('*, user.nama AS nama_dokter'); 
 	//     $this->db->from('tb_resep'); 
 	//     $this->db->join('tb_periksa','tb_resep.id_periksa = tb_periksa.id_periksa');
-	//     $this->db->join('admin', 'admin.user_id = tb_periksa.user_id');
+	//     $this->db->join('user', 'user.user_id = tb_periksa.user_id');
 	//     $this->db->join('rawat_jalan','tb_periksa.id_rawat = rawat_jalan.id_rawat');
 	//     $this->db->join('tb_transaksi','rawat_jalan.id_rawat = tb_transaksi.id_rawat');
 	//     $this->db->join('pasien','rawat_jalan.no_pasien = pasien.no_pasien');
@@ -47,10 +47,10 @@ class ResepModel extends CI_Model{
 	// }
 
 	public function viewAll(){
-		$this->db->select('*, admin.nama AS nama_dokter'); //memeilih semua field
+		$this->db->select('*, user.nama AS nama_dokter'); //memeilih semua field
 	    $this->db->from('tb_resep'); 
 	    $this->db->join('tb_periksa','tb_resep.id_periksa = tb_periksa.id_periksa');
-	    $this->db->join('admin', 'admin.user_id = tb_periksa.user_id');
+	    $this->db->join('user', 'user.user_id = tb_periksa.user_id');
 	    $this->db->join('rawat_jalan','tb_periksa.id_rawat = rawat_jalan.id_rawat');
 	    $this->db->join('tb_transaksi','rawat_jalan.id_rawat = tb_transaksi.id_rawat');
 	    $this->db->join('pasien','rawat_jalan.no_pasien = pasien.no_pasien');
@@ -59,10 +59,10 @@ class ResepModel extends CI_Model{
 	}
 
 	public function viewAllWhere($where){
-		$this->db->select('*, admin.nama AS nama_dokter, tb_resep.tanggal AS tanggal_resep, pasien.nama AS nama_pasien, tb_resep.status AS status_resep'); //memeilih semua field
+		$this->db->select('*, user.nama AS nama_dokter, tb_resep.tanggal AS tanggal_resep, pasien.nama AS nama_pasien, tb_resep.status AS status_resep'); //memeilih semua field
 	    $this->db->from('tb_resep'); 
 	    $this->db->join('tb_periksa','tb_resep.id_periksa = tb_periksa.id_periksa');
-	    $this->db->join('admin', 'admin.user_id = tb_periksa.user_id');
+	    $this->db->join('user', 'user.user_id = tb_periksa.user_id');
 	    $this->db->join('rawat_jalan','tb_periksa.id_rawat = rawat_jalan.id_rawat');
 	    $this->db->join('tb_transaksi','rawat_jalan.id_rawat = tb_transaksi.id_rawat');
 	    $this->db->join('pasien','rawat_jalan.no_pasien = pasien.no_pasien');
@@ -82,10 +82,10 @@ class ResepModel extends CI_Model{
 	}
 
 	// public function viewAll($where){
-	// 	$this->db->select('*, admin.nama AS nama_dokter'); //memeilih semua field
+	// 	$this->db->select('*, user.nama AS nama_dokter'); //memeilih semua field
 	//     $this->db->from('tb_resep'); //memeilih tabel
 	//     $this->db->join('tb_periksa','tb_resep.id_periksa = tb_periksa.id_periksa');
-	//     $this->db->join('admin', 'admin.user_id = tb_periksa.user_id');
+	//     $this->db->join('user', 'user.user_id = tb_periksa.user_id');
 	//     $this->db->join('rawat_jalan','tb_periksa.id_rawat = rawat_jalan.id_rawat');
 	//     $this->db->join('pasien','rawat_jalan.no_pasien = pasien.no_pasien');
 	//     $this->db->join('tb_obat', 'tb_resep.no_obat = tb_obat.no_obat');

@@ -15,7 +15,7 @@ class Admin extends CI_Controller {
 		// 	$this->load->view('welcome_message');
 		// }
 				
-		$this->load->model('AdminModel');
+		$this->load->model('UserModel');
  
 	}
 

@@ -248,8 +248,6 @@
                         <th>Tanggal Lahir</th>
                         <th>Umur</th>
                         <th>Alamat</th>
-                        <th>Pekerjaan</th>
-                        <th>Gol. Darah</th>
                         <th>Aksi</th>
                       </tr>
                     </thead>
@@ -266,8 +264,6 @@
                         <td><?php echo $p->tanggal_lahir; ?></td>
                         <td><?php echo $p->umur; ?></td>
                         <td><?php echo $p->alamat; ?></td>
-                        <td><?php echo $p->pekerjaan; ?></td>
-                        <td><?php echo $p->golongan_darah; ?></td>
                         <td><a href="<?php echo base_url().'rekam_medis/pasien/'.$p->no_pasien; ?>" target="_blank"  >View</a>
                         <!-- Tampilan Modal -->
                         

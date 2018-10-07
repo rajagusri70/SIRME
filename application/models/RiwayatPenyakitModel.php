@@ -14,7 +14,7 @@ class RiwayatPenyakitModel extends CI_Model{
 	public function viewRiwayatPenyakit($where){
 		$this->db->select('*');
 		$this->db->from('tb_riwayat_penyakit');
-		$this->db->where('no_pasien',$where);
+		$this->db->where($where);
 		return $this->db->get()->result();
 	}
 

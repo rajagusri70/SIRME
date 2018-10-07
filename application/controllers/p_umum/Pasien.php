@@ -8,7 +8,7 @@ class Pasien extends CI_Controller {
 			redirect(base_url("login"));
 		}
 		$this->load->model('PasienModel');
-		$this->load->model('AdminModel');
+		$this->load->model('UserModel');
 		$this->load->model('RawatModel');
 		$this->load->model('PoliklinikModel');
 		$this->load->model('TransaksiModel');
@@ -24,7 +24,7 @@ class Pasien extends CI_Controller {
 	
 	public function cari(){
 		$cari_input = $this->input->post('cari_input');
-		$data['users'] = $this->AdminModel->tampilkan();
+		$data['users'] = $this->UserModel->tampilkan();
 		if(!empty($cari_input)){
 			$parameter = $this->input->post('parameter_input');
 			$data['pasien'] = $this->PasienModel->cari('pasien','pasien.no_pasien',$cari_input,'pasien.nama',$cari_input);
@@ -35,7 +35,7 @@ class Pasien extends CI_Controller {
 	}
 
 	public function profile_pasien($no_pasien){
-		$data['users'] = $this->AdminModel->tampilkan();
+		$data['users'] = $this->UserModel->tampilkan();
 		$data['pasien'] = $this->PasienModel->viewPasien('no_pasien',$no_pasien);
 		$this->load->view('resepsionis/profile_pasien',$data);
 	}

@@ -30,29 +30,27 @@ class TransaksiModel extends CI_Model{
 		$this->db->distinct();
 		$this->db->select('tb_transaksi.id_transaksi, rawat_jalan.id_rawat, nama, tanggal_transaksi, jam_transaksi, tb_transaksi.status'); 
 	    $this->db->from('tb_transaksi');
-	    $this->db->join('rawat_jalan', 'tb_transaksi.id_rawat = rawat_jalan.id_rawat');
+	    $this->db->join('rawat_jalan', 'tb_transaksi.no_rawat_jalan = rawat_jalan.id_rawat');
 	    $this->db->join('pasien', 'rawat_jalan.no_pasien = pasien.no_pasien');
 	    return $this->db->get()->result();
 	}
 
 	public function viewAllTrxWhere($where,$where_parameter){
 		$this->db->distinct();
-		$this->db->select('tb_transaksi.id_transaksi, rawat_jalan.no_pasien, tb_transaksi.id_rawat, nama, tanggal_transaksi, jam_transaksi, tb_transaksi.status'); //memeilih semua field
+		$this->db->select('tb_transaksi.id_transaksi, rawat_jalan.no_pasien, tb_transaksi.no_rawat_jalan, nama, tanggal_transaksi, jam_transaksi, tb_transaksi.status'); //memeilih semua field
 	    $this->db->from('tb_transaksi');
-	    $this->db->join('rawat_jalan', 'tb_transaksi.id_rawat = rawat_jalan.id_rawat');
+	    $this->db->join('rawat_jalan', 'tb_transaksi.no_rawat_jalan = rawat_jalan.id_rawat');
 	    $this->db->join('pasien', 'rawat_jalan.no_pasien = pasien.no_pasien');
 	    $this->db->where($where,$where_parameter);
 	    return $this->db->get()->result();
 	}
-
-	
 
 	public function viewTrxItem($where){
 		$this->db->distinct();
 		$this->db->select('nama_transaksi,jumlah,harga,tb_item_transaksi.biaya'); //memeilih semua field
 	    $this->db->from('tb_item_transaksi');
 	    $this->db->join('tb_transaksi', 'tb_item_transaksi.id_transaksi = tb_transaksi.id_transaksi');
-	    $this->db->join('rawat_jalan', 'tb_transaksi.id_rawat = rawat_jalan.id_rawat');
+	    $this->db->join('rawat_jalan', 'tb_transaksi.no_rawat_jalan = rawat_jalan.id_rawat');
 	    $this->db->where($where);
 	    return $this->db->get()->result();
 	}
@@ -64,8 +62,8 @@ class TransaksiModel extends CI_Model{
 		return $this->db->get()->result();
 	}
 
-	public function updateTrx($coloumn,$where,$data){
-		$this->db->where($coloumn,$where);
+	public function updateTrx($where,$data){
+		$this->db->where($where);
 		$this->db->update("tb_transaksi",$data);
 	}
 

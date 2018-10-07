@@ -1,12 +1,12 @@
 <?php 
 
-class AdminModel extends CI_Model{
+class UserModel extends CI_Model{
 	// function tampilkanNama(){
 	// 	$session_id = $this->session->userdata('nama');
 	//  	//$where = array('username' => $session_id);
 
 	// 	$this->db->select('nama');
-	// 	$this->db->from('admin');
+	// 	$this->db->from('user');
 	// 	$this->db->where('username',$session_id);
 	// 	//$result = 
 	// 	return $this->db->get()->result();
@@ -14,32 +14,32 @@ class AdminModel extends CI_Model{
 		//$nama = $result['nama'];
 		//return $nama;
 		//return $this->db->get()->result();
-		//$this->db->get_where('admin',$where)->result();
+		//$this->db->get_where('user',$where)->result();
 		//return "Raja Dwika Gusri";
 	
 	public function selectAll(){
-		return $this->db->get('admin')->result();
+		return $this->db->get('user')->result();
 	}
 
 	public function selectNot(){
 		$username = $this->session->userdata('nama');
 		//return $this->db->query($querry)->result();
-		return $this->db->query('SELECT * FROM admin WHERE NOT (username = "'.$username.'")')->result();
+		return $this->db->query('SELECT * FROM user WHERE NOT (username = "'.$username.'")')->result();
 	}
 
 	function selectWhere($user_id){
 		$this->db->where('user_id', $user_id);
-		return $this->db->get('admin')->result();
+		return $this->db->get('user')->result();
 	}
 
 	function selectWheres($where){
 		$this->db->where($where);
-		return $this->db->get('admin')->result();
+		return $this->db->get('user')->result();
 	}
 
 	function update($user_id,$data){
 		$this->db->where("user_id",$user_id);
-		$this->db->update("admin",$data);
+		$this->db->update("user",$data);
 	}
 
 	function cek_user_id($no_ktp,$nama){
@@ -55,7 +55,7 @@ class AdminModel extends CI_Model{
 
 		$where = array(
 			'username' => $session_id);
-		return $this->db->get_where("admin",$where)->result();
+		return $this->db->get_where("user",$where)->result();
 	}
 
 	function cek_login($table,$where){		
@@ -65,7 +65,7 @@ class AdminModel extends CI_Model{
 	function view($user_id){
 		$where = array(
 			'user_id' => $user_id);
-		return $this->db->get_where("admin",$where)->result();
+		return $this->db->get_where("user",$where)->result();
 	}
 
 	public function upload(){
@@ -101,7 +101,7 @@ class AdminModel extends CI_Model{
 			"tipe_admin" => $this->input->post('input_jabatan'),
 			"foto" => $upload['file']['file_name']
 		);
-		$this->db->insert('admin', $data);
+		$this->db->insert('user', $data);
 	}
 
 	public function getJabatan(){
@@ -109,13 +109,13 @@ class AdminModel extends CI_Model{
 	}
 
 	public function hapus($where){
-		$this->db->delete('admin',$where);
+		$this->db->delete('user',$where);
 	}
 
 	public function dokter($where,$like){
 		$this->db->where($where);
 		$this->db->like($like);
-		return $this->db->get('admin')->result();
+		return $this->db->get('user')->result();
 	}
 	
 }

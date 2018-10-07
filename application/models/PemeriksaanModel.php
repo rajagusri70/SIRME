@@ -18,6 +18,13 @@ class PemeriksaanModel extends CI_Model{
 		return $this->db->get()->result();
 	}
 
+	public function viewWhere($where){
+		$this->db->select('*');
+		$this->db->from('tb_pemeriksaan');
+		$this->db->where($where);
+		return $this->db->get()->result();
+	}
+
 	public function hapus($where){
 		$this->db->delete('tb_pemeriksaan',$where);
 	}

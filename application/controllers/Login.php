@@ -14,7 +14,7 @@ class Login extends CI_Controller {
 		if($this->session->userdata('status') == "login"){
 			redirect(base_url("home")); //Jika user sudah Login, maka saat visit Login page, akan dialihkan ke halaman welcome
 		}
-		$this->load->model('AdminModel');		
+		$this->load->model('UserModel');		
 		// $this->load->model('LoginModel');
 	}
 
@@ -25,8 +25,8 @@ class Login extends CI_Controller {
 			'username' => $username,
 			'password' => $password
 			);
-		$cek = $this->AdminModel->cek_login("admin",$where)->num_rows();
-		$cek_tipe = $this->AdminModel->cek_login("admin",$where);
+		$cek = $this->UserModel->cek_login("user",$where)->num_rows();
+		$cek_tipe = $this->UserModel->cek_login("user",$where);
 		$tipe_admin = $cek_tipe->result_array();
 		if($cek > 0){
 			$data_session = array(

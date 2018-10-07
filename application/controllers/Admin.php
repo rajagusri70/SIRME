@@ -15,22 +15,22 @@ class Admin extends CI_Controller {
 			redirect(base_url("login"));
 		}
 				
-		$this->load->model('AdminModel');
+		$this->load->model('UserModel');
 		$this->load->model('PoliklinikModel');
 		$this->load->model('JadwalPraktekModel');
  
 	}
 
 	public function user(){
-		$data['users'] = $this->AdminModel->tampilkan();
+		$data['users'] = $this->UserModel->tampilkan();
 		$data['poliklinik'] = $this->PoliklinikModel->viewPoli();
-		$data['data_admin'] = $this->AdminModel->selectNot();
-		$data['jabatan'] = $this->AdminModel->getJabatan();
+		$data['data_admin'] = $this->UserModel->selectNot();
+		$data['jabatan'] = $this->UserModel->getJabatan();
 		$this->load->view('admin/user',$data);
 		if($this->input->post('submit_dokter')){ // Jika user mengklik tombol submit yang ada di form
-			$upload = $this->AdminModel->upload();
+			$upload = $this->UserModel->upload();
 			if($upload['result'] == "success"){
-					$this->AdminModel->input($upload);// Panggil fungsi input() yang ada di PasienModel.php
+					$this->UserModel->input($upload);// Panggil fungsi input() yang ada di PasienModel.php
 					// $this->load->view('pasien/pasien_baru');
 						//$this->load->view('admin/user',$data);
 						
@@ -67,24 +67,24 @@ class Admin extends CI_Controller {
 					//$this->load->view('pasien/pasien_baru');
 				}else{
 					//$data['message'] = $upload['error'];
-					$this->AdminModel->input($upload,'Dokter');// Panggil fungsi input() yang ada di PasienModel.php
+					$this->UserModel->input($upload,'Dokter');// Panggil fungsi input() yang ada di PasienModel.php
 					redirect('admin/user');
 				}
 		}
 	}
 
 	public function jadwal(){
-		$data['users'] = $this->AdminModel->tampilkan();
+		$data['users'] = $this->UserModel->tampilkan();
 		$where = array('tipe_admin' => 'Dokter', );
-		$data['data_admin'] = $this->AdminModel->selectWheres($where);
+		$data['data_admin'] = $this->UserModel->selectWheres($where);
 		$this->load->view('admin/user-jadwal',$data);
 	}
 
 	public function dokter(){
-		$data['users'] = $this->AdminModel->tampilkan();
+		$data['users'] = $this->UserModel->tampilkan();
 		$data['poliklinik'] = $this->PoliklinikModel->viewPoli();
-		$data['data_admin'] = $this->AdminModel->selectAll();
-		$data['jabatan'] = $this->AdminModel->getJabatan();
+		$data['data_admin'] = $this->UserModel->selectAll();
+		$data['jabatan'] = $this->UserModel->getJabatan();
 		$this->load->view('admin/user',$data);
 	}
 
@@ -96,7 +96,7 @@ class Admin extends CI_Controller {
 			$where = array(
 				'user_id' => $item_id, 
 			);
-			$this->AdminModel->hapus($where);
+			$this->UserModel->hapus($where);
 			echo json_encode(array('status' => true));
 		}
 	}
@@ -106,7 +106,7 @@ class Admin extends CI_Controller {
 		$where = array(
 			'username' => $username
 			);
-		$cek = $this->AdminModel->cek_login("admin",$where)->num_rows();
+		$cek = $this->UserModel->cek_login("admin",$where)->num_rows();
 		if($cek > 0){
 			echo json_encode(array('status' => true));
 		}else{
@@ -115,16 +115,16 @@ class Admin extends CI_Controller {
 	}
 
 	public function profile($user_id){
-		$data['users'] = $this->AdminModel->tampilkan();
-		$data['admin'] = $this->AdminModel->selectWhere($user_id);
+		$data['users'] = $this->UserModel->tampilkan();
+		$data['admin'] = $this->UserModel->selectWhere($user_id);
 
-		$data_admin = $this->AdminModel->selectWhere($user_id);
+		$data_admin = $this->UserModel->selectWhere($user_id);
 		foreach ($data_admin as $da) {
 			$tipe_admin = $da->tipe_admin;
 		}
 		$data['tipe_admin'] = $tipe_admin;
 		$data['poliklinik'] = $this->PoliklinikModel->viewPoli();
-		$data['jabatan'] = $this->AdminModel->getJabatan();
+		$data['jabatan'] = $this->UserModel->getJabatan();
 		$this->load->view('admin/profile',$data);
 		if($this->input->post('tombol_submit1')){
 			$data = array(
@@ -135,7 +135,7 @@ class Admin extends CI_Controller {
 				'no_hp' => $this->input->post('input_no_hp'),
 				'email' => $this->input->post('input_email')
 			);
-			$this->AdminModel->update($user_id,$data);
+			$this->UserModel->update($user_id,$data);
 			//redirect(base_url('admin/profile/'.$user_id));
 						echo '<body>';
 						echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
@@ -170,7 +170,7 @@ class Admin extends CI_Controller {
 				'username' => $this->input->post('input_username'),
 				'password' => $this->input->post('input_password')
 			);
-			$this->AdminModel->update($user_id,$data);
+			$this->UserModel->update($user_id,$data);
 			echo '<body>';
 						echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
 						echo '<script type="text/javascript" >';
@@ -208,7 +208,7 @@ class Admin extends CI_Controller {
 					'no_sip' => $this->input->post('input_no_sip'),
 					'jadwal_praktek' => $jadwal_praktek,
 				);
-				$this->AdminModel->update($user_id,$data);
+				$this->UserModel->update($user_id,$data);
 				echo '<body>';
 						echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
 						echo '<script type="text/javascript" >';
@@ -241,7 +241,7 @@ class Admin extends CI_Controller {
 				$data = array(
 					'tipe_admin' => $this->input->post('input_jabatan'),
 				);
-				$this->AdminModel->update($user_id,$data);
+				$this->UserModel->update($user_id,$data);
 				echo '<body>';
 						echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
 						echo '<script type="text/javascript" >';
@@ -276,8 +276,8 @@ class Admin extends CI_Controller {
 	}
 
 	public function atur_jadwal($user_id){
-		$data['users'] = $this->AdminModel->tampilkan();
-		$data['admin'] = $this->AdminModel->selectWhere($user_id);
+		$data['users'] = $this->UserModel->tampilkan();
+		$data['admin'] = $this->UserModel->selectWhere($user_id);
 		
 		$this->load->view('admin/profile-jadwal',$data);
 		
@@ -287,7 +287,7 @@ class Admin extends CI_Controller {
 			$data = array(
 					'jadwal_praktek' => $jadwal_praktek,
 				);
-			$this->AdminModel->update($user_id,$data);
+			$this->UserModel->update($user_id,$data);
 			echo '<body>';
 			echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
 			echo '<script type="text/javascript" >';
@@ -328,7 +328,7 @@ class Admin extends CI_Controller {
 				'no_hp' => $this->input->post('input_no_hp'),
 				'email' => $this->input->post('input_email')
 			);
-		$this->AdminModel->update($user_id,$data);
+		$this->UserModel->update($user_id,$data);
 		// echo "<script>window.close();</script>";
 		// redirect('pasien/profile_pasien/'.$no_pasien);
 	}

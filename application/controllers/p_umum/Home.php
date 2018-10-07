@@ -12,7 +12,7 @@ class Home extends CI_Controller {
 		}else{
 			
 		}
-		$this->load->model('AdminModel');
+		$this->load->model('UserModel');
 		$this->load->model('PoliklinikModel');
 		$this->load->model('RawatModel');
 		
@@ -22,7 +22,7 @@ class Home extends CI_Controller {
 
 	public function index(){
 		$tanggal = date("d-m-Y");
-		$data['users'] = $this->AdminModel->tampilkan();
+		$data['users'] = $this->UserModel->tampilkan();
 		$antrian = array(
 			'poliklinik' => 'Umum',
 			'status' => 'Menunggu', 

@@ -41,11 +41,11 @@ class ItemResepModel extends CI_Model{
 	}
 
 	public function viewAll($where){
-		$this->db->select('*, admin.nama AS nama_dokter, tb_resep.tanggal AS tanggal_resep'); 
+		$this->db->select('*, user.nama AS nama_dokter, tb_resep.tanggal AS tanggal_resep'); 
 	    $this->db->from('tb_item_resep'); 
 	    $this->db->join('tb_resep','tb_item_resep.id_resep = tb_resep.id');
 	    $this->db->join('rawat_jalan','tb_resep.no_rawat_jalan = rawat_jalan.id_rawat');
-	    $this->db->join('admin', 'admin.user_id = rawat_jalan.dokter');
+	    $this->db->join('user', 'user.user_id = rawat_jalan.dokter');
 	    // $this->db->join('rawat_jalan','tb_periksa.id_rawat = rawat_jalan.id_rawat');
 	    $this->db->join('pasien','rawat_jalan.no_pasien = pasien.no_pasien');
 	    $this->db->join('tb_obat', 'tb_item_resep.no_obat = tb_obat.no_obat');

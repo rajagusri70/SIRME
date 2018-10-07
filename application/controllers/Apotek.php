@@ -10,7 +10,7 @@ class Apotek extends CI_Controller {
 		// 	$this->load->view('welcome_message');
 		// }
 				
-		$this->load->model('AdminModel');
+		$this->load->model('UserModel');
 		$this->load->model('PoliklinikModel');
 		$this->load->model('ObatModel');
 		$this->load->model('ResepModel');
@@ -24,7 +24,7 @@ class Apotek extends CI_Controller {
 	}
 
 	public function obat(){
-		$data['users'] = $this->AdminModel->tampilkan();
+		$data['users'] = $this->UserModel->tampilkan();
 		$data['data_obat'] = $this->ObatModel->viewObat();
 		$this->load->view('apotek/obat',$data);
 		if($this->input->post('submit_obat')){
@@ -102,7 +102,7 @@ class Apotek extends CI_Controller {
 
 	public function resep_diterima(){
 		$tanggal = date("d-m-Y");
-		$data['users'] = $this->AdminModel->tampilkan();
+		$data['users'] = $this->UserModel->tampilkan();
 		$where = array('tb_resep.tanggal' => $tanggal, );
 		$data['resep_diterima'] = $this->ResepModel->viewAllWhere($where);
 		$this->load->view('apotek/resep_diterima',$data);

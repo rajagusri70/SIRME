@@ -51,7 +51,7 @@ class APIS extends REST_Controller {
                 'message' => 'User could not be found'
             ], REST_Controller::HTTP_BAD_REQUEST);
       }else{
-        $patients = $this->PasienModel->viewPasiens('uuid',$id)->result_array();
+        $patients = $this->PasienModel->viewPasiens('pid',$id)->result_array();
         
         //echo $uuid;
         $users = $patients;

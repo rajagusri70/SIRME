@@ -116,23 +116,6 @@
                       </tr>
                       <?php } ?>
                       <tr>
-                        <td align="center" ><b>3</b></td>
-                        <td colspan="4" ><b>Biaya Obat</b></td>
-                      </tr>
-                      <?php foreach ($pengobatan as $pbt) { ?>
-                      <tr>
-                        <td></td>
-                        <td><?php echo $pbt->nama_transaksi ?></td>
-                        <td align="center" ><?php echo $pbt->jumlah ?></td>
-                        <td align="right" ><?php echo $pbt->harga ?></td>
-                        <td align="right" ><?php echo $pbt->biaya ?></td>
-                      </tr>
-                      <?php } ?>
-                      <tr>
-                        <td align="center" ><b>4</b></td>
-                        <td colspan="4" ><b>Lain-lain</b></td>
-                      </tr>
-                      <tr>
                         <td colspan="4" align="center"><b>Jumlah Biaya Rawat Jalan</b></td>
                         <?php foreach ($sumBiaya as $biaya) {?>
                         <td align="right" ><b>Rp.&nbsp;&nbsp;</b><b><?php echo $biaya->biaya ?></b></td>

@@ -131,6 +131,8 @@
 
               $no_pasien = $pt->no_pasien;
             ?>
+             <?php } ?>
+
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
@@ -151,31 +153,91 @@
                       <!-- required for floating -->
                       <!-- Nav tabs -->
                       <ul class="nav nav-tabs tabs-left">
-                        <li class="active"><a href="#data_diri" data-toggle="tab">Data Diri</a>
+                        <label><b>FHIR RESOURCE</b></label></br></br>
+
+                        <li><a href="#patient" data-toggle="tab">Patient</a>
                         </li>
-                        <li><a href="#aktivitas" data-toggle="tab">Aktivitas Terakhir</a>
+                        <li><a href="#encounter" data-toggle="tab">Encounter</a>
+                        </li>
+                        <li><a href="#observation" data-toggle="tab">Observation</a>
+                        </li>
+                        <li><a href="#condition" data-toggle="tab">Condition</a>
+                        </li>
+                        <div class="ln_solid"></div>
+                        <li class="active"><a href="#demografi" href="#data_pasien" data-toggle="tab">Demografi</a>
+                        </li>
+                        <li><a href="#diagnosis" data-toggle="tab">Diagnosis</a>
                         </li>
                         <li><a href="#rawat_jalan" data-toggle="tab">Rawat Jalan</a>
-                        </li>
-                        <li><a href="#riwayat_penyakit" data-toggle="tab">Riwayat Penyakit</a>
                         </li>
                         <li><a href="#riwayat_alergi" data-toggle="tab">Riwayat Alergi</a>
                         </li>
                         <li><a href="#riwayat_obat" data-toggle="tab">Riwayat Obat</a>
                         </li>
-                        <li><a href="#riwayat_hamil" data-toggle="tab">Riwayat Kehamilan</a>
-                        </li>
+                        
                       </ul>
                     </div>
                   </div>
 
-                  
-
                   <div class="col-md-9 col-sm-9 col-xs-12">
                     <div class="" role="tabpanel" data-example-id="togglable-tabs">
                       <div id="myTabContent" class="tab-content">
-                        <div role="tabpanel" class="tab-pane fade active in" id="data_diri" aria-labelledby="home-tab">
-                          <h2>Data Diri</h2>
+                        <div role="tabpanel" class="tab-pane fade" id="patient" aria-labelledby="patient-tab">
+                          <h2>Patient</h2>
+                          <div class="ln_solid"></div>
+                          <style type="text/css">
+                            #form td {
+                              padding: 5px;
+                            }
+                            table{
+
+                            }
+
+                            ul{
+                              list-style-type: none;
+                            }
+                          </style>
+                          
+                          <table style="width: 100%" id="" class="table table-striped table-bordered">
+                            <thead>
+                              <tr>
+                                <th align="center">Identifier</th>
+                                <th align="center">Name</th>
+                                <th align="center">Gender</th>
+                                <th align="center">Birthdate</th>
+                                <th align="center">API</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php
+                              foreach ($patient as $patient) {
+                              ?>
+                              <tr>
+                                <td>
+                                ID : <?php echo $patient->pid ?><br>
+                                Pasien : <?php echo $patient->no_pasien ?><br>
+                                KTP : <?php echo $patient->no_ktp ?><br>
+                                KK : <?php echo $patient->no_kk ?><br>
+                                </td>
+                                <td><?php echo $patient->nama ?></td>
+                                <td>
+                                  <?php 
+                                  if($patient->pid == "Laki-laki"){
+                                    $gender = 'male';
+                                  }else{
+                                    $gender = 'female';
+                                  }
+                                  echo $gender ?>
+                                </td>
+                                <td><?php echo $patient->tanggal_lahir ?></td>
+                                <td><a href="<?php echo base_url().'api/api/patient/'.$patient->pid; ?>" target="_blank">Link</a></td>
+                              </tr>
+                              <?php } ?>
+                            </tbody>
+                          </table>   
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="encounter" aria-labelledby="encounter-tab">
+                          <h2>Encounter</h2>
                           <div class="ln_solid"></div>
                           <style type="text/css">
                             #form td {
@@ -186,9 +248,123 @@
                               list-style-type: none;
                             }
                           </style>
+                          
+                          <table style="width: 100%" id="" class="table table-striped table-bordered">
+                            <thead>
+                              <tr>
+                                <th align="center">Identifier</th>
+                                <th align="center">Type</th>
+                                <th align="center">Status</th>
+                                <th align="center">Time</th>
+                                <th align="center">API</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php
+                              foreach ($encounter as $en) {
+                              ?>
+                              <tr>
+                                <td>ID : <?php echo $en->id ?><br>
+                                  No. Rawat Jalan : <?php echo $en->id_rawat ?></td>
+                                <td><?php echo $en->typeText ?></td>
+                                <td><?php echo $en->status ?></td>
+                                <td><?php echo $en->tanggal ?> <sub>from</sub><?php echo $en->waktu ?> <sub>to</sub><?php echo $en->jam_keluar ?></td>
+                                <td><a href="">Link</a></td>
+                              </tr>
+                              <?php } ?>
+                            </tbody>
+                          </table>   
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="observation" aria-labelledby="observation-tab">
+                          <h2>Observation</h2>
+                          <div class="ln_solid"></div>
+                          <style type="text/css">
+                            #form td {
+                              padding: 5px;
+                            }
+
+                            ul{
+                              list-style-type: none;
+                            }
+                          </style>
+                          
+                          <table style="width: 100%" id="" class="table table-striped table-bordered">
+                            <thead>
+                              <tr>
+                                <th align="center">Name</th>
+                                <th align="center">Value</th>
+                                <th align="center">Date</th>
+                                <th align="center">API</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php
+                              foreach ($observation as $ob) {
+                              ?>
+                              <tr>
+                                <td><?php echo $ob->tipe_pemeriksaan ?></td>
+                                <td><?php echo $ob->hasil ?> <?php echo $ob->unit ?></td>
+                                <td><?php echo $en->tanggal ?></td>
+                                <td><a href="">Link</a></td>
+                              </tr>
+                              <?php } ?>
+                            </tbody>
+                          </table>   
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="condition" aria-labelledby="condition-tab">
+                          <h2>Condition</h2>
+                          <div class="ln_solid"></div>
+                          <style type="text/css">
+                            #form td {
+                              padding: 5px;
+                            }
+
+                            ul{
+                              list-style-type: none;
+                            }
+                          </style>
+                          
+                          <table style="width: 100%" id="" class="table table-striped table-bordered">
+                            <thead>
+                              <tr>
+                                <th align="center">Condition</th>
+                                <th align="center">Status</th>
+                                <th align="center">Date</th>
+                                <th align="center">API</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php
+                              foreach ($condition as $co) {
+                              ?>
+                              <tr>
+                                <td><?php echo $co->diagnosis ?></td>
+                                <td><?php echo $co->status_klinis ?></td>
+                                <td><?php echo $co->tanggal ?></td>
+                                <td><a href="">Link</a></td>
+                              </tr>
+                              <?php } ?>
+                            </tbody>
+                          </table>   
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane fade active in" id="demografi" aria-labelledby="demografi-tab">
+                          <h2>Data Pasien</h2>
+                          <div class="ln_solid"></div>
+                          <style type="text/css">
+                            #form td {
+                              padding: 5px;
+                            }
+
+                            ul{
+                              list-style-type: none;
+                            }
+                          </style>
+
+
                           <table id="form" style="width: 95% ">
                             <tr>
-                              <td colspan="3" title="" ><b>DATA DIRI</b></td>
+                              <td colspan="3" title="" ><b>DATA PASIEN</b></td>
                             </tr>
                             <tr>
                               <td style="text-align: right;width: 30%" title="" >No Pasien :</td>
@@ -227,36 +403,8 @@
                               <td><?php echo $pt->alamat; ?></td>
                             </tr>
                             <tr>
-                              <td style="text-align: right;width: 30%" title="" >Pekerjaan :</td>
-                              <td><?php echo $pt->pekerjaan; ?></td>
-                            </tr>
-                            <tr>
-                              <td style="text-align: right;width: 30%" title="" >Pendidikan Terakhir :</td>
-                              <td><?php echo $pt->pendidikan; ?></td>
-                            </tr>
-                            <tr>
-                              <td style="text-align: right;width: 30%" title="" >Golongan Darah :</td>
-                              <td><?php echo $pt->golongan_darah; ?></td>
-                            </tr>
-                            <tr>
                               <td style="text-align: right;width: 30%" title="" >Status Pernikahan :</td>
                               <td><?php echo $pt->status_pernikahan; ?></td>
-                            </tr>
-                            <tr>
-                              <td style="text-align: right;width: 30%" title="" >Nama Orangtua :</td>
-                              <td><?php echo $pt->nama_orangtua; ?></td>
-                            </tr>
-                            <tr>
-                              <td style="text-align: right;width: 30%" title="" >Pekerjaan Orangtua :</td>
-                              <td><?php echo $pt->pekerjaan_orangtua; ?></td>
-                            </tr>
-                            <tr>
-                              <td style="text-align: right;width: 30%" title="" >Nama Suami/Istri :</td>
-                              <td><?php echo $pt->nama_suamistri; ?></td>
-                            </tr>
-                            <tr>
-                              <td style="text-align: right;width: 30%" title="" >Agama :</td>
-                              <td><?php echo $pt->agama; ?></td>
                             </tr>
                             <tr>
                               <td colspan="3" title="" ><b>KONTAK PASIEN</b></td>
@@ -265,12 +413,11 @@
                               <td style="text-align: right;width: 30%" title="" >No Kontak :</td>
                               <td><?php echo $pt->no_telpon; ?></td>
                             </tr>
-                          </table>                     
+                          </table>           
                         </div>
-                        <?php } ?>
 
-                        <div role="tabpanel" class="tab-pane fade active" id="aktivitas" aria-labelledby="home-tab">
-                          <h2>Aktivitas Terakhir</h2>
+                        <div role="tabpanel" class="tab-pane fade" id="diagnosis" aria-labelledby="diagnosis-tab">
+                          <h2>Data Diagnosis Pasien</h2>
                           <div class="ln_solid"></div>
                           <style type="text/css">
                             #form td {
@@ -281,51 +428,36 @@
                               list-style-type: none;
                             }
                           </style>
-                          <ul class="messages">
-                            <?php
-                            foreach ($data_rawat as $dr) {
-                            ?>
-                            <li>
-                              <img src="<?php echo base_url('images/pasien/').$pt->foto ?>" class="avatar" alt="Avatar">
-                              <div class="message_date">
-                                <h3 class="date text-info"><?php echo substr($dr->tanggal, 0,2) ?></h3>
-                                  <p class="month">
-                                  <?php 
-                                  $b = substr($dr->tanggal, 3,2);
-                                  if($b=="01"){
-                                    $bulan = "Januari";
-                                  }elseif ($b=="02") {
-                                    $bulan = "Februari";
-                                  }elseif ($b=="03") {
-                                    $bulan = "Maret";
-                                  }elseif ($b=="04") {
-                                    $bulan = "April";
-                                  }elseif($b == "05"){
-                                    $bulan = "Mei";
-                                  }elseif ($b=="06") {
-                                    $bulan = "Juni";
-                                  }elseif ($b=="07") {
-                                    $bulan = "Juli";
-                                  }elseif ($b=="08") {
-                                    $bulan = "Agustus";
-                                  }
-                                  echo $bulan;
-                                  ?></p>
-                              </div>
-                              <div class="message_wrapper">
-                                <h4 class=""><?php echo $pt->nama; ?></h4>
-                                <blockquote class="message">Pasien telah mengunjungi/dirujuk ke poliklinik <b><?php echo $dr->poliklinik; ?></b>.</blockquote>
-                                <br/>
-                                <p class="url">
-                                  <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
-                                </p>
-                              </div>
-                            </li>
-                            <?php } ?>
-                          </ul>             
+
+
+                          <table style="width: 100%" id="" class="table table-striped table-bordered">
+                            <thead>
+                              <tr>
+                                <th align="center">Kode</th>
+                                <th align="center">Diagnosis</th>
+                                <th align="center">Keterangan</th>
+                                <th align="center">Tanggal</th>
+                                <th align="center">Jam</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php
+                              foreach ($diagnosis as $dia) {
+                              ?>
+                              <tr>
+                                <td><?php echo $dia->kode_diagnosis; ?></td>
+                                <td><?php echo $dia->diagnosis; ?></td>
+                                <td><?php echo $dia->keterangan; ?></td>
+                                <td><?php echo $dia->tanggal; ?></td>
+                                <td><?php echo $dia->jam; ?></td>
+                              </tr>
+                              <?php } ?>
+                            </tbody>
+                          </table>           
                         </div>
+
                         <div role="tabpanel" class="tab-pane fade active" id="rawat_jalan" aria-labelledby="home-tab">
-                          <h2>Rawat Jalan Pasien</h2>
+                          <h2>Riwayat Rawat Jalan</h2>
                           <div class="ln_solid"></div>
                           <style type="text/css">
                             #form td {
@@ -341,9 +473,9 @@
                             <thead>
                               <tr>
                                 <th align="center">No Rawat Jalan</th>
-                                <th align="center">Poliklinik</th>
-                                <th align="center">Tanggal Masuk</th>
-                                <th align="center">Jam</th>
+                                <th align="center">Tgl. Masuk</th>
+                                <th align="center">Jam Masuk</th>
+                                <th align="center">Jam Keluar</th>
                                 <th align="center">Aksi</th>
                               </tr>
                             </thead>
@@ -353,9 +485,9 @@
                               ?>
                               <tr>
                                 <td><?php echo $dr->id_rawat ?></td>
-                                <td><?php echo $dr->poliklinik ?></td>
                                 <td><?php echo $dr->tanggal ?></td>
                                 <td><?php echo $dr->waktu ?></td>
+                                <td><?php echo $dr->jam_keluar ?></td>
                                 <td align="center"><a onclick="buka_popup(<?php echo $dr->id_rawat ?>)" style="cursor:pointer" >Lihat</a></td>
                               </tr>
                               <?php } ?>
@@ -448,51 +580,6 @@
                                 <td><?php echo $ra->gejala ?></td>
                                 <td><?php echo $ra->bahan_kimia ?></td>
                                 <td><?php echo $ra->keterangan ?></td>
-                              </tr>
-                              <?php } ?>
-                            </tbody>
-                          </table>   
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade" id="riwayat_hamil" aria-labelledby="home-tab">
-                          <h2>Riwayat Kehamilan</h2>
-                          <div class="ln_solid"></div>
-                          <style type="text/css">
-                            #form td {
-                              padding: 5px;
-                            }
-
-                            ul{
-                              list-style-type: none;
-                            }
-                          </style>
-                          
-                          <table id="datatable4" class="table table-striped table-bordered">
-                            <thead>
-                              <tr>
-                                <th align="center">No.</th>
-                                <th align="center">Macam Persalinan</th>
-                                <th align="center">Jenis Kelamin</th>
-                                <th align="center">Status Lahir</th>
-                                <th align="center">Waktu</th>
-                                <th align="center">Penolong</th>
-                                <th align="center">Penyulit</th>
-                                <th align="center">Sebab Kematian</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <?php
-                              $n=1;
-                              foreach ($riwayat_kehamilan as $rk) {
-                              ?>
-                              <tr>
-                                <td><?php echo $n++; ?></td>
-                                <td><?php echo $rk->macam_persalinan ?></td>
-                                <td><?php echo $rk->jenis_kelamin ?></td>
-                                <td><?php echo $rk->status_lahir ?></td>
-                                <td><?php echo $rk->waktu ?></td>
-                                <td><?php echo $rk->penolong_persalinan ?></td>
-                                <td><?php echo $rk->penyulit ?></td>
-                                <td><?php echo $rk->sebab_kematian ?></td>
                               </tr>
                               <?php } ?>
                             </tbody>

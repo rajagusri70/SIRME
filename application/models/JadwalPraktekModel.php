@@ -6,7 +6,7 @@ class JadwalPraktekModel extends CI_Model{
 
 	function selectWheres($where){
 		$this->db->where($where);
-		return $this->db->get('admin')->result();
+		return $this->db->get('user')->result();
 	}
 
 	function update($user_id,$data){

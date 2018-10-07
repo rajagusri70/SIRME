@@ -224,7 +224,7 @@
   <script type="text/javascript">
     function tambah(no_obat){
       var no_obat_value = no_obat;
-      var id_resep_value = <?php echo $id_resep; ?>;
+      var id_resep_value = '<?php echo $id_resep; ?>';
       
         $.ajax({
           url: "<?php echo base_url().'p_umum/check_up/tambahresep' ?>",

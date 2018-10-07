@@ -1009,7 +1009,7 @@
       $.ajax({
         url   : '<?php echo base_url()?>p_umum/check_up/viewRiwayatPenyakit',
         type  : 'POST',
-        data : {no_pasien: <?php echo $no_pasien; ?>},
+        data : {no_rawat_jalan: <?php echo $id_rawat; ?>},
         dataType : 'JSON',
         success : function(data){
           if (data.length <= 0){
@@ -1046,7 +1046,7 @@
       $.ajax({
         url   : '<?php echo base_url()?>p_umum/check_up/viewRiwayatAlergi',
         type  : 'POST',
-        data : {no_pasien: <?php echo $no_pasien; ?>},
+        data : {no_rawat_jalan: <?php echo $id_rawat; ?>},
         dataType : 'JSON',
         success : function(data){
           if (data.length <= 0){

@@ -266,7 +266,6 @@
                         </li>
                       </ul>
                       <div id="myTabContent" class="tab-content">
-
                         <div role="tabpanel" class="tab-pane fade active in" id="rm1a" aria-labelledby="home-tab">
                           <h2>ASESMEN AWAL</h2>
                           <div class="ln_solid"></div>

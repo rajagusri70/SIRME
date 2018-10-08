@@ -502,7 +502,7 @@ class Check_Up extends CI_Controller {
 	public function viewDiagnosis(){
 		$id_rawat = $this->input->post('id_rawat');
 		//$id_periksa = '180';
-		$data = $this->DiagnosisModel->view($id_rawat);
+		$data = $this->DiagnosisModel->view(array('no_rawat_jalan' => $id_rawat));
 		echo json_encode($data);
 	}
 

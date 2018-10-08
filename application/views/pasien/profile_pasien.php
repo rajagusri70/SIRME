@@ -152,30 +152,46 @@
                     <div style="width: 100%">
                       <!-- required for floating -->
                       <!-- Nav tabs -->
-                      <ul class="nav nav-tabs tabs-left">
-                        <label><b>FHIR RESOURCE</b></label></br></br>
-
-                        <li><a href="#patient" data-toggle="tab">Patient</a>
-                        </li>
-                        <li><a href="#encounter" data-toggle="tab">Encounter</a>
-                        </li>
-                        <li><a href="#observation" data-toggle="tab">Observation</a>
-                        </li>
-                        <li><a href="#condition" data-toggle="tab">Condition</a>
-                        </li>
-                        <div class="ln_solid"></div>
-                        <li class="active"><a href="#demografi" href="#data_pasien" data-toggle="tab">Demografi</a>
-                        </li>
-                        <li><a href="#diagnosis" data-toggle="tab">Diagnosis</a>
-                        </li>
-                        <li><a href="#rawat_jalan" data-toggle="tab">Rawat Jalan</a>
-                        </li>
-                        <li><a href="#riwayat_alergi" data-toggle="tab">Riwayat Alergi</a>
-                        </li>
-                        <li><a href="#riwayat_obat" data-toggle="tab">Riwayat Obat</a>
-                        </li>
-                        
-                      </ul>
+                      <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                          <li role="presentation" class=""><a href="#fhir" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">FHIR</a>
+                          </li>
+                          <li role="presentation" class="active"><a href="#rumah_sakit" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Data Pasien</a>
+                          </li>
+                        </ul>
+                        <div id="myTabContent" class="tab-content">
+                          <div role="tabpanel" class="tab-pane fade" id="fhir" aria-labelledby="home-tab">
+                            <ul class="nav nav-tabs tabs-left">
+                              <label><b>FHIR Resource</b></label><br>
+                              <li><a href="#patient" data-toggle="tab">Patient</a>
+                              </li>
+                              <li><a href="#encounter" data-toggle="tab">Encounter</a>
+                              </li>
+                              <li><a href="#observation" data-toggle="tab">Observation</a>
+                              </li>
+                              <li><a href="#condition" data-toggle="tab">Condition</a>
+                              </li>
+                              <div class="ln_solid"></div>
+                              
+                            </ul>
+                          </div>
+                          <div role="tabpanel" class="tab-pane fade active in" id="rumah_sakit" aria-labelledby="home-tab">
+                            <label><b>Data Pasien</b></label><br>
+                            <ul class="nav nav-tabs tabs-left">
+                              <li class="active"><a href="#demografi" href="#data_pasien" data-toggle="tab">Demografi</a>
+                              </li>
+                              <li><a href="#diagnosis" data-toggle="tab">Diagnosis</a>
+                              </li>
+                              <li><a href="#rawat_jalan" data-toggle="tab">Rawat Jalan</a>
+                              </li>
+                              <li><a href="#riwayat_alergi" data-toggle="tab">Riwayat Alergi</a>
+                              </li>
+                              <li><a href="#riwayat_obat" data-toggle="tab">Riwayat Obat</a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
@@ -187,7 +203,7 @@
                           <div class="ln_solid"></div>
                           <style type="text/css">
                             #form td {
-                              padding: 5px;
+                              padding: 2px;
                             }
                             table{
 
@@ -230,7 +246,7 @@
                                   echo $gender ?>
                                 </td>
                                 <td><?php echo $patient->tanggal_lahir ?></td>
-                                <td><a href="<?php echo base_url().'api/api/patient/'.$patient->pid; ?>" target="_blank">Link</a></td>
+                                <td><a href="<?php echo base_url().'api/Patient/'.$patient->no_pasien; ?>" target="_blank">Link</a></td>
                               </tr>
                               <?php } ?>
                             </tbody>
@@ -239,16 +255,6 @@
                         <div role="tabpanel" class="tab-pane fade" id="encounter" aria-labelledby="encounter-tab">
                           <h2>Encounter</h2>
                           <div class="ln_solid"></div>
-                          <style type="text/css">
-                            #form td {
-                              padding: 5px;
-                            }
-
-                            ul{
-                              list-style-type: none;
-                            }
-                          </style>
-                          
                           <table style="width: 100%" id="" class="table table-striped table-bordered">
                             <thead>
                               <tr>
@@ -269,7 +275,7 @@
                                 <td><?php echo $en->typeText ?></td>
                                 <td><?php echo $en->status ?></td>
                                 <td><?php echo $en->tanggal ?> <sub>from</sub><?php echo $en->waktu ?> <sub>to</sub><?php echo $en->jam_keluar ?></td>
-                                <td><a href="">Link</a></td>
+                                <td><a href="<?php echo base_url().'api/Encounter/'.$en->id_rawat; ?>" target="_blank">Link</a></td>
                               </tr>
                               <?php } ?>
                             </tbody>
@@ -278,16 +284,6 @@
                         <div role="tabpanel" class="tab-pane fade" id="observation" aria-labelledby="observation-tab">
                           <h2>Observation</h2>
                           <div class="ln_solid"></div>
-                          <style type="text/css">
-                            #form td {
-                              padding: 5px;
-                            }
-
-                            ul{
-                              list-style-type: none;
-                            }
-                          </style>
-                          
                           <table style="width: 100%" id="" class="table table-striped table-bordered">
                             <thead>
                               <tr>
@@ -305,7 +301,7 @@
                                 <td><?php echo $ob->tipe_pemeriksaan ?></td>
                                 <td><?php echo $ob->hasil ?> <?php echo $ob->unit ?></td>
                                 <td><?php echo $en->tanggal ?></td>
-                                <td><a href="">Link</a></td>
+                                <td><a href="<?php echo base_url().'api/Observation/'.$ob->id; ?>" target="_blank">Link</a></td>
                               </tr>
                               <?php } ?>
                             </tbody>
@@ -314,16 +310,6 @@
                         <div role="tabpanel" class="tab-pane fade" id="condition" aria-labelledby="condition-tab">
                           <h2>Condition</h2>
                           <div class="ln_solid"></div>
-                          <style type="text/css">
-                            #form td {
-                              padding: 5px;
-                            }
-
-                            ul{
-                              list-style-type: none;
-                            }
-                          </style>
-                          
                           <table style="width: 100%" id="" class="table table-striped table-bordered">
                             <thead>
                               <tr>
@@ -341,7 +327,7 @@
                                 <td><?php echo $co->diagnosis ?></td>
                                 <td><?php echo $co->status_klinis ?></td>
                                 <td><?php echo $co->tanggal ?></td>
-                                <td><a href="">Link</a></td>
+                                <td><a href="<?php echo base_url().'api/Condition/'.$co->id; ?>" target="_blank">Link</a></td>
                               </tr>
                               <?php } ?>
                             </tbody>
@@ -351,18 +337,7 @@
                         <div role="tabpanel" class="tab-pane fade active in" id="demografi" aria-labelledby="demografi-tab">
                           <h2>Data Pasien</h2>
                           <div class="ln_solid"></div>
-                          <style type="text/css">
-                            #form td {
-                              padding: 5px;
-                            }
-
-                            ul{
-                              list-style-type: none;
-                            }
-                          </style>
-
-
-                          <table id="form" style="width: 95% ">
+                          <table id="form" style="width: 100% ">
                             <tr>
                               <td colspan="3" title="" ><b>DATA PASIEN</b></td>
                             </tr>
@@ -419,18 +394,7 @@
                         <div role="tabpanel" class="tab-pane fade" id="diagnosis" aria-labelledby="diagnosis-tab">
                           <h2>Data Diagnosis Pasien</h2>
                           <div class="ln_solid"></div>
-                          <style type="text/css">
-                            #form td {
-                              padding: 5px;
-                            }
-
-                            ul{
-                              list-style-type: none;
-                            }
-                          </style>
-
-
-                          <table style="width: 100%" id="" class="table table-striped table-bordered">
+                          <table style="width: 100%" id="datatable" class="table table-striped table-bordered">
                             <thead>
                               <tr>
                                 <th align="center">Kode</th>
@@ -456,20 +420,10 @@
                           </table>           
                         </div>
 
-                        <div role="tabpanel" class="tab-pane fade active" id="rawat_jalan" aria-labelledby="home-tab">
+                        <div role="tabpanel" class="tab-pane fade" id="rawat_jalan" aria-labelledby="home-tab">
                           <h2>Riwayat Rawat Jalan</h2>
                           <div class="ln_solid"></div>
-                          <style type="text/css">
-                            #form td {
-                              padding: 5px;
-                            }
-
-                            ul{
-                              list-style-type: none;
-                            }
-                          </style>
-                          
-                          <table id="datatable" class="table table-striped table-bordered">
+                          <table style="width: 100%" id="datatable2" class="table table-striped table-bordered">
                             <thead>
                               <tr>
                                 <th align="center">No Rawat Jalan</th>
@@ -499,67 +453,14 @@
                             </tbody>
                           </table>   
                         </div>
-                        <div role="tabpanel" class="tab-pane fade" id="riwayat_penyakit" aria-labelledby="home-tab">
-                          <h2>Riwayat Penyakit</h2>
-                          <div class="ln_solid"></div>
-                          <style type="text/css">
-                            #form td {
-                              padding: 5px;
-                            }
-
-                            ul{
-                              list-style-type: none;
-                            }
-                          </style>
-                          
-                          <table id="datatable2" class="table table-striped table-bordered">
-                            <thead>
-                              <tr>
-                                <th align="center">No.</th>
-                                <th align="center">ID</th>
-                                <th align="center">Rawat Jalan</th>
-                                <th align="center">Tanggal Masuk</th>
-                                <th align="center">Kode ICD</th>
-                                <th align="center">Diagnosa Penyakit</th>
-                                <th align="center">Keterangan</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <?php
-                              $n=1;
-                              foreach ($riwayat_penyakit as $rp) {
-                              ?>
-                              <tr>
-                                <td><?php echo $n++; ?></td>
-                                <td><?php echo $rp->id_riwayat ?></td>
-                                <td><a onclick="buka_popup(<?php echo $rp->id_rawat ?>)" style="cursor:pointer" ><?php echo $rp->id_rawat ?></a></td>
-                                <td><?php echo $rp->tanggal_input ?></td>
-                                <td><?php echo $rp->kode_icd10 ?></td>
-                                <td><?php echo $rp->diagnosa ?></td>
-                                <td><?php echo $rp->keterangan ?></td>
-                              </tr>
-                              <?php } ?>
-                            </tbody>
-                          </table>   
-                        </div>
+                        
                         <div role="tabpanel" class="tab-pane fade" id="riwayat_alergi" aria-labelledby="home-tab">
                           <h2>Riwayat Alergi</h2>
                           <div class="ln_solid"></div>
-                          <style type="text/css">
-                            #form td {
-                              padding: 5px;
-                            }
-
-                            ul{
-                              list-style-type: none;
-                            }
-                          </style>
-                          
-                          <table id="datatable3" class="table table-striped table-bordered">
+                          <table style="width: 100%" id="datatable3" class="table table-striped table-bordered">
                             <thead>
                               <tr>
                                 <th align="center">No.</th>
-                                <th align="center">ID</th>
                                 <th align="center">Tanggal Masuk</th>
                                 <th align="center">Organ Sasaran</th>
                                 <th align="center">Gejala</th>
@@ -574,7 +475,6 @@
                               ?>
                               <tr>
                                 <td><?php echo $n++; ?></td>
-                                <td><?php echo $ra->id_alergi ?></td>
                                 <td><?php echo $ra->tanggal_input ?></td>
                                 <td><?php echo $ra->organ_sasaran ?></td>
                                 <td><?php echo $ra->gejala ?></td>
@@ -588,17 +488,7 @@
                         <div role="tabpanel" class="tab-pane fade" id="riwayat_obat" aria-labelledby="home-tab">
                           <h2>Riwayat Obat</h2>
                           <div class="ln_solid"></div>
-                          <style type="text/css">
-                            #form td {
-                              padding: 5px;
-                            }
-
-                            ul{
-                              list-style-type: none;
-                            }
-                          </style>
-                          
-                          <table id="datatable5" class="table table-striped table-bordered">
+                          <table style="width: 100%" id="datatable4" class="table table-striped table-bordered">
                             <thead>
                               <tr>
                                 <th align="center">Tanggal</th>
@@ -615,7 +505,7 @@
                               foreach ($resep_obat as $ro) {
                               ?>
                               <tr>
-                                <td><?php echo $ro->tanggal_masuk ?></td>
+                                <td><?php echo $ro->tanggal ?></td>
                                 <td><?php echo $ro->nama_obat ?></td>
                                 <td><?php echo $ro->jenis ?></td>
                                 <td><?php echo $ro->kategori ?></td>

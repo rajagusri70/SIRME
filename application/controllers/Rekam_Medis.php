@@ -43,7 +43,7 @@ class rekam_medis extends CI_Controller {
 		$data['diagnosis'] = $this->DiagnosisModel->view(array('no_pasien' => $no_pasien, ));
 		$data['data_rawat'] = $this->RawatModel->viewWhere(array('no_pasien' => $no_pasien, ));
 		$data['riwayat_penyakit'] = $this->RiwayatPenyakitModel->viewRiwayatPenyakit($no_pasien);
-		$data['riwayat_alergi'] = $this->RiwayatAlergiModel->viewRiwayat($no_pasien);
+		$data['riwayat_alergi'] = $this->RiwayatAlergiModel->viewRiwayat(array('no_pasien' => $no_pasien, ));
 		$where = array('pasien.no_pasien' => $no_pasien, );
 		$data['resep_obat'] = $this->ItemResepModel->viewAll($where);
 		$this->load->view('pasien/profile_pasien',$data);

@@ -159,4 +159,12 @@ class RawatModel extends CI_Model{
 		$this->db->from("tb_jadwal");
 		return $this->db->get()->result();
 	}
+
+	public function viewDokter(){
+		$this->db->distinct();
+		$this->db->select('tb_transaksi.id_transaksi, rawat_jalan.id_rawat, nama, tanggal_transaksi, jam_transaksi, tb_transaksi.status'); 
+	    $this->db->from('tb_transaksi');
+	    $this->db->join('rawat_jalan', 'tb_transaksi.no_rawat_jalan = rawat_jalan.id_rawat');
+	    return $this->db->get()->result();
+	}
 }

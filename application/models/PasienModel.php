@@ -19,6 +19,11 @@ class PasienModel extends CI_Model{
 		return $this->db->get("pasien")->result();
 	}
 
+	public function cekPasien($where){
+		$this->db->where($where);
+		return $this->db->get("pasien");
+	}
+
 	public function viewPasiens($where, $no_pasien){
 		$this->db->where($where,$no_pasien);
 		return $this->db->get("pasien");

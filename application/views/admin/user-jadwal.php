@@ -107,11 +107,15 @@
                   <ul class="nav child_menu" style="display: none">
                     <li><a href="<?php echo site_url('admin/user') ?>" > Daftar User</a>
                     </li>
+                    <li><a href="<?php echo $_SERVER['REQUEST_URI']; ?>" > Atur Jadwal Dokter</a>
+                    </li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-info-circle"></i> Manajemen Jadwal <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-info-circle"></i> Manajemen Info <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo $_SERVER['REQUEST_URI']; ?>" > Atur Jadwal Dokter</a>
+                    <li><a href="<?php echo site_url('admin/pasien') ?>" >Pasien</a>
+                    </li>
+                    <li><a href="<?php echo site_url('admin/obat') ?>" >Informasi Obat</a>
                     </li>
                   </ul>
                 </li>
@@ -194,7 +198,6 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                  <a class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-plus"></i> <b>Tambah</b></a>
                   <!-- Modal --> 
                   <p>Tabel dibawah ini merupakan daftar dokter yang ada di rumah sakit
                   </p>

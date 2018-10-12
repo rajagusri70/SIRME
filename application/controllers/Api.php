@@ -104,10 +104,9 @@ class Api extends REST_Controller {
         $status_kawin = $p->status_pernikahan;
         $nama_orangtua = $p->nama_orangtua;
         $no_telpon_orangtua = $p->no_telpon_orangtua;
-        $nama_saudara = $p->nama_saudara;
-        $no_telpon_saudara = $p->no_telpon_saudara;
-        $nama_pasangan = $p->nama_pasangan;
-        $no_telpon_pasangan = $p->no_telepon_pasangan;
+        $nama_kerabat = $p->nama_kerabat;
+        $no_telpon_kerabat = $p->no_telpon_kerabat;
+        $hubungan = $p->hubungan;
         $no_id_praktisi = 'Practitioner/'.$p->user_id;
       }
       //echo $uuid;
@@ -185,36 +184,18 @@ class Api extends REST_Controller {
             [
               'relationship' => [
                 [
-                  'text' => 'pasangan'
+                  'text' => $hubungan
                 ]
               ],
               'name' => [
                 [
-                  'text' => $nama_pasangan
+                  'text' => $nama_kerabat
                 ]
               ],
               "telecom"=> [
                 [
                   'system'=> 'phone',
-                  'value'=> $no_telpon_pasangan
-                ]
-              ]
-            ],
-            [
-              'relationship' => [
-                [
-                  'text' => 'saudara'
-                ]
-              ],
-              'name' => [
-                [
-                  'text' => $nama_saudara
-                ]
-              ],
-              "telecom"=> [
-                [
-                  'system'=> 'phone',
-                  'value'=> $no_telpon_saudara
+                  'value'=> $no_telpon_kerabat
                 ]
               ]
             ]
@@ -443,9 +424,9 @@ class Api extends REST_Controller {
                 'system' => 'http://apps.who.int/classifications/icd10/',
                 'code' => $data->kode_diagnosis,
                 'display' => $data->diagnosis
-              ],
-              'text' => $data->diagnosis.' | '.$data->keterangan
-            ]
+              ]
+            ],
+            'text' => $data->diagnosis.' | '.$data->keterangan
           ],
           'subject' => [
             'reference' => 'Patient/'.$data->no_pasien

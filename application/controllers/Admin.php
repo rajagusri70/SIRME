@@ -18,6 +18,8 @@ class Admin extends CI_Controller {
 		$this->load->model('UserModel');
 		$this->load->model('PoliklinikModel');
 		$this->load->model('JadwalPraktekModel');
+		$this->load->model('PasienModel');
+		$this->load->model('ObatModel');
  
 	}
 
@@ -73,6 +75,24 @@ class Admin extends CI_Controller {
 		}
 	}
 
+	public function pasien(){
+		$data['users'] = $this->UserModel->tampilkan();
+		$data['pasien'] = $this->PasienModel->view();
+		$this->load->view('admin/pasien',$data);
+	}
+
+	public function pasien_info($no_pasien){
+		$data['users'] = $this->UserModel->tampilkan();
+		$data['pasien'] = $this->PasienModel->ViewPasien('no_pasien',$no_pasien);
+		$this->load->view('admin/profile-pasien',$data);
+		if($this->input->post('tombol_submit')){
+			$update = array(
+				'no_ktp' => $this->input->post('input_no_ktp'), 
+			);
+			$this->PasienModel->update($no_pasien,$update);
+		}
+	}
+
 	public function jadwal(){
 		$data['users'] = $this->UserModel->tampilkan();
 		$where = array('tipe_admin' => 'Dokter', );
@@ -106,7 +126,7 @@ class Admin extends CI_Controller {
 		$where = array(
 			'username' => $username
 			);
-		$cek = $this->UserModel->cek_login("admin",$where)->num_rows();
+		$cek = $this->UserModel->cek_login("user",$where)->num_rows();
 		if($cek > 0){
 			echo json_encode(array('status' => true));
 		}else{
@@ -137,34 +157,34 @@ class Admin extends CI_Controller {
 			);
 			$this->UserModel->update($user_id,$data);
 			//redirect(base_url('admin/profile/'.$user_id));
-						echo '<body>';
-						echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
-						echo '<script type="text/javascript" >';
-						echo 'swal({';
-						echo '  title: "Data berhasil diganti.!!!",';
-						echo '  text: "Data User telah berhasil diganti dengan yang baru",';
-						echo '	icon: "success",';
-						echo '  buttons: {';
-						echo '    catch: {';
-						echo '      text: "Oke",';
-						echo '      value: "catch",';
-						echo '    },';
-						echo '  },';
-						echo '})';
-						echo '.then((value) => {';
-						echo '  switch (value) {';				 
-						echo '    case "defeat":';
-						echo '      swal("Pikachu fainted! You gained 500 XP!");';
-						echo '      break;';				 
-						echo '    case "catch":';
-						echo '      window.location = "'.base_url().'admin/profile/'.$user_id.'";';
-						echo '      break;';				 
-						echo '    default:';
-						echo '      window.location = "'.base_url().'admin/profile/'.$user_id.'";';
-						echo '  }';
-						echo '});';
-						echo '</script>';
-						echo  '</body>';
+			echo '<body>';
+			echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
+			echo '<script type="text/javascript" >';
+			echo 'swal({';
+			echo '  title: "Data berhasil diganti.!!!",';
+			echo '  text: "Data User telah berhasil diganti dengan yang baru",';
+			echo '	icon: "success",';
+			echo '  buttons: {';
+			echo '    catch: {';
+			echo '      text: "Oke",';
+			echo '      value: "catch",';
+			echo '    },';
+			echo '  },';
+			echo '})';
+			echo '.then((value) => {';
+			echo '  switch (value) {';				 
+			echo '    case "defeat":';
+			echo '      swal("Pikachu fainted! You gained 500 XP!");';
+			echo '      break;';				 
+			echo '    case "catch":';
+			echo '      window.location = "'.base_url().'admin/profile/'.$user_id.'";';
+			echo '      break;';				 
+			echo '    default:';
+			echo '      window.location = "'.base_url().'admin/profile/'.$user_id.'";';
+			echo '  }';
+			echo '});';
+			echo '</script>';
+			echo  '</body>';
 		}elseif ($this->input->post('tombol_submit2')){
 			$data = array(
 				'username' => $this->input->post('input_username'),
@@ -172,37 +192,38 @@ class Admin extends CI_Controller {
 			);
 			$this->UserModel->update($user_id,$data);
 			echo '<body>';
-						echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
-						echo '<script type="text/javascript" >';
-						echo 'swal({';
-						echo '  title: "Data berhasil diganti.!!!",';
-						echo '  text: "Data User telah berhasil diganti dengan yang baru",';
-						echo '	icon: "success",';
-						echo '  buttons: {';
-						echo '    catch: {';
-						echo '      text: "Oke",';
-						echo '      value: "catch",';
-						echo '    },';
-						echo '  },';
-						echo '})';
-						echo '.then((value) => {';
-						echo '  switch (value) {';				 
-						echo '    case "defeat":';
-						echo '      swal("Pikachu fainted! You gained 500 XP!");';
-						echo '      break;';				 
-						echo '    case "catch":';
-						echo '      window.location = "'.base_url().'admin/profile/'.$user_id.'";';
-						echo '      break;';				 
-						echo '    default:';
-						echo '      window.location = "'.base_url().'admin/profile/'.$user_id.'";';
-						echo '  }';
-						echo '});';
-						echo '</script>';
-						echo  '</body>';
+			echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
+			echo '<script type="text/javascript" >';
+			echo 'swal({';
+			echo '  title: "Data berhasil diganti.!!!",';
+			echo '  text: "Data User telah berhasil diganti dengan yang baru",';
+			echo '	icon: "success",';
+			echo '  buttons: {';
+			echo '    catch: {';
+			echo '      text: "Oke",';
+			echo '      value: "catch",';
+			echo '    },';
+			echo '  },';
+			echo '})';
+			echo '.then((value) => {';
+			echo '  switch (value) {';				 
+			echo '    case "defeat":';
+			echo '      swal("Pikachu fainted! You gained 500 XP!");';
+			echo '      break;';				 
+			echo '    case "catch":';
+			echo '      window.location = "'.base_url().'admin/profile/'.$user_id.'";';
+			echo '      break;';				 
+			echo '    default:';
+			echo '      window.location = "'.base_url().'admin/profile/'.$user_id.'";';
+			echo '  }';
+			echo '});';
+			echo '</script>';
+			echo  '</body>';
 		}elseif($this->input->post('tombol_submit_jabatan')){
 			$array_praktek = $this->input->post('Praktek');
-			$jadwal_praktek = implode(",", $array_praktek);
+			
 			if($tipe_admin == 'Dokter'){
+				$jadwal_praktek = implode(",", $array_praktek);
 				$data = array(
 					'spesialis' => $this->input->post('input_spesialis'),
 					'no_sip' => $this->input->post('input_no_sip'),
@@ -271,7 +292,6 @@ class Admin extends CI_Controller {
 						echo '</script>';
 						echo  '</body>';
 			}
-			
 		}
 	}
 
@@ -331,6 +351,70 @@ class Admin extends CI_Controller {
 		$this->UserModel->update($user_id,$data);
 		// echo "<script>window.close();</script>";
 		// redirect('pasien/profile_pasien/'.$no_pasien);
+	}
+
+	public function obat(){
+		$data['users'] = $this->UserModel->tampilkan();
+		$data['data_obat'] = $this->ObatModel->viewObat();
+		$this->load->view('admin/obat',$data);
+		if($this->input->post('submit_obat')){
+			$data = array(
+				'nama_obat' => $this->input->post('input_nama_obat'), 
+				'jenis' => $this->input->post('input_satuan'), 
+				'kategori' => $this->input->post('input_kategori'), 
+				'harga' => $this->input->post('input_harga'), 
+				'stok' => $this->input->post('input_stok'), 
+				'deskripsi' => $this->input->post('input_deskripsi'), 
+			);
+			$this->ObatModel->tambahObat($data);
+			echo '<body>';
+			echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
+			echo '<script type="text/javascript" >';
+			echo 'swal({';
+			echo '  title: "Data berhasil diganti.!!!",';
+			echo '  text: "Data User telah berhasil diganti dengan yang baru",';
+			echo '	icon: "success",';
+			echo '  buttons: {';
+			echo '    catch: {';
+			echo '      text: "Oke",';
+			echo '      value: "catch",';
+			echo '    },';
+			echo '  },';
+			echo '})';
+			echo '.then((value) => {';
+			echo '  switch (value) {';				 
+			echo '    case "defeat":';
+			echo '      swal("Pikachu fainted! You gained 500 XP!");';
+			echo '      break;';				 
+			echo '    case "catch":';
+			echo '      window.location = "'.base_url().'admin/obat";';
+			echo '      break;';				 
+			echo '    default:';
+			echo '      window.location = "'.base_url().'admin/obat";';
+			echo '  }';
+			echo '});';
+			echo '</script>';
+			echo  '</body>';
+		}
+	}
+
+	public function detail($no_obat){
+		$where = array('no_obat' => $no_obat, );
+		$data['data_obat'] = $this->ObatModel->viewWhere($where);
+		$this->load->view('apotek/detail',$data);
+		if($this->input->post('tombol_submit_obat')){
+			$data = array(
+				'nama_obat' => $this->input->post('input_nama_obat'),
+				'jenis' => $this->input->post('input_satuan'),
+				'kategori' => $this->input->post('input_kategori'), 
+				'harga' => $this->input->post('input_harga'),
+				'stok' => $this->input->post('input_stok'),
+				'deskripsi' => $this->input->post('input_deskripsi'),
+			);
+			$where = array('no_obat' => $no_obat, );
+			$this->ObatModel->update($where,$data);
+			redirect(base_url('admin/detail/'.$no_obat));
+		}
 	}
 
 	public function logout(){

@@ -91,12 +91,13 @@ class UserModel extends CI_Model{
 		$tanggal = date("d-m-Y");
 		$data = array(
 			"nama" => $this->input->post('input_nama'),
+			"tanggal_lahir" => $this->input->post('input_tanggal_lahir'),
 			"jenis_kelamin" => $this->input->post('input_jenis_kelamin'),
 			"alamat" => $this->input->post('input_alamat'),
 			"kota" => $this->input->post('input_kota'),
 			"no_hp" => $this->input->post('input_no_hp'),
 			"email" => $this->input->post('input_email'),
-			"username" => $this->input->post('input_user_id'),
+			"username" => $this->input->post('input_username'),
 			"password" => $this->input->post('input_password'),
 			"tipe_admin" => $this->input->post('input_jabatan'),
 			"foto" => $upload['file']['file_name']

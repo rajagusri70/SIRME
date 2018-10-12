@@ -240,12 +240,12 @@
                           </div>
                         </div>
                         <div class="item form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Status Pernikahan
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Status Kawin
                           </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
                             <select class="normal-form-long" name="input_status_pernikahan">
-                              <option value="Belum Nikah">Belum Nikah</option>
-                              <option value="Sudah Nikah">Sudah Nikah</option>
+                              <option value="Belum Kawin">Belum Kawin</option>
+                              <option value="Sudah Nikah">Kawin</option>
                             </select>
                           </div>
                         </div>
@@ -319,36 +319,33 @@
                             <input id="input_no_telpon_ortu" name="input_no_telpon_orangtua" class="normal-form-long" required="required" type="number">
                           </div>
                         </div>
-                        <label>Saudara</label>
+                        <label>Kerabat Lainya</label>
                         <span class="section"></span>
+                        <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Hub. Dg. Pasien
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select class="normal-form-long" name="input_hubungan">
+                              <option value="Lainya">Lainya</option>
+                              <option value="Wali">Wali</option>
+                              <option value="Anak">Anak</option>
+                              <option value="Saudara Kandung">Saudara Kandung</option>
+                              <option value="Pasangan">Pasangan</option>
+                            </select>
+                          </div>
+                        </div>
                         <div class="item form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama <span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="birthday" name="input_nama_saudara" class="normal-form-long" required="required" type="text">
+                            <input id="birthday" name="input_nama_kerabat" class="normal-form-long" required="required" type="text">
                           </div>
                         </div>
                         <div class="item form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12">No. Telepon<span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="input_no_telpon_ortu" name="input_no_telpon_saudara" class="normal-form-long" required="required" type="number">
-                          </div>
-                        </div>
-                        <label>Pasangan</label>
-                        <span class="section"></span>
-                        <div class="item form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama <span class="required">*</span>
-                          </label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="birthday" name="input_nama_pasangan" class="normal-form-long" required="required" type="text">
-                          </div>
-                        </div>
-                        <div class="item form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12">No. Telepon<span class="required">*</span>
-                          </label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="input_no_telpon_ortu" name="input_no_telpon_pasangan" class="normal-form-long" required="required" type="number">
+                            <input id="input_no_telpon_ortu" name="input_no_telpon_kerabat" class="normal-form-long" required="required" type="number">
                           </div>
                         </div>
                       </div>

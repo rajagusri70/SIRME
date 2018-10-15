@@ -242,48 +242,48 @@
                                 </select>
                               </div>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                               <label class="col-md-3 col-sm-3 col-xs-12 control-label">Hari praktek
                               </label>
                               <div class="col-md-9 col-sm-9 col-xs-12">
-                                <?php $hari = $a->jadwal_praktek ?>
+                                <?php $hari //= $a->jadwal_praktek ?>
                                 <div class="checkbox">
                                   <label>
-                                    <input type="checkbox" name="Praktek[]" value="Senin" <?php if (strstr($hari, 'Senin')) { echo "checked";}  ?> > Senin
+                                    <input type="checkbox" name="Praktek[]" value="Senin" <?php //if (strstr($hari, 'Senin')) { echo "checked";}  ?> > Senin
                                   </label>
                                 </div>
                                 <div class="checkbox">
                                   <label>
-                                    <input type="checkbox" name="Praktek[]" value="Selasa" <?php if (strstr($hari, 'Selasa')) { echo "checked";}  ?> > Selasa
+                                    <input type="checkbox" name="Praktek[]" value="Selasa" <?php //if (strstr($hari, 'Selasa')) { echo "checked";}  ?> > Selasa
                                   </label>
                                 </div>
                                 <div class="checkbox">
                                   <label>
-                                    <input type="checkbox" name="Praktek[]" value="Rabu" <?php if (strstr($hari, 'Rabu')) { echo "checked";}  ?> > Rabu
+                                    <input type="checkbox" name="Praktek[]" value="Rabu" <?php //if (strstr($hari, 'Rabu')) { echo "checked";}  ?> > Rabu
                                   </label>
                                 </div>
                                 <div class="checkbox">
                                   <label>
-                                    <input type="checkbox" name="Praktek[]" value="Kamis" <?php if (strstr($hari, 'Kamis')) { echo "checked";}  ?> > Kamis
+                                    <input type="checkbox" name="Praktek[]" value="Kamis" <?php //if (strstr($hari, 'Kamis')) { echo "checked";}  ?> > Kamis
                                   </label>
                                 </div>
                                 <div class="checkbox">
                                   <label>
-                                    <input type="checkbox" name="Praktek[]" value="Jum'at" <?php if (strstr($hari, "Jum'at")) { echo "checked";}  ?> > Jum'at
+                                    <input type="checkbox" name="Praktek[]" value="Jum'at" <?php //if (strstr($hari, "Jum'at")) { echo "checked";}  ?> > Jum'at
                                   </label>
                                 </div>
                                 <div class="checkbox">
                                   <label>
-                                    <input type="checkbox" name="Praktek[]" value="Sabtu" <?php if (strstr($hari, 'Sabtu')) { echo "checked";}  ?> > Sabtu
+                                    <input type="checkbox" name="Praktek[]" value="Sabtu" <?php //if (strstr($hari, 'Sabtu')) { echo "checked";}  ?> > Sabtu
                                   </label>
                                 </div>
                                 <div class="checkbox">
                                   <label>
-                                    <input type="checkbox" name="Praktek[]" value="Minggu" <?php if (strstr($hari, 'Minggu')) { echo "checked";}  ?> > Minggu
+                                    <input type="checkbox" name="Praktek[]" value="Minggu" <?php //if (strstr($hari, 'Minggu')) { echo "checked";}  ?> > Minggu
                                   </label>
                                 </div>
                               </div>
-                            </div>
+                            </div> -->
                             
                             <?php }else{?>
                             <div class="item form-group">

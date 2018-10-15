@@ -223,11 +223,11 @@ class Admin extends CI_Controller {
 			$array_praktek = $this->input->post('Praktek');
 			
 			if($tipe_admin == 'Dokter'){
-				$jadwal_praktek = implode(",", $array_praktek);
+				//$jadwal_praktek = implode(",", $array_praktek);
 				$data = array(
 					'spesialis' => $this->input->post('input_spesialis'),
 					'no_sip' => $this->input->post('input_no_sip'),
-					'jadwal_praktek' => $jadwal_praktek,
+					//'jadwal_praktek' => $jadwal_praktek,
 				);
 				$this->UserModel->update($user_id,$data);
 				echo '<body>';

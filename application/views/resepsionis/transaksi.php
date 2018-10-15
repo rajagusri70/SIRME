@@ -69,12 +69,12 @@
                       <td>Tanggal Transaksi</td>
                       <td>&nbsp;:&nbsp;</td>
                       <td><?php echo $trx->tanggal_transaksi ?></td>
-                    </tr>
+                    </tr><!-- 
                     <tr>
                       <td>Status Transaksi</td>
                       <td>&nbsp;:&nbsp;</td>
-                      <td><?php echo $trx->status ?> &nbsp;<a style="cursor:pointer" onclick="selesai()" title="Lunaskan" class="fa fa-check-square-o"></a></td> 
-                    </tr>
+                      <td><?php //echo $trx->status ?> &nbsp;<a style="cursor:pointer" onclick="selesai()" title="Lunaskan" class="fa fa-check-square-o"></a></td> 
+                    </tr> -->
                   <?php } ?>
                   </table>
                 </br></br>

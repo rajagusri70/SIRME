@@ -107,8 +107,8 @@
                   <ul class="nav child_menu" style="display: none">
                     <li><a href="<?php echo site_url('admin/user') ?>" >Daftar User</a>
                     </li>
-                    <li><a href="<?php echo site_url('admin/jadwal') ?>" > Atur Jadwal Dokter</a>
-                    </li>
+                    <!-- <li><a href="<?php //echo site_url('admin/jadwal') ?>" > Atur Jadwal Dokter</a>
+                    </li> -->
                   </ul>
                 </li>
                 <li><a><i class="fa fa-info-circle"></i> Manajemen Info <span class="fa fa-chevron-down"></span></a>

@@ -130,6 +130,13 @@
       })
       .then((simpan) => {
         if (simpan) {
+          swal({
+              title: "Mohon Tunggu!",
+              text: "Data sedang disimpan. Mohon tunggu ...",
+              icon: "warning",
+              button: false,
+              closeOnClickOutside: false,
+            });
           $.ajax({
           url: "<?php echo base_url().'/fhir/getData' ?>",
           type: 'POST',

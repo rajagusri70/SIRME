@@ -22,4 +22,9 @@ class ObservationModel extends CI_Model{
 		$this->db->delete('tb_observation',$where);
 	}
 	
+	public function search($like){
+		$this->db->select('id');
+		$this->db->where($like);
+   		return $this->db->get('tb_observation');
+	}
 }

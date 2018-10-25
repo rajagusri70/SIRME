@@ -17,13 +17,10 @@ class Check_Up extends CI_Controller {
 		$this->load->model('RawatModel');
 		$this->load->model('ObatModel');
 		$this->load->model('ResepModel');
-		$this->load->model('PeriksaModel');
 		$this->load->model('TransaksiModel');
 		$this->load->model('PoliklinikModel');
 		$this->load->model('ItemTransaksiModel');
 		$this->load->model('ItemResepModel');
-		$this->load->model('RM1AModel');
-		$this->load->model('RM1BModel');
 		$this->load->model('RiwayatPenyakitModel');
 		$this->load->model('RiwayatAlergiModel');
 		$this->load->model('KeluhanModel');
@@ -31,7 +28,6 @@ class Check_Up extends CI_Controller {
 		$this->load->model('DiagnosisModel');
 		$this->load->model('PenatalaksanaanModel');
 		$this->load->model('TindakanModel');
-		$this->load->model('RiwayatHamilModel');
 		$this->load->model('ObservationModel');
 		$this->load->library('pdf');
 

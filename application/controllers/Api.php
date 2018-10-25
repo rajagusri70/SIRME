@@ -341,10 +341,62 @@ class Api extends REST_Controller {
   public function observation_get($id = NULL){
       // If the id parameter doesn't exist return all the users
     if ($id == NULL){
-      $this->response([
+      $no_pasien = $_GET['pasien'];
+      if($no_pasien == NULL){
+        $this->response([
               'status' => FALSE,
               'message' => 'User could not be found'
           ], REST_Controller::HTTP_BAD_REQUEST);
+      }else{
+        $data = $this->ObservationModel->search(array('no_pasien' => $no_pasien))->result_array();
+        // foreach ($data as $data) {
+        //   // $entry = [
+        //   //   'resourceType' => 'Observation',
+        //   //   'id' => $data->id,
+        //   //   'category' => [
+        //   //     [
+        //   //       'coding' => [
+        //   //         [
+        //   //           'code' => 'vital-sign',
+        //   //           'display' => 'Vital Sign'
+        //   //         ]
+        //   //       ]
+        //   //     ]
+        //   //   ],
+        //   //   'code' => [
+        //   //     'text' => $data->tipe_pemeriksaan
+        //   //   ],
+        //   //   'subject' => [
+        //   //     'reference' => 'Patient/'.$data->no_pasien
+        //   //   ],
+        //   //   'context' => [
+        //   //     'reference' => 'Encounter/'.$data->no_rawat_jalan
+        //   //   ],
+        //   //   'effectiveDateTime' => $data->tanggal.'T'.$data->jam,
+        //   //   'performer' => [
+        //   //     [
+        //   //       'reference' => 'Practitioner/'.$data->no_id_praktisi
+        //   //     ]
+        //   //   ],
+        //   //   'valueQuantity' => [
+        //   //     'value' => $data->hasil,
+        //   //     'unit' => $data->unit
+        //   //   ]
+        //   // ]
+        // }
+        
+        $bundle = [
+          'resourceType' => 'Bundle',
+          'id' => uniqid(),
+          'type' => 'searchset',
+          'entry' => 
+            $data
+          
+        ];
+
+        $this->response($bundle, REST_Controller::HTTP_OK);
+        //echo "ID Provied Well educated";
+      }
     }else{
       $data = $this->ObservationModel->viewObservation(array('id' => $id));
       foreach ($data as $data) {

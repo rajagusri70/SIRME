@@ -21,6 +21,8 @@ class rekam_medis extends CI_Controller {
 		$this->load->model('PemeriksaanModel');
 		$this->load->model('DiagnosisModel');
 		$this->load->model('TindakanModel');
+		$this->load->model('UrlModel');
+		$this->load->model('ImagingModel');
 
 		date_default_timezone_set("Asia/Jakarta");
  
@@ -39,6 +41,7 @@ class rekam_medis extends CI_Controller {
 		$data['encounter'] = $this->RawatModel->viewWhere(array('no_pasien' => $no_pasien, ));
 		$data['observation'] = $this->ObservationModel->viewObservation(array('no_pasien' => $no_pasien, ));
 		$data['condition'] = $this->DiagnosisModel->view(array('no_pasien' => $no_pasien, ));
+		$data['imagingstudy'] = $this->ImagingModel->view(array('no_pasien' => $no_pasien, ));
 		$data['pasien_terdaftar'] = $this->PasienModel->viewPasien('no_pasien',$no_pasien);
 		$data['diagnosis'] = $this->DiagnosisModel->view(array('no_pasien' => $no_pasien, ));
 		$data['data_rawat'] = $this->RawatModel->viewWhere(array('no_pasien' => $no_pasien, ));
@@ -46,6 +49,8 @@ class rekam_medis extends CI_Controller {
 		$data['riwayat_alergi'] = $this->RiwayatAlergiModel->viewRiwayat(array('no_pasien' => $no_pasien, ));
 		$where = array('pasien.no_pasien' => $no_pasien, );
 		$data['resep_obat'] = $this->ItemResepModel->viewAll($where);
+		$data['server'] = $this->UrlModel->view();
+		$data['no_pasien'] = $no_pasien;
 		$this->load->view('pasien/profile_pasien',$data);
 	}
 

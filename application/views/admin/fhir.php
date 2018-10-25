@@ -46,40 +46,23 @@
     }
   </style>
   
+  
 
 
   <script src="<?php echo base_url(); ?>/assets/js/jquery.min.js"></script>
-
-  <!--[if lt IE 9]>
-        <script src="../assets/js/ie8-responsive-file-warning.js"></script>
-        <![endif]-->
-
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
 
 </head>
 
 
 <body class="nav-md">
-
   <div class="container body">
-
-
     <div class="main_container">
-
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
-
           <div class="navbar nav_title" style="border: 0;">
             <a href="<?php echo base_url() ?>" class="site_title"><i class="fa fa-user-md"></i> <span>SIRME</span></a>
           </div>
           <div class="clearfix"></div>
-
-
-          <!-- menu prile quick info -->
           <div class="profile">
             <div class="profile_pic">
               <?php foreach ($users as $user) { ?>
@@ -102,20 +85,23 @@
                 echo $u->tipe_admin;
               } ?></h3>
               <ul class="nav side-menu">
-                
                 <li><a><i class="fa fa-edit"></i> Manajemen User <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo site_url('admin/user') ?>" >Daftar User</a>
+                    <li><a href="<?php echo site_url('admin/user') ?>" > Daftar User</a>
                     </li>
-                    <!-- <li><a href="<?php //echo site_url('admin/jadwal') ?>" > Atur Jadwal Dokter</a>
-                    </li> -->
                   </ul>
                 </li>
                 <li><a><i class="fa fa-info-circle"></i> Manajemen Info <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo $_SERVER['REQUEST_URI']; ?>" >Pasien</a>
+                    <li><a href="<?php echo site_url('admin/pasien') ?>" >Pasien</a>
                     </li>
                     <li><a href="<?php echo site_url('admin/obat') ?>" >Informasi Obat</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a><i class="fa fa-fire"></i> Manajemen FHIR <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu" style="display: none">
+                    <li><a href="<?php echo $_SERVER['REQUEST_URI']; ?>" >FHIR</a>
                     </li>
                   </ul>
                 </li>
@@ -169,7 +155,7 @@
           <div class="page-title">
             <div class="title_left">
               <h3>
-                Manajemen User
+                Manajemen Server
               </h3>
             </div>
 
@@ -183,7 +169,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Daftar User & Jabatan</h2>
+                  <h2>Daftar Server</h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
 
@@ -198,46 +184,86 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                  
+                  <a class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-plus"></i> <b>Tambah</b></a>
                   <!-- Modal --> 
+                  <div class="modal fade bs-example-modal-lg" id="modal_tambah" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                          </button>
+                          <h4 class="modal-title" id="myModalLabel"><b>Tambah Server</b></h4>
+                        </div>
+                        <div class="modal-body">
+                          <!-- <h4>Text in a modal</h4> -->
+                          <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                              <div class="x_panel">
+                                <div class="x_title">
+                                  <h2>Data Server</h2>
+                                  <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content" >
+                                  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="" method="" enctype="multipart/form-data" >
+                                    <div class="item form-group">
+                                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Nama <span class="required">*</span>
+                                      </label>
+                                      <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" name="input_nama_server" id="nama" required="required" class="normal-form-long">
+                                      </div>
+                                    </div>
+                                    <div class="item form-group">
+                                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="url">URL <span class="required">*</span>
+                                      </label>
+                                      <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" name="input_url" id="url" required="required" class="normal-form-long">
+                                      </div>
+                                    </div>
+                                    <div class="item form-group">
+                                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name"> <span class="required"></span>
+                                      </label>
+                                      <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <small><b>contoh URL : http://rumahsakit.com/fhir-api</b></small>
+                                      </div>
+                                    </div>
+                                  
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-primary" onclick="tambahServer()" ><i class="fa fa-edit"></i> Simpan</button>
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <p>Tabel dibawah ini merupakan daftar pasien terdaftar di rumah sakit
+                  <p>
                   </p>
                   <table id="datatable" class="table table-striped table-bordered">
                     <thead>
                       <tr>
-                        <th>No Pasien.</th>
-                        <th>Nama</th>
-                        <th>Jns. Kelamin</th>
-                        <th>Tgl. Lahir</th>
+                        <th>No.</th>
+                        <th>Nama Server RS</th>
+                        <th>URL</th>
                         <th align="center">Aksi</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <?php $n = 1;
-                      foreach ($pasien as $pa) {?>
-                        <tr>
-                          <td style="vertical-align: middle;" align="center"><?php echo $pa->no_pasien; ?></td>
-                          <td style="vertical-align: middle;"><?php echo $pa->nama; ?></td>
-                          <td style="vertical-align: middle;"><?php echo $pa->jenis_kelamin; ?></td>
-                          <td style="vertical-align: middle;"><?php echo $pa->tanggal_lahir; ?></td>
-                          <td style="vertical-align: middle;" align="center"><button type="button" class="btn btn-danger" onclick="hapus(1,<?php echo $pa->no_pasien; ?>)"><i class="fa fa-remove"></i> Hapus</button>&nbsp;<button type="button" class="btn btn-primary" onclick="buka_popup(<?php echo $pa->no_pasien; ?>)" ><i class="fa fa-edit"></i> Edit</button></td>
-                        </tr>
-                      <?php } ?>
+                    <tbody id="show_data">
+                      
                     </tbody>
                   </table>
                   <script type="text/javascript">
                     function buka_popup(user_id){
-                      resepWindow = window.open('<?php echo base_url()?>admin/pasien_info/'+user_id,'', 'width=920, height=720, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
+                      resepWindow = window.open('<?php echo base_url()?>admin/profile/'+user_id,'', 'width=920, height=720, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
                     }
                   </script>
                 </div>
               </div>
             </div>
           </div>
-
           <div class="row">
-            
           </div>
         </div>
 
@@ -275,21 +301,122 @@
   <script src="<?php echo base_url(); ?>/assets/js/custom.js"></script>
   <!-- form validation -->
   <script src="<?php echo base_url(); ?>/assets/js/validator/validator.js"></script>
-  <script src="<?php echo base_url(); ?>/assets/js/datepicker/bootstrap-datepicker.min.js"></script>
-  <script src="<?php echo base_url(); ?>/assets/js/datepicker/locales/bootstrap-datepicker.id.min.js">
-  </script>
   <script src="<?php echo base_url(); ?>/assets/js/datatables/jquery.dataTables.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/js/datatables/dataTables.bootstrap.js"></script>
   <script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/notify/pnotify.core.js"></script>
   <script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/notify/pnotify.buttons.js"></script>
   <script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/notify/pnotify.nonblock.js"></script>
   <script src="<?php echo base_url(); ?>/assets/js/sweetalert.min.js"></script>
-  <script type="text/javascript">
-      $(document).ready(function() {
-        $('#datatable').dataTable();
-      });
-  </script>
   
+  <script type="text/javascript">
+    $(document).ready(function() {
+      viewFhir();
+      $('#datatable').dataTable();
+    });
+
+    function dataTable(){
+      $('#datatable').dataTable().fnDestroy();
+      $('#datatable').dataTable();
+    }
+
+    function viewFhir(){
+        $.ajax({
+          type  : 'ajax',
+          url   : '<?php echo base_url()?>/admin/getFhir',
+          async : false,
+          dataType : 'json',
+          success : function(data){
+            var html = '';
+            var i;
+            for(i=0; i<data.length; i++){
+              var num = i+1;
+              html += '<tr>'+
+                      '<td align="center" style="vertical-align:middle" >'+num+'</td>'+
+                      '<td style="vertical-align:middle" >'+data[i].nama+'</td>'+
+                      '<td style="vertical-align:middle" >'+data[i].url+'</td>'+
+                      '<td align="center" style="vertical-align:middle" >'+
+                        '<button type="button" class="btn btn-danger" onclick="hapus(2,'+data[i].pk+')"><i class="fa fa-remove"></i> Hapus</button>'+
+                      '</td>'+
+                      '</tr>';
+            }
+            $('#show_data').html(html);
+          }
+        });
+      }
+
+    function tambahServer(){
+      var nama_value = $('#nama').val();
+      var url_value = $("#url").val();
+      
+        $.ajax({
+          url: "<?php echo base_url().'/admin/tambahServer' ?>",
+          type: 'POST',
+          data: {nama: nama_value, url: url_value},
+          dataType: "JSON",
+          success: function(data) {
+            $("#nama").val('');
+            $("#url").val('');
+            swal({
+              title: "Berhasil",
+              text: "Data berhasil disimpan",
+              icon: "success",
+              button: "Ok!",
+            });
+            $('#modal_tambah').modal('hide');
+            $('#datatable').dataTable().fnDestroy();
+            viewFhir();
+            $('#datatable').dataTable();
+          },
+          error: function(data) {
+            new PNotify({
+              title: 'Gagal Menyimpan Data!',
+              text: 'Terjadi gagal saat menyimpan data. Dikarenakan error di server atau database',
+              type: 'error'
+            });
+          }
+        });
+      }
+
+    function hapus(jenis,item_id){
+    var item_id_value = item_id;
+    var jenis_value = jenis;
+    swal({
+        title: "Hapus Data.?",
+        text: "Data akan dihapus dari database. Lanjutkan?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((simpan) => {
+        if (simpan) {
+          $.ajax({
+            url: "<?php echo base_url().'admin/hapus' ?>",
+            type: 'POST',
+            data: {jenis: jenis_value, item_id: item_id_value},
+            dataType: "JSON",
+            success: function(data) {
+              swal({
+                title: "Data Berhasil Dihapus.!",
+                text: "Data Telah berhasil dihapus dari Database",
+                icon: "success",
+                buttons: {
+                  catch: {
+                    text: "Oke",
+                    value: "catch",
+                  },
+                },
+              });
+              $('#datatable').dataTable().fnDestroy();
+              viewFhir();
+              $('#datatable').dataTable();
+            }
+          });
+        }else{
+          
+        }
+      });
+  }
+  </script>
   
 </body>
 

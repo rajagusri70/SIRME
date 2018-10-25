@@ -20,6 +20,7 @@ class Admin extends CI_Controller {
 		$this->load->model('JadwalPraktekModel');
 		$this->load->model('PasienModel');
 		$this->load->model('ObatModel');
+		$this->load->model('UrlModel');
  
 	}
 
@@ -88,8 +89,52 @@ class Admin extends CI_Controller {
 		if($this->input->post('tombol_submit')){
 			$update = array(
 				'no_ktp' => $this->input->post('input_no_ktp'), 
+				'nama' => $this->input->post('input_nama'),
+				'no_ktp' => $this->input->post('input_no_ktp'),
+				'tanggal_lahir' => $this->input->post('input_tanggal_lahir'),
+				'tempat_lahir' => $this->input->post('input_tempat_lahir'),
+				'jenis_kelamin' => $this->input->post('input_jenis_kelamin'),
+				'alamat' => $this->input->post('input_alamat'),
+				'kecamatan' => $this->input->post('input_kecamatan'),
+				'kota' => $this->input->post('input_kota'),
+				'status_pernikahan' => $this->input->post('input_status_kawin'),
+				'no_telpon' => $this->input->post('input_no_hp'),
+				'email' => $this->input->post('input_email'),
+				'nama_orangtua' => $this->input->post('input_nama_orangtua'),
+				'no_telpon_orangtua' => $this->input->post('input_no_telpon_orangtua'),
+				'hubungan' => $this->input->post('input_hubungan'),
+				'nama_kerabat' => $this->input->post('input_nama_kerabat'),
+				'no_telpon_kerabat' => $this->input->post('input_no_telpon_kerabat'),
 			);
 			$this->PasienModel->update($no_pasien,$update);
+			echo '<body>';
+			echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
+			echo '<script type="text/javascript" >';
+			echo 'swal({';
+			echo '  title: "Data berhasil diganti.!!!",';
+			echo '  text: "Data  telah berhasil diganti dengan yang baru",';
+			echo '	icon: "success",';
+			echo '  buttons: {';
+			echo '    catch: {';
+			echo '      text: "Oke",';
+			echo '      value: "catch",';
+			echo '    },';
+			echo '  },';
+			echo '})';
+			echo '.then((value) => {';
+			echo '  switch (value) {';				 
+			echo '    case "defeat":';
+			echo '      swal("Pikachu fainted! You gained 500 XP!");';
+			echo '      break;';				 
+			echo '    case "catch":';
+			echo '      window.location = "'.base_url().'admin/pasien_info/'.$no_pasien.'";';
+			echo '      break;';				 
+			echo '    default:';
+			echo '      window.location = "'.base_url().'admin/pasien_info/'.$no_pasien.'";';
+			echo '  }';
+			echo '});';
+			echo '</script>';
+			echo  '</body>';
 		}
 	}
 
@@ -117,6 +162,12 @@ class Admin extends CI_Controller {
 				'user_id' => $item_id, 
 			);
 			$this->UserModel->hapus($where);
+			echo json_encode(array('status' => true));
+		}elseif ($jenis == '2'){
+			$where = array(
+				'pk' => $item_id, 
+			);
+			$this->UrlModel->delete($where);
 			echo json_encode(array('status' => true));
 		}
 	}
@@ -417,9 +468,27 @@ class Admin extends CI_Controller {
 		}
 	}
 
+	public function fhir(){
+		$data['users'] = $this->UserModel->tampilkan();
+		$this->load->view('admin/fhir',$data);
+	}
+
+	public function getFhir(){
+		$data = $this->UrlModel->view();
+		echo json_encode($data);
+	}
+
+	public function tambahServer(){
+		$data = array(
+			'nama' => $this->input->post('nama'),
+			'url' =>  $this->input->post('url')
+		);
+		$this->UrlModel->insert($data);
+		echo json_encode(array('status' => true));
+	}
+
 	public function logout(){
 		$this->session->sess_destroy();
 		redirect(base_url('login'));
 	}
-
 }

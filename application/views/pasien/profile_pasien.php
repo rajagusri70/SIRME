@@ -21,8 +21,22 @@
   <link href="<?php echo base_url(); ?>/assets/css/custom.css" rel="stylesheet">
   <link href="<?php echo base_url(); ?>/assets/css/icheck/flat/green.css" rel="stylesheet">
 
+  <style type="text/css">
+    .float{
+      position:fixed;
+      bottom:40px;
+      right:40px;
+      color:#FFF;
+      text-align:center;
+      box-shadow: 2px 2px 3px #999;
+    }
 
-  <!-- <script src="<?php //echo base_url(); ?>/assets/js/jquery.min.js"></script> -->
+    .my-float{
+      margin-top:22px;
+    }
+  </style>
+
+  <script src="<?php echo base_url(); ?>/assets/js/jquery.min.js"></script>
   <!-- <script src="https://clinicaltables.nlm.nih.gov/autocomplete-lhc-versions/15.1.1/autocomplete-lhc_jQuery.min.js"></script> -->
   <link href="<?php echo base_url(); ?>/assets/js/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
   <link href="<?php echo base_url(); ?>/assets/js/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -171,6 +185,8 @@
                               </li>
                               <li><a href="#condition" data-toggle="tab">Condition</a>
                               </li>
+                              <li><a href="#imagingstudy" data-toggle="tab">ImagingStudy</a>
+                              </li>
                               <div class="ln_solid"></div>
                               
                             </ul>
@@ -199,7 +215,7 @@
                     <div class="" role="tabpanel" data-example-id="togglable-tabs">
                       <div id="myTabContent" class="tab-content">
                         <div role="tabpanel" class="tab-pane fade" id="patient" aria-labelledby="patient-tab">
-                          <h2>Patient</h2>
+                          <h2>Patient</h2><div></div>
                           <div class="ln_solid"></div>
                           <style type="text/css">
                             #form td {
@@ -238,7 +254,7 @@
                                 <td><?php echo $patient->nama ?></td>
                                 <td>
                                   <?php 
-                                  if($patient->pid == "Laki-laki"){
+                                  if($patient->jenis_kelamin == "Laki-laki"){
                                     $gender = 'male';
                                   }else{
                                     $gender = 'female';
@@ -333,25 +349,109 @@
                             </tbody>
                           </table>   
                         </div>
+                        <div role="tabpanel" class="tab-pane fade" id="imagingstudy" aria-labelledby="encounter-tab">
+                          <h2>ImagingStudy</h2>
+                          <div class="ln_solid"></div>
+                          <table style="width: 100%" id="" class="table table-striped table-bordered">
+                            <thead>
+                              <tr>
+                                <th align="center">Desc</th>
+                                <th align="center">Modality</th>
+                                <th align="center">Time</th>
+                                <th align="center">API</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php foreach ($imagingstudy as $is) {?>
+                                <tr>
+                                  <td><?php echo $is->deskripsi ?></td>
+                                  <td><?php echo $is->modality ?></td>
+                                  <td><?php echo $is->waktu ?></td>
+                                  <td><a href="<?php echo base_url().'api/Condition/'.$is->pk; ?>" target="_blank">Link</a></td>
+                                </tr>
+                              <?php } ?> 
+                            </tbody>
+                          </table>
+                          <a  class="btn btn-success float" data-toggle="modal" data-target=".modal_imagingstudy"><i class="fa fa-plus"></i></a>
+                          <div class="modal fade modal_imagingstudy" id="modal_imagingstudy" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                                  </button>
+                                  <h4 class="modal-title" id="myModalLabel"><b>ImagingStudy</b></h4>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                      <div class="x_panel">
+                                        <div class="x_title">
+                                          <h2>Retrieve Resource</h2>
+                                          <div class="clearfix"></div>
+                                        </div>
+                                        <div class="x_content" >
+                                          <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" >
+                                            <div class="item form-group">
+                                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Server <span class="required">*</span>
+                                              </label>
+                                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <select class="normal-form-long" id="server" name="input_server">
+                                                  <?php foreach ($server as $server) { ?>
+                                                  <option value="<?php echo $server->pk ?>"><?php echo $server->nama; ?></option>
+                                                  <?php } ?>
+                                                </select>
+                                              </div>
+                                            </div>
+                                            <div class="item form-group">
+                                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="url">Parameters<span class="required">*</span>
+                                              </label>
+                                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <select class="normal-form" name="input_parameter" id="param">
+                                                  <option value="patient">Patient</option>
+                                                  <option value="id">Resource ID</option>
+                                                </select>
+                                                <input type="text" name="input_value" id="param_value" required="required" class="normal-form">
+                                              </div>
+                                            </div>
+                                            <div class="item form-group">
+                                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name"> <span class="required"></span>
+                                              </label>
+                                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <small><b>contoh URL : http://rumahsakit.com/fhir-api</b></small>
+                                              </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <a class="btn btn-primary" onclick="retrieve()" ><i class="fa fa-edit"></i> Retrieve</a>
+                                            </div>
+                                          </form>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>   
+                        </div>
 
                         <div role="tabpanel" class="tab-pane fade active in" id="demografi" aria-labelledby="demografi-tab">
-                          <h2>Data Pasien</h2>
+                          <h2>Data Demografi Pasien</h2>
                           <div class="ln_solid"></div>
-                          <table id="form" style="width: 100% ">
-                            <tr>
-                              <td colspan="3" title="" ><b>DATA PASIEN</b></td>
-                            </tr>
-                            <tr>
+                          <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel">
+                      <a class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <h4 class="panel-title"><b>Data Pasien</b></h4>
+                      </a>
+                      <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                          <table id="form" style="width: 100%; ">
+                           <tr>
                               <td style="text-align: right;width: 30%" title="" >No Pasien :</td>
                               <td><b><?php echo $pt->no_pasien; ?></b></td>
                             </tr>
                             <tr>
                               <td style="text-align: right;width: 30%" title="" >Nomor KTP :</td>
                               <td><?php echo $pt->no_ktp; ?></td>
-                            </tr>
-                            <tr>
-                              <td style="text-align: right;width: 30%" title="" >Nomor KK :</td>
-                              <td><?php echo $pt->no_kk; ?></td>
                             </tr>
                             <tr>
                               <td style="text-align: right;width: 30%" title="" >Nama :</td>
@@ -378,17 +478,55 @@
                               <td><?php echo $pt->alamat; ?></td>
                             </tr>
                             <tr>
+                              <td style="text-align: right;width: 30%" title="" >Kecamatan :</td>
+                              <td><?php echo $pt->kecamatan; ?></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="" >Kota :</td>
+                              <td><?php echo $pt->kota; ?></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="" >Provinsi :</td>
+                              <td><?php echo $pt->provinsi; ?></td>
+                            </tr>
+                            <tr>
                               <td style="text-align: right;width: 30%" title="" >Status Pernikahan :</td>
                               <td><?php echo $pt->status_pernikahan; ?></td>
                             </tr>
                             <tr>
-                              <td colspan="3" title="" ><b>KONTAK PASIEN</b></td>
-                            </tr>
-                            <tr>
-                              <td style="text-align: right;width: 30%" title="" >No Kontak :</td>
+                              <td style="text-align: right;width: 30%" title="" >No. Telepon :</td>
                               <td><?php echo $pt->no_telpon; ?></td>
                             </tr>
-                          </table>           
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="" >Email :</td>
+                              <td><?php echo $pt->email; ?></td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="panel">
+                      <a class="panel-heading collapsed" role="tab" id="headingThree" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <h4 class="panel-title"><b>Hubungan Pasien</b></h4>
+                      </a>
+                      <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                        <div class="panel-body">
+                          <p><strong>Penanggungjawab</strong>
+                          </p>
+                          <table id="form" style="width: 100% ">
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="" >Nama :</td>
+                              <td><b><?php echo $pt->nama_orangtua; ?></b></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: right;width: 30%" title="" >No. Telepon :</td>
+                              <td><b><?php echo $pt->no_telpon_orangtua; ?></b></td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>           
                         </div>
 
                         <div role="tabpanel" class="tab-pane fade" id="diagnosis" aria-labelledby="diagnosis-tab">
@@ -449,6 +587,8 @@
                                 function buka_popup(id_rawat){
                                   resepWindow = window.open('<?php echo base_url()?>rekam_medis/rawat_jalan/'+id_rawat, '', 'width=820, height=720, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
                                 }
+
+                                
                               </script>
                             </tbody>
                           </table>   
@@ -546,7 +686,8 @@
     <div id="notif-group" class="tabbed_notifications"></div>
   </div>
 
-  <script src="https://clinicaltables.nlm.nih.gov/autocomplete-lhc-versions/15.1.1/autocomplete-lhc_jQuery.min.js"></script>
+  
+
   <script src="<?php echo base_url(); ?>/assets/js/bootstrap.min.js"></script>
 
   <!-- bootstrap progress js -->
@@ -573,7 +714,6 @@
   <script src="<?php echo base_url(); ?>/assets/js/datatables/dataTables.responsive.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/js/datatables/responsive.bootstrap.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/js/datatables/dataTables.scroller.min.js"></script>
-  <link href='https://clinicaltables.nlm.nih.gov/autocomplete-lhc-versions/15.1.1/autocomplete-lhc_jQueryUI.min.css' rel="stylesheet">
   
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/jquery.sweet-modal.min.css" />
   <script src="<?php echo base_url(); ?>/assets/js/jquery.sweet-modal.min.js"></script>
@@ -584,37 +724,14 @@
   <!-- range slider -->
   <script src="<?php echo base_url(); ?>/assets/js/ion_range/ion.rangeSlider.min.js"></script>
   <script type="text/javascript">
-    function dataTable(){}
-    $(document).ready(function(){
-      $('#datatable').DataTable();
-    });
+    function retrieve(){
+      var server_value = $('#server').val();
+      var param_value = $('#param').val();
+      var value_value = $('#param_value').val();
+      var resource_value = 'ImagingStudy';
+      $('#modal_imagingstudy').modal('hide');
+      popup = window.open('<?php echo base_url()?>fhir/result/'+server_value+'/'+resource_value+'/'+param_value+'/'+value_value+'?no_pasien=<?php echo $no_pasien ?>','', 'width=820, height=720, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
+    }
   </script>
-  <script type="text/javascript">
-    function dataTable(){}
-    $(document).ready(function(){
-      $('#datatable2').DataTable();
-    });
-  </script>
-  <script type="text/javascript">
-    function dataTable(){}
-    $(document).ready(function(){
-      $('#datatable3').DataTable();
-    });
-  </script>
-  <script type="text/javascript">
-    function dataTable(){}
-    $(document).ready(function(){
-      $('#datatable4').DataTable();
-    });
-  </script>
-  <script type="text/javascript">
-    function dataTable(){}
-    $(document).ready(function(){
-      $('#datatable5').DataTable();
-    });
-  </script>
-
-  
 </body>
-
 </html>

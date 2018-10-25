@@ -136,10 +136,10 @@
 
                     <div class="" role="tabpanel" data-example-id="togglable-tabs">
                       <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#tab_data_diri" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Data Pasien</a>
+                        <!-- <li role="presentation" class="active"><a href="#tab_data_diri" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Data Pasien</a>
                         </li>
                         <li role="presentation" class=""><a href="#hub_pasien" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Hub. Pasien</a>
-                        </li>
+                        </li> -->
                       </ul>
                       <div id="myTabContent" class="tab-content">
                         <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="<?php echo base_url('admin/pasien_info/').$p->no_pasien  ?>" method="post" enctype="multipart/form-data" >
@@ -260,12 +260,13 @@
                               <label class="control-label col-md-3 col-sm-3 col-xs-12">Hub. 
                               </label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
+                                <?php $hub = $p->hubungan; ?>
                                 <select class="normal-form-long" name="input_hubungan">
-                                  <option value="Lainya">Lainya</option>
-                                  <option value="Wali">Wali</option>
-                                  <option value="Anak">Anak</option>
-                                  <option value="Saudara Kandung">Saudara Kandung</option>
-                                  <option value="Pasangan">Pasangan</option>
+                                  <option value="Lainya" <?php if($hub=='Lainya'){echo "selected";} ?> >Lainya</option>
+                                  <option value="Wali" <?php if($hub=='Wali'){echo "selected";} ?> >Wali</option>
+                                  <option value="Anak" <?php if($hub=='Anak'){echo "selected";} ?> >Anak</option>
+                                  <option value="Saudara Kandung" <?php if($hub=='Saudara Kandung'){echo "selected";} ?> >Saudara Kandung</option>
+                                  <option value="Pasangan" <?php if($hub=='Pasangan'){echo "selected";} ?> >Pasangan</option>
                                 </select>
                               </div>
                             </div>

@@ -249,7 +249,6 @@
                                 ID : <?php echo $patient->pid ?><br>
                                 Pasien : <?php echo $patient->no_pasien ?><br>
                                 KTP : <?php echo $patient->no_ktp ?><br>
-                                KK : <?php echo $patient->no_kk ?><br>
                                 </td>
                                 <td><?php echo $patient->nama ?></td>
                                 <td>
@@ -271,7 +270,7 @@
                         <div role="tabpanel" class="tab-pane fade" id="encounter" aria-labelledby="encounter-tab">
                           <h2>Encounter</h2>
                           <div class="ln_solid"></div>
-                          <table style="width: 100%" id="" class="table table-striped table-bordered">
+                          <table style="width: 100%" id="datatable_encounter" class="table table-striped table-bordered">
                             <thead>
                               <tr>
                                 <th align="center">Identifier</th>
@@ -300,7 +299,7 @@
                         <div role="tabpanel" class="tab-pane fade" id="observation" aria-labelledby="observation-tab">
                           <h2>Observation</h2>
                           <div class="ln_solid"></div>
-                          <table style="width: 100%" id="" class="table table-striped table-bordered">
+                          <table style="width: 100%" id="datatable_observation" class="table table-striped table-bordered">
                             <thead>
                               <tr>
                                 <th align="center">Name</th>
@@ -326,7 +325,7 @@
                         <div role="tabpanel" class="tab-pane fade" id="condition" aria-labelledby="condition-tab">
                           <h2>Condition</h2>
                           <div class="ln_solid"></div>
-                          <table style="width: 100%" id="" class="table table-striped table-bordered">
+                          <table style="width: 100%" id="datatable_condition" class="table table-striped table-bordered">
                             <thead>
                               <tr>
                                 <th align="center">Condition</th>
@@ -352,11 +351,10 @@
                         <div role="tabpanel" class="tab-pane fade" id="imagingstudy" aria-labelledby="encounter-tab">
                           <h2>ImagingStudy</h2>
                           <div class="ln_solid"></div>
-                          <table style="width: 100%" id="" class="table table-striped table-bordered">
+                          <table style="width: 100%" id="datatable_is" class="table table-striped table-bordered">
                             <thead>
                               <tr>
                                 <th align="center">Desc</th>
-                                <th align="center">Modality</th>
                                 <th align="center">Time</th>
                                 <th align="center">API</th>
                               </tr>
@@ -365,7 +363,6 @@
                               <?php foreach ($imagingstudy as $is) {?>
                                 <tr>
                                   <td><?php echo $is->deskripsi ?></td>
-                                  <td><?php echo $is->modality ?></td>
                                   <td><?php echo $is->waktu ?></td>
                                   <td><a href="<?php echo base_url().'api/Condition/'.$is->pk; ?>" target="_blank">Link</a></td>
                                 </tr>
@@ -438,101 +435,105 @@
                           <h2>Data Demografi Pasien</h2>
                           <div class="ln_solid"></div>
                           <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
-                    <div class="panel">
-                      <a class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        <h4 class="panel-title"><b>Data Pasien</b></h4>
-                      </a>
-                      <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                        <div class="panel-body">
-                          <table id="form" style="width: 100%; ">
-                           <tr>
-                              <td style="text-align: right;width: 30%" title="" >No Pasien :</td>
-                              <td><b><?php echo $pt->no_pasien; ?></b></td>
-                            </tr>
-                            <tr>
-                              <td style="text-align: right;width: 30%" title="" >Nomor KTP :</td>
-                              <td><?php echo $pt->no_ktp; ?></td>
-                            </tr>
-                            <tr>
-                              <td style="text-align: right;width: 30%" title="" >Nama :</td>
-                              <td><?php echo $pt->nama; ?></td>
-                            </tr>
-                            <tr>
-                              <td style="text-align: right;width: 30%" title="" >Jenis Kelamin :</td>
-                              <td><?php echo $pt->jenis_kelamin; ?></td>
-                            </tr>
-                            <tr>
-                              <td style="text-align: right;width: 30%" title="" >Tanggal Lahir :</td>
-                              <td><?php echo $pt->tanggal_lahir; ?></td>
-                            </tr>
-                            <tr>
-                              <td style="text-align: right;width: 30%" title="" >Tempat Lahir :</td>
-                              <td><?php echo $pt->tempat_lahir; ?></td>
-                            </tr>
-                            <tr>
-                              <td style="text-align: right;width: 30%" title="" >Umur :</td>
-                              <td><?php echo $pt->umur; ?></td>
-                            </tr>
-                            <tr>
-                              <td style="text-align: right;width: 30%" title="" >Alamat :</td>
-                              <td><?php echo $pt->alamat; ?></td>
-                            </tr>
-                            <tr>
-                              <td style="text-align: right;width: 30%" title="" >Kecamatan :</td>
-                              <td><?php echo $pt->kecamatan; ?></td>
-                            </tr>
-                            <tr>
-                              <td style="text-align: right;width: 30%" title="" >Kota :</td>
-                              <td><?php echo $pt->kota; ?></td>
-                            </tr>
-                            <tr>
-                              <td style="text-align: right;width: 30%" title="" >Provinsi :</td>
-                              <td><?php echo $pt->provinsi; ?></td>
-                            </tr>
-                            <tr>
-                              <td style="text-align: right;width: 30%" title="" >Status Pernikahan :</td>
-                              <td><?php echo $pt->status_pernikahan; ?></td>
-                            </tr>
-                            <tr>
-                              <td style="text-align: right;width: 30%" title="" >No. Telepon :</td>
-                              <td><?php echo $pt->no_telpon; ?></td>
-                            </tr>
-                            <tr>
-                              <td style="text-align: right;width: 30%" title="" >Email :</td>
-                              <td><?php echo $pt->email; ?></td>
-                            </tr>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="panel">
-                      <a class="panel-heading collapsed" role="tab" id="headingThree" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        <h4 class="panel-title"><b>Hubungan Pasien</b></h4>
-                      </a>
-                      <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                        <div class="panel-body">
-                          <p><strong>Penanggungjawab</strong>
-                          </p>
-                          <table id="form" style="width: 100% ">
-                            <tr>
-                              <td style="text-align: right;width: 30%" title="" >Nama :</td>
-                              <td><b><?php echo $pt->nama_orangtua; ?></b></td>
-                            </tr>
-                            <tr>
-                              <td style="text-align: right;width: 30%" title="" >No. Telepon :</td>
-                              <td><b><?php echo $pt->no_telpon_orangtua; ?></b></td>
-                            </tr>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>           
+                            <div class="panel">
+                              <a class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <h4 class="panel-title"><b>Data Pasien</b></h4>
+                              </a>
+                              <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="panel-body">
+                                  <table id="form" style="width: 100%; ">
+                                   <tr>
+                                      <td style="text-align: right;width: 30%" title="" >No Pasien :</td>
+                                      <td><b><?php echo $pt->no_pasien; ?></b></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="text-align: right;width: 30%" title="" >Nomor KTP :</td>
+                                      <td><?php echo $pt->no_ktp; ?></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="text-align: right;width: 30%" title="" >Nama :</td>
+                                      <td><?php echo $pt->nama; ?></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="text-align: right;width: 30%" title="" >Jenis Kelamin :</td>
+                                      <td><?php echo $pt->jenis_kelamin; ?></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="text-align: right;width: 30%" title="" >Tanggal Lahir :</td>
+                                      <td><?php echo $pt->tanggal_lahir; ?></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="text-align: right;width: 30%" title="" >Tempat Lahir :</td>
+                                      <td><?php echo $pt->tempat_lahir; ?></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="text-align: right;width: 30%" title="" >Umur :</td>
+                                      <td><?php echo $umur; ?></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="text-align: right;width: 30%" title="" >Alamat :</td>
+                                      <td><?php echo $pt->alamat; ?></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="text-align: right;width: 30%" title="" >Kecamatan :</td>
+                                      <td><?php echo $pt->kecamatan; ?></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="text-align: right;width: 30%" title="" >Kota :</td>
+                                      <td><?php echo $pt->kota; ?></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="text-align: right;width: 30%" title="" >Provinsi :</td>
+                                      <td><?php echo $pt->provinsi; ?></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="text-align: right;width: 30%" title="" >Status Pernikahan :</td>
+                                      <td><?php echo $pt->status_pernikahan; ?></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="text-align: right;width: 30%" title="" >No. Telepon :</td>
+                                      <td><?php echo $pt->no_telpon; ?></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="text-align: right;width: 30%" title="" >Email :</td>
+                                      <td><?php echo $pt->email; ?></td>
+                                    </tr>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="panel">
+                              <a class="panel-heading collapsed" role="tab" id="headingThree" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <h4 class="panel-title"><b>Hubungan Pasien</b></h4>
+                              </a>
+                              <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                <div class="panel-body">
+                                  <p><strong>Penanggungjawab</strong>
+                                  </p>
+                                  <table id="form" style="width: 100% ">
+                                    <tr>
+                                      <td style="text-align: right;width: 30%" title="" >Nama :</td>
+                                      <td><b><?php echo $pt->nama_penanggungjawab; ?></b></td>
+                                    </tr>
+                                     <tr>
+                                      <td style="text-align: right;width: 30%" title="" >Hub. dengan Pasien :</td>
+                                      <td><b><?php echo $pt->hubungan_penanggungjawab; ?></b></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="text-align: right;width: 30%" title="" >No. Telepon :</td>
+                                      <td><b><?php echo $pt->no_telpon_penanggungjawab; ?></b></td>
+                                    </tr>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>           
                         </div>
 
                         <div role="tabpanel" class="tab-pane fade" id="diagnosis" aria-labelledby="diagnosis-tab">
                           <h2>Data Diagnosis Pasien</h2>
                           <div class="ln_solid"></div>
-                          <table style="width: 100%" id="datatable" class="table table-striped table-bordered">
+                          <table style="width: 100%" id="datatable_diagnosis" class="table table-striped table-bordered">
                             <thead>
                               <tr>
                                 <th align="center">Kode</th>
@@ -561,7 +562,7 @@
                         <div role="tabpanel" class="tab-pane fade" id="rawat_jalan" aria-labelledby="home-tab">
                           <h2>Riwayat Rawat Jalan</h2>
                           <div class="ln_solid"></div>
-                          <table style="width: 100%" id="datatable2" class="table table-striped table-bordered">
+                          <table style="width: 100%" id="datatable_rawat_jalan" class="table table-striped table-bordered">
                             <thead>
                               <tr>
                                 <th align="center">No Rawat Jalan</th>
@@ -597,7 +598,7 @@
                         <div role="tabpanel" class="tab-pane fade" id="riwayat_alergi" aria-labelledby="home-tab">
                           <h2>Riwayat Alergi</h2>
                           <div class="ln_solid"></div>
-                          <table style="width: 100%" id="datatable3" class="table table-striped table-bordered">
+                          <table style="width: 100%" id="datatable_riwayat_alergi" class="table table-striped table-bordered">
                             <thead>
                               <tr>
                                 <th align="center">No.</th>
@@ -628,7 +629,7 @@
                         <div role="tabpanel" class="tab-pane fade" id="riwayat_obat" aria-labelledby="home-tab">
                           <h2>Riwayat Obat</h2>
                           <div class="ln_solid"></div>
-                          <table style="width: 100%" id="datatable4" class="table table-striped table-bordered">
+                          <table style="width: 100%" id="datatable_riwayat_obat" class="table table-striped table-bordered">
                             <thead>
                               <tr>
                                 <th align="center">Tanggal</th>
@@ -724,6 +725,17 @@
   <!-- range slider -->
   <script src="<?php echo base_url(); ?>/assets/js/ion_range/ion.rangeSlider.min.js"></script>
   <script type="text/javascript">
+    $(document).ready(function() {
+      $('#datatable_is').dataTable();
+      $('#datatable_condition').dataTable();
+      $('#datatable_observation').dataTable();
+      $('#datatable_encounter').dataTable();
+      $('#datatable_diagnosis').dataTable();
+      $('#datatable_rawat_jalan').dataTable();
+      $('#datatable_riwayat_alergi').dataTable();
+      $('#datatable_riwayat_obat').dataTable();
+    });
+
     function retrieve(){
       var server_value = $('#server').val();
       var param_value = $('#param').val();

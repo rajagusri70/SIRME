@@ -29,9 +29,9 @@ class ImagingModel extends CI_Model{
 
 	public function selectWhere($where){
 		$this->db->select('*');
-		$this->db->from('tb_fhir_url');
+		$this->db->from('tb_study');
 		$this->db->where($where);
-		return $this->db->get();
+		return $this->db->get()->result();
 	}
 
 	public function delete($where){

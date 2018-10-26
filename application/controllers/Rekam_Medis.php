@@ -41,7 +41,7 @@ class rekam_medis extends CI_Controller {
 		$data['encounter'] = $this->RawatModel->viewWhere(array('no_pasien' => $no_pasien, ));
 		$data['observation'] = $this->ObservationModel->viewObservation(array('no_pasien' => $no_pasien, ));
 		$data['condition'] = $this->DiagnosisModel->view(array('no_pasien' => $no_pasien, ));
-		$data['imagingstudy'] = $this->ImagingModel->view(array('no_pasien' => $no_pasien, ));
+		$data['imagingstudy'] = $this->ImagingModel->selectWhere(array('no_pasien' => $no_pasien, ));
 		$data['pasien_terdaftar'] = $this->PasienModel->viewPasien('no_pasien',$no_pasien);
 		$data['diagnosis'] = $this->DiagnosisModel->view(array('no_pasien' => $no_pasien, ));
 		$data['data_rawat'] = $this->RawatModel->viewWhere(array('no_pasien' => $no_pasien, ));
@@ -51,6 +51,14 @@ class rekam_medis extends CI_Controller {
 		$data['resep_obat'] = $this->ItemResepModel->viewAll($where);
 		$data['server'] = $this->UrlModel->view();
 		$data['no_pasien'] = $no_pasien;
+		$pasien = $this->PasienModel->viewPasien('no_pasien',$no_pasien);
+		foreach ($pasien as $p) {
+			$tanggal_lahir  = $p->tanggal_lahir;
+		}
+		$tahun = date("Y");
+		$tahun_lahir = substr($tanggal_lahir, -4);
+		$umur = $tahun - $tahun_lahir;
+		$data['umur'] = $umur;
 		$this->load->view('pasien/profile_pasien',$data);
 	}
 

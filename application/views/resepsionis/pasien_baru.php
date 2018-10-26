@@ -84,7 +84,7 @@
             <div class="profile_info">
               <span>Welcome,</span>
               <?php foreach ($users as $user) { ?>
-                <h2>Dr. <?php echo $user->nama ?></h2>
+                <h2><?php echo $user->nama ?></h2>
               <?php } ?>
             </div>
           </div>
@@ -205,6 +205,7 @@
                             <input type="text" name="input_nama" id="nama" required="required" class="normal-form-long"  >
                           </div>
                         </div>
+
                         <div class="item form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Tgl. Lahir<span class="required">*</span>
                           </label>
@@ -220,7 +221,7 @@
                           </div>
                         </div>
                         <div class="item form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Jenis Kelamin</label>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Jenis Kelamin<span class="required">*</span></label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
                             <div id="gender" class="btn-group" data-toggle="buttons">
                               <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
@@ -233,35 +234,15 @@
                           </div>
                         </div>
                         <div class="item form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Alamat<span class="required">*</span>
-                          </label>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Status Kawin<span class="required">*</span></label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="birthday" name="input_alamat" class="normal-form-long" required="required" type="text">
-                          </div>
-                        </div>
-                        <div class="item form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Status Kawin
-                          </label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <select class="normal-form-long" name="input_status_pernikahan">
+                            <select class="normal-form-long" name="input_status_pernikahan" required="required" >
                               <option value="Belum Kawin">Belum Kawin</option>
                               <option value="Sudah Nikah">Kawin</option>
                             </select>
                           </div>
                         </div>
-                        <div class="item form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="foto">Foto<span class="required">*</span>
-                          </label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="file" id="foto" class="btn btn-primary" name="input_foto" class="">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-xs-12">
-                    <div class="x_panel">
-                      <div class="x_content">
+                        <br><br>
                         <label>Identitas</label>
                         <span class="section"></span>
                         <div class="item form-group">
@@ -271,91 +252,22 @@
                             <input type="number" id="nomor_ktp" name="input_no_ktp" required="required" class="normal-form-long" onchange="cekKtp()" >
                           </div>
                         </div>
-                        <div class="item form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Nomor KK<span></span>
-                          </label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="number" name="input_no_kk" id="input_no_kk" class="normal-form-long">
-                          </div>
-                        </div>
-                        <label>Kontak</label>
-                        <span class="section"></span>
-                        <div class="item form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12">No. Telepon<span class="required">*</span>
-                          </label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="input_no_telpon" name="input_no_telpon" class="normal-form-long" required="required" type="number">
-                          </div>
-                        </div>
-                        <div class="item form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Email<span class="required">*</span>
-                          </label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="email" name="input_email" class="normal-form-long" required="required" type="email">
-                          </div>
-                        </div>
 
                       </div>
                     </div>
                   </div>
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="tab_data_tambahan" aria-labelledby="home-tab">
                   <div class="col-md-6 col-xs-12">
                     <div class="x_panel">
                       <div class="x_content">
-                        <label>Orangtua/Wali</label>
+                        <label>Alamat</label>
                         <span class="section"></span>
                         <div class="item form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama <span class="required">*</span>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Alamat<span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="birthday" name="input_nama_orangtua" class="normal-form-long" required="required" type="text">
+                            <input id="birthday" name="input_alamat" class="normal-form-long" required="required" type="text">
                           </div>
                         </div>
-                        <div class="item form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12">No. Telepon<span class="required">*</span>
-                          </label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="input_no_telpon_ortu" name="input_no_telpon_orangtua" class="normal-form-long" required="required" type="number">
-                          </div>
-                        </div>
-                        <label>Kerabat Lainya</label>
-                        <span class="section"></span>
-                        <div class="item form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Hub. Dg. Pasien
-                          </label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <select class="normal-form-long" name="input_hubungan">
-                              <option value="Lainya">Lainya</option>
-                              <option value="Wali">Wali</option>
-                              <option value="Anak">Anak</option>
-                              <option value="Saudara Kandung">Saudara Kandung</option>
-                              <option value="Pasangan">Pasangan</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="item form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama <span class="required">*</span>
-                          </label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="birthday" name="input_nama_kerabat" class="normal-form-long" required="required" type="text">
-                          </div>
-                        </div>
-                        <div class="item form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12">No. Telepon<span class="required">*</span>
-                          </label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="input_no_telpon_ortu" name="input_no_telpon_kerabat" class="normal-form-long" required="required" type="number">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-xs-12">
-                    <div class="x_panel">
-                      <div class="x_content">
-                        <label>Detil Alamat</label>
-                        <span class="section"></span>
                         <div class="item form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12">Kecamatan<span class="required">*</span>
                           </label>
@@ -375,6 +287,105 @@
                           </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
                             <input id="birthday" name="input_provinsi" class="normal-form-long" required="required" type="text">
+                          </div>
+                        </div>
+                        <label>Kontak</label>
+                        <span class="section"></span>
+                        <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12">No. Telepon<span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="input_no_telpon" name="input_no_telpon" class="normal-form-long" required="required" type="number">
+                          </div>
+                        </div>
+                        <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Email
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="email" name="input_email" class="normal-form-long" type="email">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="tab_data_tambahan" aria-labelledby="home-tab">
+                  <div class="col-md-6 col-xs-12">
+                    <div class="x_panel">
+                      <div class="x_content">
+                        <label>Penanggungjawab</label>
+                        <span class="section"></span>
+                        <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama <span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="birthday" name="input_nama_penanggungjawab" class="normal-form-long" required="required" type="text">
+                          </div>
+                        </div>
+                        <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Hub. Dg. Pasien
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select class="normal-form-long" name="input_hubungan_penanggungjawab">
+                              <option value="Lainya">Lainya</option>
+                              <option value="Orangtua">Orangtua</option>
+                              <option value="Wali">Wali</option>
+                              <option value="Anak">Anak</option>
+                              <option value="Saudara Kandung">Saudara Kandung</option>
+                              <option value="Pasangan">Pasangan</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12">No. Telepon
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="input_no_telpon_ortu" name="input_no_telpon_penanggungjawab" class="normal-form-long" type="number">
+                          </div>
+                        </div>
+                        <label>Kerabat Lainya</label>
+                        <span class="section"></span>
+                        <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama 
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="birthday" name="input_nama_kerabat" class="normal-form-long"  type="text">
+                          </div>
+                        </div>
+                        <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Hub. Dg. Pasien
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select class="normal-form-long" name="input_hubungan">
+                              <option value="Lainya">Lainya</option>
+                              <option value="Orangtua">Orangtua</option>
+                              <option value="Wali">Wali</option>
+                              <option value="Anak">Anak</option>
+                              <option value="Saudara Kandung">Saudara Kandung</option>
+                              <option value="Pasangan">Pasangan</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12">No. Telepon
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="input_no_telpon_ortu" name="input_no_telpon_kerabat" class="normal-form-long" type="number">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xs-12">
+                    <div class="x_panel">
+                      <div class="x_content">
+                        <label>Opsional</label>
+                        <span class="section"></span>
+                        <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="foto">Foto
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="file" id="foto" class="btn btn-primary" name="input_foto" class="">
                           </div>
                         </div>
                         <label></label>

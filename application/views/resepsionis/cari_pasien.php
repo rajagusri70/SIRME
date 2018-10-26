@@ -246,7 +246,6 @@
                         <th>Nama</th>
                         <th>Jenis Kelamin</th>
                         <th>Tanggal Lahir</th>
-                        <th>Umur</th>
                         <th>Alamat</th>
                         <th>Aksi</th>
                       </tr>
@@ -262,7 +261,6 @@
                         <td><?php echo $p->nama; ?></td>
                         <td><?php echo $p->jenis_kelamin; ?></td>
                         <td><?php echo $p->tanggal_lahir; ?></td>
-                        <td><?php echo $p->umur; ?></td>
                         <td><?php echo $p->alamat; ?></td>
                         <td><a href="<?php echo base_url().'rekam_medis/pasien/'.$p->no_pasien; ?>" target="_blank"  >View</a>
                         <!-- Tampilan Modal -->

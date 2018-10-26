@@ -80,9 +80,49 @@ class Pasien extends CI_Controller {
 					//$this->load->view('pasien/pasien_baru');
 				}else{
 					//$data['message'] = $upload['error'];
-					echo "galat";
-					$this->PasienModel->input($upload);// Panggil fungsi input() yang ada di PasienModel.php
-					redirect('pasien/resepsionis/daftar');
+					//echo "galat";
+					$uploadArray = [
+						'file' => [
+							'file_name' => 'default-image.png'
+						]
+					];
+					$this->PasienModel->input($uploadArray);
+					$no_ktp = $this->input->post('input_no_ktp');
+					$viewpasien = $this->PasienModel->viewPasien('no_ktp',$no_ktp);
+					foreach ($viewpasien as $vp) {
+						echo '<body>';
+						echo '<script src="'.base_url().'assets/js/sweetalert.min.js"></script>';
+						echo '<script type="text/javascript" >';
+						echo 'swal({';
+						echo '  title: "Pendaftaran Berhasil.!!! Nomor Pasien : ['.$vp->no_pasien.']",';
+						echo '  text: "Pasien telah berhasil didaftarkan. Nomor pasien : '.$vp->no_pasien.'",';
+						echo '	icon: "success",';
+						echo '  buttons: {';
+						//echo '    cancel: "Run away!",';
+						echo '    catch: {';
+						echo '      text: "Oke",';
+						echo '      value: "catch",';
+						echo '    },';
+						//echo '    defeat: true,';
+						echo '  },';
+						echo '})';
+						echo '.then((value) => {';
+						echo '  switch (value) {';				 
+						echo '    case "defeat":';
+						echo '      swal("Pikachu fainted! You gained 500 XP!");';
+						echo '      break;';				 
+						echo '    case "catch":';
+						echo '     ';
+						echo '      break;';				 
+						echo '    default:';
+						echo '      swal("Got away safely!");';
+						echo '  }';
+						echo '});';
+						echo '</script>';
+						echo  '</body>';
+					}
+					// Panggil fungsi input() yang ada di PasienModel.php
+					//redirect('pasien/resepsionis/daftar');
 				}
 
 			// $cek = $this->PasienModel->cek_pasien($no_ktp,$nama_pasien)->num_rows();

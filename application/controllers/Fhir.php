@@ -25,12 +25,17 @@ class fhir extends CI_Controller {
 			$urlAPI = $u['url'];
 		}
 		$url = $urlAPI.'/'.$resc.'?'.$param.'='.$value;
-		$json = file_get_contents($url); 
-		$content = json_decode($json);
-		$data['result'] = $content->entry;
-		$data['url'] = $urlAPI.'/'.$resc.'/';
-		$data['no_pasien'] = $no_pasien;
-		$this->load->view('fhir/fhir-retrieve',$data);
+		$content = @file_get_contents($url); 
+
+		if ($content === FALSE) {
+			echo "Server not Respond. <br> It might be the server is turned of or under maintenance. <br>Try Again or contact the Administrator <br>for further information<br><br><br>@isErrorCatcher";
+		}else{
+			$json = json_decode($content);
+			$data['result'] = $json->entry;
+			$data['url'] = $urlAPI.'/'.$resc.'/';
+			$data['no_pasien'] = $no_pasien;
+			$this->load->view('fhir/fhir-retrieve',$data);
+		}
 	}
 
 	public function getData(){
@@ -40,25 +45,23 @@ class fhir extends CI_Controller {
 		$server = $this->input->post('server');
 
 		$url = $server.$id;
-		$json = file_get_contents($url); 
-		$content = json_decode($json);
+		$content = file_get_contents($url); 
+		$json = json_decode($content);
 
-		#assing PK for each
+		#assign PK for each
 		$pk_study = 'st'.date("dmy").uniqid();
-		//$pk_series = 'sr'.date("dmy").uniqid();
-		
-		#memasukan data ake study
+		#memasukan data ke study
 		$data = array(
 			'pk' => $pk_study,
-			'study_iuid' => $content->uid,
+			'study_iuid' => $json->uid,
 			'no_pasien' => $no_pasien,
-			'waktu' => $content->started,
-			'deskripsi' => $content->description,  
+			'waktu' => $json->started,
+			'deskripsi' => $json->description,  
 		);
 		$this->ImagingModel->insertStudy($data);
 
 		#memasukan data ke series
-		$seriesContent = $content->series;
+		$seriesContent = $json->series;
 		foreach ($seriesContent as $sc) {
 			$pk_series = 'sr'.date("dmy").uniqid();
 			$seriesData = array(
@@ -83,7 +86,6 @@ class fhir extends CI_Controller {
 				$this->ImagingModel->insertInstance($instanceData);
 			}
 		}
-
 		echo json_encode(array('status' => true));
 	}
 }

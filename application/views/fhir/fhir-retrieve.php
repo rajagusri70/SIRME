@@ -45,11 +45,10 @@
                 <div class="clearfix"></div>
                 <div class="x_content">
                   <div class="ln_solid"></div>
-                  <table style="font-size: 14px">
+                  <table style="font-size: 12px">
                     
                   </table>
-                </br></br>
-                  <table class="table table-striped table-bordered">
+                  <table class="table table-striped table-bordered" id="datatable">
                     <thead align="center">
                       <tr style="font-weight: bold;">
                         <td>No</td>
@@ -109,6 +108,18 @@
   <!-- Datatable -->
   <script src="<?php echo base_url(); ?>/assets/js/datatables/jquery.dataTables.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/js/datatables/dataTables.bootstrap.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/js/datatables/dataTables.buttons.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/js/datatables/buttons.bootstrap.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/js/datatables/jszip.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/js/datatables/pdfmake.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/js/datatables/vfs_fonts.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/js/datatables/buttons.html5.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/js/datatables/buttons.print.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/js/datatables/dataTables.fixedHeader.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/js/datatables/dataTables.keyTable.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/js/datatables/dataTables.responsive.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/js/datatables/responsive.bootstrap.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/js/datatables/dataTables.scroller.min.js"></script>
   <script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/notify/pnotify.core.js"></script>
   <script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/notify/pnotify.buttons.js"></script>
   <script type="text/javascript" src="<?php echo base_url(); ?>/assets/js/notify/pnotify.nonblock.js"></script>
@@ -116,6 +127,10 @@
   
   <script type="text/javascript">
     
+    $(document).ready(function() {
+      $('#datatable').dataTable();
+    });
+
     function add(_id, _resourceType){
 
       var id_value = _id;
@@ -132,7 +147,7 @@
         if (simpan) {
           swal({
               title: "Mohon Tunggu!",
-              text: "Data sedang disimpan. Mohon tunggu ...",
+              text: "Data sedang disimpan. Window ini Jangan Dtutup. Mohon tunggu ...",
               icon: "warning",
               button: false,
               closeOnClickOutside: false,

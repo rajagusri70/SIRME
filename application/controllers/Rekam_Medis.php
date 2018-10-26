@@ -41,7 +41,7 @@ class rekam_medis extends CI_Controller {
 		$data['encounter'] = $this->RawatModel->viewWhere(array('no_pasien' => $no_pasien, ));
 		$data['observation'] = $this->ObservationModel->viewObservation(array('no_pasien' => $no_pasien, ));
 		$data['condition'] = $this->DiagnosisModel->view(array('no_pasien' => $no_pasien, ));
-		$data['imagingstudy'] = $this->ImagingModel->selectWhere(array('no_pasien' => $no_pasien, ));
+		$data['imagingstudy'] = $this->ImagingModel->selectStudy(array('no_pasien' => $no_pasien, ));
 		$data['pasien_terdaftar'] = $this->PasienModel->viewPasien('no_pasien',$no_pasien);
 		$data['diagnosis'] = $this->DiagnosisModel->view(array('no_pasien' => $no_pasien, ));
 		$data['data_rawat'] = $this->RawatModel->viewWhere(array('no_pasien' => $no_pasien, ));
@@ -59,6 +59,7 @@ class rekam_medis extends CI_Controller {
 		$tahun_lahir = substr($tanggal_lahir, -4);
 		$umur = $tahun - $tahun_lahir;
 		$data['umur'] = $umur;
+		$data['imagingall'] = $this->ImagingModel->view(array('no_pasien' => $no_pasien, ));
 		$this->load->view('pasien/profile_pasien',$data);
 	}
 
@@ -82,6 +83,7 @@ class rekam_medis extends CI_Controller {
 		foreach ($dokter_pemeriksa as $dp) {
 			$user_id = $dp->dokter;
 		}
+
 		
 		// $data['riwayat_penyakit'] = $this->RiwayatPenyakitModel->viewRiwayatPenyakit($no_pasien);
 		// $data['riwayat_alergi'] = $this->RiwayatAlergiModel->viewRiwayat($no_pasien);
@@ -91,5 +93,12 @@ class rekam_medis extends CI_Controller {
 		// $data['tindakan'] = $this->TindakanModel->view($id_periksa);
 		$data['dokter_pemeriksa'] = $this->UserModel->view($user_id);
 		$this->load->view('pasien/rawat_jalan',$data);
+	}
+
+
+	public function image(){
+		$objectUID = $_GET['objectUID'];
+		$data['objectUID'] = $objectUID;
+		$this->load->view('pasien/imaging',$data);		
 	}
 }

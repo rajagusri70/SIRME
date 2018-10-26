@@ -80,7 +80,7 @@ class fhir extends CI_Controller {
 				$instanceData = array(
 					'pk' => $pk_instance,
 					'fk_series' => $pk_series,
-					'instance_iuid' => $sc->uid,
+					'instance_iuid' => $ic->uid,
 					'sop_class' => $sc->modality,
 				);
 				$this->ImagingModel->insertInstance($instanceData);

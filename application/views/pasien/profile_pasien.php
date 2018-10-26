@@ -188,7 +188,6 @@
                               <li><a href="#imagingstudy" data-toggle="tab">ImagingStudy</a>
                               </li>
                               <div class="ln_solid"></div>
-                              
                             </ul>
                           </div>
                           <div role="tabpanel" class="tab-pane fade active in" id="rumah_sakit" aria-labelledby="home-tab">
@@ -202,7 +201,9 @@
                               </li>
                               <li><a href="#riwayat_alergi" data-toggle="tab">Riwayat Alergi</a>
                               </li>
-                              <li><a href="#riwayat_obat" data-toggle="tab">Riwayat Obat</a>
+                              <!-- <li><a href="#riwayat_obat" data-toggle="tab">Riwayat Obat</a>
+                              </li> -->
+                              <li><a href="#imaging" data-toggle="tab">Imaging</a>
                               </li>
                             </ul>
                           </div>
@@ -657,6 +658,37 @@
                             </tbody>
                           </table>   
                         </div>
+                        <div role="tabpanel" class="tab-pane fade" id="imaging" aria-labelledby="home-tab">
+                          <h2>Imaging</h2>
+                          <div class="ln_solid"></div>
+                          <table style="width: 100%" id="datatable_imaging" class="table table-striped table-bordered">
+                            <thead>
+                              <tr>
+                                <th align="center">No.</th>
+                                <th align="center">Study</th>
+                                <th align="center">Desc. </th>
+                                <th align="center">Series</th>
+                                <th align="center">Waktu.</th>
+                                <th align="center">Aksi</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php
+                              $n=1;
+                              foreach ($imagingall as $ia) { ?>
+                              <tr>
+                                <td align="center"><?php echo $n++; ?></td>
+                                <td><?php echo $ia->pk_study ?></td>
+                                <td><?php echo $ia->deskripsi ?></td>
+                                <td><?php echo $ia->pk_series ?></td>
+                                <td><?php echo $ia->waktu ?></td>
+                                <td align="center"><a onclick="image('<?php echo $ia->instance_iuid ?>')" class="btn btn-info btn-xs"><i class="fa fa-file-image-o"></i></a>
+                                  </td>
+                              </tr>
+                              <?php } ?>
+                            </tbody>
+                          </table>   
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -734,6 +766,7 @@
       $('#datatable_rawat_jalan').dataTable();
       $('#datatable_riwayat_alergi').dataTable();
       $('#datatable_riwayat_obat').dataTable();
+      $('#datatable_imaging').dataTable();
     });
 
     function retrieve(){
@@ -743,6 +776,13 @@
       var resource_value = 'ImagingStudy';
       $('#modal_imagingstudy').modal('hide');
       popup = window.open('<?php echo base_url()?>fhir/result/'+server_value+'/'+resource_value+'/'+param_value+'/'+value_value+'?no_pasien=<?php echo $no_pasien ?>','', 'width=820, height=720, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
+    }
+
+    function image(objectUID){
+      var objectUID_value = objectUID;
+      var param_value = $('#param').val();
+      $('#modal_imagingstudy').modal('hide');
+      popup = window.open('<?php echo base_url()?>rekam_medis/image?objectUID='+objectUID_value+'','', 'width=720, height=620, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
     }
   </script>
 </body>

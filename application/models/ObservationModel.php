@@ -23,7 +23,7 @@ class ObservationModel extends CI_Model{
 	}
 	
 	public function search($like){
-		$this->db->select('id');
+		$this->db->select('*');
 		$this->db->where($like);
    		return $this->db->get('tb_observation');
 	}

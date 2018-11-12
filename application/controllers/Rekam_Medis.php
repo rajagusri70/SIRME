@@ -97,8 +97,22 @@ class rekam_medis extends CI_Controller {
 
 
 	public function image(){
+		$server = $_GET['server'];
+		$endpoint = $_GET['endpoint'];
+		#get  server address
+		$serverData = $this->UrlModel->selectWhere(array('pk' => $server, ))->result();
+		foreach ($serverData as $sd) {
+			$url = $sd->url.'/Endpoint/'.$endpoint;
+		}
+
+		$content = @file_get_contents($url); 
+		$json = json_decode($content);
+
+		#get endpoint address from API
+		$endpointAddress = $json->address;
 		$objectUID = $_GET['objectUID'];
 		$data['objectUID'] = $objectUID;
+		$data['endpointAddress'] = $endpointAddress.'/wado?requestType=wado&studyUID=&seriesUID=&objectUID=';  
 		$this->load->view('pasien/imaging',$data);		
 	}
 }

@@ -207,27 +207,27 @@
                     <p>
                     <?php echo $deskripsi ?>
                   </p>
-                  </div>
+                  <!-- </div>
                   <div class="tiles">
                     <div class="col-md-4 tile">
                       <span>Jam Buka Layanan</span>
-                      <h2><?php echo $buka; ?> WIB</h2>
+                      <h2><?php //echo $buka; ?> WIB</h2>
                     </div>
                     <div class="col-md-4 tile">
                       <span>Jam Tutup Layanan</span>
-                      <h2><?php echo $tutup; ?> WIB</h2>
+                      <h2><?php //echo $tutup; ?> WIB</h2>
                     </div>
                     <div class="col-md-4 tile">
                       <span>Hari Layanan</span>
-                      <h2><?php foreach ($hari as $ha) {
-                        echo $ha->hari.', ';
-                      } ?></h2>
-                    </div>
+                      <h2><?php //foreach ($hari as $ha) {
+                        //echo $ha->hari.', ';
+                      //} ?></h2>
+                    </div> -->
                     
                   </div>
 
                 </div>
-                <div class="col-md-3 col-sm-12 col-xs-12">
+                <!-- <div class="col-md-3 col-sm-12 col-xs-12">
                   <div>
                     <div class="x_title">
                       <h2>Atur</h2>
@@ -241,7 +241,7 @@
                       </li>
                     </ul>
                   </div>
-                </div>
+                </div> -->
                 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
                   <div class="modal-dialog modal-lg">
                     <div class="modal-content">

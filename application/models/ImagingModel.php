@@ -24,6 +24,7 @@ class ImagingModel extends CI_Model{
 		$this->db->from('tb_study');
 		$this->db->join('tb_series','tb_study.pk = tb_series.fk_study');
 		$this->db->join('tb_instance','tb_series.pk = tb_instance.fk_series');
+		$this->db->join('tb_fhir_url','tb_study.server = tb_fhir_url.pk');
 		return $this->db->get()->result();
 	}
 

@@ -211,7 +211,7 @@
                       </div>
                     </div>
                   </div>
-
+                  <?php $servers = $server; ?>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                     <div class="" role="tabpanel" data-example-id="togglable-tabs">
                       <div id="myTabContent" class="tab-content">
@@ -286,8 +286,7 @@
                               foreach ($encounter as $en) {
                               ?>
                               <tr>
-                                <td>ID : <?php echo $en->id ?><br>
-                                  No. Rawat Jalan : <?php echo $en->id_rawat ?></td>
+                                <td>No. Rawat Jalan : <?php echo $en->id_rawat ?></td>
                                 <td><?php echo $en->typeText ?></td>
                                 <td><?php echo $en->status ?></td>
                                 <td><?php echo $en->tanggal ?> <sub>from</sub><?php echo $en->waktu ?> <sub>to</sub><?php echo $en->jam_keluar ?></td>
@@ -321,7 +320,67 @@
                               </tr>
                               <?php } ?>
                             </tbody>
-                          </table>   
+                          </table>
+                          <a  class="btn btn-success float" data-toggle="modal" data-target=".modal_observation"><i class="fa fa-plus"></i></a>
+                          <div class="modal fade modal_observation" id="modal_observation" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                                  </button>
+                                  <h4 class="modal-title" id="myModalLabel"><b>Observation</b></h4>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                      <div class="x_panel">
+                                        <div class="x_title">
+                                          <h2>Retrieve Resource</h2>
+                                          <div class="clearfix"></div>
+                                        </div>
+                                        <div class="x_content" >
+                                          <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" >
+                                            <div class="item form-group">
+                                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Server <span class="required">*</span>
+                                              </label>
+                                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <select class="normal-form-long" id="server1" name="input_server">
+                                                  <?php foreach ($servers as $server) { ?>
+                                                  <option value="<?php echo $server->pk ?>"><?php echo $server->nama; ?></option>
+                                                  <?php } ?>
+                                                </select>
+                                              </div>
+                                            </div>
+                                            <div class="item form-group">
+                                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="url">Parameters<span class="required">*</span>
+                                              </label>
+                                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <select class="normal-form" name="input_parameter1" id="param1">
+                                                  <option value="patient">Patient</option><!-- 
+                                                  <option value="id">Resource ID</option> -->
+                                                </select>
+                                                <input type="text" name="input_value1" id="param_value1" required="required" class="normal-form">
+                                              </div>
+                                            </div>
+                                            <div class="item form-group">
+                                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name"> <span class="required"></span>
+                                              </label>
+                                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <small><b>Nomor pasien di rumah sakit yang akam diambil datanya</b></small>
+                                              </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <a class="btn btn-primary" onclick="retrieveAll('Observation')" ><i class="fa fa-edit"></i> Retrieve</a>
+                                            </div>
+                                          </form>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>      
                         </div>
                         <div role="tabpanel" class="tab-pane fade" id="condition" aria-labelledby="condition-tab">
                           <h2>Condition</h2>
@@ -330,7 +389,6 @@
                             <thead>
                               <tr>
                                 <th align="center">Condition</th>
-                                <th align="center">Status</th>
                                 <th align="center">Date</th>
                                 <th align="center">API</th>
                               </tr>
@@ -341,13 +399,72 @@
                               ?>
                               <tr>
                                 <td><?php echo $co->diagnosis ?></td>
-                                <td><?php echo $co->status_klinis ?></td>
                                 <td><?php echo $co->tanggal ?></td>
                                 <td><a href="<?php echo base_url().'api/Condition/'.$co->id; ?>" target="_blank">Link</a></td>
                               </tr>
                               <?php } ?>
                             </tbody>
-                          </table>   
+                          </table>
+                          <a  class="btn btn-success float" data-toggle="modal" data-target=".modal_condition"><i class="fa fa-plus"></i></a>
+                          <div class="modal fade modal_condition" id="modal_condition" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                                  </button>
+                                  <h4 class="modal-title" id="myModalLabel"><b>Condition</b></h4>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                      <div class="x_panel">
+                                        <div class="x_title">
+                                          <h2>Retrieve Resource</h2>
+                                          <div class="clearfix"></div>
+                                        </div>
+                                        <div class="x_content" >
+                                          <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" >
+                                            <div class="item form-group">
+                                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Server <span class="required">*</span>
+                                              </label>
+                                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <select class="normal-form-long" id="server2" name="input_server2">
+                                                  <?php foreach ($servers as $server) { ?>
+                                                  <option value="<?php echo $server->pk ?>"><?php echo $server->nama; ?></option>
+                                                  <?php } ?>
+                                                </select>
+                                              </div>
+                                            </div>
+                                            <div class="item form-group">
+                                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="url">Parameters<span class="required">*</span>
+                                              </label>
+                                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <select class="normal-form" name="input_parameter1" id="param2">
+                                                  <option value="patient">Patient</option><!-- 
+                                                  <option value="id">Resource ID</option> -->
+                                                </select>
+                                                <input type="text" name="input_valu1e" id="param_value2" required="required" class="normal-form">
+                                              </div>
+                                            </div>
+                                            <div class="item form-group">
+                                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name"> <span class="required"></span>
+                                              </label>
+                                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <small><b>Nomor pasien di rumah sakit yang akam diambil datanya</b></small>
+                                              </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <a class="btn btn-primary" onclick="retrieveCon('Condition')" ><i class="fa fa-edit"></i> Retrieve</a>
+                                            </div>
+                                          </form>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>    
                         </div>
                         <div role="tabpanel" class="tab-pane fade" id="imagingstudy" aria-labelledby="encounter-tab">
                           <h2>ImagingStudy</h2>
@@ -394,7 +511,7 @@
                                               </label>
                                               <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <select class="normal-form-long" id="server" name="input_server">
-                                                  <?php foreach ($server as $server) { ?>
+                                                  <?php foreach ($servers as $server) { ?>
                                                   <option value="<?php echo $server->pk ?>"><?php echo $server->nama; ?></option>
                                                   <?php } ?>
                                                 </select>
@@ -665,9 +782,8 @@
                             <thead>
                               <tr>
                                 <th align="center">No.</th>
-                                <th align="center">Study</th>
-                                <th align="center">Desc. </th>
-                                <th align="center">Series</th>
+                                <th align="center">Deskripsi Study </th>
+                                <th align="center">Sumber</th>
                                 <th align="center">Waktu.</th>
                                 <th align="center">Aksi</th>
                               </tr>
@@ -678,11 +794,10 @@
                               foreach ($imagingall as $ia) { ?>
                               <tr>
                                 <td align="center"><?php echo $n++; ?></td>
-                                <td><?php echo $ia->pk_study ?></td>
                                 <td><?php echo $ia->deskripsi ?></td>
-                                <td><?php echo $ia->pk_series ?></td>
+                                <td><?php echo $ia->nama ?></td>
                                 <td><?php echo $ia->waktu ?></td>
-                                <td align="center"><a onclick="image('<?php echo $ia->instance_iuid ?>')" class="btn btn-info btn-xs"><i class="fa fa-file-image-o"></i></a>
+                                <td align="center"><a onclick="image('<?php echo $ia->instance_iuid ?>','<?php echo $ia->endpoint ?>','<?php echo $ia->server ?>')" class="btn btn-info btn-xs"><i class="fa fa-file-image-o"></i></a>
                                   </td>
                               </tr>
                               <?php } ?>
@@ -778,11 +893,31 @@
       popup = window.open('<?php echo base_url()?>fhir/result/'+server_value+'/'+resource_value+'/'+param_value+'/'+value_value+'?no_pasien=<?php echo $no_pasien ?>','', 'width=820, height=720, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
     }
 
-    function image(objectUID){
+    function retrieveAll(resource){
+      var server_value = $('#server1').val();
+      var param_value = $('#param1').val();
+      var value_value = $('#param_value1').val();
+      var resource_value = resource;
+      $('#modal_observation').modal('hide');
+      popup = window.open('<?php echo base_url()?>fhir/result/'+server_value+'/'+resource_value+'/'+param_value+'/'+value_value+'?no_pasien=<?php echo $no_pasien ?>','', 'width=820, height=720, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
+    }
+
+    function retrieveCon(resource){
+      var server_value = $('#server2').val();
+      var param_value = $('#param2').val();
+      var value_value = $('#param_value2').val();
+      var resource_value = resource;
+      $('#modal_observation').modal('hide');
+      popup = window.open('<?php echo base_url()?>fhir/result/'+server_value+'/'+resource_value+'/'+param_value+'/'+value_value+'?no_pasien=<?php echo $no_pasien ?>','', 'width=820, height=720, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
+    }
+
+    function image(objectUID, endpoint, server){
       var objectUID_value = objectUID;
+      var endpoint_value = endpoint;
+      var server_value = server;
       var param_value = $('#param').val();
       $('#modal_imagingstudy').modal('hide');
-      popup = window.open('<?php echo base_url()?>rekam_medis/image?objectUID='+objectUID_value+'','', 'width=720, height=620, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
+      popup = window.open('<?php echo base_url()?>rekam_medis/image?objectUID='+objectUID_value+'&endpoint='+endpoint_value+'&server='+server_value+'','', 'width=720, height=620, menubar=yes,location=no, scrollbars=yes, resizeable=no, status=yes, copyhistory=no,toolbar=no');
     }
   </script>
 </body>

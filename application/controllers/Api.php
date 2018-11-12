@@ -341,59 +341,34 @@ class Api extends REST_Controller {
   public function observation_get($id = NULL){
       // If the id parameter doesn't exist return all the users
     if ($id == NULL){
-      $no_pasien = $_GET['pasien'];
+      $no_pasien = $_GET['patient'];
       if($no_pasien == NULL){
         $this->response([
               'status' => FALSE,
               'message' => 'User could not be found'
           ], REST_Controller::HTTP_BAD_REQUEST);
       }else{
-        $data = $this->ObservationModel->search(array('no_pasien' => $no_pasien))->result_array();
-        // foreach ($data as $data) {
-        //   // $entry = [
-        //   //   'resourceType' => 'Observation',
-        //   //   'id' => $data->id,
-        //   //   'category' => [
-        //   //     [
-        //   //       'coding' => [
-        //   //         [
-        //   //           'code' => 'vital-sign',
-        //   //           'display' => 'Vital Sign'
-        //   //         ]
-        //   //       ]
-        //   //     ]
-        //   //   ],
-        //   //   'code' => [
-        //   //     'text' => $data->tipe_pemeriksaan
-        //   //   ],
-        //   //   'subject' => [
-        //   //     'reference' => 'Patient/'.$data->no_pasien
-        //   //   ],
-        //   //   'context' => [
-        //   //     'reference' => 'Encounter/'.$data->no_rawat_jalan
-        //   //   ],
-        //   //   'effectiveDateTime' => $data->tanggal.'T'.$data->jam,
-        //   //   'performer' => [
-        //   //     [
-        //   //       'reference' => 'Practitioner/'.$data->no_id_praktisi
-        //   //     ]
-        //   //   ],
-        //   //   'valueQuantity' => [
-        //   //     'value' => $data->hasil,
-        //   //     'unit' => $data->unit
-        //   //   ]
-        //   // ]
-        // }
+        $data = $this->ObservationModel->search(array('no_pasien' => $no_pasien, ))->result_array();
+
+        $items = array();
+        
+        foreach ($data as $datas ) {
+          $url = 'http://localhost/SIRME/api/Observation/'.$datas['id']; 
+          $json = file_get_contents($url); 
+          $content = json_decode($json);
+          $resource = [
+            'resource' => $content
+          ]; 
+          $items[] = $resource;
+        }
         
         $bundle = [
           'resourceType' => 'Bundle',
-          'id' => uniqid(),
+          //'id' => uniqid(),
           'type' => 'searchset',
           'entry' => 
-            $data
-          
+            $items
         ];
-
         $this->response($bundle, REST_Controller::HTTP_OK);
         //echo "ID Provied Well educated";
       }
@@ -403,6 +378,7 @@ class Api extends REST_Controller {
         $observation = [
           'resourceType' => 'Observation',
           'id' => $data->id,
+          'status' => $data->status,
           'category' => [
             [
               'coding' => [
@@ -447,6 +423,41 @@ class Api extends REST_Controller {
   public function condition_get($id = NULL){
       // If the id parameter doesn't exist return all the users
     if ($id == NULL){
+
+      $no_pasien = $_GET['patient'];
+      if($no_pasien == NULL){
+        $this->response([
+              'status' => FALSE,
+              'message' => 'User could not be found'
+          ], REST_Controller::HTTP_BAD_REQUEST);
+      }else{
+        $data = $this->DiagnosisModel->search(array('no_pasien' => $no_pasien, ))->result_array();
+
+        $items = array();
+        
+        foreach ($data as $datas ) {
+          $url = 'http://localhost/SIRME/api/Condition/'.$datas['id']; 
+          $json = file_get_contents($url); 
+          $content = json_decode($json);
+          $resource = [
+            'resource' => $content
+          ]; 
+          $items[] = $resource;
+        }
+        
+        $bundle = [
+          'resourceType' => 'Bundle',
+          //'id' => uniqid(),
+          'type' => 'searchset',
+          'entry' => 
+            $items
+        ];
+        $this->response($bundle, REST_Controller::HTTP_OK);
+        //echo "ID Provied Well educated";
+      }
+
+
+
       $this->response([
               'status' => FALSE,
               'message' => 'User could not be found'

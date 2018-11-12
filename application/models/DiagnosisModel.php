@@ -21,5 +21,11 @@ class DiagnosisModel extends CI_Model{
 	public function hapus($where){
 		$this->db->delete('tb_diagnosis',$where);
 	}
+
+	public function search($like){
+		$this->db->select('*');
+		$this->db->where($like);
+   		return $this->db->get('tb_diagnosis');
+	}
 	
 }

@@ -49,6 +49,7 @@
                     
                   </table>
                   <table class="table table-striped table-bordered" id="datatable">
+                    <?php if ($resource == "ImagingStudy"){ ?>
                     <thead align="center">
                       <tr style="font-weight: bold;">
                         <td>No</td>
@@ -68,6 +69,55 @@
                       </tr>
                       <?php } ?>
                     </tbody>
+                    <?php }elseif ($resource == "Observation") {?>
+                      <thead align="center">
+                      <tr style="font-weight: bold;">
+                        <td>No</td>
+                        <td>Tipe Pemeriksaan</td>
+                        <td>Date</td>
+                        <td>Value</td>
+                        <td>Unit</td>
+                        <td>Aksi</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php $num = 1; 
+                      foreach ($result as $result) { ?>
+                      <tr>
+                        <td align="center" ><?php echo $num++; ?></td>
+                        <td><?php echo $result->resource->code->text ?></td>
+                        <td><?php echo $result->resource->effectiveDateTime ?></td>
+                        <td><?php echo $result->resource->valueQuantity->value ?></td>
+                        <td><?php echo $result->resource->valueQuantity->unit ?></td>
+                        <td align="center" ><a onclick="add('<?php echo $result->resource->id ?>', '<?php echo $result->resource->resourceType ?>')" class="btn btn-info btn-xs"><i class="fa fa-plus"></i></a>&nbsp;&nbsp;<a href="<?php echo $url.$result->resource->id ?>" target="_blank" class="btn btn-info btn-xs"><i class="fa fa-external-link"></i></a></td>
+                      </tr>
+                      <?php } ?>
+                    </tbody>
+                    <?php }elseif($resource == "Condition"){ ?>
+                      <thead align="center">
+                      <tr style="font-weight: bold;">
+                        <td>No</td>
+                        <td>Category</td>
+                        <td>Code</td>
+                        <td>Text</td>
+                        <td>Date</td>
+                        <td>Aksi</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php $num = 1; 
+                      foreach ($result as $result) { ?>
+                      <tr>
+                        <td align="center" ><?php echo $num++; ?></td>
+                        <td><?php echo $result->resource->category[0]->coding[0]->display ?></td>
+                        <td><?php echo $result->resource->code->coding[0]->code ?></td>
+                        <td><?php echo $result->resource->code->coding[0]->display ?></td>
+                        <td><?php echo $result->resource->assertedDate ?></td>
+                        <td align="center" ><a onclick="add('<?php echo $result->resource->id ?>', '<?php echo $result->resource->resourceType ?>')" class="btn btn-info btn-xs"><i class="fa fa-plus"></i></a>&nbsp;&nbsp;<a href="<?php echo $url.$result->resource->id ?>" target="_blank" class="btn btn-info btn-xs"><i class="fa fa-external-link"></i></a></td>
+                      </tr>
+                      <?php } ?>
+                    </tbody>
+                    <?php } ?>
                   </table>
                 </div>
               </div>
@@ -155,7 +205,7 @@
           $.ajax({
           url: "<?php echo base_url().'/fhir/getData' ?>",
           type: 'POST',
-          data: {id: id_value, resourceType: resourceType_value, no_pasien: no_pasien_value, server: '<?php echo $url ?>'},
+          data: {id: id_value, resourceType: resourceType_value, no_pasien: no_pasien_value, url: '<?php echo $url ?>', server: <?php echo $server ?>},
           dataType: "JSON",
           success: function(data) {
             swal({

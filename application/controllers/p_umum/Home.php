@@ -15,6 +15,7 @@ class Home extends CI_Controller {
 		$this->load->model('UserModel');
 		$this->load->model('PoliklinikModel');
 		$this->load->model('RawatModel');
+		$this->load->model('AntrianModel');
 		
 		date_default_timezone_set("Asia/Jakarta");
  
@@ -48,13 +49,13 @@ class Home extends CI_Controller {
 			'tanggal' => $tanggal, 
 		);
 		$jadwal = array('id_poli' => 1, );
-		$data['antrian'] = $this->RawatModel->count($antrian);
+		$data['antrian'] = $this->AntrianModel->count($antrian);
 		$data['maksimum'] = $maksimum;
 		$data['deskripsi'] = $deskripsi;
-		$data['total'] = $this->RawatModel->count($total);
-		$data['selesai'] = $this->RawatModel->count($selesai);
+		$data['total'] = $this->AntrianModel->count($total);
+		$data['selesai'] = $this->AntrianModel ->count($selesai);
 		$data['buka'] = $buka; $data['tutup'] = $tutup;
-		$data['hari'] = $this->RawatModel->hari($jadwal);
+		//$data['hari'] = $this->RawatModel->hari($jadwal);
 		$this->load->view('poli_umum/home',$data );
 
 		if($this->input->post('submit_maksimum')){

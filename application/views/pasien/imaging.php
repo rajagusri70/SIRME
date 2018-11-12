@@ -48,7 +48,7 @@
                   <table align="center">
                     <tr>
                       <td align="center">
-                        <img src="http://192.168.87.129:8080/wado?requestType=wado&studyUID=&seriesUID=&objectUID=<?php echo $objectUID ?>" alt="Server connection Error! Cannot retrieve image." />
+                        <img width="100%" src="<?php echo $endpointAddress.$objectUID ?>" alt="Server connection Error! Cannot retrieve image."  />
                       </td>
                     </tr>
                   </table>

@@ -129,7 +129,7 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="images/img.jpg" alt="">Dr. 
+                  <img src="images/img.jpg" alt=""> 
                   <?php foreach ($users as $user) {
                     echo $user->nama;
                   } ?>
@@ -142,7 +142,7 @@
                 </ul>
               </li>
               <li class="">
-                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Anda Login sebagai
+                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                 </a>
               </li>
 

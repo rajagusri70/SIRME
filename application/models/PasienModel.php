@@ -140,7 +140,6 @@ class PasienModel extends CI_Model{
 		$this->db->like('no_pasien', $cari_input);
 		$this->db->or_like('no_ktp', $cari_input);
     	$this->db->or_like('nama', $cari_input);
-    	$this->db->or_like('no_kk', $cari_input);
 		return $this->db->get("pasien")->result();
 		//return $this->db->get()->result();
 	}

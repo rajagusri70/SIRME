@@ -99,7 +99,7 @@
                     </li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-fire"></i> Manajemen FHIR <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-fire"></i> Manajemen Server <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
                     <li><a href="<?php echo $_SERVER['REQUEST_URI']; ?>" >FHIR</a>
                     </li>

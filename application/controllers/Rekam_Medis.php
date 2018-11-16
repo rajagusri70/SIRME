@@ -109,10 +109,15 @@ class rekam_medis extends CI_Controller {
 		$json = json_decode($content);
 
 		#get endpoint address from API
-		$endpointAddress = $json->address;
-		$objectUID = $_GET['objectUID'];
-		$data['objectUID'] = $objectUID;
-		$data['endpointAddress'] = $endpointAddress.'/wado?requestType=wado&studyUID=&seriesUID=&objectUID=';  
+		if($content){
+			$endpointAddress = $json->address;
+			$objectUID = $_GET['objectUID'];
+			$data['objectUID'] = $objectUID;
+			$data['endpointAddress'] = $endpointAddress.'/wado?requestType=wado&studyUID=&seriesUID=&objectUID=';
+		}else{
+			$data['objectUID'] ="";
+			$data['endpointAddress'] = '';
+		}
 		$this->load->view('pasien/imaging',$data);		
 	}
 }

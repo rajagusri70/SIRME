@@ -227,6 +227,14 @@ class Check_Up extends CI_Controller {
 					$id_resep = $rd->id;
 				}
 				$data['id_resep'] = $id_resep;
+				$pasien = $this->RawatModel->cariStatus('rawat_jalan','rawat_jalan.id_rawat',$id_rawat);
+				foreach ($pasien as $p) {
+					$tanggal_lahir  = $p->tanggal_lahir;
+				}
+				$tahun = date("Y");
+				$tahun_lahir = substr($tanggal_lahir, -4);
+				$umur = $tahun - $tahun_lahir;
+				$data['umur'] = $umur;
 				$this->load->view('poli_umum/check_up',$data);
 			}
 		}
@@ -271,7 +279,10 @@ class Check_Up extends CI_Controller {
 		$data['tanggal_masuk'] = '';
 		foreach ($user_data as $ud) {
 			$nama = $ud->nama;
-			$umur = $ud->umur;
+			$tanggal_lahir  = $ud->tanggal_lahir;
+			$tahun = date("Y");
+			$tahun_lahir = substr($tanggal_lahir, -4);
+			$umur = $tahun - $tahun_lahir;
 			$alamat = $ud->alamat;
 			$tanggal_masuk = $ud->tanggal_resep;
 			$nama_dokter = $ud->nama_dokter;
@@ -283,6 +294,7 @@ class Check_Up extends CI_Controller {
 			$data['nama_dokter'] = $nama_dokter;
 			$data['nip'] = $nip;
 			$data['tanggal_masuk'] = $tanggal_masuk;
+			$data['umur'] = $umur;
 
 		}
 		// $data['nama'] = $nama;

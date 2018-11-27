@@ -167,4 +167,10 @@ class RawatModel extends CI_Model{
 	    $this->db->join('rawat_jalan', 'tb_transaksi.no_rawat_jalan = rawat_jalan.id_rawat');
 	    return $this->db->get()->result();
 	}
+
+	public function search($like){
+		$this->db->select('*');
+		$this->db->where($like);
+   		return $this->db->get('rawat_jalan');
+	}
 }

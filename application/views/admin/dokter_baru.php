@@ -84,7 +84,7 @@
             <div class="profile_info">
               <span>Welcome,</span>
               <?php foreach ($users as $user) { ?>
-                <h2>Dr. <?php echo $user->nama ?></h2>
+                <h2><?php echo $user->nama ?></h2>
               <?php } ?>
             </div>
           </div>
@@ -144,7 +144,7 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  Dr. 
+                
                   <?php foreach ($users as $user) {
                     echo $user->nama;
                   } ?>

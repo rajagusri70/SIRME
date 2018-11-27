@@ -54,7 +54,6 @@ class Api extends REST_Controller {
       foreach ($patients as $p) {
         $pid = $p->pid;
         $no_ktp = $p->no_ktp;
-        $no_kk = $p->no_kk;
         $no_pasien = $p->no_pasien;
         $nama = $p->nama;
         $no_telpon = $p->no_telpon;
@@ -102,8 +101,9 @@ class Api extends REST_Controller {
         $status_kawin = $p->status_pernikahan;
         $foto = 'http://localhost/SIRME/images/pasien/'.$p->foto;
         $status_kawin = $p->status_pernikahan;
-        $nama_orangtua = $p->nama_orangtua;
-        $no_telpon_orangtua = $p->no_telpon_orangtua;
+        $hubungan_penanggungjawab = $p->hubungan_penanggungjawab;
+        $nama_penanggungjawab = $p->nama_penanggungjawab;
+        $no_telpon_penanggungjawab = $p->no_telpon_penanggungjawab;
         $nama_kerabat = $p->nama_kerabat;
         $no_telpon_kerabat = $p->no_telpon_kerabat;
         $hubungan = $p->hubungan;
@@ -119,12 +119,6 @@ class Api extends REST_Controller {
                 'text' => 'KTP',
               ],
               'value' => $no_ktp
-            ],
-            [
-              'type' => [
-                'text' => 'KK',
-              ],
-              'value' => $no_kk
             ]
           ],
           'name' => [
@@ -166,18 +160,18 @@ class Api extends REST_Controller {
             [
               'relationship' => [
                 [
-                  'text' => 'orangtua'
+                  'text' => $hubungan_penanggungjawab
                 ]
               ],
               'name' => [
                 [
-                  'text' => $nama_orangtua
+                  'text' => $nama_penanggungjawab
                 ]
               ],
               "telecom"=> [
                 [
                   'system'=> 'phone',
-                  'value'=> $no_telpon_orangtua
+                  'value'=> $no_telpon_penanggungjawab
                 ]
               ]
             ],
@@ -286,10 +280,36 @@ class Api extends REST_Controller {
 
   public function encounter_get($id_rawat = NULL){
     if ($id_rawat == NULL){
-      $this->response([
+      $no_pasien = $_GET['patient'];
+      if($no_pasien == NULL){
+        $this->response([
               'status' => FALSE,
-              'message' => 'Incomplete method'
+              'message' => 'User could not be found'
           ], REST_Controller::HTTP_BAD_REQUEST);
+      }else{
+        $data = $this->RawatModel->search(array('no_pasien' => $no_pasien, ))->result_array();
+
+        $items = array();
+        foreach ($data as $datas ) {
+          $url = 'http://localhost/SIRME/api/Encounter/'.$datas['id_rawat']; 
+          $json = file_get_contents($url); 
+          $content = json_decode($json);
+          $resource = [
+            'resource' => $content
+          ]; 
+          $items[] = $resource;
+        }
+        
+        $bundle = [
+          'resourceType' => 'Bundle',
+          //'id' => uniqid(),
+          'type' => 'searchset',
+          'entry' => 
+            $items
+        ];
+        $this->response($bundle, REST_Controller::HTTP_OK);
+        //echo "ID Provied Well educated";
+      }
     }else{
       $data = $this->RawatModel->viewWhere(array('id_rawat' => $id_rawat));
       foreach ($data as $data) {

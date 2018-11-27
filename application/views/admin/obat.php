@@ -89,7 +89,7 @@
             <div class="profile_info">
               <span>Welcome,</span>
               <?php foreach ($users as $user) { ?>
-                <h2>Dr. <?php echo $user->nama ?></h2>
+                <h2><?php echo $user->nama ?></h2>
               <?php } ?>
             </div>
           </div>
@@ -149,7 +149,7 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  Dr. 
+                  
                   <?php foreach ($users as $user) {
                     echo $user->nama;
                   } ?>
@@ -259,20 +259,6 @@
                                       </div>
                                     </div>
                                     <div class="item form-group">
-                                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Stok
-                                      </label>
-                                      <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input id="stok" name="input_stok" class="normal-form-long" required="required" type="number">
-                                      </div>
-                                    </div>
-                                    <div class="item form-group">
-                                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Harga
-                                      </label>
-                                      <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input id="harga" name="input_harga" class="normal-form-long" required="required" type="number">
-                                      </div>
-                                    </div>
-                                    <div class="item form-group">
                                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Deskripsi<span class="required">*</span>
                                       </label>
                                       <div class="col-md-6 col-sm-6 col-xs-12">
@@ -302,7 +288,6 @@
                         <th>Nama Obat</th>
                         <th>Satuan</th>
                         <th>Kategori</th>
-                        <th>Harga</th>
                         <th align="center">Aksi</th>
                       </tr>
                     </thead>
@@ -315,7 +300,6 @@
                           <td style="vertical-align: middle;"><?php echo $do->nama_obat; ?></td>
                           <td style="vertical-align: middle;"><?php echo $do->jenis; ?></td>
                           <td style="vertical-align: middle;"><?php echo $do->kategori; ?></td>
-                          <td style="vertical-align: middle;"><?php echo $do->harga; ?></td>
                           <td style="vertical-align: middle;" align="center"><a href="#" type="button"  onclick="hapus(1,<?php echo $do->no_obat ?>)"><i class="fa fa-remove"></i> Hapus</a>&nbsp;&nbsp;<a href="#" type="button"  onclick="buka_popup(<?php echo $do->no_obat ?>)" ><i class="fa fa-edit"></i> Info</a></td>
                         </tr>
                       <?php } ?>

@@ -63,7 +63,7 @@
             <div class="profile_info">
               <span>Welcome,</span>
               <?php foreach ($users as $user) { ?>
-                <h2>Dr. <?php echo $user->nama ?></h2>
+                <h2><?php echo $user->nama ?></h2>
               <?php } ?>
             </div>
           </div>

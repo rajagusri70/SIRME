@@ -130,7 +130,7 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  Dr. 
+                  
                   <?php foreach ($users as $user) {
                     echo $user->nama;
                   } ?>
@@ -269,7 +269,7 @@
                         <td><?php echo $p->nama; ?></td>
                         <td><?php echo $p->jenis_kelamin; ?></td>
                         <td><?php echo $p->tanggal_lahir; ?></td>
-                        <td><?php echo $p->umur; ?></td>
+                        <td><?php echo $umur; ?></td>
                         <td>
                           <button type="button" class=" btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg-id-<?php echo $p->no_pasien; ?>">Daftarkan ke Poli</button>
                           <!-- <a href="#" class=""><i class="fa fa-hospital-o"></i> Daftar ke Poli </a> -->

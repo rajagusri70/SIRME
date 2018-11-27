@@ -379,6 +379,17 @@ class Pasien extends CI_Controller {
 			$like_umum = array('jadwal_praktek' => $hari, );
 			$data['dokter_umum'] = $this->UserModel->dokter($where_umum,$like_umum);
 			$data['pasien'] = $this->PasienModel->cariPasienLama('id_pasien');
+			if($data['pasien']){
+				$pasien = $this->PasienModel->cariPasienLama('id_pasien');
+				foreach ($pasien as $p) {
+					$tanggal_lahir  = $p->tanggal_lahir;
+				}
+				$tahun = date("Y");
+				$tahun_lahir = substr($tanggal_lahir, -4);
+				$umur = $tahun - $tahun_lahir;
+				$data['umur'] = $umur;
+			}
+			
 			$this->load->view('resepsionis/pasien_lama',$data);
 		}else{
 			redirect ("resepsionis/pasien/pasien_lama");

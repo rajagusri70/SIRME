@@ -243,17 +243,32 @@
                               </div>
                             </div>
                             <div class="item form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Nama Org. Tua
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Nama Penanggungjawab
                               </label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="nama_orangtua" class="form-control" name="input_nama_orangtua"  required="required" type="text" value="<?php echo $p->nama_orangtua; ?>" readonly >
+                                <input id="nama_orangtua" class="form-control" name="input_nama_penanggungjawab"  required="required" type="text" value="<?php echo $p->nama_penanggungjawab; ?>" readonly >
                               </div>
                             </div>
                             <div class="item form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">No. Tlp. Org. Tua
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12">Hub. dg Pasien 
                               </label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="no_telpon_orangtua" class="form-control" name="input_no_telpon_orangtua"  required="required" type="text" value="<?php echo $p->no_telpon_orangtua; ?>" readonly >
+                                <?php $hub = $p->hubungan_penanggungjawab; ?>
+                                <select class="normal-form-long" name="input_hubunga_penanggungjawab">
+                                  <option value="Lainya" <?php if($hub=='Lainya'){echo "selected";} ?> >Lainya</option>
+                                  <option value="Orangtua" <?php if($hub=='Orangtua'){echo "selected";} ?> >Orangtua</option>
+                                  <option value="Wali" <?php if($hub=='Wali'){echo "selected";} ?> >Wali</option>
+                                  <option value="Anak" <?php if($hub=='Anak'){echo "selected";} ?> >Anak</option>
+                                  <option value="Saudara Kandung" <?php if($hub=='Saudara Kandung'){echo "selected";} ?> >Saudara Kandung</option>
+                                  <option value="Pasangan" <?php if($hub=='Pasangan'){echo "selected";} ?> >Pasangan</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="item form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">No  Telp
+                              </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="no_telpon_orangtua" class="form-control" name="input_no_telpon_penanggungjawab"  required="required" type="text" value="<?php echo $p->no_telpon_penanggungjawab; ?>" readonly >
                               </div>
                             </div>
                             <div class="item form-group">

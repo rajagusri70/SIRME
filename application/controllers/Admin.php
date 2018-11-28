@@ -66,12 +66,48 @@ class Admin extends CI_Controller {
 						echo '});';
 						echo '</script>';
 						echo  '</body>';
+						redirect('admin/user');
 					
 					//$this->load->view('pasien/pasien_baru');
 				}else{
 					//$data['message'] = $upload['error'];
-					$this->UserModel->input($upload,'Dokter');// Panggil fungsi input() yang ada di PasienModel.php
+					$uploadArray = [
+						'file' => [
+							'file_name' => 'default-image.png'
+						]
+					];
+					$this->UserModel->input($uploadArray);// Panggil fungsi input() yang ada di PasienModel.php
+					echo '<body>';
+					echo '<script type="text/javascript" >';
+					echo 'swal({';
+					echo '  title: "Data Berhasil Ditambahkan.!!!",';
+					echo '  text: "Data user yang baru telah berhasil ditambahkan",';
+					echo '	icon: "success",';
+					echo '  buttons: {';
+					//echo '    cancel: "Run away!",';
+					echo '    catch: {';
+					echo '      text: "Oke",';
+					echo '      value: "catch",';
+					echo '    },';
+					//echo '    defeat: true,';
+					echo '  },';
+					echo '})';
+					echo '.then((value) => {';
+					echo '  switch (value) {';				 
+					echo '    case "defeat":';
+					echo '      swal("Pikachu fainted! You gained 500 XP!");';
+					echo '      break;';				 
+					echo '    case "catch":';
+					echo '      window.location = "'.base_url().'admin/user";';
+					echo '      break;';				 
+					echo '    default:';
+					echo '      window.location = "'.base_url().'admin/user";';
+					echo '  }';
+					echo '});';
+					echo '</script>';
+					echo  '</body>';
 					redirect('admin/user');
+				
 				}
 		}
 	}

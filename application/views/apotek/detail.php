@@ -167,20 +167,20 @@
                                 </select>
                               </div>
                             </div>
-                            <div class="item form-group">
+                            <!-- <div class="item form-group">
                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Harga 
                               </label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="harga" class="form-control" name="input_harga"  required="required" type="text" value="<?php echo $do->harga; ?>" readonly >
+                                <input id="harga" class="form-control" name="input_harga"  required="required" type="text" value="<?php //echo $do->harga; ?>" readonly >
                               </div>
                             </div>
                             <div class="item form-group">
                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Stok
                               </label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="stok" class="form-control" name="input_stok"  required="required" type="text" value="<?php echo $do->stok; ?>" readonly >
+                                <input id="stok" class="form-control" name="input_stok"  required="required" type="text" value="<?php //echo $do->stok; ?>" readonly >
                               </div>
-                            </div>
+                            </div> -->
                             <div class="item form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Deskripsi<span class="required">*</span>
                             </label>

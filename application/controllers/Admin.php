@@ -491,9 +491,7 @@ class Admin extends CI_Controller {
 			$data = array(
 				'nama_obat' => $this->input->post('input_nama_obat'),
 				'jenis' => $this->input->post('input_satuan'),
-				'kategori' => $this->input->post('input_kategori'), 
-				'harga' => $this->input->post('input_harga'),
-				'stok' => $this->input->post('input_stok'),
+				'kategori' => $this->input->post('input_kategori'),
 				'deskripsi' => $this->input->post('input_deskripsi'),
 			);
 			$where = array('no_obat' => $no_obat, );

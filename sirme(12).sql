@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2018 at 05:12 AM
+-- Generation Time: Jan 03, 2019 at 02:28 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -59,9 +59,9 @@ CREATE TABLE `pasien` (
 --
 
 INSERT INTO `pasien` (`pid`, `no_pasien`, `no_ktp`, `nama`, `jenis_kelamin`, `tanggal_lahir`, `tempat_lahir`, `alamat`, `kecamatan`, `kota`, `provinsi`, `status_pernikahan`, `nama_penanggungjawab`, `hubungan_penanggungjawab`, `no_telpon_penanggungjawab`, `hubungan`, `nama_kerabat`, `no_telpon_kerabat`, `no_telpon`, `email`, `tanggal_daftar`, `foto`, `user_id`) VALUES
-('', 1000, '12222222', 'Fadhil', 'Perempuan', '02-September-1912', '12', 'Bandung', '', '', '', 'Belum Nikah', 'Haja', '', '0855', 'Wali', '', '', '0822', '', '', '12222222.PNG', 0),
-('', 1001, '454888', 'Teguh Piganta', 'Laki-laki', '13 - Juli - 1910', 'Pariaman', 'Bandung', 'Bojongsoang', 'Kab Bandung', 'Jawa Barat', 'Belum Kawin', 'Haja', '', '0988', 'Saudara Kandung', 'Zaki', '545454', '977', 'teg@teg.com', '', '9445252362346.jpg', 102),
-('', 1002, '690038', 'Nurlela', 'Perempuan', '13 - Oktober - 1911', 'Pematang Siantar', 'Peru', '', '', '', 'Sudah Nikah', 'Hariai', '', '', '', '', '', '089923432365', '', '', '690038.jpg', 0),
+('', 1000, '12222222', 'Fadhil', 'Perempuan', '02-September-1912', '12', 'Bandung', '', '', '', 'Belum Nikah', 'Haja', '', '0855', 'Wali', '', '', '0822', '', '', 'default-image.png', 0),
+('', 1001, '454888', 'Eddy Roamson', 'Laki-laki', '13 - Juli - 1910', 'Pariaman', 'Bandung', 'Bojongsoang', 'Kab Bandung', 'Jawa Barat', 'Belum Kawin', 'Haja', '', '0988', 'Saudara Kandung', 'Zaki', '545454', '977', 'teg@teg.com', '', 'default-image.png', 102),
+('', 1002, '690038', 'Nurlela', 'Perempuan', '13 - Oktober - 1911', 'Pematang Siantar', 'Peru', '', '', '', 'Sudah Nikah', 'Hariai', '', '', '', '', '', '089923432365', '', '', 'default-image.png', 0),
 ('', 1003, '236545236541', 'John Doe', 'Laki-laki', '02 - Juli - 1951', 'Bandung', 'Bandung', '', '', '', 'Belum Nikah', 'Kudli', '', '', '', '', '', '085263523652', '', '', 'default-image.png', 0),
 ('', 1004, '1202145213', 'Abiluda Awalum', 'Laki-laki', '02 - Juli - 1992', 'Jakarta', 'Jakarta', '', '', '', 'Belum Nikah', 'Kudli', '', '', '', '', '', '082240118844', '', '', 'default-image.png', 0),
 ('', 1005, '1566354798542365', 'Meisarohmi', 'Perempuan', '15 - Oktober - 1992', 'Makasar', 'Bandung', '', '', '', 'Belum Nikah', 'Arisman', '', '', '', '', '', '082265424853', '', '', 'default-image.png', 0),
@@ -198,7 +198,8 @@ CREATE TABLE `tb_fhir_url` (
 --
 
 INSERT INTO `tb_fhir_url` (`pk`, `nama`, `url`) VALUES
-(21, 'PACSBackup Server', 'http://192.168.8.102/api/index.php/api/');
+(21, 'PACSBackup Server', 'http://192.168.8.102/api/index.php/api/'),
+(23, 'Test Server', 'http://192.168.87.129/api/index.php/api');
 
 -- --------------------------------------------------------
 
@@ -220,7 +221,8 @@ CREATE TABLE `tb_instance` (
 INSERT INTO `tb_instance` (`pk`, `fk_series`, `instance_iuid`, `sop_class`) VALUES
 ('in0211185bdc13c00689a', 'sr0211185bdc13bff2b9a', '1.2.826.0.1.3680043.8.1055.1.20111103112244831.30826609.78057758', 'OT'),
 ('in0211185bdc13f08b847', 'sr0211185bdc13f068113', '1.2.840.113619.2.15.1008000062035011254.825190719.0.31.2.1', 'RF'),
-('in0211185bdc17a02f4b3', 'sr0211185bdc17a0263f2', '1.3.46.670589.11.0.4.1996082307380006', 'MR');
+('in0211185bdc17a02f4b3', 'sr0211185bdc17a0263f2', '1.3.46.670589.11.0.4.1996082307380006', 'MR'),
+('in1211185be9055698c94', 'sr1211185be9055691a63', '1.2.826.0.1.3680043.8.1055.1.20111103112244831.30826609.78057758', 'OT');
 
 -- --------------------------------------------------------
 
@@ -244,7 +246,8 @@ CREATE TABLE `tb_item_resep` (
 INSERT INTO `tb_item_resep` (`item_id`, `id_resep`, `no_obat`, `kuantitas`, `keterangan`, `status_resep`) VALUES
 (1, 'RO0810185bbabe3a3cad3', 9000, '2', 'sekali sehari sehabis bobok', ''),
 (2, 'RO0810185bbabe3a3cad3', 9003, '4', 'sekalis sehari sehabis coli', ''),
-(3, 'RO1110185bbec44738c26', 9001, '6', 'dua kali sehari', '');
+(3, 'RO1110185bbec44738c26', 9001, '6', 'dua kali sehari', ''),
+(4, 'RO1110185bbec44738c26', 9000, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -347,22 +350,24 @@ CREATE TABLE `tb_obat` (
   `kategori` varchar(100) NOT NULL,
   `harga` int(11) NOT NULL,
   `stok` int(11) NOT NULL,
-  `deskripsi` varchar(1000) NOT NULL
+  `deskripsi` varchar(1000) NOT NULL,
+  `add_status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_obat`
 --
 
-INSERT INTO `tb_obat` (`no_obat`, `nama_obat`, `jenis`, `kategori`, `harga`, `stok`, `deskripsi`) VALUES
-(9000, 'Potion', 'Strip', 'Generik', 5000, 0, 'Obat herbal tapi daneh banyak bgt'),
-(9001, 'Paracetamol 500mg', 'Tablet', 'Generik', 5000, 54, 'pereda nyeri dan panas demam'),
-(9002, 'Piroxicam', 'Tablet', 'Generik', 7000, 66, ''),
-(9003, 'Optimox', 'Tablet', 'Generik', 10000, 34, ''),
-(9004, 'Hi Potion', 'Botol', 'Generik', 699, 88, 'Increase your HP by 5000'),
-(9005, 'X Potion', 'Botol', 'Generik', 90000, 99, 'Increase your HP to your maximum HP'),
-(9007, 'Mega Potion', 'Botol', 'Generik', 9000000, 99, 'Increase to the maximum HP to all allies'),
-(9010, 'Paracetamol', 'Sachet', 'Generik', 67, 67, '5yf');
+INSERT INTO `tb_obat` (`no_obat`, `nama_obat`, `jenis`, `kategori`, `harga`, `stok`, `deskripsi`, `add_status`) VALUES
+(9000, 'Potion', 'Strip', 'Generik', 5000, 0, 'Obat herbal tapi daneh banyak bgt', ''),
+(9001, 'Paracetamol 500mg', 'Tablet', 'Generik', 5000, 54, 'pereda nyeri dan panas demam', ''),
+(9002, 'Piroxicam', 'Tablet', 'Generik', 7000, 66, '', ''),
+(9003, 'Optimox', 'Tablet', 'Generik', 10000, 34, '', ''),
+(9004, 'Hi Potion', 'Botol', 'Generik', 699, 88, 'Increase your HP by 5000', ''),
+(9005, 'X Potion', 'Botol', 'Generik', 90000, 99, 'Increase your HP to your maximum HP', ''),
+(9007, 'Mega Potion', 'Botol', 'Generik', 9000000, 99, 'Increase to the maximum HP to all allies', ''),
+(9010, 'Paracetamol', 'Sachet', 'Generik', 67, 67, '5yf', ''),
+(9011, 'Maruki', 'Tablet', 'Generik', 0, 0, 'Masuk angin', '');
 
 -- --------------------------------------------------------
 
@@ -555,7 +560,8 @@ CREATE TABLE `tb_series` (
 INSERT INTO `tb_series` (`pk`, `fk_study`, `series_iuid`, `modality`, `started`) VALUES
 ('sr0211185bdc13bff2b9a', 'st0211185bdc13bfea64b', '1.2.826.0.1.3680043.8.1055.1.20111103112244831.29109107.29203688', 'OT', '2018-10-15 02:15:03'),
 ('sr0211185bdc13f068113', 'st0211185bdc13f05e3a1', '1.2.840.113619.2.15.1008000062035011254.825190719.1.31', 'RF', '2018-11-02 01:40:54'),
-('sr0211185bdc17a0263f2', 'st0211185bdc17a02001e', '1.3.46.670589.11.0.2.1996082307380006', 'MR', '2018-11-02 01:41:20');
+('sr0211185bdc17a0263f2', 'st0211185bdc17a02001e', '1.3.46.670589.11.0.2.1996082307380006', 'MR', '2018-11-02 01:41:20'),
+('sr1211185be9055691a63', 'st1211185be9055682c57', '1.2.826.0.1.3680043.8.1055.1.20111103112244831.29109107.29203688', 'OT', '2018-10-15 02:15:03');
 
 -- --------------------------------------------------------
 
@@ -580,7 +586,8 @@ CREATE TABLE `tb_study` (
 INSERT INTO `tb_study` (`pk`, `study_iuid`, `no_pasien`, `waktu`, `deskripsi`, `endpoint`, `server`) VALUES
 ('st0211185bdc13bfea64b', '1.2.826.0.1.3680043.8.1055.1.20111103112244831.40200514.30965937', 1001, '2018-10-15 02:15:02', 'TUBUH BAGIAN ATAS', '1', '21'),
 ('st0211185bdc13f05e3a1', '1.2.840.113619.2.15.1008000062035011254.825190719.2.31', 1001, '2018-11-02 01:40:54', 'GINJAL', '1', '21'),
-('st0211185bdc17a02001e', '1.3.46.670589.11.0.1.1996082307380006', 1001, '2018-11-02 01:41:20', 'OTAK', '1', '21');
+('st0211185bdc17a02001e', '1.3.46.670589.11.0.1.1996082307380006', 1001, '2018-11-02 01:41:20', 'OTAK', '1', '21'),
+('st1211185be9055682c57', '1.2.826.0.1.3680043.8.1055.1.20111103112244831.40200514.30965937', 1024, '2018-10-15 02:15:02', 'BODY', '1', '23');
 
 -- --------------------------------------------------------
 
@@ -636,21 +643,24 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `password`, `nama`, `jenis_kelamin`, `tipe_admin`, `alamat`, `kota`, `no_hp`, `email`, `spesialis`, `tanggal_daftar`, `tanggal_lahir`, `no_sip`, `foto`, `status_jaga`, `jadwal_praktek`) VALUES
-(1, 'rajagusri', 'ilovepiaman', 'Raja Dwika Gusri', 'Laki - Laki', 'Dokter', 'Jl. Buah Batu Kab. Bandung', 'Bandung', '086545226633', 'rajagusri@yahoo.co.id', 'Umum', '', '', '028/158/SIP-TU/II/2008', 'rajagusri.png', '', ''),
-(100, 'teguh', 'teguh', 'Teguh Piganta Putra', 'Laki - Laki', 'Admin', 'Jl. Buah Batu Kab. Bandung', 'Bandung', '089957675', 'teg@yahoo.co.id', '', '', '', '', 'teguh.png', '', ''),
-(102, 'defri', 'defri', 'Defri Hidayat', '', 'Resepsionis', 'Bandung', 'Bandung', '089966321541', '', '', '', '', '', 'defri.png', '', ''),
-(103, 'gibran', 'gibran', 'Khalil Ghibran One', 'Laki-laki', 'Dokter', 'Jl. Buah Batu Kab. Bandung', 'Bandung', '089934565544', 'gibran@yahoo.com', 'Umum', '', '', '323', 'gibran.jpg', '', 'Senin,Selasa,Rabu,Kamis,Jum\'at'),
-(104, 'edward', 'edward', 'Edward De Gusri', 'Laki-laki', 'Dokter', 'Jl. Buah Batu Kab. Bandung', 'Bandung', '082245667788', 'edwardgusri@gmail.com', 'Mata', '', '', 'ST/12/SP', '', '', 'Senin,Selasa,Rabu,Kamis,Jum\'at'),
-(106, 'aprido', 'aprido', 'Apridho Darani', 'Laki-laki', 'Resepsionis', 'Jl. Buah Batu Kab. Bandung', 'Bandung', '081255668347', 'ap@yahoo.com', '', '', '', '', 'aprido1.png', '', ''),
-(107, 'irvan', 'irvan', 'Irvan Setiwan', 'Laki - Laki', 'Resepsionis', 'Jl. Buah Batu Kab. Bandung', 'Bandung', '081234567890', 'irv@gmail.com', '', '', '', '', 'irvan.jpg', '', ''),
-(108, 'deni', 'deni', 'Deni Alberto', 'Laki-laki', 'Dokter', 'Jl. Buah Batu Kab. Bandung', 'Bandung', '082234443345', 'deni@yahoo.co.id', 'Mata', '', '', 'asdasd', 'deni.jpg', '', 'Senin,Selasa,Rabu,Kamis,Jum\'at'),
-(109, 'zakia', 'zaki', 'Muhammad Zaki Ramadhani', 'Laki-laki', 'Resepsionis', 'Jl. Buah Batu Kab. Bandung', 'Bandung', '082249887675', 'zak@gmail.com', '', '', '', '', 'zaki1.jpg', '', ''),
-(110, 'pratama', 'pratama', 'Edward Putra Pratama', 'Laki-laki', 'Resepsionis', 'Jl. Soekarno Hatta No. 2 ', 'Bandung', '081245667654', 'soeta@gmail.com', '', '', '', '', 'pratama.jpg', '', ''),
-(111, 'zulhilman', 'zulhilman', 'Zulhilman Hakim', 'Laki-laki', 'Dokter', 'Jl. Soekarno Hatta No. 2', 'Bandung', '082299572964', 'zul@gmail.com', 'Umum', '', '', '028/546/SIP-TU/II/2008', '', '', 'Senin,Selasa,Rabu,Kamis'),
-(112, 'rahmi', 'rahmi', 'Rahmi Wahyuni Putri', 'Perempuan', 'Perawat', 'Jl. Buah Batu Kab. Bandung', 'Bandung', '08967788346', 'rahmi@yahoo.com', '', '', '', '', 'rahmi.jpg', '', ''),
-(113, 'aulia', 'aulia', 'Aulita Putri Anjani', 'Perempuan', 'Apoteker', 'Jl. Soekarno Hatta No. 2', 'Bandung', '089678894155', 'putri@yahoo.co.id', '', '', '', '', 'aulia.jpg', '', ''),
-(114, 'teguhi', 'teguh', 'Khalil Qibran One', 'Laki-laki', 'Kasir', 'Jl. Buah Batu Kab. Bandung', 'Bandung', '089934565544', 'rajadwikhagusri@gmail.com', '', '', '', '', '1.jpg', '', ''),
-(116, 'qurafu', 'qurafu', 'Qurafu Minaj', 'Perempuan', 'Admin', 'Bandung', 'Kab Bandung', '089934565544', 'qurafu@gmail.com', '', '', '', '', '3.jpg', '', '');
+(1, 'rajagusri', 'ilovepiaman', 'Romanov Kowalski', 'Laki - Laki', 'Dokter', 'Jl. Buah Batu Kab. Bandung', 'Bandung', '086545226633', 'rajagusri@yahoo.co.id', 'Umum', '', '', '028/158/SIP-TU/II/2008', 'default-image.png', '', ''),
+(100, 'teguh', 'teguh', 'Edwardo Guvara', 'Laki - Laki', 'Admin', 'Jl. Buah Batu Kab. Bandung', 'Bandung', '089957675', 'teg@yahoo.co.id', '', '', '', '', 'default-image.png', '', ''),
+(102, 'defri', 'defri', 'Defri Hidayat', '', 'Resepsionis', 'Bandung', 'Bandung', '089966321541', '', '', '', '', '', 'default-image.png', '', ''),
+(103, 'gibran', 'gibran', 'Khalil Ghibran One', 'Laki-laki', 'Dokter', 'Jl. Buah Batu Kab. Bandung', 'Bandung', '089934565544', 'gibran@yahoo.com', 'Umum', '', '', '323', 'default-image.png', '', 'Senin,Selasa,Rabu,Kamis,Jum\'at'),
+(104, 'edward', 'edward', 'Edward De Gusri', 'Laki-laki', 'Dokter', 'Jl. Buah Batu Kab. Bandung', 'Bandung', '082245667788', 'edwardgusri@gmail.com', 'Mata', '', '', 'ST/12/SP', 'default-image.png', '', 'Senin,Selasa,Rabu,Kamis,Jum\'at'),
+(106, 'aprido', 'aprido', 'Apridho Darani', 'Laki-laki', 'Resepsionis', 'Jl. Buah Batu Kab. Bandung', 'Bandung', '081255668347', 'ap@yahoo.com', '', '', '', '', 'default-image.png', '', ''),
+(107, 'irvan', 'irvan', 'Irvan Setiwan', 'Laki - Laki', 'Resepsionis', 'Jl. Buah Batu Kab. Bandung', 'Bandung', '081234567890', 'irv@gmail.com', '', '', '', '', 'default-image.png', '', ''),
+(108, 'deni', 'deni', 'Deni Alberto', 'Laki-laki', 'Dokter', 'Jl. Buah Batu Kab. Bandung', 'Bandung', '082234443345', 'deni@yahoo.co.id', 'Mata', '', '', 'asdasd', 'default-image.png', '', 'Senin,Selasa,Rabu,Kamis,Jum\'at'),
+(109, 'zakia', 'zaki', 'Muhammad Zaki Ramadhani', 'Laki-laki', 'Resepsionis', 'Jl. Buah Batu Kab. Bandung', 'Bandung', '082249887675', 'zak@gmail.com', '', '', '', '', 'default-image.png', '', ''),
+(110, 'pratama', 'pratama', 'Edward Putra Pratama', 'Laki-laki', 'Resepsionis', 'Jl. Soekarno Hatta No. 2 ', 'Bandung', '081245667654', 'soeta@gmail.com', '', '', '', '', 'default-image.png', '', ''),
+(111, 'zulhilman', 'zulhilman', 'Zulhilman Hakim', 'Laki-laki', 'Dokter', 'Jl. Soekarno Hatta No. 2', 'Bandung', '082299572964', 'zul@gmail.com', 'Umum', '', '', '028/546/SIP-TU/II/2008', 'default-image.png', '', 'Senin,Selasa,Rabu,Kamis'),
+(112, 'rahmi', 'rahmi', 'Rahmi Wahyuni Putri', 'Perempuan', 'Perawat', 'Jl. Buah Batu Kab. Bandung', 'Bandung', '08967788346', 'rahmi@yahoo.com', '', '', '', '', 'default-image.png', '', ''),
+(113, 'aulia', 'aulia', 'Aulita Putri Anjani', 'Perempuan', 'Apoteker', 'Jl. Soekarno Hatta No. 2', 'Bandung', '089678894155', 'putri@yahoo.co.id', '', '', '', '', 'default-image.png', '', ''),
+(114, 'teguhi', 'teguh', 'Khalil Qibran One', 'Laki-laki', 'Kasir', 'Jl. Buah Batu Kab. Bandung', 'Bandung', '089934565544', 'rajadwikhagusri@gmail.com', '', '', '', '', 'default-image.png', '', ''),
+(116, 'qurafu', 'qurafu', 'Qurafu Minaj', 'Perempuan', 'Admin', 'Bandung', 'Kab Bandung', '089934565544', 'qurafu@gmail.com', '', '', '', '', 'default-image.png', '', ''),
+(118, 'putri', 'putri', 'Putri Titian', 'Perempuan', 'Resepsionis', 'Bandung', 'Padang', '9877866667', 'gibran@ya.com', '', '', '30 - November - 2018', '', 'default-image.png', '', ''),
+(119, 'terbaru', 'terbaru', 'Terbaru Banget', 'Laki-laki', 'Admin', 'Bandung', 'Kab. Bandung', '4563434', 'aulia@r.comr', '', '', '30 - Oktober - 2018', '', 'default-image.png', '', ''),
+(120, 'dokter', 'dokter', 'Dokter', 'Laki-laki', 'Dokter', 'Bandung', 'Bandung', '089977887777', 'rata@yhaoo.com', '', '', '13 - November - 2018', '', '.jpg', '', '');
 
 --
 -- Indexes for dumped tables
@@ -841,12 +851,12 @@ ALTER TABLE `tb_dokter`
 -- AUTO_INCREMENT for table `tb_fhir_url`
 --
 ALTER TABLE `tb_fhir_url`
-  MODIFY `pk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `pk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `tb_item_resep`
 --
 ALTER TABLE `tb_item_resep`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tb_item_transaksi`
 --
@@ -871,7 +881,7 @@ ALTER TABLE `tb_keluhan`
 -- AUTO_INCREMENT for table `tb_obat`
 --
 ALTER TABLE `tb_obat`
-  MODIFY `no_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9011;
+  MODIFY `no_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9012;
 --
 -- AUTO_INCREMENT for table `tb_pemeriksaan`
 --
@@ -901,7 +911,7 @@ ALTER TABLE `tb_riwayat_penyakit`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
+  MODIFY `user_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 --
 -- Constraints for dumped tables
 --

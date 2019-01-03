@@ -195,14 +195,14 @@
                             <ul class="nav nav-tabs tabs-left">
                               <li class="active"><a href="#demografi" href="#data_pasien" data-toggle="tab">Demografi</a>
                               </li>
-                              <li><a href="#diagnosis" data-toggle="tab">Diagnosis</a>
+                              <li><a href="#diagnosis" data-toggle="tab">Riwayat Diagnosis</a>
                               </li>
                               <li><a href="#rawat_jalan" data-toggle="tab">Rawat Jalan</a>
                               </li>
                               <li><a href="#riwayat_alergi" data-toggle="tab">Riwayat Alergi</a>
                               </li>
-                              <!-- <li><a href="#riwayat_obat" data-toggle="tab">Riwayat Obat</a>
-                              </li> -->
+                              <li><a href="#riwayat_obat" data-toggle="tab">Riwayat Obat</a>
+                              </li>
                               <li><a href="#imaging" data-toggle="tab">Imaging</a>
                               </li>
                             </ul>
@@ -482,7 +482,7 @@
                                 <tr>
                                   <td><?php echo $is->deskripsi ?></td>
                                   <td><?php echo $is->waktu ?></td>
-                                  <td><a href="<?php echo base_url().'api/Condition/'.$is->pk; ?>" target="_blank">Link</a></td>
+                                  <td><a href="<?php echo base_url().'api/ImagingStudy/'.$is->pk; ?>" target="_blank">Link</a></td>
                                 </tr>
                               <?php } ?> 
                             </tbody>

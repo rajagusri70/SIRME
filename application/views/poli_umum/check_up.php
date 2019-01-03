@@ -165,7 +165,7 @@
                         </div>
                         <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
                     </div>
-                    <h3><?php echo $pt->nama ?></h3>
+                    <h3><b><a title="Lihat rekam medis pasien" href="<?php echo base_url().'rekam_medis/pasien/'.$no_pasien; ?>" target="_blank"><?php echo $pt->nama ?> <span class="fa fa-external-link"></span></a></b></h3>
 
                     <table style="font-size: 14px">
                       <tr>

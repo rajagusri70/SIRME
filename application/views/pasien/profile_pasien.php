@@ -522,8 +522,8 @@
                                               </label>
                                               <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <select class="normal-form" name="input_parameter" id="param">
-                                                  <option value="patient">Patient</option>
                                                   <option value="ktp">KTP</option>
+                                                  <option value="patient">Patient</option>
                                                 </select>
                                                 <input type="text" name="input_value" id="param_value" required="required" class="normal-form">
                                               </div>

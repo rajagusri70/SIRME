@@ -29,21 +29,38 @@ class fhir extends CI_Controller {
 		}
 
 		if ($resc == 'ImagingStudy') {
-			
-			$url = $urlAPI.'/'.$resc.'?'.$param.'='.$value;
-			$content = @file_get_contents($url); 
+			if($param == 'patient'){
+				$url = $urlAPI.'/'.$resc.'?'.$param.'='.$value;
+				$content = @file_get_contents($url); 
 
-			if ($content === FALSE) {
-				echo "Server not Respond. <br> It might be the server is turned of or under maintenance. <br>Try Again or contact the Administrator <br>for further information<br><br><br>@isErrorCatcher";
-			}else{
-				$json = json_decode($content);
-				$data['result'] = $json->entry;
-				$data['url'] = $urlAPI.'/'.$resc.'/';
-				$data['no_pasien'] = $no_pasien;
-				$data['server'] = $server;
-				$data['resource'] = $resc;
-				$this->load->view('fhir/fhir-retrieve',$data);
+				if ($content === FALSE) {
+					echo "Server not Respond. <br> It might be the server is turned of or under maintenance. <br>Try Again or contact the Administrator <br>for further information<br><br><br>@isErrorCatcher";
+				}else{
+					$json = json_decode($content);
+					$data['result'] = $json->entry;
+					$data['url'] = $urlAPI.'/'.$resc.'/';
+					$data['no_pasien'] = $no_pasien;
+					$data['server'] = $server;
+					$data['resource'] = $resc;
+					$this->load->view('fhir/fhir-retrieve',$data);
+				}
+			}elseif ($param == 'ktp' ) {
+				$url = $urlAPI.'/'.$resc.'?'.$param.'='.$value;
+				$content = @file_get_contents($url); 
+
+				if ($content === FALSE) {
+					echo "Server not Respond. <br> It might be the server is turned of or under maintenance. <br>Try Again or contact the Administrator <br>for further information<br><br><br>@isErrorCatcher";
+				}else{
+					$json = json_decode($content);
+					$data['result'] = $json->entry;
+					$data['url'] = $urlAPI.'/'.$resc.'/';
+					$data['no_pasien'] = $no_pasien;
+					$data['server'] = $server;
+					$data['resource'] = $resc;
+					$this->load->view('fhir/fhir-retrieve',$data);
+				}
 			}
+			
 		}elseif ($resc == 'Observation') {
 
 			$url = $urlAPI.'/'.$resc.'?'.$param.'='.$value;
@@ -61,19 +78,24 @@ class fhir extends CI_Controller {
 			}
 		}elseif ($resc == 'Condition') {
 
-			$url = $urlAPI.'/'.$resc.'?'.$param.'='.$value;
-			$content = @file_get_contents($url); 
-			if ($content === FALSE) {
-				echo "Server not Respond. <br> It might be the server is turned of or under maintenance. <br>Try Again or contact the Administrator <br>for further information<br><br><br>@isErrorCatcher";
-			}else{
-				$json = json_decode($content);
-				$data['result'] = $json->entry;
-				$data['url'] = $urlAPI.'/'.$resc.'/';
-				$data['no_pasien'] = $no_pasien;
-				$data['server'] = $server;
-				$data['resource'] = $resc;
-				$this->load->view('fhir/fhir-retrieve',$data);
+			if($param == 'patient'){
+				$url = $urlAPI.'/'.$resc.'?'.$param.'='.$value;
+				$content = @file_get_contents($url); 
+				if ($content === FALSE) {
+					echo "Server not Respond. <br> It might be the server is turned of or under maintenance. <br>Try Again or contact the Administrator <br>for further information<br><br><br>@isErrorCatcher";
+				}else{
+					$json = json_decode($content);
+					$data['result'] = $json->entry;
+					$data['url'] = $urlAPI.'/'.$resc.'/';
+					$data['no_pasien'] = $no_pasien;
+					$data['server'] = $server;
+					$data['resource'] = $resc;
+					$this->load->view('fhir/fhir-retrieve',$data);
+				}
+			}elseif ($param == 'ktp' ) {
+				
 			}
+			
 		}
 	}
 

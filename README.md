@@ -5,4 +5,5 @@ Program yang diperlukan (Prerequisite) :
 
 Copy-kan file dan ekstrak file zip di :
 [#X]:\xampp\htdocs
+
 Ket : [#X] Direktori xampp diinstall, biasanya di C.
